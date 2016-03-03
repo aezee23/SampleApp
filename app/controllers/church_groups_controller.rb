@@ -1,0 +1,2 @@
+class ChurchGroupsController < ApplicationController
+end
