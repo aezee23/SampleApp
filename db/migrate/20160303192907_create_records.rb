@@ -17,6 +17,5 @@ t.references :user, index:true
       t.timestamps null: false
     end
      add_foreign_key :records, :users
-    add_index :records, [:user_id, :day]
   end
 end

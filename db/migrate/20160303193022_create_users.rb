@@ -11,6 +11,5 @@ t.boolean :admin, default: false
       t.timestamps null: false
     end
     add_foreign_key :users, :church_groups
-    add_index :users, [:church_group_id]
   end
 end
