@@ -1,6 +1,6 @@
 class ChurchGroupsController < ApplicationController
 	 def index
-@church_group = ChurchGroup.where.not(id: 1).order('name ASC').paginate(:page => params[:page], :per_page => 20)
+@church_group = ChurchGroup.where.not(id: 1).order('name ASC')
 	 end
 
 
