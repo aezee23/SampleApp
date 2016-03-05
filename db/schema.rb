@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303201921) do
+ActiveRecord::Schema.define(version: 20160304205521) do
 
   create_table "church_groups", force: :cascade do |t|
     t.string   "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160303201921) do
     t.integer  "user_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "nbs_finish"
   end
 
   add_index "records", ["day"], name: "index_records_on_day"
