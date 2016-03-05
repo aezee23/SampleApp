@@ -5,7 +5,8 @@ class Record < ActiveRecord::Base
 validates :day, presence: true, uniqueness: {scope: :user_id}
 validates :sunday_att, presence: true, numericality: { less_than_or_equal_to: 999,  only_integer: true }
 validates :weekday_att, presence: true, numericality: { less_than_or_equal_to: 999,  only_integer: true }
-validates :first_timers, presence: true, :ft_const
+validates :first_timers, presence: true 
+validate :ft_const
 validates :new_converts, presence: true
 validates :nbs, presence: true
 validates :fnb, presence: true
