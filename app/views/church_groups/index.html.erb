@@ -1,0 +1,15 @@
+<% provide(:title, "Church Index") %>
+
+<% @church_group.each do |t| %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title"><%= t.name %></h4>
+  </div>
+<ul class="list-group">
+    <li class="list-group-item">Overseer:	<%= t.leader %> </li>
+    <li class="list-group-item">Number of CCs: <%= t.users.count %></li>
+    <li class="list-group-item">Region: <%= t.region %></li>
+  </ul>
+</div>
+<%end%>
+  <%= will_paginate @church_group, renderer: BootstrapPagination::Rails %>
