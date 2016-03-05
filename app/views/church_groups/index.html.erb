@@ -1,15 +1,25 @@
 <% provide(:title, "Church Index") %>
-
+<div class="row">
+  
 <% @church_group.each do |t| %>
-<div class="panel panel-default">
+<div class="col-xs-6 col-md-4">
+  	<div class="panel panel-default">
   <div class="panel-heading">
-    <h4 class="panel-title"><%= t.name %></h4>
+    <h2 class="panel-title"><%= link_to t.name, "#" %></h2>
   </div>
 <ul class="list-group">
-    <li class="list-group-item">Overseer:	<%= t.leader %> </li>
-    <li class="list-group-item">Number of CCs: <%= t.users.count %></li>
-    <li class="list-group-item">Region: <%= t.region %></li>
+    <li class="list-group-item"><b>Overseer:	</b><%= t.leader %> </li>
+    <li class="list-group-item"><b>Number of CCs: </b><%= t.users.count %></li>
+    <li class="list-group-item"><b>Region: </b><%= t.region %></li>
   </ul>
 </div>
+</div>
 <%end%>
+ 
+ </div>
+ 
   
+
+
+
+
