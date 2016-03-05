@@ -16,3 +16,4 @@ def ft_const
     self.errors.add_to_base("First Timers cannot be greater than Total attendance")
   end
 end
+end
