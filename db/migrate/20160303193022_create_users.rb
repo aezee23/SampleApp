@@ -10,6 +10,6 @@ t.boolean :admin, default: false
 
       t.timestamps null: false
     end
-    add_foreign_key :users, :church_group
+  
   end
 end
