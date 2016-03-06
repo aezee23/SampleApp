@@ -22,9 +22,6 @@
 .footer a {
     color: $gray;
 }
-.footer a:hover {
-      color: $gray-darker;
-    }
 .footer small {
     float: left;
   }
