@@ -19,9 +19,6 @@
   padding-top: 5px;
   border-top: 30px solid #00284d
 }
-.footer a {
-    color: $gray;
-}
 .footer small {
     float: left;
   }
