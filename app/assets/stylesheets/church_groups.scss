@@ -1,3 +1,11 @@
 // Place all the styles related to the Church_Groups controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.col-xs-6 > .panel-default > .panel-heading {
+  background-color: #cce6ff;
+   font-variant: small-caps;
+   font-weight: bold;
+}
+.panel-default > .list-group > .list-group-item {
+  background-color: #d1e0e0;
+}

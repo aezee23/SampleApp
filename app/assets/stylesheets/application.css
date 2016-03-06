@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+.footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 30px solid #00284d
+  font-color: $gray-light;
+}
+.footer a {
+    color: $gray;
+}
+.footer a:hover {
+      color: $gray-darker;
+    }
+.footer small {
+    float: left;
+  }
+  .footer ul {
+    float: right;
+    list-style: none;
+}
+.footer ul li {
+      float: left;
+      margin-left: 15px;
+    }
+
+

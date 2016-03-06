@@ -1,5 +1,15 @@
 class UsersController < ApplicationController
-	 def create
+	
+def index
+  if params[:search]
+    @users = User.search(params[:search]).where(admin: false).order("name ASC")
+  else
+    @users = User.where(admin: false).order('name ASC')
+  end
+end
+
+
+	def create
     @user= User.create(user_params)
   end
 

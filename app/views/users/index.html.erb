@@ -1,16 +1,21 @@
-<% provide(:title, "Church Index") %>
+<% provide(:title, "Campus Churches") %>
 <div class="row">
-  
-<% @church_group.each do |t| %>
+  <% if @users.count == 0 %>
+      <div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title"> No Results Found</h2>
+  </div>
+<% else %>
+<% @users.each do |t| %>
 <div class="col-xs-6 col-md-4">
   	<div class="panel panel-default">
   <div class="panel-heading">
     <h2 class="panel-title"><%= link_to t.name, "#" %></h2>
   </div>
 <ul class="list-group">
-    <li class="list-group-item"><b>Overseer:	</b><%= t.leader %> </li>
-    <li class="list-group-item"><b>Number of CCs: </b><%= t.users.count %></li>
-    <li class="list-group-item"><b>Region: </b><%= t.region %></li>
+    <li class="list-group-item"><b>Elder:	</b><%= t.elder %> </li>
+    <li class="list-group-item"><b>Church Group: </b><%= t.church_group.name %></li>
+    <li class="list-group-item"><b>Region: </b><%= t.church_group.region %></li>
     <li>
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">
@@ -27,7 +32,7 @@
 </div>
 </div>
 <%end%>
- 
+ <% end %>
  </div>
  
   
