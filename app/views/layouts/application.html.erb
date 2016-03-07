@@ -40,20 +40,16 @@
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-         <%= form_tag(users_path, :method => "get", id: "search-form", class:"form-control") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search By CC Name" %>
-        </div>
-        <%= submit_tag "Search", :name => nil, class:"btn btn-default"%>
 
+<%= form_tag(users_path, method: 'get', class: 'navbar-form navbar-left') do %>
+  <%= search_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search By Campus'  %>
+  <%= submit_tag "Submit", class: 'btn btn-default', :name => nil %>
 <% end %>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Log Out", logout_path, :method => 'delete' %></li>
        
       </ul>
-    </div><!-- /.navbar-collapse -->
+     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
