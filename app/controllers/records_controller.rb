@@ -3,6 +3,7 @@ class RecordsController < ApplicationController
 def index
 	if current_user.admin
 		@records= Record.all
+	end
 end
 
 #def new
