@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160305185448) do
+ActiveRecord::Schema.define(version: 20160308173025) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "church_groups", force: :cascade do |t|
     t.string   "name"
@@ -39,9 +42,8 @@ ActiveRecord::Schema.define(version: 20160305185448) do
     t.integer  "nbs_finish"
   end
 
-  add_index "records", ["day"], name: "index_records_on_day"
-  add_index "records", ["user_id", "day"], name: "index_records_on_user_id_and_day"
-  add_index "records", ["user_id"], name: "index_records_on_user_id"
+  add_index "records", ["day", "user_id"], name: "index_records_on_day_and_user_id", unique: true, using: :btree
+  add_index "records", ["user_id"], name: "index_records_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -55,6 +57,6 @@ ActiveRecord::Schema.define(version: 20160305185448) do
     t.string   "remember_digest"
   end
 
-  add_index "users", ["church_group_id"], name: "index_users_on_church_group_id"
+  add_index "users", ["church_group_id"], name: "index_users_on_church_group_id", using: :btree
 
 end

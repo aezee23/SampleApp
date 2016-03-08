@@ -22,13 +22,14 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
+gem 'pg'
 
 group :development, :test do
-     gem 'sqlite3'
+   
 end
 
 group :production do
-     gem 'pg'
+    gem 'puma',           '2.11.1'
      gem 'rails_12factor'
 end
 # Use ActiveModel has_secure_password
@@ -36,7 +37,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
-gem 'groupdate', '~> 2.5', '>= 2.5.2'
+#gem 'groupdate', '~> 2.5', '>= 2.5.2'
+gem 'dateslices', '~> 0.0.3'
 gem 'hightop'
 gem 'active_median'
 gem "chartkick"

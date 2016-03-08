@@ -1,5 +1,6 @@
 class Record < ActiveRecord::Base
 	belongs_to :user
+
 default_scope -> { order(day: :desc) }
 validates :user_id, presence: true
 validates :day, presence: true, uniqueness: {scope: :user_id}
