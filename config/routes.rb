@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
-  get '/elders' => 'elders#index'
-  root "sessions#new"
-  get 'demo' => 'pages#index'
-  resources :church_groups
+get '/elders' => 'elders#index'
+root "sessions#new"
+get 'demo' => 'pages#index'
+resources :church_groups
 get 'login' => 'sessions#new'
 post 'login' => 'sessions#create'
 delete 'logout' => 'sessions#destroy'
-resources :users
-resources :records
+resources :users do
+  resources :records
+end
+resources :records, only: [:new, :create, :edit, :update, :index]
+resources :password_resets,     only: [:new, :create, :edit, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,3 @@
+      invoke  active_record
+      create    db/migrate/20160308214702_add_reset_to_users.rb
+Running via Spring preloader in process 49447
