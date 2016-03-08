@@ -11,7 +11,7 @@ class ChurchGroupsController < ApplicationController
 	 def create
     @church_group= ChurchGroup.new(church_params)
         if @church_group.save
-      redirect_to_church_groups_path , notice: 'Church Group was successfully created.'
+      redirect_to church_groups_path , notice: 'Church Group was successfully created.'
     else
       render action: 'new'
     end
@@ -22,7 +22,7 @@ class ChurchGroupsController < ApplicationController
 
     def update
     if @church_group.update(church_params)
-      redirect_to_church_groups_path, notice: 'Church Group was successfully updated.'
+      redirect_to church_groups_path, notice: 'Church Group was successfully updated.'
     else
       render action: 'edit'
     end

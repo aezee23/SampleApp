@@ -36,7 +36,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
-gem 'groupdate'
+gem 'groupdate', '~> 2.5', '>= 2.5.2'
 gem 'hightop'
 gem 'active_median'
 gem "chartkick"

@@ -171,7 +171,7 @@ DEPENDENCIES
   byebug
   chartkick
   coffee-rails (~> 4.1.0)
-  groupdate
+  groupdate (~> 2.5, >= 2.5.2)
   hightop
   jbuilder (~> 2.0)
   jquery-rails
