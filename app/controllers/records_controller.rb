@@ -6,21 +6,34 @@ def index
 	end
 end
 
-#def new
-#@record = current_user.records.new(record_params)
-#end
+def new
+@record = current_user.records.new
+end
+
+def edit
+end
 
  def create
-    @record = Record.create(record_params)
-   # if @record.save
-    #  flash[:success] = "Data Recorded! Thank You #{current_user.elder}"
-     # redirect_to root_url
-    #else
-     # @feed_items = []
-     # render 'records/index'
-    #end
+    @record = current_user.records.build(record_params)
+    if @record.save
+      flash[:success] = "Data Recorded! Thank You #{current_user.elder}"
+     redirect_to records_path
+    else
+     flash.now[:danger] = 'Error - Check Data'
+     render 'new'
+    end
   end
   
+  def update
+if @record.update_attributes(record_params)
+      flash[:success] = "Record updated"
+      redirect_to_users_path
+    else
+    	 flash[:danger] = "Please try again"
+      render 'edit'
+    end
+  end
+
   def destroy
     @record.destroy
     flash[:success] = "Record deleted"
@@ -30,12 +43,9 @@ end
   private
     
     def record_params
-      params.require(:record).permit(:day, :sunday_att, :weekday_att, :first_timers, :new_converts, :nbs, :nbs_finish, :fnb, :message_sunday, :message_weekday, :preacher_sunday, :preacher_wekday, :user_id)
+      params.require(:record).permit(:day, :sunday_att, :weekday_att, :first_timers, :new_converts, :nbs, :nbs_finish, :fnb, :message_sunday, :message_weekday, :preacher_sunday, :preacher_wekday)
     end
     
-    #def correct_user
-      #@micropost = current_user.microposts.find_by(id: params[:id])
-      #redirect_to root_url if @micropost.nil?
-    #end
+ 
 
 end

@@ -15,7 +15,7 @@ validates :fnb, presence: true
 
 
 def ft_const
-  if self.sunday_att &&(self.first_timers> self.sunday_att)
+  if self.sunday_att && (self.first_timers > self.sunday_att)
     self.errors.add :base, "First Timers cannot be greater than Total attendance"
 end
   end

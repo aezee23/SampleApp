@@ -1,0 +1,48 @@
+
+<% provide(:title, 'New Data Record') %>
+<h1>Enter New Data Record</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@record) do |f| %>
+    
+      <%= f.label :day, Date %>
+      <%= f.date_field :day, :value => Date.today, class: 'form-control' %>
+      
+      <%= f.label :sunday_att, "Sunday Attendance" %>
+      <%= f.number_field :sunday_att, step: 1, value: 0, class: 'form-control' %>
+
+         <%= f.label :weekday_att, "Weekday Attendance" %>
+      <%= f.number_field :weekday_att, value: 0, class: 'form-control' %>
+      
+        <%= f.label :first_timers, "Number of First Timers In Sunday Service" %>
+      <%= f.number_field :first_timers, value: 0, class: 'form-control' %>
+
+          <%= f.label :new_converts, "Number of New Converts In Sunday Service" %>
+      <%= f.number_field :new_converts, value: 0, class: 'form-control' %>
+
+          <%= f.label :fnb, "Number of People Who Gave Their First and Best" %>
+      <%= f.number_field :fnb, value: 0, class: 'form-control' %>
+
+          <%= f.label :nbs, "Number of People Who STARTED New Believers School" %>
+      <%= f.number_field :nbs, value: 0, class: 'form-control' %>
+
+          <%= f.label :nbs_finish, "Number of People Who FINISHED New Believers School" %>
+      <%= f.number_field :nbs_finish, value: 0, class: 'form-control' %>
+
+         <%= f.label :message_sunday, "Sunday Message Title" %>
+      <%= f.text_field :message_sunday, value: "None", class: 'form-control' %>
+
+       <%= f.label :message_weekday, "Weekday Message Title" %>
+      <%= f.text_field :message_weekday, value: "None", class: 'form-control' %>
+
+       <%= f.label :preacher_sunday, "Who Preached in Sunday Service" %>
+      <%= f.text_field :preacher_sunday, value: "#{current_user.elder}", class: 'form-control' %>
+
+       <%= f.label :preacher_weekday, "Who Preached in Weekday Service" %>
+      <%= f.text_field :preacher_weekday, value: "#{current_user.elder}", class: 'form-control' %>
+      
+      <%= f.submit "Submit Data", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

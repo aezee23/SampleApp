@@ -36,6 +36,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
+gem 'groupdate'
+gem 'hightop'
+gem 'active_median'
+gem "chartkick"
 # Use Unicorn as the app server
 # gem 'unicorn'
 
