@@ -46,10 +46,6 @@ if @record.update_attributes(record_params)
       params.require(:record).permit(:day, :sunday_att, :weekday_att, :first_timers, :new_converts, :nbs, :nbs_finish, :fnb, :message_sunday, :message_weekday, :preacher_sunday, :preacher_wekday)
     end
     
-    “rails generate migration add_reset_to_users reset_digest:string \
-> reset_sent_at:datetime”
-
-Excerpt From: Michael Hartl. “Ruby on Rails Tutorial.” iBooks. https://itun.es/gb/6AW96.l
  
 
 end
