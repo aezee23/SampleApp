@@ -6,14 +6,14 @@
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@record) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-    
-      <%= f.label :day, Date %>
+
+      <%= f.label :day, "Date of Sunday Service (click dropdown arrow to select)" %>
       <%= f.date_field :day, :value => Date.today, class: 'form-control' %>
       
       <%= f.label :sunday_att, "Sunday Attendance" %>
      <%= f.number_field :sunday_att, value: 0, class: "form-control"%>
 
-         <%= f.label :weekday_att, "Weekday Attendance" %>
+         <%= f.label :weekday_att, "Weekday Attendance (for meeting a few days prior to the Sunday above.)" %>
       <%= f.number_field :weekday_att, value: 0, class: 'form-control' %>
       
         <%= f.label :first_timers, "Number of First Timers In Sunday Service" %>
