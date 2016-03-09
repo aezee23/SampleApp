@@ -3,7 +3,7 @@ class Record < ActiveRecord::Base
 
 default_scope -> { order(day: :desc) }
 validates :user_id, presence: true
-validates :day, presence: true, uniqueness: {scope: :user_id}
+validates :day, presence: true, uniqueness: {scope: :user_id, message: "already has data recorded for it. Check date."}
 validates :sunday_att, presence: true, numericality: { less_than_or_equal_to: 999,  only_integer: true }
 validates :weekday_att, presence: true, numericality: { less_than_or_equal_to: 999,  only_integer: true }
 validates :first_timers, presence: true 
