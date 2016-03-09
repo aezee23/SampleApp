@@ -41,7 +41,7 @@
       <%= f.text_field :preacher_sunday, value: "#{current_user.elder}", class: 'form-control' %>
 
        <%= f.label :preacher_weekday, "Who Preached in Weekday Service" %>
-      <%= f.text_field :preacher_weekday, value: "#{current_user.elder}", class: 'form-control' %> <br><br>
+      <%= f.text_field :preacher_weekday, value: "#{current_user.elder}", class: 'form-control' %> <br>
       
       <%= f.submit "Submit Data", class: "btn btn-primary" %>
     <% end %>
