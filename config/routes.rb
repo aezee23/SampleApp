@@ -2,10 +2,12 @@ Rails.application.routes.draw do
 get '/elders' => 'elders#index'
 root "sessions#new"
 get 'demo' => 'pages#index'
+get 'pages/show' => 'pages#show'
 resources :church_groups
 get 'login' => 'sessions#new'
 post 'login' => 'sessions#create'
 delete 'logout' => 'sessions#destroy'
+
 resources :users do
   resources :records
 end

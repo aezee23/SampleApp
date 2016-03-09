@@ -5,15 +5,20 @@
   <p><a class="btn btn-primary btn-lg" href="/records" role="button">View Data</a></p>
 </div>
 
-<div class="list-group">
-  <a href="#" class="list-group-item active">
-   Missing Data For the Following <%= "Church".pluralize(@users.count) %>
-  </a>
+<% if current_user.admin %>
+<% if @users.empty? %>
   <div class="list-group">
-  	<% @users.each do |t| %>
-  <a href="#" class="list-group-item list-group-item-danger"><%=t.name%></a>
+  <li class="list-group-item list-group-item-success">All Churches Have Submitted Data for <%= @date %></li>
+</div>
+  <% else %>
+  <div class="list-group">
+  	
+  <a href="/pages/show" class="list-group-item list-group-item-danger">Missing <%= @date %> Data For <%= pluralize(@users.count, "Church") %></a>
   <% end %>
 </div>
-</div>
+<% end %>
+
+
+
 
 
