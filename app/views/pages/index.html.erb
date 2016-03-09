@@ -13,7 +13,7 @@
   <% else %>
   <div class="list-group">
   	
-  <a href="/pages/show" class="list-group-item list-group-item-danger">Missing <%= @date %> Data For <%= pluralize(@users.count, "Church") %></a>
+  <a href="/show_nots" class="list-group-item list-group-item-danger">Missing <%= @date %> Data For <%= pluralize(@users.count, "Church") %></a>
   <% end %>
 </div>
 <% end %>
