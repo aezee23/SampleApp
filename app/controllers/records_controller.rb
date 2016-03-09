@@ -14,7 +14,7 @@ def edit
 end
 
  def create
-    @record = current_user.records.build(record_params)
+   @record = current_user.records.build(record_params)
     if @record.save
       flash[:success] = "Data Recorded! Thank You #{current_user.elder}"
      redirect_to records_path

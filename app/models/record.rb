@@ -13,7 +13,10 @@ validate :future_day
 validates :new_converts, presence: true
 validates :nbs, presence: true
 validates :fnb, presence: true
-
+validates :message_sunday, presence: true
+validates :message_weekday, presence: true
+validates :preacher_sunday, presence: true
+validates :preacher_weekday, presence: true
 
 def ft_const
   if self.sunday_att && (self.first_timers > self.sunday_att)
