@@ -5,6 +5,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(@record) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
     
       <%= f.label :day, Date %>
       <%= f.date_field :day, :value => Date.today, class: 'form-control' %>

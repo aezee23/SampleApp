@@ -19,7 +19,7 @@ end
       flash[:success] = "Data Recorded! Thank You #{current_user.elder}"
      redirect_to records_path
     else
-     flash.now[:danger] = 'Error - Check Data'
+     flash.now[:danger] = 'Error - See Below'
      render 'new'
     end
   end
