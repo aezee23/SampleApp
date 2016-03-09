@@ -10,8 +10,19 @@ has_secure_password
 validates :password, presence: true, length: { minimum: 6 }
 
 
+
+def has_not_submitted
+self.records.find_by(day: date_of_last("Sunday")).nil?
+end
+
+  def date_of_last(day)
+  date  = Date.parse(day)
+  delta = date > Date.today ? -7 : 0
+  date + delta
+end
+
 def self.search(query)
-  where("name like ?", "%#{query}%") 
+  where("name ILIKE ? OR elder ILIKE ?", "%#{query}%", "%#{query}%") 
 end
 # Returns the hash digest of the given string.
   def User.digest(string)

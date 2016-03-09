@@ -8,10 +8,12 @@ end
 
 def new
 @record = current_user.records.new
+@date = date_of_last("Sunday")
 end
 
 def edit
 end
+
 
  def create
    @record = current_user.records.build(record_params)
@@ -40,6 +42,9 @@ if @record.update_attributes(record_params)
     redirect_to request.referrer || root_url
   end
   
+
+
+
   private
     
     def record_params
