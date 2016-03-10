@@ -19,20 +19,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/demo">FLC Pastoral Care</a>
+     <%= link_to "FLC Pastoral Care", demo_path, class: "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="church_groups">View Church Groups <span class="sr-only">(current)</span></a></li>
-        <li class="active"><a href="users">View Campus Churches <span class="sr-only">(current)</span></a></li>
+        <li class="active"><%= link_to "View Church Groups", church_groups_path, class: "active"%> <span class="sr-only">(current)</span></li>
+        <li class="active"><%= link_to "View Campus Churches", users_path, class: "active" %><span class="sr-only">(current)</span></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Create New Church Group</a></li>
             <li><a href="#">Create New Campus Church</a></li>
-            <li><a href="#">Edit Campus Church Data</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Edit Church Group Information</a></li>
             <li role="separator" class="divider"></li>
@@ -46,7 +45,7 @@
   <%= submit_tag "Submit", class: 'btn btn-default', :name => nil %>
 <% end %>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log Out", logout_path, :method => 'delete' %></li>
+        <li><%= link_to "Log Out", logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"} %></li>
        
       </ul>
      </div><!-- /.navbar-collapse -->
@@ -64,7 +63,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/records">FLC Pastoral Care</a>
+     <%= link_to "FLC Pastoral Care", demo_path, class: "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -74,7 +73,7 @@
          <li class="active"><%= link_to "New Data Record", new_record_path %><span class="sr-only">(current)</span></li>
    </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log Out", logout_path, :method => 'delete' %></li>
+        <li><%= link_to "Log Out", logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"} %></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -92,14 +91,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">FLC Pastoral Care</a>
+      <%= link_to "FLC Pastoral Care", login_path, class: "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
  
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Login To Access System", '/'%></li>
+        <li><%= link_to "Login To Access System", login_path%></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

@@ -4,9 +4,9 @@
   </a>
   <div class="list-group">
   	<% @users.each do |t| %>
-  	<%= link_to(t) do %>
-  <li class="list-group-item list-group-item-danger"><%=t.name%> ---- <%= t.elder %></li>
-  <%end%>
+  
+  <li><%= link_to "#{t.name} -- #{t.elder}", user_path(t), class: "list-group-item list-group-item-danger" %></li>
   <% end %>
+
 </div>
 </div>

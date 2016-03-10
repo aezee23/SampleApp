@@ -28,7 +28,7 @@ end
 
   def show
 @user = User.find(params[:id])
-@records = @user.records
+@records = @user.records.paginate(page: params[:page])
     end
 
   def update

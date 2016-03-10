@@ -43,7 +43,7 @@
        <%= f.label :preacher_weekday, "Who Preached in Weekday Service" %>
       <%= f.text_field :preacher_weekday, value: "#{current_user.elder}", class: 'form-control' %> <br>
       
-      <%= f.submit "Submit Data", class: "btn btn-primary" %>
+      <%= f.submit "Submit Data", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

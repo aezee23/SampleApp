@@ -15,19 +15,11 @@
     <%end%>
   </div>
 <ul class="list-group">
-    <li class="list-group-item"><b>Elder:	</b><%= t.elder %> </li>
-    <li class="list-group-item"><b>Church Group: </b><%= t.church_group.name %></li>
-    <li class="list-group-item"><b>Region: </b><%= t.church_group.region %></li>
-    <li>
-    <div class="btn-group btn-group-justified" role="group" aria-label="...">
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-xs"><%= link_to "EDIT", '#' %> </button>
-  </div>
-
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-xs"><%= link_to "DELETE", '#' %></button>
-  </div>
-</div>
+    <li class="list-group-item", align= "left"><b>Elder:	</b><%= t.elder %> </li>
+    <li class="list-group-item", align= "left"><b>Church Group: </b><%= t.church_group.name %></li>
+    <li class="list-group-item", align= "left"><b>Region: </b><%= t.church_group.region %></li>
+    <li> <%= link_to "EDIT", '#', class: "list-group-item list-group-item-warning" %> </li>
+    <li><%= link_to "DELETE", "#", data: {confirm: "Are you sure you want to Delete #{t.name}?"}, class: "list-group-item list-group-item-danger" %>
 
 </li>
   </ul>
