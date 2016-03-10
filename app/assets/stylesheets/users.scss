@@ -49,10 +49,7 @@ aside {
     padding: 0 10px;
     border-left: 1px solid #383838 ;
     color: #383838; 
-    &':first-child' {
-      padding-left: 0;
-      border: 0;
-    }
+   
     &:hover {
       text-decoration: none;
       color: blue;
