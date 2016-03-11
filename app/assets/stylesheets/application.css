@@ -15,8 +15,7 @@
  *= require font-awesome
  */
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
+
 
 .container{
 padding-left: 60px;
