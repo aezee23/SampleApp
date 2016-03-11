@@ -1,3 +1,4 @@
+<% if current_user %>
 <div class="jumbotron">
   <h1>Thanks For Logging In</h1>
   <p>Welcome to the FLC Data App! </p>
@@ -5,10 +6,11 @@
   <p><%= link_to "View Data", records_path, class: "btn btn-primary btn-lg" %></p>
 </div>
 
-<% if current_user.admin %>
+
+  <% if current_user.admin %>
 <% if @users.empty? %>
   <div class="list-group">
-  <li class="list-group-item list-group-item-success">All Churches Should Have Submitted Data for <%= @date %></li>
+  <li class="list-group-item list-group-item-success">All Churches Have Submitted Data for <%= @date %></li>
 </div>
   <% else %>
   <div class="list-group">
@@ -17,8 +19,6 @@
   <% end %>
 </div>
 <% end %>
-
-
-
+  <%end%>
 
 

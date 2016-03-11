@@ -1,21 +1,15 @@
 <% provide(:title, "Campus Churches") %>
 
 
- <div class="container bootstrap snippet">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="main-box no-header clearfix">
-                <div class="main-box-body clearfix">
-                    <div class="table-responsive">
                       
-                        <table class="table user-list">
+                        <table class="table table-striped user-list">
                             <thead>
                                 <tr>
                                 <th><span>Campus Church</span></th>
                               
                                  <th><span>Group</span></th>
                                 <th><span>Region</span></th>
-                                <th><span>AVG Sun Att</span></th>
+                                <th><span>AVG Size</span></th>
                                  <th><span>Email</span></th>
                                 <th class="text-center"><span>Data Status</span></th>
                                 <th> &nbsp; </th>
@@ -25,11 +19,15 @@
                                 <% @users.each do |t| %>
                                
                                 <tr>
+                                  
                                     <td>
-                                        <%= gravatar_for t %>
+
+                                        <%= gravatar_for(t) %>
+                                         
                                         <%= link_to t.name, t, class: "user-link" %>
                                         <span class="user-subhead"><%= t.elder%></span>
                                     </td>
+                                   
                                     <td><%= link_to t.church_group.name, church_group_path(t.church_group), class: "table-text"%></td>
                                     <td class="table-text"><%= t.church_group.region %></td>
                                     <td class="table-text text-center"><strong><%= t.ytd_avg(:sunday_att) %></strong></td>
@@ -66,13 +64,8 @@
                             </tbody>
                         </table>
                         
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <%= will_paginate @user, renderer: BootstrapPagination::Rails%>
-</div>
+                    </div> <%= will_paginate @user, renderer: BootstrapPagination::Rails%>
+
   
 
 

@@ -1,12 +1,75 @@
-<div class="list-group">
-  <a href="#" class="list-group-item active">
-   Missing <%= @date %> Data For the Following <%= pluralize(@users.count, "Church") %>
-  </a>
-  <div class="list-group">
-  	<% @users.each do |t| %>
-  
-  <li><%= link_to "#{t.name} -- #{t.elder}", user_path(t), class: "list-group-item list-group-item-danger" %></li>
-  <% end %>
 
-</div>
-</div>
+  <% if !@users.empty? %>
+
+   <table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th ><span class="list-group-item list-group-item-danger">Missing <%= @date %> Data For The Following <%= pluralize(@users.count, "Church") %></span></th>
+                             
+                                </tr>
+    </thead>
+ </table>
+<table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th><span>Campus Church</span></th>
+                              
+                                 <th><span>Group</span></th>
+                                <th><span>Region</span></th>
+                              <th><span>Email</span></th>
+                                <th><span>Last Submitted</span></th>
+                                <th class="text-center"><span>Data Status</span></th>
+                                <th> &nbsp; </th>
+                                </tr>
+    </thead>
+
+    <tbody>
+    	 	<% @users.each do |t| %>
+                                <tr>
+                                    <td>
+                                        <%= gravatar_for t %>
+                                        <%= link_to t.name, t, class: "user-link2" %>
+                                        
+                                    </td>
+                                    <td><%= link_to t.church_group.name, church_group_path(t.church_group), class: "table-text"%></td>
+                                    <td class="table-text"><%= t.church_group.region %></td>
+                                    <td><%= link_to "#{t.elder}", "mailto:#{t.email}" %></td>
+                                    <td class="table-text text-center"><%= t.records.first.day.strftime("%d%b%y") %></td>
+                                    <td class="text-center">
+                                    	<% @csclass= t.records.count < Date.today.cweek ? "label label-danger" : "label label-success" %>
+                                        <span class="<%="#{@csclass}"%>"><%= t.missing_data%></span>
+                                    </td>
+                                  
+                        <td>
+                                        <%= link_to user_path(t), class: "table-link success" do %>
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                       <% end %>
+                                        <%= link_to edit_user_path(t), class: "table-link" do %>
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <% end %>
+                                   
+                                    </td>
+                                </tr>
+                               <% end %>
+                            </tbody>
+
+ 
+
+</table>
+<% else %>
+   <table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th ><span class="list-group-item list-group-item-success">All Users Have Submitted <%= @date %> Data %></span></th>
+                             
+                                </tr>
+    </thead>
+ </table>
+ <% end %>
+

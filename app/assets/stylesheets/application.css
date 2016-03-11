@@ -15,6 +15,9 @@
  *= require font-awesome
  */
 
+.pagination{
+  padding-left: 20px;
+}
 
 
 .container{
