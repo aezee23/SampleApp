@@ -18,10 +18,10 @@
 
 
 .container{
-padding-left: 0px;
+padding-left: 60px;
 }
 .container>a{
-  padding-left: 0px;
+  padding-left: 60px;
   color: #000000;
 }
 .text-muted{
