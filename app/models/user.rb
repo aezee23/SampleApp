@@ -10,6 +10,22 @@ has_secure_password
 validates :password, presence: true, length: { minimum: 6 }
 
 
+def ytd_avg_sun
+  n = self.records.where(day: ((Date.parse(Date.today.strftime("%Y0101"))..Date.today))).count
+  a = self.records.pluck(:sunday_att).first(n)
+  sum_a = a.inject(0){|sum,x| sum + x }
+  avg= sum_a/n.to_f
+  avg.round(1)
+end
+
+def missing_data
+  if self.records.count < Date.today.cweek
+    "Missing #{Date.today.cweek-self.records.count} #{"Record".pluralize(Date.today.cweek-self.records.count)}"
+  else
+    "Complete"
+  end
+end
+
 
 def has_not_submitted
 self.records.find_by(day: date_of_last("Sunday")).nil?

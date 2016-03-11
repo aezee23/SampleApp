@@ -18,7 +18,73 @@
       <ol class="records">
       
       </ol>
-      <%= will_paginate @records %>
+    
    
   </div>
+</div>
+
+
+
+
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Campus Church</span></th>
+                              
+                                 <th><span>Group</span></th>
+                                <th><span>Region</span></th>
+                                <th><span>AVG Sunday Attendance</span></th>
+                                <th class="text-center"><span>Data Status</span></th>
+                                <th> &nbsp; </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <%= gravatar_for @user %>
+                                        <%= link_to @user.name, @user, class: "user-link" %>
+                                        <span class="user-subhead">Elder: <%= @user.elder%></span>
+                                    </td>
+                                    <td><%= link_to @user.church_group.name, church_group_path(@user.church_group), class: "table-text"%></td>
+                                    <td class="table-text"><%= @user.church_group.region %></td>
+                                    <td class="table-text text-center"><%= @user.ytd_avg_sun %></td>
+                                    <td class="text-center">
+                                        <span class="<%="#{@csclass}"%>"><%= @user.missing_data%></span>
+                                    </td>
+                                  
+                                    <td>
+                                        <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="#" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

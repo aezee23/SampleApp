@@ -12,23 +12,16 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
 
-.footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #00284d
-}
-.footer small {
-    float: left;
-  }
-  .footer ul {
-    float: right;
-    list-style: none;
-}
-.footer ul li {
-      float: left;
-      margin-left: 15px;
-    }
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
-
+.container{
+padding-left: 60px;
+}
+.container>a{
+  padding-left: 60px;
+  color: #000000;
+}

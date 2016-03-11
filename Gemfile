@@ -42,6 +42,8 @@ gem 'dateslices', '~> 0.0.3'
 gem 'hightop'
 gem 'active_median'
 gem "chartkick"
+gem 'font-awesome-sass', '~> 4.5.0'
+gem "font-awesome-rails"
 # Use Unicorn as the app server
 # gem 'unicorn'
 

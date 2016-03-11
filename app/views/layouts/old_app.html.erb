@@ -111,31 +111,27 @@
       <% end %>
 <%= yield %>
 
-
-  <footer>
-     <div class="container">
-      <div class="row">
-  <div class="col-md-8">
-
-      
-        <%= link_to "FLC Pastoral Care", demo_path, class: "text-muted" %>
-      
-  </div>
-  <div class="col-md-4">
-  
-        <%= link_to "Contact Technical Support", "mailto:firstlovechurchuk@gmail.com", class: "text-muted" %>
-     
-</div>
-</div>
- 
 </body>
 
- 
+ <div class="container">
+<footer class="footer">
 
+  <div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-8"><small>
+   <a href="#">FPC APP</a>
+  
+  </small></div>
+  <div class="col-xs-6 col-md-4">
+    <ul>
+      <li><%= link_to "Help", '#' %></li>
+      <li><%= link_to "Contact", '#' %></li>
+      <li><a href="#">Read Me</a></li>
+    </ul></div>
+</div>
   
   
   
-
-
+</footer>
+</div>
 
 </html>

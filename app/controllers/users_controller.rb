@@ -2,10 +2,12 @@ class UsersController < ApplicationController
 	
 def index
   if params[:search]
-    @users = User.search(params[:search]).where(admin: false).order("name ASC")
+    @users = User.search(params[:search]).where(admin: false).order("name ASC").paginate(page: params[:page], per_page: 10) 
   else
-    @users = User.where(admin: false).order('name ASC')
+    @users = User.where(admin: false).order('name ASC').paginate(page: params[:page], per_page: 10) 
+
   end
+  
 end
 
 def new
@@ -13,6 +15,7 @@ def new
 end
 
 def edit
+	@user = User.find(params[:id])
 end
 
 
@@ -29,6 +32,7 @@ end
   def show
 @user = User.find(params[:id])
 @records = @user.records.paginate(page: params[:page])
+@csclass= @user.records.count < Date.today.cweek ? "label label-danger" : "label label-success"
     end
 
   def update
