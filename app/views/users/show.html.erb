@@ -53,7 +53,7 @@
                                     </td>
                                     <td><%= link_to @user.church_group.name, church_group_path(@user.church_group), class: "table-text"%></td>
                                     <td class="table-text"><%= @user.church_group.region %></td>
-                                    <td class="table-text text-center"><%= @user.ytd_avg_sun %></td>
+                                    <td class="table-text text-center"><%= @user.ytd_avg(:sunday_att) %></td>
                                     <td class="text-center">
                                         <span class="<%="#{@csclass}"%>"><%= @user.missing_data%></span>
                                     </td>

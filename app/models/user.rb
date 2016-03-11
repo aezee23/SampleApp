@@ -10,15 +10,15 @@ has_secure_password
 validates :password, presence: true, length: { minimum: 6 }
 
 
-def ytd_avg_sun
+def ytd_avg(y)
   n = self.records.where(day: ((Date.parse(Date.today.strftime("%Y0101"))..Date.today))).count
   if n ==0
     0
   else
-  a = self.records.pluck(:sunday_att).first(n)
+  a = self.records.pluck(y).first(n)
   sum_a = a.inject(0){|sum,x| sum + x }
   avg= sum_a/n.to_f
-  avg.round(1)
+  avg.round(0)
 end
 end
 

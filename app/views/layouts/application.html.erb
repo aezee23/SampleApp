@@ -45,7 +45,7 @@
   <%= submit_tag "Submit", class: 'btn btn-default', :name => nil %>
 <% end %>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log Out", logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"} %></li>
+        <li><%= link_to "Log Out", logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"}, class: "nav navbar-nav navbar-right" %></li>
        
       </ul>
      </div><!-- /.navbar-collapse -->
@@ -118,16 +118,17 @@
   <div class="col-md-8">
 
       
-        <%= link_to "FLC Pastoral Care", demo_path, class: "text-muted" %>
+        
+        <%= link_to "Contact Technical Support", "mailto:firstlovechurchuk@gmail.com", class: "text-muted text" %>
       
   </div>
-  <div class="col-md-4">
   
-        <%= link_to "Contact Technical Support", "mailto:firstlovechurchuk@gmail.com", class: "text-muted" %>
+ 
+       
      
 </div>
 </div>
- 
+  </footer>
 </body>
 
  

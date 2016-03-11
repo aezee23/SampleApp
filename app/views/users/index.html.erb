@@ -32,7 +32,7 @@
                                     </td>
                                     <td><%= link_to t.church_group.name, church_group_path(t.church_group), class: "table-text"%></td>
                                     <td class="table-text"><%= t.church_group.region %></td>
-                                    <td class="table-text text-center"><strong><%= t.ytd_avg_sun %></strong></td>
+                                    <td class="table-text text-center"><strong><%= t.ytd_avg(:sunday_att) %></strong></td>
                                     <td><%= link_to "#{t.elder}", "mailto:#{t.email}" %></td>
                                     <td class="text-center">
                                          <% csclass= t.records.count < Date.today.cweek ? "label label-danger" : "label label-success" %>

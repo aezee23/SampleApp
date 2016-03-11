@@ -4,7 +4,7 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-.jumbotron{padding: 60px;}
+.jumbotron{padding: 30px;}
 
 
 /* Sticky footer styles
@@ -27,5 +27,6 @@ footer {
   border-top: double #393E41;
 }
 .list-group-item{
-	padding-left: 60px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
