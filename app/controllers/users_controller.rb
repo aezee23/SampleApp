@@ -32,7 +32,6 @@ end
   def show
 @user = User.find(params[:id])
 @records = @user.records.paginate(page: params[:page])
-@csclass= @user.records.count < Date.today.cweek ? "label label-danger" : "label label-success"
     end
 
   def update
