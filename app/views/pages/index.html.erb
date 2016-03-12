@@ -2,23 +2,56 @@
 <div class="jumbotron">
   <h1>Thanks For Logging In</h1>
   <p>Welcome to the FLC Data App! </p>
+  <% if !current_user.admin %> 
   <p>All data should now have been submitted for <b><%= @date %></b></p>
+   <p><%= link_to "View Data", records_path, class: "btn btn-primary btn-lg" %></p>  
+</div>
+   <% else %>
   <p><%= link_to "View Latest Data", last_sunday_path, class: "btn btn-primary btn-lg" %></p>
 </div>
-
+<% end %>
 
   <% if current_user.admin %>
 <% if @users.empty? %>
-  <div class="list-group">
-  <li class="list-group-item list-group-item-success">All Churches Have Submitted Data for <%= @date %></li>
-</div>
+      <table class="table table-striped user-list">
+      <thead>
+         <tr class="success">
+        <td class="success"><span>All Churches Have Submitted Data for <%= @date %></span></td>
+         </thead>
+        </table>  
+
   <% else %>
-  <div class="list-group">
-  	
-  <%= link_to "Missing #{@date} Data For #{pluralize(@users.count, "Church")}", show_nots_path, class: "list-group-item list-group-item-danger" %>
+      <table class="table table-striped user-list">
+      <thead>
+         <tr class="danger">
+        <td class="danger"><span>  <%= link_to "Missing #{@date} Data For #{pluralize(@users.count, "Church")}", show_nots_path, style: "color: black; font-size: 0.8em"  %></span></td>
+         </thead>
+        </table>  
+
   <% end %>
-</div>
 <% end %>
+
+
+   <table class="table table-striped user-list" style="width: 100%">
+                            <thead>
+                                <tr class="info">
+                                <th class= "text-center info"><span class="text-center" style="font-size: 2em; text-align: center">THIS WEEK IN FLC</span></th>
+                             </thead>
+                             </table>  
+      <table class="table table-striped user-list" style="width: 100%">
+                            <thead>
+                                <tr>
+                                <th class= "text-center"><span class="text-left" style="font-size: 1.6em; text-align: center">London Campus Churches</span></th>
+ 
+                                <th class= "text-center"><span class="text-left" style="font-size: 1.6em; text-align: center">Judea</span></th>
+
+                                <th class= "text-center"><span class="text-left" style="font-size: 1.6em; text-align: center">London Main</span></th>
+                             </thead>
+                             </table>  
+                            
+
+
+
   <%end%>
 
 

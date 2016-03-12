@@ -1,4 +1,21 @@
-<h1>Last Week in FLC</h1>
+
+
+<h1 style="padding-left: 0px"><span class="label label-default" style="padding-left:20px">Last Week In FLC</span></h1>
+
+<p style="padding: 20px">
+ Data Download:
+  <%= link_to "To Excel", last_sunday_path(format: "csv") %> |
+</p>
+
+
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+
 
 <table class="table table-striped">
     <thead>
@@ -43,6 +60,7 @@
         </tr>
         <% end %>
     </tbody>
-    <%= will_paginate @records, renderer: BootstrapPagination::Rails%>
+    
 </table>
+<%= will_paginate @records, renderer: BootstrapPagination::Rails%>
                 

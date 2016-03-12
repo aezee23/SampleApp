@@ -21,15 +21,22 @@ helper_method :sort_column, :sort_direction
   end
 
   def edit
+  	@church_group = ChurchGroup.find(params[:id])
   end
 
     def update
+    	@church_group = ChurchGroup.find(params[:id])
     if @church_group.update(church_params)
       redirect_to church_groups_path, notice: 'Church Group was successfully updated.'
     else
       render action: 'edit'
     end
   end
+
+def show
+@church_group = ChurchGroup.find(params[:id])
+@users = @church_group.records
+end
 
 def destroy
     ChurchGroup.find(params[:id]).destroy

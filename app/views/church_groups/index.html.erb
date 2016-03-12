@@ -1,5 +1,6 @@
 <% provide(:title, "Church Groups") %>
 
+<h1 style="padding-left: 0px"><span class="label label-default" style="padding-left:20px">Church Groups</span></h1>
                         <table class="table table-striped user-list">
                             <thead>
                                 <tr>
@@ -55,9 +56,9 @@
                                 </tr>
                                <% end %>
                             </tbody>
-                            <%= will_paginate @church_groups, renderer: BootstrapPagination::Rails%>
+                           
                         </table>
- 
+  <%= will_paginate @church_groups, renderer: BootstrapPagination::Rails%>
   
 
 
