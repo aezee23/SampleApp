@@ -1,0 +1,49 @@
+
+<% provide(:title, 'Edit Data Record') %>
+<h3><%= "Edit #{@record.day} Data Record For #{@record.user.name}" %></h3>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@record) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :day, "Date of Sunday Service (click dropdown arrow to select)" %>
+      <%= f.date_field :day, :value => @date, class: 'form-control' %>
+      
+      <%= f.label :sunday_att, "Sunday Attendance" %>
+     <%= f.number_field :sunday_att, class: "form-control"%>
+
+         <%= f.label :weekday_att, "Weekday Attendance (for meeting a few days prior to the Sunday above.)" %>
+      <%= f.number_field :weekday_att, class: 'form-control' %>
+      
+        <%= f.label :first_timers, "Number of First Timers In Sunday Service" %>
+      <%= f.number_field :first_timers, class: 'form-control' %>
+
+          <%= f.label :new_converts, "Number of New Converts In Sunday Service" %>
+      <%= f.number_field :new_converts, class: 'form-control' %>
+
+          <%= f.label :fnb, "Number of People Who Gave Their First and Best" %>
+      <%= f.number_field :fnb, class: 'form-control' %>
+
+          <%= f.label :nbs, "Number of People Who STARTED New Believers School" %>
+      <%= f.number_field :nbs, class: 'form-control' %>
+
+          <%= f.label :nbs_finish, "Number of People Who FINISHED New Believers School" %>
+      <%= f.number_field :nbs_finish, class: 'form-control' %>
+
+         <%= f.label :message_sunday, "Sunday Message Title" %>
+      <%= f.text_field :message_sunday, class: 'form-control' %>
+
+       <%= f.label :message_weekday, "Weekday Message Title" %>
+      <%= f.text_field :message_weekday, class: 'form-control' %>
+
+       <%= f.label :preacher_sunday, "Who Preached in Sunday Service" %>
+      <%= f.text_field :preacher_sunday, class: 'form-control' %>
+
+       <%= f.label :preacher_weekday, "Who Preached in Weekday Service" %>
+      <%= f.text_field :preacher_weekday, class: 'form-control' %> <br>
+      
+      <%= f.submit "Submit Ammendment", data: { confirm: 'Are You Sure You Want To Amend This Record?' }, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

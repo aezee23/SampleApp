@@ -2,12 +2,13 @@ Rails.application.routes.draw do
 get '/elders' => 'elders#index'
 root "sessions#new"
 get 'demo' => 'pages#index'
+get 'last_sunday' => 'pages#last_sunday'
 get 'show_nots' => 'pages#show'
 resources :church_groups
 get 'login' => 'sessions#new'
 post 'login' => 'sessions#create'
 delete 'logout' => 'sessions#destroy'
-
+get 'records/:id' => 'records#show'
 
 resources :users do
   resources :records

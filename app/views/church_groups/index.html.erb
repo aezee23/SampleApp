@@ -1,34 +1,62 @@
-<% provide(:title, "Church Index") %>
-<div class="row">
-  
-<% @church_group.each do |t| %>
-<div class="col-xs-6 col-md-4">
-  	<div class="panel panel-default">
-  <div class="panel-heading">
-    <h2 class="panel-title"><%= link_to t.name, "#" %></h2>
-  </div>
-<ul class="list-group">
-    <li class="list-group-item"><b>Overseer:	</b><%= t.leader %> </li>
-    <li class="list-group-item"><b>Number of CCs: </b><%= t.users.count %></li>
-    <li class="list-group-item"><b>Region: </b><%= t.region %></li>
-    <li>
-    <div class="btn-group btn-group-justified" role="group" aria-label="...">
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-xs"><%= link_to "EDIT", '#' %> </button>
-  </div>
+<% provide(:title, "Church Groups") %>
 
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-xs"><%= link_to "DELETE", '#' %></button>
-  </div>
-</div>
+                        <table class="table table-striped user-list">
+                            <thead>
+                                <tr>
+                                <th><span><%= sortable "name", "Name" %></span></th>
+                                 <th><span><%= sortable "region", "Region" %></span></th>
+                                <th><span> Number of Churches</span></th>
+                                 <th><span> AVG Total Size</span></th>
+                                 <th><span> Latest Total Size</span></th>
+                                <th> &nbsp; </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @church_groups.each do |t| %>
+                               
+                                <tr>
+                                  
+                                    <td>
 
-</li>
-  </ul>
-</div>
-</div>
-<%end%>
- 
- </div>
+                                        <%= gravatar_for(@user) %>
+                                         
+                                        <%= link_to t.name, t, class: "user-link" %>
+                                        <span class="user-subhead"><%="Overseer: #{t.leader}"%></span>
+                                    </td>
+                                   
+                                    <td class= "table-text"><%= t.region%></td>
+                                    <td class= "table-text"><%= t.users.count%></td>
+                                    <td class="table-text text-center"><strong><%= t.sum_ytd_avg(:sunday_att) %></strong></td>
+                                     <td class="table-text text-center"><strong><%= t.sum_latest(:sunday_att) %></strong></td>
+                                 
+                                  
+                                    <td>
+                                        <%= link_to church_group_path(t), class: "table-link success" do %>
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                       <% end %>
+                                        <%= link_to edit_church_group_path(t), class: "table-link" do %>
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <% end %>
+                                      
+                                            <span class="fa-stack">
+                                                
+                                                <%= link_to url_for(t), method: :delete, data: { confirm: 'Are you sure you want to delete this Church and all thier records?' }, class: "table-link danger", remote: false do %>
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <% end %>
+                                    </td>
+                                </tr>
+                               <% end %>
+                            </tbody>
+                            <%= will_paginate @church_groups, renderer: BootstrapPagination::Rails%>
+                        </table>
  
   
 

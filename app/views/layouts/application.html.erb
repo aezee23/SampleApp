@@ -19,43 +19,61 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-         <%= link_to "FLC Pastoral Care", demo_path, class: "navbar-brand active"%>
-         
-      
+      <%= link_to demo_path, class: "navbar-brand" do %>
+      <span class="glyphicon glyphicon-signal"></span>&nbsp;<%= "FLC" %>
+      <% end %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="acti" ><%= link_to "Church Groups", church_groups_path, class: "active"%> <span class="sr-only">(current)</span></li>
-         <li class="aive" ><%= link_to "Latest Data", "#", class: "active" %><span class="sr-only">(current)</span></li>
-        <li class="tive"><%= link_to "Campus Churches", users_path, class: "active" %><span class="sr-only">(current)</span></li>
+        <li class="">
+          <%= link_to church_groups_path do %>
+          <%= "Church Groups" %> <span class="sr-only">(current)</span>
+          <% end %></li>
+        <li class="">
+          <%= link_to users_path do %>
+          <%= "Campus Churches" %> <span class="sr-only">(current)</span>
+          <% end %></li>
+             <li class="">
+          <%= link_to records_path do %>
+          <%= "All Records" %> <span class="sr-only">(current)</span>
+          <% end %></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Create New Church Group</a></li>
-            <li><a href="#">Create New Campus Church</a></li>
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Edit Church Group Information</a></li>
+            <li><a href="#">Separated link</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Edit Campus Church Inofrmation</a></li>
+            <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
       </ul>
-
-<%= form_tag(users_path, method: 'get', class: 'navbar-form navbar-left') do %>
+      
+        
+   <%= form_tag(users_path, method: 'get', class: 'navbar-form navbar-left') do %>
   <%= search_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search By Campus or Elder'  %>
   <%= submit_tag "Submit", class: 'btn btn-default', :name => nil %>
 <% end %>
+      
       <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"}, remote: false do%>
-         <span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</li>
-      <% end %>
        
+       <li>
+        <%= link_to logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"}, class: "navbar-brand", remote: false do %>
+        <span class="glyphicon glyphicon-log-out"></span>&nbsp;<%="Log Out" %>
+       <% end %>
+       </li>
       </ul>
-     </div><!-- /.navbar-collapse -->
+    </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+
+
+
 
 <% elsif logged_in? && current_user.admin == false  %>
 <nav class="navbar navbar-default">
@@ -68,20 +86,32 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-     <%= link_to "FLC Pastoral Care", demo_path, class: "navbar-brand" %>
+       <%= link_to demo_path, class: "navbar-brand" do %>
+      <span class="glyphicon glyphicon-signal"></span>&nbsp;<%= "FLC" %>
+      <% end %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to "View Records", records_path %> <span class="sr-only">(current)</span></li>
-         <li><%= link_to "New Data Record", new_record_path %><span class="sr-only">(current)</span></li>
+        <li>
+          <%= link_to records_path do %>
+          <%= "Records" %> <span class="sr-only">(current)</span>
+          <% end %></li>
+        </li>
+            <li>
+          <%= link_to new_record_path do %>
+          <%= "New Record" %> <span class="sr-only">(current)</span>
+          <% end %></li>
+        </li>
    </ul>
-    <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"}, remote: false do%>
-         <span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</li>
-      <% end %>
+     <ul class="nav navbar-nav navbar-right">
        
+       <li>
+        <%= link_to logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"}, class: "navbar-brand", remote: false do %>
+        <span class="glyphicon glyphicon-log-out"></span>&nbsp;<%="Log Out" %>
+       <% end %>
+       </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -99,7 +129,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-     <%= link_to "FLC Pastoral Care", login_path, class: "navbar-brand" %>
+        <%= link_to root_path, class: "navbar-brand" do %>
+      <span class="glyphicon glyphicon-signal"></span>&nbsp;<%= "FLC Pastoral Care" %>
+      <% end %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -108,8 +140,8 @@
      
      
       <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to login_path do%>
-         <span class="glyphicon glyphicon-log-in"></span>&nbsp;Login To Access The System</li>
+          <li><%= link_to login_path, class: "navbar-brand" do%>
+         <span class="glyphicon glyphicon-log-in"></span>&nbsp;Login To Access System</li>
       <% end %>
        
       </ul>
@@ -132,7 +164,7 @@
    <table class="table table-striped">
                             <thead>
                                 <tr>
-                                <td><span class="glyphicon glyphicon-flag"></span>&nbsp;<span><%= link_to "Email For Tech Support", "mailto:firstlovechurchuk@gmail.com" %></span></td>
+                                <td><span class="glyphicon glyphicon-flag"></span>&nbsp;<span><%= link_to "Email For Support", "mailto:firstlovechurchuk@gmail.com" %></span></td>
                               
                                
                                 <th> &nbsp; </th>

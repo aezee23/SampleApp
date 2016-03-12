@@ -22,6 +22,11 @@ def ytd_avg(y)
 end
 end
 
+def latest(x)
+  a = self.records.order('day DESC').first[x]
+end
+
+
 def missing_data
   if self.records.count < Date.today.cweek
     "Missing #{Date.today.cweek-self.records.count} #{"Record".pluralize(Date.today.cweek-self.records.count)}"

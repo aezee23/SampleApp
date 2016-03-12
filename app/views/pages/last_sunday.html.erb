@@ -1,29 +1,29 @@
-<% provide(:title, 'Data Records') %>
+<h1>Last Week in FLC</h1>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th><span><%= sortable "day", "Date" %></span></th>
-            <% if current_user.admin %>
-            <th><span><%= sortable "user_id", "Church" %></span></th>
-            <% end %>
-            <th><span><%= sortable "sunday_att", "Sunday" %></span></th>
+           
+           
+            <th><span><%= sortable "user_id", "Church      " %></span></th>
+            
+            <th><span><%= sortable "sunday_att      ", "Sunday" %></span></th>
             <th><span><%= sortable "weekday_att", "Weekday" %></span></th>               
             <th><span><%= sortable "first_timers", "First Timers" %></span></th>
             <th><span><%= sortable "new_converts", "New Converts" %></span></th>
             <th><span><%= sortable "fnb", "Tithe" %></span></th>
             <th ><span><%= sortable "nbs", "Start NBS" %></span></th>
             <th ><span><%= sortable "nbs_finish", "Finish NBS" %></span></th>
+            <th ><span><%= sortable "message_sunday", "Sunday Message" %></span></th>
         </tr>
     </thead>
 
       <tbody>
         <% @records.each do |t| %>
         <tr>
-            <td><span><%= link_to t.day.strftime('%d-%b-%y'), record_path(t) %></span></td>
-            <% if current_user.admin %>
-            <td><span><%= link_to t.user.name, user_path(t.user) %></span></td>
-            <% end %>
+            
+          
+            <td><span><%= t.user.name %></span></td>
             <td><span><%= t.sunday_att %></span></td>
             <td><span><%= t.weekday_att %></span></td>               
             <td><span><%= t.first_timers %></span></td>
@@ -31,6 +31,7 @@
             <td><span><%= t.fnb %></span></td>
             <td ><span><%= t.nbs %></span></td>
             <td ><span><%= t.nbs_finish %></span></td>
+          <td ><span><%= t.message_sunday %></span></td>
         </tr>
         <% end %>
     </tbody>

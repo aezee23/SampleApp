@@ -1,6 +1,9 @@
 class ChurchGroupsController < ApplicationController
+helper_method :sort_column, :sort_direction
+
 	 def index
-@church_group = ChurchGroup.where.not(id: 1).order('name ASC')
+@church_groups = ChurchGroup.where.not(id: 1).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 13)
+@user= ChurchGroup.find_by(id: 10).users.first
 	 end
 
 
@@ -39,4 +42,13 @@ def destroy
   def church_params
     params.require(:church_group).permit(:name, :leader, :region)
   end
+
+    def sort_column
+   params[:sort] ? params[:sort] : "region"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end

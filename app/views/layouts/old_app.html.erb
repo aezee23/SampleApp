@@ -19,14 +19,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-     <%= link_to "FLC Pastoral Care", demo_path, class: "navbar-brand" %>
+         <%= link_to "FLC Pastoral Care", demo_path, class: "navbar-brand active"%>
+         
+      
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><%= link_to "View Church Groups", church_groups_path, class: "active"%> <span class="sr-only">(current)</span></li>
-        <li class="active"><%= link_to "View Campus Churches", users_path, class: "active" %><span class="sr-only">(current)</span></li>
+        <li class="acti" ><%= link_to "Church Groups", church_groups_path, class: "active"%> <span class="sr-only">(current)</span></li>
+         <li class="aive" ><%= link_to "Latest Data", "#", class: "active" %><span class="sr-only">(current)</span></li>
+        <li class="tive"><%= link_to "Campus Churches", users_path, class: "active" %><span class="sr-only">(current)</span></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -45,7 +48,9 @@
   <%= submit_tag "Submit", class: 'btn btn-default', :name => nil %>
 <% end %>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log Out", logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"} %></li>
+          <li><%= link_to logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"}, remote: false do%>
+         <span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</li>
+      <% end %>
        
       </ul>
      </div><!-- /.navbar-collapse -->
@@ -69,11 +74,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><%= link_to "View Records", records_path %> <span class="sr-only">(current)</span></li>
-         <li class="active"><%= link_to "New Data Record", new_record_path %><span class="sr-only">(current)</span></li>
+        <li><%= link_to "View Records", records_path %> <span class="sr-only">(current)</span></li>
+         <li><%= link_to "New Data Record", new_record_path %><span class="sr-only">(current)</span></li>
    </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log Out", logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"} %></li>
+    <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"}, remote: false do%>
+         <span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</li>
+      <% end %>
+       
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -91,16 +99,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "FLC Pastoral Care", login_path, class: "navbar-brand" %>
+     <%= link_to "FLC Pastoral Care", login_path, class: "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
- 
+
+     
+     
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Login To Access System", login_path%></li>
+          <li><%= link_to login_path do%>
+         <span class="glyphicon glyphicon-log-in"></span>&nbsp;Login To Access The System</li>
+      <% end %>
+       
       </ul>
-    </div><!-- /.navbar-collapse -->
+     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
@@ -111,27 +124,32 @@
       <% end %>
 <%= yield %>
 
+
+  <footer>
+   
+
+      
+   <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                <td><span class="glyphicon glyphicon-flag"></span>&nbsp;<span><%= link_to "Email For Tech Support", "mailto:firstlovechurchuk@gmail.com" %></span></td>
+                              
+                               
+                                <th> &nbsp; </th>
+                                </tr>
+                            </thead>     
+     
+      
+</table>
+  </footer>
 </body>
 
- <div class="container">
-<footer class="footer">
+ 
 
-  <div class="row">
-  <div class="col-xs-12 col-sm-6 col-md-8"><small>
-   <a href="#">FPC APP</a>
-  
-  </small></div>
-  <div class="col-xs-6 col-md-4">
-    <ul>
-      <li><%= link_to "Help", '#' %></li>
-      <li><%= link_to "Contact", '#' %></li>
-      <li><a href="#">Read Me</a></li>
-    </ul></div>
-</div>
   
   
   
-</footer>
-</div>
+
+
 
 </html>
