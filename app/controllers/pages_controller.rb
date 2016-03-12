@@ -25,7 +25,7 @@ class PagesController < ApplicationController
 def last_sunday
 	if current_user && current_user.admin
 @date = date_of_last("Sunday")
-@records = Record.where(day: date_of_last("Sunday")).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 15)
+@records = Record.where(day: date_of_last("Sunday")-7).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 15)
 end
 end
 

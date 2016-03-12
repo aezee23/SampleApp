@@ -33,4 +33,5 @@ def future_day
 		self.errors.add :base, "Date cannot be in the future!"
 	end
 end
+
 end

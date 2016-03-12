@@ -30,9 +30,10 @@ end
   end
   
   def update
+  	@record = Record.find(params[:id])
 if @record.update_attributes(record_params)
       flash[:success] = "Record updated. See All Records Below:"
-      redirect_to_records_path
+      redirect_to records_path
     else
     	 flash[:danger] = "Please try again"
       render 'edit'
@@ -54,7 +55,7 @@ if @record.update_attributes(record_params)
   private
     
     def record_params
-      params.require(:record).permit(:day, :sunday_att, :weekday_att, :first_timers, :new_converts, :nbs, :nbs_finish, :fnb, :message_sunday, :message_weekday, :preacher_sunday, :preacher_weekday)
+      params.require(:record).permit(:day, :sunday_att, :weekday_att, :first_timers, :new_converts, :nbs, :nbs_finish, :fnb, :message_sunday, :message_weekday, :preacher_sunday, :preacher_weekday, :user_id)
     end
     
   def sort_column

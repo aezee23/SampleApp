@@ -23,7 +23,7 @@ end
     @user = User.new(user_params)
     if @user.save
       flash[:info] = "Church Successful Created!"
-      redirect_to_users_path
+      redirect_to users_path
     else
       render 'new'
     end
@@ -35,6 +35,7 @@ end
     end
 
   def update
+  	@user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
