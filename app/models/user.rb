@@ -67,7 +67,7 @@ end
 
 
 def missing_data
-  if self.records.count < Date.today.cweek
+  if self.records.count < (Date.today+1).cweek
     "Missing #{Date.today.cweek-self.records.count} #{"Record".pluralize(Date.today.cweek-self.records.count)}"
   else
     "Complete"
