@@ -104,6 +104,30 @@ d= a.values.inject(0) {|b, c| b+c}
 d	
 end
 
+def self.total_ytd_avg(func)
+a=	ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_ytd_avg(func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
+def self.total_ytd(func)
+a=	ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_ytd_sum(func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
+def self.total_month(month, func)
+a=	ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum(month, func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
+def self.total_month_avg(month, func)
+a=	ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_avg(month, func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
 def self.judea_latest(func)
 a=	ChurchGroup.where(region: "Judea").make_hash_latest(func)
 d= a.values.inject(0) {|b, c| b+c}

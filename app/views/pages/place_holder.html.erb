@@ -1,13 +1,92 @@
-<% provide(:title, "Sign in") %>
+<!-- Charts -->
 
-  
+<div class="row">
+  <div class="col-md-12" style="text-align: center">
+<h3 class="page_heading">	
+	
+	<span class="label label-primary" width= 100%>Latest Attendance By Church Group</span>
+	</h3>
+  </div>
+</div>
+</div>
+<div class="row" style="padding-left: 20px; padding-top: 0px">
+  <div class="col-xs-6">
+    <%= pie_chart @array.except("London Main"), library: {backgroundColor: "#F0F0F0"} %>
+  </div>
+    <div class="col-xs-6">
+    <%= column_chart @array, library: {backgroundColor: "#F0F0F0"} %>
+  </div>
+   
+</div>
 
-      <div class="container">    
+
+
+
+
+
+
+<!--new record -->
+
+
+<% provide(:title, 'New Data Record') %>
+<h1>Enter New Data Record</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@record) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :day, "Date of Sunday Service (click dropdown arrow to select)" %>
+      <%= f.date_field :day, :value => @date, class: 'form-control' %>
+      
+      <%= f.label :sunday_att, "Sunday Attendance" %>
+     <%= f.number_field :sunday_att, value: 0, class: "form-control"%>
+
+         <%= f.label :weekday_att, "Weekday Attendance (for meeting a few days prior to the Sunday above.)" %>
+      <%= f.number_field :weekday_att, value: 0, class: 'form-control' %>
+      
+        <%= f.label :first_timers, "Number of First Timers In Sunday Service" %>
+      <%= f.number_field :first_timers, value: 0, class: 'form-control' %>
+
+          <%= f.label :new_converts, "Number of New Converts In Sunday Service" %>
+      <%= f.number_field :new_converts, value: 0, class: 'form-control' %>
+
+          <%= f.label :fnb, "Number of People Who Gave Their First and Best" %>
+      <%= f.number_field :fnb, value: 0, class: 'form-control' %>
+
+          <%= f.label :nbs, "Number of People Who STARTED New Believers School" %>
+      <%= f.number_field :nbs, value: 0, class: 'form-control' %>
+
+          <%= f.label :nbs_finish, "Number of People Who FINISHED New Believers School" %>
+      <%= f.number_field :nbs_finish, value: 0, class: 'form-control' %>
+
+         <%= f.label :message_sunday, "Sunday Message Title" %>
+      <%= f.text_field :message_sunday, value: "None", class: 'form-control' %>
+
+       <%= f.label :message_weekday, "Weekday Message Title" %>
+      <%= f.text_field :message_weekday, value: "None", class: 'form-control' %>
+
+       <%= f.label :preacher_sunday, "Who Preached in Sunday Service" %>
+      <%= f.text_field :preacher_sunday, value: "#{current_user.elder}", class: 'form-control' %>
+
+       <%= f.label :preacher_weekday, "Who Preached in Weekday Service" %>
+      <%= f.text_field :preacher_weekday, value: "#{current_user.elder}", class: 'form-control' %> <br>
+      
+      <%= f.submit "Submit Data", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+<!-- Update Record Form -->
+    <div class="container">    
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <div class="panel-title">Sign In</div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"> <%= link_to "Forgot Password?", new_password_reset_path %></div>
+                        <div class="panel-title">New Data Record</div>
+                        <div style="float:right; font-size: 80%; position: relative; top:-10px"> <%= "Select Date Of The Sunday Service Data Corresponds To" %></div>
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
@@ -15,11 +94,28 @@
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
                        
-                                    <%= form_for(:session, url: login_path, html: {class: "form-horizontal"}) do |f| %>
+                                    <%= form_for(@record) do |f| %>
+                                     <%= render 'shared/error_messages', object: f.object %>
                             <div style="margin-bottom: 25px" class="input-group">
+
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    
+                                         <%= f.date_field :day, :value => @date, class: 'form-control' %>                               
+                                    </div>
+     
+     <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                     
-                                        <%= f.text_field :email, value: "", placeholder: "Enter Email", class: "form-control" %>                                        
+                                    <%= f.number_field :sunday_att, value: 0, placeholder: "Enter Sunday Attendance", class: "form-control"%>
+                                    </div>
+
+                                        <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <%= f.number_field :weekday_att, value: 0, placeholder: "Enter Weekday Attendance", class: "form-control"%>
+                                    </div>
+
+                                      <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <%= f.number_field :weekday_att, placeholder: "Enter First Timers in Sunday Service", value: 0, class: "form-control"%>
                                     </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">
@@ -30,13 +126,7 @@
                                     
 
                                 
-                            <div class="input-group">
-                                      <div class="checkbox">
-                                        <label>
-                                          <%= f.check_box :remember_me %> Remember me
-                                        </label>
-                                      </div>
-                                    </div>
+                        
 
 
                                 <div style="margin-top:10px" class="form-group">
@@ -125,7 +215,7 @@
                                 
                                 
                                 <% end %>
-                            </form>
+                           
                          </div>
                     </div>
 
@@ -134,4 +224,3 @@
                 
          </div> 
     </div>
-    

@@ -8,12 +8,11 @@ resources :church_groups
 get 'login' => 'sessions#new'
 post 'login' => 'sessions#create'
 delete 'logout' => 'sessions#destroy'
-get 'records/:id' => 'records#show'
 
-resources :users do
-  resources :records
-end
-resources :records, only: [:new, :create, :edit, :update, :index]
+
+resources :users
+
+resources :records
 resources :password_resets,     only: [:new, :create, :edit, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.

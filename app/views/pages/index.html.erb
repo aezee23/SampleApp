@@ -1,14 +1,214 @@
-<% if current_user %>
-<div class="jumbotro">
+<% if current_user && !current_user.admin %>
+<div class="jumbotron" style="text-align: center">
 
   <p>Welcome to the FLC Data App! </p>
-  <% if !current_user.admin %> 
+
   <p>All data should now have been submitted for <b><%= @date %></b></p>
-   <p><%= link_to "View Data", records_path, class: "btn btn-primary btn-lg" %></p>  
+   <p><%= link_to "View Data", records_path, class: "btn btn-primary btn-xs" %></p>  
 </div>
-   <% else %>
-  <p><%= link_to "View Latest Data", last_sunday_path, class: "btn btn-primary btn-xs" %></p>
-<div class="row">
+   
+
+   <% elsif current_user && current_user.admin %>
+
+  <div class="container">
+   <div class="row text-center">
+            <div class="col-md-12">
+        <h2>Welcome to the FLC Data App! </h2>
+
+  <p><%= link_to "View Latest Data", last_sunday_path, class: "btn btn-primary" %></p>
+            
+            </div>
+    </div>        
+           
+              <table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th ><span class="list-group-item list-group-item-success" style="text-align: center"><i class="glyphicon glyphicon-signal"></i>&nbsp;&nbsp;Key Summary</span></th>
+                             
+                                </tr>
+    </thead>
+ </table>
+
+
+  <div class="row db-padding-btm db-attached">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="db-wrapper">
+                    <div class="db-pricing-eleven db-bk-color-one">
+                        <div class="price">
+                                <%= ChurchGroup.total_month_avg((Date.today << 2).strftime('%B'), :sunday_att) %>
+                                <small>Total FLC UK Average Sunday Attendance For</small>
+                        </div>
+                        <div class="type">
+                            <%= (Date.today << 2).strftime('%B')%>
+                        </div>
+                        <ul>
+							<li><i class="glyphicon glyphicon-tree-deciduous"></i><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :new_converts) %> Total New Converts </li>
+                            <li><i class="glyphicon glyphicon-user"></i><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :first_timers) %> Total First Timers  </li>
+                            <li><i class="glyphicon glyphicon-home"></i><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :nbs) %> Began New Believers School  </li>
+                            <li><i class="glyphicon glyphicon-education"></i><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :nbs_finish) %> Finished New Believers School  </li>
+                             <li><i class="glyphicon glyphicon-option_vertical"></i><%= ChurchGroup.total_month_avg((Date.today << 2).strftime('%B'), :fnb) %> Total Average First and Best </li>
+                        </ul>
+                        <div class="pricing-footer">
+
+                            <a href="#" class="btn db-button-color-square btn-lg">More Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="db-wrapper">
+                <div class="db-pricing-eleven db-bk-color-two popular">
+                    <div class="price">
+                        <%= ChurchGroup.total_month_avg((Date.today << 1).strftime('%B'), :sunday_att) %>
+                                <small>Total FLC UK Average Sunday Attendance For</small>
+                    </div>
+                    <div class="type">
+                        <%= (Date.today << 1).strftime('%B')%>
+                    </div>
+                    <ul>
+
+                     <li><i class="glyphicon glyphicon-tree-deciduous"></i><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :new_converts) %> Total New Converts </li>
+                            <li><i class="glyphicon glyphicon-user"></i><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :first_timers) %> Total First Timers  </li>
+                            <li><i class="glyphicon glyphicon-home"></i><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :nbs) %> Began New Believers School  </li>
+                            <li><i class="glyphicon glyphicon-education"></i><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :nbs_finish) %> Finished New Believers School  </li>
+                             <li><i class="glyphicon glyphicon-option_vertical"></i><%= ChurchGroup.total_month_avg((Date.today << 1).strftime('%B'), :fnb) %> Total Average First and Best </li>
+                    </ul>
+                    <div class="pricing-footer">
+
+                        <a href="#" class="btn db-button-color-square btn-lg">More Details</a>
+                    </div>
+                </div>
+                      </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="db-wrapper">
+                <div class="db-pricing-eleven db-bk-color-three">
+                    <div class="price">
+                       <%= ChurchGroup.total_month_avg((Date.today).strftime('%B'), :sunday_att) %>
+                                <small>Total FLC UK Average Sunday Attendance For</small>
+                    </div>
+                    <div class="type">
+                       <%= (Date.today).strftime('%B')%>
+                    </div>
+                    <ul>
+
+                          <li><i class="glyphicon glyphicon-tree-deciduous"></i><%= ChurchGroup.total_month((Date.today).strftime('%B'), :new_converts) %> Total New Converts </li>
+                            <li><i class="glyphicon glyphicon-user"></i><%= ChurchGroup.total_month((Date.today).strftime('%B'), :first_timers) %> Total First Timers  </li>
+                            <li><i class="glyphicon glyphicon-home"></i><%= ChurchGroup.total_month((Date.today).strftime('%B'), :nbs) %> Began New Believers School  </li>
+                            <li><i class="glyphicon glyphicon-education"></i><%= ChurchGroup.total_month((Date.today).strftime('%B'), :nbs_finish) %> Finished New Believers School  </li>
+                             <li><i class="glyphicon glyphicon-option_vertical"></i><%= ChurchGroup.total_month_avg((Date.today).strftime('%B'), :fnb) %> Total Average First and Best </li>
+                    </ul>
+                    <div class="pricing-footer">
+
+                        <a href="#" class="btn db-button-color-square btn-lg">More Details</a>
+                    </div>
+                </div>
+                      </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                  <div class="db-wrapper">
+                <div class="db-pricing-eleven db-bk-color-six">
+                    <div class="price">
+                        <%= ChurchGroup.total_ytd_avg(:sunday_att) %>
+                                <small>Total FLC UK Sunday Average For</small>
+                    </div>
+                    <div class="type">
+                       <%= Date.today.strftime("%Y") %>
+                    </div>
+                    <ul>
+
+                    
+                          <li><i class="glyphicon glyphicon-tree-deciduous"></i><%= ChurchGroup.total_ytd(:new_converts) %> Total New Converts </li>
+                            <li><i class="glyphicon glyphicon-user"></i><%= ChurchGroup.total_ytd(:first_timers) %> Total First Timers  </li>
+                            <li><i class="glyphicon glyphicon-home"></i><%= ChurchGroup.total_ytd(:nbs) %> Began New Believers School  </li>
+                            <li><i class="glyphicon glyphicon-education"></i><%= ChurchGroup.total_ytd(:nbs_finish)%> Finished New Believers School  </li>
+                             <li><i class="glyphicon glyphicon-option_vertical"></i><%= ChurchGroup.total_ytd_avg(:fnb) %> Total Average First and Best </li>
+                    </ul>
+                    <div class="pricing-footer">
+
+                        <a href="#" class="btn db-button-color-square btn-lg">More Details</a>
+                    </div>
+                </div>
+                      </div>
+            </div>
+        </div>
+        <div class="row db-padding-btm db-attached">
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                <div class="db-wrapper">
+                    <div class="db-pricing-eleven db-bk-color-one">
+                        <div class="price">
+                            <sup></sup>
+                                <small></small>
+                        </div>
+                        <div class="type">
+                            DATE
+                        </div>
+                        <ul>
+
+                            <li><i class="glyphicon glyphicon-print"></i> </li>
+                            <li><i class="glyphicon glyphicon-time"></i> </li>
+                            <li><i class="glyphicon glyphicon-trash"></i></li>
+                        </ul>
+                        <div class="pricing-footer">
+
+                            <a href="#" class="btn db-button-color-square btn-lg"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                 <div class="db-wrapper">
+                <div class="db-pricing-eleven db-bk-color-two popular">
+                    <div class="price">
+                        <sup></sup> X
+                                <small>For:</small>
+                    </div>
+                    <div class="type">
+                        DATE
+                    </div>
+                    <ul>
+
+                        <li><i class="glyphicon glyphicon-print"></i> </li>
+                        <li><i class="glyphicon glyphicon-time"></i> </li>
+                        <li><i class="glyphicon glyphicon-trash"></i> </li>
+                    </ul>
+                    <div class="pricing-footer">
+
+                        <a href="#" class="btn db-button-color-square btn-lg"> </a>
+                    </div>
+                </div>
+                     </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                 <div class="db-wrapper">
+                <div class="db-pricing-eleven db-bk-color-three">
+                    <div class="price">
+                        <sup> </sup>X
+                                <small></small>
+                    </div>
+                    <div class="type">
+                        DATE
+                    </div>
+                    <ul>
+
+                        <li><i class="glyphicon glyphicon-print"></i> </li>
+                        <li><i class="glyphicon glyphicon-time"></i> </li>
+                        <li><i class="glyphicon glyphicon-trash"></i> </li>
+                    </ul>
+                    <div class="pricing-footer">
+
+                        <a href="#" class="btn db-button-color-square btn-lg">More Details</a>
+                    </div>
+                </div>
+                     </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+    <div class="row">
   <div class="col-md-12" style="text-align: center">
 <h3 class="page_heading">	
 	
@@ -26,17 +226,6 @@
   </div>
    
 </div>
-
-<% unless @users.empty? %>
-
-      <table class="table table-striped user-list" style="padding-top: 10px">
-      <thead>
-         <tr class="danger">
-        <td class="danger"><span>  <%= link_to "Missing #{@date} Data For #{pluralize(@users.count, "Church")}", show_nots_path, style: "color: black; font-size: 0.8em"  %></span></td>
-         </thead>
-        </table>  
-
-  <% end %>
 <% end %>
 
 
@@ -45,6 +234,6 @@
 
 
 
-  <%end%>
+
 
 

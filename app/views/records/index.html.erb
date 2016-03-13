@@ -1,12 +1,12 @@
 <% provide(:title, 'Data Records') %>
 
 <h1 style="padding-left: 0px"><span class="label label-default">View All Records</span></h1>
-
+<% if current_user.admin %>
 <p style="padding: 20px">
   Data Download:
   <%= link_to "To Excel", records_path(format: "csv") %> |
 </p>
-
+<% end %>
 <?xml version="1.0"?>
 <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -45,6 +45,13 @@
             <td><span><%= t.fnb %></span></td>
             <td ><span><%= t.nbs %></span></td>
             <td ><span><%= t.nbs_finish %></span></td>
+             <% if current_user.admin %>
+             <td>
+                                  <%= link_to edit_record_path(t), class: "btn btn-default", remote: false do %>
+<i class="fa fa-cog"></i>Edit</a>
+<% end %> 
+                                    </td>
+                                    <% end %>
         </tr>
         <% end %>
     </tbody>

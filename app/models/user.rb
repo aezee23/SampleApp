@@ -15,7 +15,7 @@ def ytd_avg(y)
   if n ==0
     0
   else
-  a = self.records.pluck(y).first(n)
+  a = self.records.where(day: ((Date.parse(Date.today.strftime("%Y0101"))..Date.today))).pluck(y).first(n)
   sum_a = a.inject(0){|sum,x| sum + x }
   avg= sum_a/n.to_f
   avg.round(0)
@@ -27,7 +27,7 @@ def qtd_avg(y)
   if n ==0
     0
   else
-  a = self.records.pluck(y).first(n)
+  a = self.records.where(day: ((Date.today << 3)..Date.today)).pluck(y).first(n)
   sum_a = a.inject(0){|sum,x| sum + x }
   avg= sum_a/n.to_f
   avg.round(0)
@@ -35,11 +35,11 @@ end
 end
 
 def month_avg(month, att)
-   n = self.records.where(day: ((Date.parse(month))..((Date.parse(month))>>1))).count
+   n = self.records.where(day: (Date.parse(month)..Date.parse(month)>>1)).count
 if n == 0
     0
   else
-  a = self.records.pluck(att).first(n)
+  a = self.records.where(day: (Date.parse(month)..Date.parse(month)>>1)).pluck(att).first(n)
   sum_a = a.inject(0){|sum,x| sum + x }
   avg= sum_a/n.to_f
   avg.round(0)
@@ -55,7 +55,7 @@ n = self.records.where(day: (((Date.today) << 3)..(Date.today))).sum(att)
 end
 
 def month_sum(month, att)
- n = self.records.where(day: ((Date.parse(month))..((Date.parse(month)) >> 1))).sum(att)
+ n = self.records.where(day: (Date.parse(month)..Date.parse(month) >> 1)).sum(att)
 end
 
 

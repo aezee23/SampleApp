@@ -21,10 +21,16 @@ end
 
 end
 
+    def show
+    	@record = Record.find(params[:id])
+    end
+
 def new
 @record = current_user.records.new
 @date = date_of_last("Sunday")
 end
+
+
 
 def edit
 	@record = Record.find(params[:id])
@@ -43,7 +49,7 @@ end
   end
   
   def update
-  	@record = Record.find(params[:id])
+  @record = Record.find(params[:id])
 if @record.update_attributes(record_params)
       flash[:success] = "Record updated. See All Records Below:"
       redirect_to records_path
@@ -59,9 +65,7 @@ if @record.update_attributes(record_params)
     redirect_to request.referrer || root_url
   end
   
-    def show
-@record = Record.find(params[:id])
-    end
+
 
 
 
