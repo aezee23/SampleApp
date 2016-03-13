@@ -2,36 +2,23 @@
 <% provide(:title, 'Edit Church Group Information') %>
 <h1 style="padding-left: 0px"><span class="label label-default" style="padding-left:20px">Edit Church Group</span></h1>
 
-<div class="row">
+<div class="row" style="padding: 40px">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
+    <%= form_for(@church_group) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
     
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
-      <%= f.label :elder %>
-      <%= f.text_field :elder, class: 'form-control' %>
+      <%= f.label :leader, "Overseer" %>
+      <%= f.text_field :leader, class: 'form-control' %>
       
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <%= f.label :region %>
+      <%= f.text_field :region, placeholder: "London/Judea", class: 'form-control' %>
       
-      <%= f.label :church_group_id, "Church Group" %><br>
-      
-      <%= f.select :church_group_id, ChurchGroup.all.collect {|a| [ a.name, a.id ] }, class: "selectwidthauto"%>
-<br>
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-      
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
       <br>
       <%= f.submit "Save Changes", class: "btn btn-primary" %>
     <% end %>
     
-    <div class="gravatar_edit">
-      <%= gravatar_for @user %>
-      <a href="http://gravatar.com/emails" target=_blank>Change Profile Picture</a>
-    </div>
   </div>
 </div>

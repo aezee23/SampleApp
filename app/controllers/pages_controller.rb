@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 				@users << t
 			end
 		end
-
+		@array= ChurchGroup.make_hash_latest(:sunday_att)
 	end
 
 	def show
