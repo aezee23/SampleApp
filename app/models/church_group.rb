@@ -98,8 +98,22 @@ b[x.name] = x.sum_latest(func)
 b
 end
 
+def self.make_hash_latest_ldn(func)
+b = {}
+self.where(region: "London").each do |x| 
+b[x.name] = x.sum_latest(func)
+	end
+b
+end
+
 def self.total_latest(func)
 a=	ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_latest(func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
+def self.total_latest_ldn(func)
+a=	ChurchGroup.where(region: "London").make_hash_latest(func)
 d= a.values.inject(0) {|b, c| b+c}
 d	
 end

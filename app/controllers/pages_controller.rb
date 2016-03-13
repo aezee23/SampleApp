@@ -9,6 +9,8 @@ class PagesController < ApplicationController
 			end
 		end
 		@array= ChurchGroup.make_hash_latest(:sunday_att)
+		@ldn_hash = ChurchGroup.make_hash_latest_ldn(:sunday_att)
+		@ldn_hash["No Church"] = (User.find_by(id: 33).records.order('day DESC').first.sunday_att)-(ChurchGroup.where(region: "London").total_latest_ldn(:sunday_att))
 	end
 
 	def show
