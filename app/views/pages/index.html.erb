@@ -229,7 +229,7 @@
 </div>
 <div class="row" style="padding-left: 20px; padding-top: 0px">
   <div class="col-xs-6">
-    <%= pie_chart @array.except("London Main"), library: {backgroundColor: "#F0F0F0"} %>
+    <%= column_chart @array.except("London Main"), library: {backgroundColor: "#F0F0F0"} %>
   </div>
     <div class="col-xs-6">
     <%= pie_chart @ldn_hash, library: {backgroundColor: "#F0F0F0"} %>
