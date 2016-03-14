@@ -1,6 +1,6 @@
 <% provide(:title, "Church Groups") %>
 
-
+<div class="table-responsive">
                         <table class="table table-striped user-list">
                             <thead>
                                 <tr>
@@ -58,6 +58,7 @@
                             </tbody>
                            
                         </table>
+                    </div>
   <%= will_paginate @church_groups, renderer: BootstrapPagination::Rails%>
   
 

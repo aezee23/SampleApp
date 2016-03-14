@@ -62,13 +62,18 @@ end
 
 
 def latest(x)
-  a = self.records.order('day DESC').first[x]
+  a = self.records.find_by(day: date_of_last("Sunday"))
+  if a.nil?
+    0
+  else
+    a[x]
+  end
 end
 
 
 def missing_data
   if self.records.count < (Date.today+1).cweek
-    "Missing #{Date.today.cweek-self.records.count} #{"Record".pluralize(Date.today.cweek-self.records.count)}"
+    "Missing #{Date.today.cweek-self.records.count} #{"Record".pluralize((Date.today+1).cweek-self.records.count)}"
   else
     "Complete"
   end

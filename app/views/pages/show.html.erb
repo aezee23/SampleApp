@@ -1,6 +1,6 @@
 
   <% if !@users.empty? %>
-
+<div class="table-responsive">
    <table class="table table-striped user-list">
  <thead>
                                 <tr>
@@ -9,6 +9,9 @@
                                 </tr>
     </thead>
  </table>
+</div>
+
+<div class="table-responsive">
 <table class="table table-striped user-list">
  <thead>
                                 <tr>
@@ -62,7 +65,9 @@
  
 
 </table>
+</div>
 <% else %>
+<div class="table-responsive">
    <table class="table table-striped user-list">
  <thead>
                                 <tr>
@@ -71,5 +76,6 @@
                                 </tr>
     </thead>
  </table>
+</div>
  <% end %>
 

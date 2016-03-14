@@ -1,6 +1,6 @@
 
 
-<h1 style="padding-left: 0px"><span class="label label-default" style="padding-left:20px">Last Week In FLC</span></h1>
+<h1 style="padding-left: 0px"><span class="label label-default" style="padding-left:20px"><%= User.first.date_of_last("Sunday").strftime('%d-%b-%y') %></span></h1>
 
 <p style="padding: 20px">
  Data Download:
@@ -41,7 +41,7 @@
         <tr>
             
           
-            <td><span><%= link_to t.user.name, user_path(t) %></span></td>
+            <td><span><%= link_to t.user.name, user_path(t.user) %></span></td>
             <td><span><%= t.sunday_att %></span></td>
             <td><span><%= t.weekday_att %></span></td>               
             <td><span><%= t.first_timers %></span></td>
