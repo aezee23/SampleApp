@@ -176,8 +176,8 @@
                  <div class="db-wrapper">
                 <div class="db-pricing-eleven db-bk-color-two popular">
                     <div class="price">
-                        <sup>  <%= ChurchGroup.total_latest(:sunday_att) %>
-                                <small><%= User.first.date_of_last("Sunday").strftime('%d%b%y') %> Attendance</sup></small>
+                         <%= ChurchGroup.total_latest(:sunday_att) %>
+                                <small><%= User.first.date_of_last("Sunday").strftime('%d%b%y') %> Attendance</small>
                     </div>
                     <div class="type">
                        FLC UK
