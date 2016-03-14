@@ -1,7 +1,7 @@
 <% if current_user && !current_user.admin %>
 <div class="jumbotron" style="text-align: center">
 
-  <p>Welcome to the FLC Data App! </p>
+  <p>Welcome to Revelations! </p>
 
   <p>All data should now have been submitted for <b><%= @date %></b></p>
    <p><%= link_to "View Data", records_path, class: "btn btn-primary btn-xs" %></p>  
@@ -35,18 +35,18 @@
                 <div class="db-wrapper">
                     <div class="db-pricing-eleven db-bk-color-one">
                         <div class="price">
-                                <%= ChurchGroup.total_month_avg((Date.today << 2).strftime('%B'), :sunday_att) %>
+                                <%= ChurchGroup.total_month_avg((Date.today << 2).strftime('%b'), :sunday_att) %>
                                 <small>Total FLC UK Average Sunday Attendance For</small>
                         </div>
                         <div class="type">
-                            <%= (Date.today << 2).strftime('%B')%>
+                            <%= (Date.today << 2).strftime('%b-%y')%>
                         </div>
                         <ul>
-							<li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :new_converts) %></span> Total New Converts </li>
-                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :first_timers) %></span> Total First Timers  </li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :nbs) %></span> Began New Believers School  </li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :nbs_finish) %></span> Finished New Believers School  </li>
-                             <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_avg((Date.today << 2).strftime('%B'), :fnb) %></span> Total Average First and Best </li>
+							<li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :new_converts) %></span><p style="font-size: 2.5vmin"> Total New Converts </p></li>
+                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :first_timers) %></span><p style="font-size: 2.5vmin"> Total First Timers  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                             <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_avg((Date.today << 2).strftime('%B'), :fnb) %></span><p style="font-size: 2.5vmin"> Total Average First and Best </p></li>
                         </ul>
                         <div class="pricing-footer">
 
@@ -59,19 +59,19 @@
                   <div class="db-wrapper">
                 <div class="db-pricing-eleven db-bk-color-two popular">
                     <div class="price">
-                        <%= ChurchGroup.total_month_avg((Date.today << 1).strftime('%B'), :sunday_att) %>
+                        <%= ChurchGroup.total_month_avg((Date.today << 1).strftime('%b'), :sunday_att) %>
                                 <small>Total FLC UK Average Sunday Attendance For</small>
                     </div>
                     <div class="type">
-                        <%= (Date.today << 1).strftime('%B')%>
+                        <%= (Date.today << 1).strftime('%b-%y')%>
                     </div>
                     <ul>
 
-                     <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :new_converts) %></span> Total New Converts </li>
-                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :first_timers) %></span> Total First Timers  </li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :nbs) %></span> Began New Believers School  </li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :nbs_finish) %></span> Finished New Believers School  </li>
-                             <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_avg((Date.today << 1).strftime('%B'), :fnb) %></span> Total Average First and Best </li>
+                     <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :new_converts) %></span> <p style="font-size: 2.5vmin">Total New Converts </p></li>
+                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :first_timers) %></span><p style="font-size: 2.5vmin"> Total First Timers  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                             <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_avg((Date.today << 1).strftime('%B'), :fnb) %></span><p style="font-size: 2.5vmin"> Total Average First and Best </p></li>
                     </ul>
 
                 
@@ -88,19 +88,19 @@
                   <div class="db-wrapper">
                 <div class="db-pricing-eleven db-bk-color-three">
                     <div class="price">
-                       <%= ChurchGroup.total_month_avg((Date.today).strftime('%B'), :sunday_att) %>
+                       <%= ChurchGroup.total_month_avg((Date.today).strftime('%b'), :sunday_att) %>
                                 <small>Total FLC UK Average Sunday Attendance For</small>
                     </div>
                     <div class="type">
-                       <%= (Date.today).strftime('%B')%>
+                       <%= (Date.today).strftime('%b-%y')%>
                     </div>
                     <ul>
 
-                          <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :new_converts) %> </span>Total New Converts </li>
-                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :first_timers) %></span> Total First Timers  </li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :nbs) %></span> Began New Believers School  </li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :nbs_finish) %></span> Finished New Believers School  </li>
-                             <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_avg((Date.today).strftime('%B'), :fnb) %></span> Total Average First and Best </li>
+                          <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :new_converts) %> </span><p style="font-size: 2.5vmin">Total New Converts </p></li>
+                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :first_timers) %></span> <p style="font-size: 2.5vmin">Total First Timers  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                             <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_avg((Date.today).strftime('%B'), :fnb) %></span> <p style="font-size: 2.5vmin">Total Average First and Best </p></li>
                     </ul>
                     <div class="pricing-footer">
 
@@ -115,7 +115,7 @@
                 <div class="db-pricing-eleven db-bk-color-six">
                     <div class="price">
                         <%= ChurchGroup.total_ytd_avg(:sunday_att) %>
-                                <small>Total FLC UK Sunday Average For</small>
+                                <small>Total FLC UK Average Sunday Attendance For</small>
                     </div>
                     <div class="type">
                        <%= Date.today.strftime("%Y") %>
@@ -123,11 +123,11 @@
                     <ul>
 
                     
-                          <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:new_converts) %></span> Total New Converts </li>
-                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:first_timers) %> </span>Total First Timers  </li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:nbs) %></span> Began New Believers School  </li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:nbs_finish)%></span> Finished New Believers School  </li>
-                             <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd_avg(:fnb) %></span> Total Average First and Best </li>
+                          <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:new_converts) %></span> <p style="font-size: 2.5vmin">Total New Converts </p></li>
+                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:first_timers) %> </span><p style="font-size: 2.5vmin">Total First Timers  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:nbs) %></span> <p style="font-size: 2.5vmin">Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:nbs_finish)%></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                             <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd_avg(:fnb) %></span> <p style="font-size: 2.5vmin">Total Average First and Best </p></li>
                     </ul>
                     <div class="pricing-footer">
 
