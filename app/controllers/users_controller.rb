@@ -36,6 +36,7 @@ end
 
   def update
   	@user = User.find(params[:id])
+    
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
@@ -44,6 +45,23 @@ end
       render 'edit'
     end
   end
+
+  def change_password
+     @user = User.find(current_user)
+  current_password = params[:user][:current_password]
+  user = User.authenticate(@user.email, current_password)
+  if @user && user
+    # @user.update.password = params[:new_password]
+    # new_password = params[:password]
+    # @user.update(new_password)
+    user.update_attribute(password: params[:user][:current_password])
+    flash[:success] = "Password successfully changed!"
+    redirect_to root_path
+  else
+    flash[:danger] = "Your old password was incorrect. Please try again."
+    redirect_to root_path
+  end
+end
 
 
   def destroy
@@ -58,6 +76,7 @@ end
   def user_params
     params.require(:user).permit(:email, :name, :elder, :church_group_id, :password, :password_confirmation)
   end
+
 
    def correct_user
       @user = User.find(params[:id])

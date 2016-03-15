@@ -44,6 +44,7 @@ gem 'active_median'
 gem "chartkick"
 gem 'font-awesome-sass', '~> 4.5.0'
 gem "font-awesome-rails"
+gem 'bootstrap_form'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
