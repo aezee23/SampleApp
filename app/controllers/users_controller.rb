@@ -46,21 +46,8 @@ end
     end
   end
 
-  def change_password
-     @user = User.find(current_user)
-  current_password = params[:user][:current_password]
-  user = User.authenticate(@user.email, current_password)
-  if @user && user
-    # @user.update.password = params[:new_password]
-    # new_password = params[:password]
-    # @user.update(new_password)
-    user.update_attribute(password: params[:user][:current_password])
-    flash[:success] = "Password successfully changed!"
-    redirect_to root_path
-  else
-    flash[:danger] = "Your old password was incorrect. Please try again."
-    redirect_to root_path
-  end
+def change_password
+@user = current_user
 end
 
 

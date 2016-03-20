@@ -10,6 +10,12 @@ a =	self.users.map {|x| x.ytd_avg(att)}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
+def sum_ytd_avg_pm(att)
+a =	self.users.map {|x| x.ytd_sum(att)}
+ sum_a = a.inject(0){|sum,x| sum + x }
+ sum_a/(Date.today.month)
+end
+
 def sum_qtd_avg(att)
 a =	self.users.map {|x| x.qtd_avg(att)}
  sum_a = a.inject(0){|sum,x| sum + x }
@@ -45,7 +51,15 @@ end
 def self.make_hash_ytd_avg(func)
 b = {}
 self.where.not(id: 1).each do |x| 
-b[x.name] = x.sum_ytd_avg(func)
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_ytd_avg(func)
+	end
+b
+end
+
+def self.make_hash_ytd_avg_pm(func)
+b = {}
+self.where.not(id: 1).each do |x| 
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_ytd_avg_pm(func)
 	end
 b
 end
@@ -53,7 +67,7 @@ end
 def self.make_hash_qtd_avg(func)
 b = {}
 self.where.not(id: 1).each do |x| 
-b[x.name] = x.sum_qtd_avg(func)
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_qtd_avg(func)
 	end
 b
 end
@@ -61,7 +75,7 @@ end
 def self.make_hash_month_avg(func, fun)
 b = {}
 self.where.not(id: 1).each do |x| 
-b[x.name] = x.sum_month_avg(func, fun)
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_month_avg(func, fun)
 	end
 b
 end
@@ -69,7 +83,7 @@ end
 def self.make_hash_ytd_sum(func)
 b = {}
 self.where.not(id: 1).each do |x| 
-b[x.name] = x.sum_ytd_sum(func)
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_ytd_sum(func)
 	end
 b
 end
@@ -77,7 +91,7 @@ end
 def self.make_hash_qtd_sum(func)
 b = {}
 self.where.not(id: 1).each do |x| 
-b[x.name] = x.sum_qtd_sum(func)
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_qtd_sum(func)
 	end
 b
 end
@@ -85,7 +99,7 @@ end
 def self.make_hash_month_sum(func, fun)
 b = {}
 self.where.not(id: 1).each do |x| 
-b[x.name] = x.sum_month_sum(func, fun)
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_month_sum(func, fun)
 	end
 b
 end
@@ -93,7 +107,7 @@ end
 def self.make_hash_latest(func)
 b = {}
 self.where.not(id: 1).each do |x| 
-b[x.name] = x.sum_latest(func)
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_latest(func)
 	end
 b
 end
@@ -120,6 +134,12 @@ end
 
 def self.total_ytd_avg(func)
 a=	ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_ytd_avg(func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
+def self.total_ytd_avg_pm(func)
+a=	ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_ytd_avg_pm(func)
 d= a.values.inject(0) {|b, c| b+c}
 d	
 end

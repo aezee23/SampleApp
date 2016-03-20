@@ -15,7 +15,7 @@ resources :users
 resources :records
 resources :password_resets,     only: [:new, :create, :edit, :update]
 get 'change_password' => 'users#change_password'
-patch 'change_password' => 'users#change_password'
+patch 'change_password' => 'users#change_passwor'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

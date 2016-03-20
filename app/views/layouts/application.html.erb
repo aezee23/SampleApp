@@ -63,9 +63,8 @@
   <%= submit_tag "Submit", class: 'btn btn-default', :name => nil %>
 <% end %>
       
-      <ul class="nav navbar-nav navbar-right">
-       
-       <li>
+      <ul class="nav navbar-nav navbar-right", style="font-size: 0.5px">
+  
         <%= link_to logout_path, :method => 'delete', data: {confirm: "Are you sure you want to Logout?"}, class: "navbar-brand", remote: false do %>
         <span class="glyphicon glyphicon-log-out"></span>&nbsp;<%="Log Out" %>
        <% end %>

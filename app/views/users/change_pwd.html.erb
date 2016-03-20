@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
               <%= bootstrap_form_for @user, url: change_password_path do |p| %>
-              <%= p.password_field :current_password, hide_label: true, placeholder: "Enter your Old Password", class: "input-lg required" %>
+              <%= p.password_field :current_password, params[:current_password], hide_label: true, placeholder: "Enter your Old Password", class: "input-lg required" %>
               <%= p.password_field :password, hide_label: true, placeholder: "Enter a New Password", class: "input-lg required" %>
               <%= p.password_field :password_confirmation, hide_label: true, placeholder: "Confirm New Password", class: "input-lg required"%>
 
