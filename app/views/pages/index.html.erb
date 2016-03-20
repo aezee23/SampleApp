@@ -341,7 +341,7 @@
                        <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= User.find_by(id: 33).latest(:new_converts) %></span> <p style="font-size: 2.5vmin">New Converts </p></li>
                             <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= User.find_by(id: 33).latest(:first_timers) %> </span><p style="font-size: 2.5vmin">First Timers  </p></li>
                             <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest_ldn(:nbs) %></span> <p style="font-size: 2.5vmin">Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total.latest_ldn(:nbs_finish)%></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest_ldn(:nbs_finish)%></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
                              <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= User.find_by(id: 33).latest(:fnb) %></span> <p style="font-size: 2.5vmin">First and Best </p></li>
                     </ul>
                     <div class="pricing-footer">
