@@ -44,8 +44,8 @@
                         <ul>
 							<li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :new_converts) %></span><p style="font-size: 2.5vmin"> Total New Converts </p></li>
                             <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :first_timers) %></span><p style="font-size: 2.5vmin"> Total First Timers  </p></li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 2).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 2).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
                              <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :fnb) %></span><p style="font-size: 2.5vmin"> Total First and Best </p></li>
                         </ul>
                         <div class="pricing-footer">
@@ -100,8 +100,8 @@
 
                      <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :new_converts) %></span> <p style="font-size: 2.5vmin">Total New Converts </p></li>
                             <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :first_timers) %></span><p style="font-size: 2.5vmin"> Total First Timers  </p></li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 1).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 1).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
                              <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :fnb) %></span><p style="font-size: 2.5vmin"> Total First and Best </p></li>
                     </ul>
 
@@ -161,8 +161,8 @@
 
                           <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :new_converts) %> </span><p style="font-size: 2.5vmin">Total New Converts </p></li>
                             <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :first_timers) %></span> <p style="font-size: 2.5vmin">Total First Timers  </p></li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
                              <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :fnb) %></span> <p style="font-size: 2.5vmin">Total First and Best </p></li>
                     </ul>
                     <div class="pricing-footer">
@@ -221,8 +221,8 @@
                     
                           <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:new_converts) %></span> <p style="font-size: 2.5vmin">Total New Converts </p></li>
                             <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:first_timers) %> </span><p style="font-size: 2.5vmin">Total First Timers  </p></li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:nbs) %></span> <p style="font-size: 2.5vmin">Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd(:nbs_finish)%></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd_cc(:nbs) %></span> <p style="font-size: 2.5vmin">Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd_cc(:nbs_finish)%></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
                              <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_ytd_avg_pm(:fnb) %></span> <p style="font-size: 2.5vmin">Total First and Best per Month </p></li>
                     </ul>
                     <div class="pricing-footer">
@@ -315,8 +315,8 @@
 
                            <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest(:new_converts) %></span> <p style="font-size: 2.5vmin">New Converts </p></li>
                             <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest(:first_timers) %> </span><p style="font-size: 2.5vmin">First Timers  </p></li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest(:nbs) %></span> <p style="font-size: 2.5vmin">Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest(:nbs_finish)%></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest_cc(:nbs) %></span> <p style="font-size: 2.5vmin">Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest_cc(:nbs_finish)%></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
                              <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest(:fnb) %></span> <p style="font-size: 2.5vmin">First and Best </p></li>
                     </ul>
                     <div class="pricing-footer">
@@ -340,8 +340,8 @@
 
                        <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= User.find_by(id: 33).latest(:new_converts) %></span> <p style="font-size: 2.5vmin">New Converts </p></li>
                             <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= User.find_by(id: 33).latest(:first_timers) %> </span><p style="font-size: 2.5vmin">First Timers  </p></li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= User.find_by(id: 33).latest(:nbs) %></span> <p style="font-size: 2.5vmin">Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= User.find_by(id: 33).latest(:nbs_finish)%></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_latest_ldn(:nbs) %></span> <p style="font-size: 2.5vmin">Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total.latest_ldn(:nbs_finish)%></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
                              <li><i class="glyphicon glyphicon-option-vertical"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= User.find_by(id: 33).latest(:fnb) %></span> <p style="font-size: 2.5vmin">First and Best </p></li>
                     </ul>
                     <div class="pricing-footer">

@@ -126,6 +126,12 @@ d= a.values.inject(0) {|b, c| b+c}
 d	
 end
 
+def self.total_latest_cc(func)
+a=	ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_latest(func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
 def self.total_latest_ldn(func)
 a=	ChurchGroup.where(region: "London").make_hash_latest(func)
 d= a.values.inject(0) {|b, c| b+c}
@@ -150,8 +156,20 @@ d= a.values.inject(0) {|b, c| b+c}
 d	
 end
 
+def self.total_ytd_cc(func)
+a=	ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_ytd_sum(func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
 def self.total_month(month, func)
 a=	ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum(month, func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
+def self.total_month_cc(month, func)
+a=	ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum(month, func)
 d= a.values.inject(0) {|b, c| b+c}
 d	
 end
