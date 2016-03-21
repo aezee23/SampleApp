@@ -22,11 +22,11 @@
   	<h5 style="text-align: center"> Sunday Attendance By Church Group (Total: <%= ChurchGroup.total_latest(:sunday_att) %>)</h5>
     <%= pie_chart ChurchGroup.make_hash_latest(:sunday_att), library: {backgroundColor: "#F0F0F0", width: "100%"} %>
   </div>
-     <div class="col-xs-6" style= "border-style: solid; border-width: 1px; border-color: grey">
+     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
   	<h5 style="text-align: center">London Sunday Attendance By Group (Total: <%= ChurchGroup.where(region: "London Main").total_latest(:sunday_att) %>)</h5>
     <%= pie_chart @ldn_hash, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
   </div>
-     <div class="col-xs-6" style= "border-style: solid; border-width: 1px; border-color: grey">
+     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
   	<h5 style="text-align: center">Judea Sunday Attendance By City (Total: <%= ChurchGroup.judea_latest(:sunday_att) %>)</h5>
     <%= pie_chart User.where.not('city = ? OR city = ?', "London CC", "London").make_hash_latest(:sunday_att), library: {backgroundColor: "#F0F0F0", width: "100%"} %>
   </div>
