@@ -51,6 +51,7 @@ User.create(email: 'janehyde_@hotmail.com', name: "Jane Hyde", elder: 'Administr
 User.create(email: 'firstlovechurchuk@gmail.com', name: "FLC London Main", elder: 'Maureen Lutalo', church_group_id: 10, password: 'firs4321', password_confirmation: 'firs4321')
 User.create(email: 'riaryee@gmail.com', name: "Bishop", elder: 'Administrator', church_group_id: 1, password: 'riar4321', password_confirmation: 'riar4321')
 User.create(email: 'leicesterflc@gmail.com', name: "De Montford University Leicester", elder: 'Emmanuel Baiden', church_group_id: 8, password: 'leic4321', password_confirmation: 'leic4321')
+User.create(email: 'yaalisa@live.co.uk', name: 'Carmen', elder: 'Carmen', church_group_id: 1, password: 'yaal4321', password_confirmation: 'yaal4321')
 
 Record.create(day: Date.parse("03-Jan-16"), sunday_att: 9, weekday_att: 0, first_timers: 0, new_converts: 0, nbs: 0, nbs_finish: 0, fnb: 0, user_id: 1, message_sunday: "None", message_weekday: "None", preacher_sunday: "None", preacher_weekday: "None")
 Record.create(day: Date.parse("10-Jan-16"), sunday_att: 9, weekday_att: 0, first_timers: 1, new_converts: 0, nbs: 0, nbs_finish: 0, fnb: 0, user_id: 1, message_sunday: "None", message_weekday: "None", preacher_sunday: "None", preacher_weekday: "None")
