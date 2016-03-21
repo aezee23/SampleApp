@@ -1,53 +1,34 @@
 
 <% provide(:title, 'Edit Data Record') %>
-<h3><%= "Edit #{@record.day} Data Record For #{@record.user.name}" %></h3>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@record) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :day, "Date of Sunday Service (click dropdown arrow to select)" %>
-      <%= f.date_field :day, class: 'form-control' %>
-      
-      <%= f.label :sunday_att, "Sunday Attendance" %>
-     <%= f.number_field :sunday_att, class: "form-control"%>
+   <div class="container">    
+        <div id="loginbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title"><%= "Edit #{@record.day} Data Record For #{@record.user.name}" %></div>
+                      </div>
+                      <div style="padding-top:30px" class="panel-body" >
 
-         <%= f.label :weekday_att, "Weekday Attendance (for meeting a few days prior to the Sunday above.)" %>
-      <%= f.number_field :weekday_att, class: 'form-control' %>
-      <%= f.hidden_field :user_id, value: @record.user.id %>
-      
-        <%= f.label :first_timers, "Number of First Timers In Sunday Service" %>
-      <%= f.number_field :first_timers, class: 'form-control' %>
+<%= bootstrap_form_for(@record) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.date_field :day, icon: "calendar", value: @date, label: "Date of Sunday Service", help: "Click dropdown arrow to select" %>
+  <%= f.number_field :sunday_att, value: 0, label: "Sunday Attendance:" %>
+  <%= f.number_field :weekday_att, value: 0, label: "Weekday Attendance:", help: "For meeting a few days prior to the Sunday above" %>
+  <%= f.number_field :new_converts, value: 0, label: "Number of New Converts in Sunday service:" %>
+  <%= f.number_field :first_timers, value: 0, label: "Number of First Timers in Sunday service:" %>
+  <%= f.number_field :nbs, value: 0, label: "How many people STARTED New Believers School this Sunday?" %>
+  <%= f.number_field :nbs_finish, value: 0, label: "How many people FINISHED New Believers School this Sunday?" %>
+   <%= f.number_field :fnb, value: 0, label: "Number of people who gave their First and Best this Sunday:" %>
+  <%= f.select :visitation,  [["No", false], ["Yes", true]], { label: "Did you go on visitation in the past week?" }, { class: "selectpicker" }  %>
+  <%= f.text_field :message_sunday, label: "Sunday Message Title:", value: "None" %>
+  <%= f.text_field :preacher_sunday, label: "Who Preached in Sunday Service?", value: "#{current_user.elder}"%>
+  <%= f.text_field :message_weekday, label: "Weekday Message Title:" , value: "None" %>
+  <%= f.text_field :preacher_weekday, label: "Who Preached in Weekday Service?", value: "#{current_user.elder}" %>
+  <%= f.submit "Amend Data", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
+<% end %>
 
-          <%= f.label :new_converts, "Number of New Converts In Sunday Service" %>
-      <%= f.number_field :new_converts, class: 'form-control' %>
-
-          <%= f.label :fnb, "Number of People Who Gave Their First and Best" %>
-      <%= f.number_field :fnb, class: 'form-control' %>
-
-          <%= f.label :nbs, "Number of People Who STARTED New Believers School" %>
-      <%= f.number_field :nbs, class: 'form-control' %>
-
-          <%= f.label :nbs_finish, "Number of People Who FINISHED New Believers School" %>
-      <%= f.number_field :nbs_finish, class: 'form-control' %><br>
-
-          <%= f.label :visitation, "Did you go on visitation in the past week?" %>
-       <%= f.select :visitation, [['No', false], ['Yes', true] ], class: 'form-control' %><br><br>
-
-         <%= f.label :message_sunday, "Sunday Message Title" %>
-      <%= f.text_field :message_sunday, class: 'form-control' %>
-
-       <%= f.label :message_weekday, "Weekday Message Title" %>
-      <%= f.text_field :message_weekday, class: 'form-control' %>
-
-       <%= f.label :preacher_sunday, "Who Preached in Sunday Service" %>
-      <%= f.text_field :preacher_sunday, class: 'form-control' %>
-
-       <%= f.label :preacher_weekday, "Who Preached in Weekday Service" %>
-      <%= f.text_field :preacher_weekday, class: 'form-control' %> <br>
-      
-      <%= f.submit "Submit Ammendment", data: { confirm: 'Are You Sure You Want To Amend This Record?' }, class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
+                      </div>
+                    </div>
+                    </div>
+                    </div>

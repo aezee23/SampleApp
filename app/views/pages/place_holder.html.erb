@@ -28,8 +28,10 @@
 <!--new record -->
 
 
+
 <% provide(:title, 'New Data Record') %>
-<h1>Enter New Data Record</h1>
+
+  <h1>Enter New Data Record</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -58,7 +60,10 @@
       <%= f.number_field :nbs, value: 0, class: 'form-control' %>
 
           <%= f.label :nbs_finish, "Number of People Who FINISHED New Believers School" %>
-      <%= f.number_field :nbs_finish, value: 0, class: 'form-control' %>
+      <%= f.number_field :nbs_finish, value: 0, class: 'form-control' %><br>
+
+      <%= f.label :visitation, "Did you go on visitation in the past week?" %>
+       <%= f.select :visitation, [['No', false], ['Yes', true]], class: 'form-control' %><br><br>
 
          <%= f.label :message_sunday, "Sunday Message Title" %>
       <%= f.text_field :message_sunday, value: "None", class: 'form-control' %>

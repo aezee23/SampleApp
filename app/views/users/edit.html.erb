@@ -1,35 +1,27 @@
 
 <% provide(:title, 'Edit Campus Church Information') %>
-<h1>Update Campus Church Information</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-    
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
+ <div class="container">    
+        <div id="loginbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Update <%= @user.name %> Campus Church Information</div>
+                      </div>
+                      <div style="padding-top:30px" class="panel-body" >
 
-      <%= f.label :elder %>
-      <%= f.text_field :elder, class: 'form-control' %>
-      
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+<%= bootstrap_form_for(@user) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+  <%= f.text_field :name, label: "Campus Church Name:" %>
+  <%= f.text_field :elder, label: "Campus Church Current Elder:" %>
+  <%= f.email_field :email, label: "Campus Church Email Address:" %>
+  <%= f.text_field :city, label: "City the Campus Church is Based In:" %>
+  <%= f.select :church_group_id, ChurchGroup.all.collect {|a| [ a.name, a.id ] }, { label: "Church Group" }, { class: "selectpicker" } %>
+  <%= f.submit "Submit Amendment", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
+<% end %>
 
-       <%= f.label :city %>
-      <%= f.text_field :city, class: 'form-control' %>
-      
-      <%= f.label :church_group_id, "Church Group" %><br>
-      
-      <%= f.select :church_group_id, ChurchGroup.all.collect {|a| [ a.name, a.id ] }, class: "form-control"%>
-<br>
-    
-      <%= f.submit "Save Changes", class: "btn btn-primary" %>
-    <% end %>
-    
-    <div class="gravatar_edit">
-      <%= gravatar_for @user %>
-      <a href="http://gravatar.com/emails" target=_blank>Change Profile Picture</a>
-    </div>
-  </div>
-</div>
+
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+
