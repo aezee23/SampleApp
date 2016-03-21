@@ -38,6 +38,10 @@
     <%= line_chart [{name: "FLC Total Sunday Attendance", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:sunday_att)}, {name: "First & Best", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:fnb)}], library: {backgroundColor: "#F0F0F0", width: "100%"} %>
   </div>
  
+   <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
+  	<h5 style= "text-align: center">London CC vs Non CC Attendants</h5>
+    <%= area_chart [{name: "London CC", data: ChurchGroup.where(region: "London").make_hash_time_series(:sunday_att)}, {name: "London Main", data: ChurchGroup.where(region: "London Main").make_hash_time_series(:sunday_att)}], stacked: false, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+  </div>
 </div>
 <br>
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
