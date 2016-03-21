@@ -8,7 +8,7 @@
                                 <th><span><%= sortable "name", "Campus Church" %></span></th>
                               
                                  <th><span><%= sortable "church_group_id", "Group" %></span></th>
-                                <th><span><%= "Region" %></span></th>
+                                <th><span><%= "City" %></span></th>
                                 <th><span> AVG Size</span></th>
                                 <th><span> Latest Size</span></th>
                                  <th><span> Email</span></th>
@@ -30,7 +30,7 @@
                                     </td>
                                    
                                     <td><%= link_to t.church_group.name, church_group_path(t.church_group), class: "table-text"%></td>
-                                    <td class="table-text"><%= t.church_group.region %></td>
+                                    <td class="table-text"><%= t.city.nil? ? "Blank": t.city %></td>
                                     <td class="table-text text-center"><strong><%= t.ytd_avg(:sunday_att) %></strong></td>
                                     <td class="table-text text-center"><strong><%= t.records.order('day DESC').first.sunday_att %></strong></td>
                                     <td><%= link_to "#{t.elder}", "mailto:#{t.email}" %></td>
