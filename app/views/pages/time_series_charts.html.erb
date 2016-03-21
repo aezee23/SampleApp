@@ -33,6 +33,10 @@
     <%= line_chart [{name: "FLC Total New Converts", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:new_converts)}, {name: "Starting NBS", data: ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_time_series(:nbs)}], library: {backgroundColor: "#F0F0F0", width: "100%"} %>
   </div>
    
+       <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
+  	<h5 style= "text-align: center">First and Best vs Sunday Attendance </h5>
+    <%= line_chart [{name: "FLC Total Sunday Attendance", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:sunday_att)}, {name: "First & Best", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:fnb)}], library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+  </div>
  
 </div>
 <br>

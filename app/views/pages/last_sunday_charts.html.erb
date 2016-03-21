@@ -8,11 +8,15 @@
 <div class="row">
   <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
   	<h5 style= "text-align: center">Sunday/Weekday Attendance Breakdown</h5>
-    <%= column_chart [{name: "Sunday", data: User.make_hash_latest(:sunday_att)}, {name: "Weekday", data: User.make_hash_latest(:weekday_att)}, {name: "First & Best", data: User.make_hash_latest(:fnb)}], stacked: true, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+    <%= column_chart [{name: "Sunday", data: User.make_hash_latest(:sunday_att)}, {name: "Weekday", data: User.make_hash_latest(:weekday_att)}], stacked: false, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
   </div>
     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
   		<h5 style= "text-align: center">First Timers/New Converts/NBS</h5>
-    <%= column_chart [{name: "First Timers", data: User.make_hash_latest(:first_timers)}, {name: "New Converts", data: User.make_hash_latest(:new_converts)}, {name: "Started NBS", data: User.make_hash_latest(:nbs)}, {name: "Finished NBS", data: User.make_hash_latest(:nbs_finish)}], stacked: true, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+    <%= column_chart [{name: "First Timers", data: User.make_hash_latest(:first_timers)}, {name: "New Converts", data: User.make_hash_latest(:new_converts)}, {name: "Started NBS", data: User.make_hash_latest(:nbs)}], stacked: false, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+  </div>
+    <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
+    <h5 style= "text-align: center"> First And Best vs Finished NBS</h5>
+    <%= column_chart [{name: "Finished NBS", data: User.make_hash_latest(:nbs_finish)}, {name: "First & Best", data: User.make_hash_latest(:fnb)}], stacked: false, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
   </div>
     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
   	<h5 style="text-align: center"> Sunday Attendance By Church Group (Total: <%= ChurchGroup.total_latest(:sunday_att) %>)</h5>
