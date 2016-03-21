@@ -3,6 +3,8 @@ get '/elders' => 'elders#index'
 root "sessions#new"
 get 'demo' => 'pages#index'
 get 'last_sunday' => 'pages#last_sunday'
+get 'last_sunday_charts' => 'pages#last_sunday_charts'
+get 'time_series_charts' => 'pages#time_series_charts'
 get 'show_nots' => 'pages#show'
 resources :church_groups
 get 'login' => 'sessions#new'

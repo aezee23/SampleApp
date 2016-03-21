@@ -59,6 +59,10 @@ def month_sum(month, att)
  n = self.records.where(day: (Date.parse(month)..Date.parse(month) >> 1)).sum(att)
 end
 
+def day_attr(x, att)
+ n = self.records.find_by(day: x)[att]
+end
+
 
 
 
@@ -71,6 +75,18 @@ def latest(x)
   end
 end
 
+
+
+def self.make_hash_latest(func)
+b = {}
+c= User.order('city ASC').where.not(admin: true).uniq.pluck(:city)
+c.each do |f|
+d= self.where(city: f).map {|y| y.latest(func)}
+e= d.inject(0) {|sum, y| sum + y}
+b["#{f}"] = e
+  end
+b
+end
 
 def missing_data
   if self.records.count < (Date.today+1).cweek

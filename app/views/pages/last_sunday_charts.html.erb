@@ -1,0 +1,47 @@
+<% provide(:title, 'Latest Sunday') %>
+
+<div class="container">  
+
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Last Sunday Data [<%=@date.strftime("%d-%b-%y") %>]</h1>
+                      </div>
+<div class="row">
+  <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
+  	<h5 style= "text-align: center">Sunday/Weekday Attendance Breakdown</h5>
+    <%= column_chart [{name: "Sunday", data: User.make_hash_latest(:sunday_att)}, {name: "Weekday", data: User.make_hash_latest(:weekday_att)}, {name: "First & Best", data: User.make_hash_latest(:fnb)}], stacked: true, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+  </div>
+    <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
+  		<h5 style= "text-align: center">First Timers/New Converts/NBS</h5>
+    <%= column_chart [{name: "First Timers", data: User.make_hash_latest(:first_timers)}, {name: "New Converts", data: User.make_hash_latest(:new_converts)}, {name: "Started NBS", data: User.make_hash_latest(:nbs)}, {name: "Finished NBS", data: User.make_hash_latest(:nbs_finish)}], stacked: true, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+  </div>
+    <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
+  	<h5 style="text-align: center"> Sunday Attendance By Church Group (Total: <%= ChurchGroup.total_latest(:sunday_att) %>)</h5>
+    <%= pie_chart ChurchGroup.make_hash_latest(:sunday_att), library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+  </div>
+     <div class="col-xs-6" style= "border-style: solid; border-width: 1px; border-color: grey">
+  	<h5 style="text-align: center">London Sunday Attendance By Group (Total: <%= ChurchGroup.where(region: "London Main").total_latest(:sunday_att) %>)</h5>
+    <%= pie_chart @ldn_hash, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+  </div>
+     <div class="col-xs-6" style= "border-style: solid; border-width: 1px; border-color: grey">
+  	<h5 style="text-align: center">Judea Sunday Attendance By City (Total: <%= ChurchGroup.judea_latest(:sunday_att) %>)</h5>
+    <%= pie_chart User.where.not('city = ? OR city = ?', "London CC", "London").make_hash_latest(:sunday_att), library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+  </div>
+</div>
+<br>
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+	 <div class="btn-group" role="group">
+  <%= link_to "Back to Home Page", demo_path, class: "btn btn-primary" %>
+</div>
+   <div class="btn-group" role="group">
+  <%= link_to "View/Download Raw Data", last_sunday_path, class: "btn btn-primary" %>
+</div>
+   <div class="btn-group" role="group">
+  <%= link_to "View Time Series", time_series_charts_path, class: "btn btn-primary" %>
+  </div>
+   <div class="btn-group" role="group">
+  <%= link_to "View Campus Churches", users_path, class: "btn btn-primary" %>
+  </div>
+</div>
+</div>
+
+

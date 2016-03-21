@@ -26,6 +26,11 @@ a =	self.users.map {|x| x.month_avg(month, att)}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
+def sum_day_attr(y, att)
+a =	self.users.map {|x| x.day_attr(y, att)}
+ sum_a = a.inject(0){|sum,x| sum + x }
+end
+
 def sum_ytd_sum(att)
 a =	self.users.map {|x| x.ytd_sum(att)}
  sum_a = a.inject(0){|sum,x| sum + x }
@@ -104,6 +109,14 @@ b["#{x.name}- #{x.leader.split[0]}"] = x.sum_month_sum(func, fun)
 b
 end
 
+def self.make_hash_day_attr(func, fun)
+b = {}
+self.where.not(id: 1).each do |x| 
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_day_attr(func, fun)
+	end
+b
+end
+
 def self.make_hash_latest(func)
 b = {}
 self.where.not(id: 1).each do |x| 
@@ -115,9 +128,18 @@ end
 def self.make_hash_latest_ldn(func)
 b = {}
 self.where(region: "London").each do |x| 
-b[x.name] = x.sum_latest(func)
+b["#{x.name}- #{x.leader.split[0]}"] = x.sum_latest(func)
 	end
 b
+end
+
+def self.make_hash_time_series(func)
+	a = User.first.records.order('day ASC').pluck(:day)
+	b = {}
+	a.each do |x|
+		b["#{x}"]= self.total_day_attr(x, func)
+	end
+	b
 end
 
 def self.total_latest(func)
@@ -164,6 +186,12 @@ end
 
 def self.total_month(month, func)
 a=	ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum(month, func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
+def self.total_day_attr(x, func)
+a=	ChurchGroup.make_hash_day_attr(x, func)
 d= a.values.inject(0) {|b, c| b+c}
 d	
 end
