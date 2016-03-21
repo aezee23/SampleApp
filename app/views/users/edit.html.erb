@@ -21,7 +21,7 @@
       
       <%= f.label :church_group_id, "Church Group" %><br>
       
-      <%= f.select :church_group_id, ChurchGroup.all.collect {|a| [ a.name, a.id ] }, class: "selectwidthauto"%>
+      <%= f.select :church_group_id, ChurchGroup.all.collect {|a| [ a.name, a.id ] }, class: "form-control"%>
 <br>
     
       <%= f.submit "Save Changes", class: "btn btn-primary" %>

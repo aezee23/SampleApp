@@ -30,7 +30,10 @@
       <%= f.number_field :nbs, class: 'form-control' %>
 
           <%= f.label :nbs_finish, "Number of People Who FINISHED New Believers School" %>
-      <%= f.number_field :nbs_finish, class: 'form-control' %>
+      <%= f.number_field :nbs_finish, class: 'form-control' %><br>
+
+          <%= f.label :visitation, "Did you go on visitation in the past week?" %>
+       <%= f.select :visitation, [['No', false], ['Yes', true] ], class: 'form-control' %><br><br>
 
          <%= f.label :message_sunday, "Sunday Message Title" %>
       <%= f.text_field :message_sunday, class: 'form-control' %>
