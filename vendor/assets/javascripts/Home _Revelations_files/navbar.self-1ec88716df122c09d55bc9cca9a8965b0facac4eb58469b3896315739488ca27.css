@@ -1,0 +1,132 @@
+/* line 1, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default {
+  background-color: #5d5c61;
+  border-color: #5d5c61;
+}
+
+/* line 5, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-brand {
+  color: #f9f9f9;
+  text-transform: uppercase;
+}
+
+/* line 9, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #e4e8ee;
+}
+
+/* line 14, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-text {
+  color: #f9f9f9;
+}
+
+/* line 17, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-nav > li > a {
+  color: #f9f9f9;
+}
+
+/* line 20, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #e4e8ee;
+}
+
+/* line 24, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-nav > li > .dropdown-menu {
+  background-color: #5d5c61;
+}
+
+/* line 27, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
+  color: #f9f9f9;
+}
+
+/* line 30, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
+  color: #e4e8ee;
+  background-color: #558bd4;
+}
+
+/* line 35, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-nav > li > .dropdown-menu > li > .divider {
+  background-color: #558bd4;
+}
+
+/* line 38, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+  color: #e4e8ee;
+  background-color: #558bd4;
+}
+
+/* line 44, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #e4e8ee;
+  background-color: #558bd4;
+}
+
+/* line 50, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #e4e8ee;
+  background-color: #558bd4;
+}
+
+/* line 56, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-toggle {
+  border-color: #558bd4;
+}
+
+/* line 59, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #558bd4;
+}
+
+/* line 63, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #f9f9f9;
+}
+
+/* line 66, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #f9f9f9;
+}
+
+/* line 70, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-link {
+  color: #f9f9f9;
+}
+
+/* line 73, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+.navbar-default .navbar-link:hover {
+  color: #e4e8ee;
+}
+
+@media (max-width: 767px) {
+  /* line 78, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #f9f9f9;
+  }
+
+  /* line 81, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #e4e8ee;
+  }
+
+  /* line 85, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/navbar.css.scss */
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #e4e8ee;
+    background-color: #558bd4;
+  }
+}

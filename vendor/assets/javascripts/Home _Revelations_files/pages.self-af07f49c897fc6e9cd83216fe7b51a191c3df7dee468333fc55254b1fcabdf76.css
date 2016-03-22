@@ -1,0 +1,153 @@
+/* line 5, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.list-group-item {
+  padding-left: 0px;
+}
+
+/* line 9, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.page_heading {
+  padding-left: 0px;
+}
+
+/* line 13, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.dl-horizontal {
+  padding-top: 0px;
+  vertical-alignment: center;
+}
+
+/* line 18, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.danger > .link_text {
+  color: #000000;
+}
+
+/*============================================================
+BACKGROUND COLORS
+============================================================*/
+/* line 28, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-bk-color-one {
+  background-color: #f55039;
+}
+
+/* line 32, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-bk-color-two {
+  background-color: #46A6F7;
+}
+
+/* line 36, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-bk-color-three {
+  background-color: #47887E;
+}
+
+/* line 40, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-bk-color-six {
+  background-color: #F59B24;
+}
+
+/*============================================================
+PRICING STYLES
+==========================================================*/
+/* line 46, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-padding-btm {
+  padding-bottom: 50px;
+}
+
+/* line 49, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-button-color-square {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 0px;
+  width: 100%;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  font-size: 2vmin;
+  position: relative;
+}
+
+/* line 61, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-button-color-square:hover {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+}
+
+/* line 68, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven {
+  margin-bottom: 30px;
+  margin-top: 50px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  line-height: 30px;
+}
+
+/* line 77, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven ul {
+  list-style: none;
+  margin: 0;
+  text-align: center;
+  padding-left: 0px;
+}
+
+/* line 84, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven ul li {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  cursor: pointer;
+}
+
+/* line 90, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven ul li i {
+  margin-right: 0px;
+}
+
+/* line 95, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven .price {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 40px 0px 20px 0px;
+  font-size: 12vmin;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+/* line 103, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven .price small {
+  color: #B8B8B8;
+  display: block;
+  font-size: 2vmin;
+  margin-top: 22px;
+}
+
+/* line 110, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven .type {
+  background-color: #5d5c61;
+  padding: 2vmin 0px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 5vmin;
+}
+
+/* line 118, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven .pricing-footer {
+  padding: 20px;
+}
+
+/* line 122, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-attached > .col-lg-4,
+.db-attached > .col-lg-3,
+.db-attached > .col-md-4,
+.db-attached > .col-md-3,
+.db-attached > .col-sm-4,
+.db-attached > .col-sm-3 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* line 132, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven.popular {
+  margin-top: 20px;
+}
+
+/* line 136, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/pages.css.scss */
+.db-pricing-eleven.popular .price {
+  padding-top: 80px;
+}

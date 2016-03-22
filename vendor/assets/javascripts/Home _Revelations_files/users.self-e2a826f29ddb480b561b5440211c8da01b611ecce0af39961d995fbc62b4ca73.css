@@ -1,0 +1,186 @@
+/* sidebar */
+/* line 10, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+aside section.user_info {
+  margin-top: 20px;
+}
+/* line 13, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+aside section {
+  padding: 10px 0;
+  margin-top: 20px;
+}
+/* line 16, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+aside section:first-child {
+  border: 0;
+  padding-top: 0;
+}
+/* line 20, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+aside section span {
+  display: block;
+  margin-bottom: 3px;
+  line-height: 1;
+}
+/* line 25, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+aside section h1 {
+  font-size: 1.4em;
+  text-align: left;
+  letter-spacing: -1px;
+  margin-bottom: 3px;
+  margin-top: 0px;
+}
+
+/* line 35, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+/* line 40, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.gravatar_edit {
+  margin-top: 15px;
+}
+
+/* line 44, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+}
+/* line 48, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.stats a {
+  float: left;
+  padding: 0 10px;
+  border-left: 1px solid #383838;
+  color: #383838;
+}
+/* line 54, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.stats a:hover {
+  text-decoration: none;
+  color: blue;
+}
+/* line 59, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.stats strong {
+  display: block;
+}
+
+/* line 64, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+}
+/* line 67, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.user_avatars .gravatar {
+  margin: 1px 1px;
+}
+/* line 70, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.user_avatars a {
+  padding: 0;
+}
+
+/* line 78, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+body {
+  background: #eee;
+}
+
+/* line 81, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.main-box.no-header {
+  padding-top: 20px;
+}
+
+/* line 84, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.main-box {
+  background: #FFFFFF;
+  -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
+  -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
+  -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
+  -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
+  box-shadow: 1px 1px 2px 0 #CCCCCC;
+  margin-bottom: 16px;
+  -webikt-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+/* line 96, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.table a.table-link.danger {
+  color: #e74c3c;
+}
+
+/* line 99, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.label {
+  border-radius: 3px;
+  font-size: 0.875em;
+  font-weight: 600;
+}
+
+/* line 104, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.user-list tbody td .user-subhead {
+  font-size: 0.875em;
+  font-style: italic;
+}
+
+/* line 108, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.user-list tbody td .user-link {
+  display: block;
+  font-size: 1.25em;
+  padding-top: 3px;
+  margin-left: 60px;
+}
+
+/* line 114, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+a {
+  color: #3498db;
+}
+
+/* line 118, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.table-text {
+  color: #000000;
+}
+
+/* line 121, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+a > .table-text {
+  color: #000000;
+}
+
+/* line 124, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.user-list tbody td > img {
+  position: relative;
+  max-width: 50px;
+  float: left;
+  margin-right: 15px;
+}
+
+/* line 131, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.table thead tr th {
+  text-transform: uppercase;
+  font-size: 0.875em;
+}
+
+/* line 135, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.table thead tr th {
+  border-bottom: 2px solid #e7ebee;
+}
+
+/* line 139, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.table tbody tr td:first-child {
+  font-size: 1.125em;
+  font-weight: 300;
+}
+
+/* line 143, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.table tbody tr td {
+  font-size: 0.875em;
+  vertical-align: middle;
+  border-top: 1px solid #e7ebee;
+  padding: 5px 8px;
+}
+
+/* line 150, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.selectwidthauto {
+  width: auto !important;
+}
+
+/* line 154, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/users.css.scss */
+.user-link2 {
+  vertical-align: middle !important;
+  padding-top: 10px;
+}

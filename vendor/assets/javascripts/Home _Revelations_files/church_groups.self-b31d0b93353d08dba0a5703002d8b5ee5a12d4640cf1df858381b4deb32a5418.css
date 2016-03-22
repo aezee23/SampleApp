@@ -1,0 +1,11 @@
+/* line 4, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/church_groups.css.scss */
+.col-xs-6 > .panel-default > .panel-heading {
+  background-color: #cce6ff;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+/* line 9, /Users/Aezee/Desktop/SampleApp/app/assets/stylesheets/church_groups.css.scss */
+.panel-default > .list-group > .list-group-item {
+  background-color: #d1e0e0;
+}
