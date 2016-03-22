@@ -35,6 +35,7 @@ def future_day
 	end
 end
 
+
 def self.to_csv(options = {})
   CSV.generate(options) do |csv|
     csv << column_names

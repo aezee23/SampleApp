@@ -56,25 +56,27 @@
   <div class="modal-dialog modal-lg" id= 'pie_c'>
     <div class="modal-content" style="width:100%">
     
-  <div class="row">
-  <div class="col-xs-6" id="pie_c"><p style="color:#000000"> Average <%= (Date.today << 2).strftime('%b-%y') %> Sunday</p>
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_avg((Date.today << 2).strftime('%B'), :sunday_att), library: {backgroundColor: "#F0F0F0", width: "1000px"} %>
+<div class="container">
+
+  <div class="col-xs-12" style="color:#000000; width: 100%; text-align: center"> Average <%= (Date.today << 2).strftime('%b-%y') %> Sunday
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_avg((Date.today << 2).strftime('%B'), :sunday_att), data: "percentage" %>
   </div>
-    <div class="col-xs-6" id="pie_c"> <p style="color:#000000"> Total <%= (Date.today << 2).strftime('%b-%y') %> New Converts</p>
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :new_converts), library: {backgroundColor: "#F0F0F0", width: "1000px"} %>
+  <!--
+    <div class="col-xs-12" id="pie_c"> <p style="color:#000000"> Total <%= (Date.today << 2).strftime('%b-%y') %> New Converts</p>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :new_converts), library: {backgroundColor: "#F0F0F0"} %>
   </div>
-    <div class="col-xs-6" id="pie_c"> <p style="color:#000000"> Total <%= (Date.today << 2).strftime('%b-%y') %> First Timers</p>
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :first_timers), library: {backgroundColor: "#F0F0F0", width: "1000px"} %>
+    <div class="col-xs-12" id="pie_c"> <p style="color:#000000"> Total <%= (Date.today << 2).strftime('%b-%y') %> First Timers</p>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :first_timers), library: {backgroundColor: "#F0F0F0"} %>
   </div>
-      <div class="col-xs-6" id="pie_c"> <p style="color:#000000"> Total <%= (Date.today << 2).strftime('%b-%y') %> Began NBS</p>
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :nbs), library: {backgroundColor: "#F0F0F0", width: "1000px"} %>
+      <div class="col-xs-12" id="pie_c"> <p style="color:#000000"> Total <%= (Date.today << 2).strftime('%b-%y') %> Began NBS</p>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :nbs), library: {backgroundColor: "#F0F0F0"} %>
   </div>
-      <div class="col-xs-6" id="pie_c"> <p style="color:#000000"> Total <%= (Date.today << 2).strftime('%b-%y') %> Finished NBS</p>
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :nbs_finish), library: {backgroundColor: "#F0F0F0", width: "1000px"} %>
+      <div class="col-xs-12" id="pie_c"> <p style="color:#000000"> Total <%= (Date.today << 2).strftime('%b-%y') %> Finished NBS</p>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :nbs_finish), library: {backgroundColor: "#F0F0F0"} %>
   </div>
-      <div class="col-xs-6" id="pie_c"> <p style="color:#000000"> <%= (Date.today << 2).strftime('%b-%y') %> First and Best</p>
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :fnb), library: {backgroundColor: "#F0F0F0", width: "1000px"} %>
-  </div>
+      <div class="col-xs-12" id="pie_c"> <p style="color:#000000"> <%= (Date.today << 2).strftime('%b-%y') %> First and Best</p>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :fnb), library: {backgroundColor: "#F0F0F0"} %>
+  </div> -->
 </div>
 
   
