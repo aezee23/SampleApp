@@ -8,6 +8,7 @@ $gray-medium-light: #eaeaea;
 aside {
   section.user_info {
     margin-top: 20px;
+    width: 100%
   }
   section {
     padding: 10px 0;
@@ -153,4 +154,101 @@ a > .table-text{
 .user-link2{
 	vertical-align: middle !important;
 	padding-top: 10px;
+}
+
+/* Profile Card */
+
+.twPc-div {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e1e8ed;
+    border-radius: 6px;
+    height: 250px;
+    max-width: 100%; // orginal twitter width: 290px;
+}
+.twPc-bg {
+    background-image: url("https://pbs.twimg.com/profile_banners/50988711/1384539792/600x200");
+    background-position: 0 50%;
+    background-size: 100% auto;
+    border-bottom: 1px solid #e1e8ed;
+    border-radius: 4px 4px 0 0;
+    height: 95px;
+    width: 100%;
+}
+.twPc-block {
+    display: block !important;
+}
+
+.twPc-avatarLink {
+    background-color: none;
+    border-radius: 6px;
+    display: inline-block !important;
+    float: left;
+    margin: -60px 0.5vmin 0 5vmin;
+    max-width: 100%;
+    padding: 1px;
+    vertical-align: bottom;
+}
+.twPc-avatarLink >.gravatar {
+    border: 5px solid #fff;
+    border-radius: 5px;
+    /*box-sizing: border-box;*/
+    color: #fff;
+    height: 160px;
+    width: 160px;
+}
+.twPc-divUser {
+    margin: 5px 0 0;
+}
+.twPc-divName {
+    font-size: 4vmin;
+    font-weight: 600;
+    line-height: auto;
+}
+.twPc-divName a {
+    color: inherit !important;
+}
+.twpc-divElder {
+  font-size: 3vmin;
+  font-style: italic;
+
+}
+.twPc-divStats {
+    margin-left: 11px;
+    padding: 10px 0;
+}
+.twPc-Arrange {
+    box-sizing: border-box;
+    display: table;
+    margin: 0;
+    min-width: 100%;
+    padding: 0;
+    table-layout: auto;
+}
+ul.twPc-Arrange {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.twPc-ArrangeSizeFit {
+    display: table-cell;
+    padding: 0;
+    vertical-align: top;
+}
+.twPc-ArrangeSizeFit a:hover {
+    text-decoration: none;
+}
+.twPc-StatValue {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    color: #66b3ff;
+    transition: color 0.15s ease-in-out 0s;
+}
+.twPc-StatLabel {
+    color: #8899a6;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    overflow: hidden;
+    text-transform: uppercase;
+    transition: color 0.15s ease-in-out 0s;
 }
