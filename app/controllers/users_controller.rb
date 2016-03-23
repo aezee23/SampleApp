@@ -32,6 +32,8 @@ end
   def show
 @user = User.find(params[:id])
 @records = @user.records.paginate(page: params[:page])
+@max_record = @user.records.order('sunday_att DESC').first
+@latest_record = @user.records.find_by(day: @user.date_of_last("Sunday") )
     end
 
   def update

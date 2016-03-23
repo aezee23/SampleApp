@@ -52,13 +52,13 @@
                 <li class="twPc-ArrangeSizeFit">
                   
                         <span class="twPc-StatLabel twPc-block">Max Sunday</span>
-                        <span class="twPc-StatValue"><%= @user.records.maximum(:sunday_att) %></span>
+                        <span class="twPc-StatValue"><%= link_to @max_record.sunday_att, record_path(@max_record) %></span>
                   
                 </li>
                 <li class="twPc-ArrangeSizeFit">
                    
                         <span class="twPc-StatLabel twPc-block">Latest Sunday</span>
-                        <span class="twPc-StatValue"><%= @user.latest(:sunday_att) %></span>
+                        <span class="twPc-StatValue"><%= link_to @latest_record.sunday_att, record_path(@latest_record) %></span>
                   
                 </li>
             </ul>
