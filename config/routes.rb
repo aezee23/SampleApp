@@ -15,10 +15,7 @@ post 'login' => 'sessions#create'
 delete 'logout' => 'sessions#destroy'
 
 
-resources :users do
-  resources :records
-end
-
+resources :users
 resources :records
 resources :password_resets,     only: [:new, :create, :edit, :update]
 get 'change_password' => 'users#change_password'

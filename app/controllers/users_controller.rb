@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+   before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
 	helper_method :sort_column, :sort_direction
 def index
   if params[:search]
@@ -83,9 +85,17 @@ end
       redirect_to(root_url) unless current_user?(@user)
     end
 
+def logged_in_user
+unless logged_in?
+flash[:danger] = "Please log in."
+redirect_to login_url
+end
+end
+
     def admin_user
-      redirect_to(current_user) unless current_user.admin?
+      redirect_to demo_path unless current_user.admin?
     end
+
 
   def sort_column
    params[:sort] ? params[:sort] : "name"

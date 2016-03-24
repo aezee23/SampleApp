@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+
+  before_action :logged_in_user, only: [:index, :show, :last_sunday, :last_sunday_charts, :time_series_charts, :monthly_average_charts, :visitation]
+  before_action :admin_user, only: [:show, :last_sunday, :last_sunday_charts, :time_series_charts, :monthly_average_charts, :visitation]
 	helper_method :sort_column, :sort_direction
 	def index
 		@date = date_of_last("Sunday").strftime('%d-%b-%y')
@@ -92,5 +95,16 @@ private
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
+
+def logged_in_user
+unless logged_in?
+flash[:danger] = "Please log in."
+redirect_to login_url
+end
+end
+
+  def admin_user
+      redirect_to demo_path unless current_user.admin?
+    end
 
 end

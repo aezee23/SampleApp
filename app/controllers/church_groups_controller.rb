@@ -1,5 +1,9 @@
 class ChurchGroupsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+
 helper_method :sort_column, :sort_direction
+
 
 	 def index
 @church_groups = ChurchGroup.where.not(id: 1).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 13)
@@ -59,5 +63,17 @@ def destroy
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
+
+def logged_in_user
+unless logged_in?
+flash[:danger] = "Please log in."
+redirect_to login_url
+end
+end
+
+  def admin_user
+      redirect_to demo_path unless current_user.admin?
+    end
+ 
 
 end

@@ -1,4 +1,7 @@
 class RecordsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+  before_action :admin_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:show]
 helper_method :sort_column, :sort_direction
 def index
 	if current_user && current_user.admin
@@ -83,5 +86,22 @@ if @record.update_attributes(record_params)
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
  
+def logged_in_user
+unless logged_in?
+flash[:danger] = "Please log in."
+redirect_to login_url
+end
+end
+
+  def admin_user
+      redirect_to demo_path unless current_user.admin?
+    end
+
+
+def correct_user
+      @user = Record.find(params[:id]).user
+      redirect_to demo_path unless current_user?(@user) || current_user.admin
+end
+
 
 end
