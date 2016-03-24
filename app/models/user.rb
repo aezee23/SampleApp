@@ -47,6 +47,36 @@ if n == 0
 end
 end
 
+def make_hash_monthly_avg(att)
+  a = {}
+  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
+  c= b.map{|x| x.strftime("%b%Y")}.uniq
+  c.each do |t|
+    a[t]= self.month_avg(t, att) || 0
+  end 
+  a
+end
+
+
+def make_hash_monthly_sum(att)
+  a = {}
+  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
+  c= b.map{|x| x.strftime("%b%Y")}.uniq
+  c.each do |t|
+    a[t]= self.month_sum(t, att) || 0
+  end 
+  a
+end
+
+def make_hash_time_series(func)
+  a = self.records.order('day ASC').pluck(:day)
+  b = {}
+  a.each do |x|
+    b["#{x}"]= self.records.find_by(day: x)[func]
+  end
+  b
+end
+
 def ytd_sum(att)
  n = self.records.where(day: ((Date.parse(Date.today.strftime("%Y0101"))..Date.today))).sum(att)
 end

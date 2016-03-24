@@ -4,60 +4,52 @@
 
 <div class="container">  
 
-                    <div class="panel-heading">
-                        <h1 class="panel-title">Time Series Analysis</h1>
-                      </div>
+            
 <div class="row">
   <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-  	<h5 style= "text-align: center">Historic Sunday Attendance</h5>
-    <%= area_chart [{name: "London", data: ChurchGroup.where(region: "London Main").make_hash_time_series(:sunday_att)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_hash_time_series(:sunday_att)}], stacked: true, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+    <%= area_chart [{name: "London", data: ChurchGroup.where(region: "London Main").make_hash_time_series(:sunday_att)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_hash_time_series(:sunday_att)}], stacked: true, library: {title: {text: "Historic Sunday Attendance"}}  %>
   </div>
 
     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-  	<h5 style= "text-align: center">Historic Weekday Attendance</h5>
-    <%= area_chart [{name: "London", data: ChurchGroup.where(region: "London").make_hash_time_series(:weekday_att)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_hash_time_series(:weekday_att)}],  library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+    <%= area_chart [{name: "London", data: ChurchGroup.where(region: "London").make_hash_time_series(:weekday_att)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_hash_time_series(:weekday_att)}], stacked: true, library: {title: {text: "Historic Weekday Attendance"}} %>
   </div>
 
      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-  	<h5 style= "text-align: center">Historic First Timers </h5>
-    <%= line_chart [{name: "FLC Total", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:first_timers)}, {name: "London", data: ChurchGroup.where(region: "London Main").make_hash_time_series(:first_timers)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_hash_time_series(:first_timers)}],  library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+    <%= line_chart [{name: "FLC Total", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:first_timers)}, {name: "London", data: ChurchGroup.where(region: "London Main").make_hash_time_series(:first_timers)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_hash_time_series(:first_timers)}],  library: {title: {text: "Historic First Timers"}}%>
   </div>
 
     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-  	<h5 style= "text-align: center">Historic New Converts </h5>
-    <%= line_chart [{name: "FLC Total", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:new_converts)}, {name: "London", data: ChurchGroup.where(region: "London Main").make_hash_time_series(:new_converts)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_hash_time_series(:new_converts)}],  library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+    <%= line_chart [{name: "FLC Total", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:new_converts)}, {name: "London", data: ChurchGroup.where(region: "London Main").make_hash_time_series(:new_converts)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_hash_time_series(:new_converts)}],  library: {title: {text: "Historic New Converts"}}%>
   </div>
    
        <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-  	<h5 style= "text-align: center">New Converts vs Starting NBS </h5>
-    <%= line_chart [{name: "FLC Total New Converts", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:new_converts)}, {name: "Starting NBS", data: ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_time_series(:nbs)}], library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+    <%= line_chart [{name: "FLC Total New Converts", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:new_converts)}, {name: "Starting NBS", data: ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_time_series(:nbs)}], library: {title: {text: "New Converts vs Starting NBS"}} %>
   </div>
    
        <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-  	<h5 style= "text-align: center">First and Best vs Sunday Attendance </h5>
-    <%= line_chart [{name: "FLC Total Sunday Attendance", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:sunday_att)}, {name: "First & Best", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:fnb)}], library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+    <%= line_chart [{name: "FLC Total Sunday Attendance", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:sunday_att)}, {name: "First & Best", data: ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_time_series(:fnb)}], library: {title: {text: "First & Best vs Sunday Attendance"}}%>
   </div>
  
    <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-  	<h5 style= "text-align: center">London CC vs Non CC Attendants</h5>
-    <%= area_chart [{name: "London CC", data: ChurchGroup.where(region: "London").make_hash_time_series(:sunday_att)}, {name: "London Main", data: ChurchGroup.where(region: "London Main").make_hash_time_series(:sunday_att)}], stacked: false, library: {backgroundColor: "#F0F0F0", width: "100%"} %>
+    <%= area_chart [{name: "London CC", data: ChurchGroup.where(region: "London").make_hash_time_series(:sunday_att)}, {name: "London Main", data: ChurchGroup.where(region: "London Main").make_hash_time_series(:sunday_att)}], stacked: false, library: {title: {text: "London CC vs non CC Attendants"}} %>
   </div>
 </div>
-<br>
+  <br>
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
 	 <div class="btn-group" role="group">
   <%= link_to "Back to Home Page", demo_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
 </div>
    <div class="btn-group" role="group">
-  <%= link_to "View/Download All Records", records_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
-</div>
+  <%= link_to "Monthly Trends", monthly_average_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+  </div>
    <div class="btn-group" role="group">
   <%= link_to "View Latest Data", last_sunday_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
   </div>
-   <div class="btn-group" role="group">
-  <%= link_to "View Campus Churches", users_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
-  </div>
+     <div class="btn-group" role="group">
+  <%= link_to "View/Download Data", records_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+	</div>
 </div>
 </div>
+
 
 

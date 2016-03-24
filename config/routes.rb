@@ -5,14 +5,19 @@ get 'demo' => 'pages#index'
 get 'last_sunday' => 'pages#last_sunday'
 get 'last_sunday_charts' => 'pages#last_sunday_charts'
 get 'time_series_charts' => 'pages#time_series_charts'
+get 'monthly_average_charts' => 'pages#monthly_average_charts'
+get 'visitation' => 'pages#visitation'
 get 'show_nots' => 'pages#show'
+get 'change_pwd' => 'users#change_pwd'
 resources :church_groups
 get 'login' => 'sessions#new'
 post 'login' => 'sessions#create'
 delete 'logout' => 'sessions#destroy'
 
 
-resources :users
+resources :users do
+  resources :records
+end
 
 resources :records
 resources :password_resets,     only: [:new, :create, :edit, :update]

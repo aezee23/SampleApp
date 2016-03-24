@@ -31,7 +31,7 @@ end
 
   def show
 @user = User.find(params[:id])
-@records = @user.records.paginate(page: params[:page])
+@records = @user.records.paginate(page: params[:page], per_page: 20)
 @max_record = @user.records.order('sunday_att DESC').first
 @latest_record = @user.records.find_by(day: @user.date_of_last("Sunday") )
     end
@@ -48,8 +48,15 @@ end
     end
   end
 
-def change_password
+def change_pwd
 @user = current_user
+if @user.update_attributes(pwd_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+       flash[:danger] = "Please try again"
+      render 'edit'
+    end
 end
 
 
@@ -64,6 +71,10 @@ end
 
   def user_params
     params.require(:user).permit(:email, :name, :elder, :church_group_id, :password, :password_confirmation, :city)
+  end
+
+    def pwd_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 
 

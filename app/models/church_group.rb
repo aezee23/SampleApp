@@ -4,6 +4,10 @@ class ChurchGroup < ActiveRecord::Base
 	validates :name, presence: true, uniqueness: true
 
 
+def sum_day_attr(d, att)
+a =	self.users.map {|x| x.records.find_by(day: d)[att]}
+ sum_a = a.inject(0){|sum,x| sum + x }
+end
 
 def sum_ytd_avg(att)
 a =	self.users.map {|x| x.ytd_avg(att)}
@@ -51,7 +55,24 @@ a =	self.users.map {|x| x.latest(h)}
 b = a.inject(0){|sum,x| sum + x }
 end
 
-
+def make_hash_monthly_avg(att)
+  a = {}
+  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
+  c= b.map{|x| x.strftime("%b%Y")}.uniq
+  c.each do |t|
+    a[t]= self.sum_month_avg(t, att) || 0
+  end 
+  a
+end
+def make_hash_monthly_sum(att)
+  a = {}
+  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
+  c= b.map{|x| x.strftime("%b%Y")}.uniq
+  c.each do |t|
+    a[t]= self.sum_month_sum(t, att) || 0
+  end 
+  a
+end
 
 def self.make_hash_ytd_avg(func)
 b = {}
@@ -133,6 +154,15 @@ b["#{x.name}- #{x.leader.split[0]}"] = x.sum_latest(func)
 b
 end
 
+def make_hash_time_series(func)
+	a = User.first.records.order('day ASC').pluck(:day)
+	b = {}
+	a.each do |x|
+		b["#{x}"]= sum_day_attr(x, func)
+	end
+	b
+end
+
 def self.make_hash_time_series(func)
 	a = User.first.records.order('day ASC').pluck(:day)
 	b = {}
@@ -208,13 +238,67 @@ d= a.values.inject(0) {|b, c| b+c}
 d	
 end
 
+def self.total_month_avg_cc(month, func)
+a=	ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_avg(month, func)
+d= a.values.inject(0) {|b, c| b+c}
+d	
+end
+
 def self.judea_latest(func)
 a=	ChurchGroup.where(region: "Judea").make_hash_latest(func)
 d= a.values.inject(0) {|b, c| b+c}
 d	
 end
 
+def self.make_total_hash_monthly_avg(att)
+  a = {}
+  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
+  c= b.map{|x| x.strftime("%b%Y")}.uniq
+  c.each do |t|
+    a[t]= self.total_month_avg(t, att)
+  end 
+  a
+end
 
+def self.make_total_hash_monthly_avg_cc(att)
+  a = {}
+  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
+  c= b.map{|x| x.strftime("%b%Y")}.uniq
+  c.each do |t|
+    a[t]= self.total_month_avg_cc(t, att) || 0
+  end 
+  a
+end
+
+def self.make_total_hash_monthly(att)
+  a = {}
+  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
+  c= b.map{|x| x.strftime("%b%Y")}.uniq
+  c.each do |t|
+    a[t]= self.total_month(t, att)
+  end 
+  a
+end
+
+def self.make_total_hash_monthly_cc(att)
+  a = {}
+  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
+  c= b.map{|x| x.strftime("%b%Y")}.uniq
+  c.each do |t|
+    a[t]= self.total_month_cc(t, att) || 0
+  end 
+  a
+end
+
+def self.make_LDN_monthly_avg_split(att)
+	  a = {}
+  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
+  c= b.map{|x| x.strftime("%b%Y")}.uniq
+  c.each do |t|
+    a[t]= self.where(region: "London Main").total_month_avg(t, att)== 0 ?  0 : 100*(self.where(region: "London Main").total_month_avg(t, att)-self.where(region: "London").total_month_avg_cc(t, att))/self.where(region: "London Main").total_month_avg(t, att) || 0
+  end 
+  a
+end
 
 
 end

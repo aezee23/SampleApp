@@ -1,0 +1,53 @@
+<% provide(:title, 'Monthly Trends') %>
+
+
+
+<div class="container">  
+
+              <!--      <div class="panel-heading">
+                        <h1 class="panel-title">Time Series Analysis</h1>
+                      </div> -->
+<div class="row">
+	  <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "London", data: ChurchGroup.where(region: "London Main").make_total_hash_monthly_avg(:sunday_att)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_total_hash_monthly_avg(:sunday_att)}], stacked: true, library: {title: {text: "Past Year Monthly Average Sunday Attendance"}} %>
+  </div>
+  <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "London", data: ChurchGroup.where(region: "London").make_total_hash_monthly_avg_cc(:weekday_att)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_total_hash_monthly_avg(:weekday_att)}], stacked: true, library: {title: {text: "Past Year Monthly Average Weekday Attendance"}} %>
+  </div>
+
+  <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "London", data: ChurchGroup.where(region: "London Main").make_total_hash_monthly(:first_timers)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_total_hash_monthly(:first_timers)}], stacked: true, library: {title: {text: "Past Year Total Monthly First Timers"}} %>
+  </div>
+
+    <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "London", data: ChurchGroup.where(region: "London Main").make_total_hash_monthly(:new_converts)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_total_hash_monthly(:new_converts)}], stacked: true, library: {title: {text: "Past Year Total Monthly New Converts"}} %>
+  </div>
+
+
+     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "Started", data: ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_total_hash_monthly_cc(:nbs)}, {name: "Finished", data: ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_total_hash_monthly_cc(:nbs_finish)}], stacked: false, library: {title: {text: "Past Year Total New Believers School"}} %>
+  </div>
+   
+     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "London", data: ChurchGroup.where(region: "London Main").make_total_hash_monthly(:fnb)}, {name: "Judea", data: ChurchGroup.where(region: "Judea").make_total_hash_monthly(:fnb)}], stacked: true, library: {title: {text: "Past Year Total Monthly First & Best"}} %>
+  </div>
+       
+</div>
+<br>
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+	 <div class="btn-group" role="group">
+  <%= link_to "Home Page", demo_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+</div>
+   <div class="btn-group" role="group">
+  <%= link_to "Time Series Analysis", time_series_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+</div>
+   <div class="btn-group" role="group">
+  <%= link_to "View Latest Data", last_sunday_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+  </div>
+   <div class="btn-group" role="group">
+  <%= link_to "View/Download Data", records_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+  </div>
+</div>
+</div>
+
+

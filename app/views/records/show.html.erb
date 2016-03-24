@@ -1,5 +1,6 @@
 <% provide(:title, "#{@record.day} Data - #{@record.user.name}") %>
 
+<div class="container">
 <h3 class="page_heading">	
 	
 	<span class="label label-primary"><%= link_to @record.user.name, user_path(@record.user), class: "label label-primary" %><%= "      "+@record.day.strftime('%d-%b-%y') %></span>
@@ -42,7 +43,7 @@
 
   <% end %>
 </dl>
-
+</div>
 
 
 

@@ -1,8 +1,104 @@
 <% provide(:title, "#{@church_group.name}") %>
 
-<h1 style="padding-left: 0px"><span class="label label-default" style="padding-left:20px"><%= "#{@church_group.name}" %></span></h1>
+<!-- START -->
+<div class="container">
+<div class="twPc-div">
+    <a class="twPc-bg twPc-block"></a>
 
-          <table class="table table-striped user-list">
+    <div>
+     
+
+        <a title="" href="#" class="twPc-avatarLink">
+            <%= gravatar_for User.find_by(id:33), size: 200 %>
+        <!--    <img alt="Mert Salih Kaplan" src="https://pbs.twimg.com/profile_images/378800000352678934/34f9e192635975bf42e534434e2b6273_bigger.jpeg" class="twPc-avatarImg">  -->
+        </a>
+
+        <div class="twPc-divUser">
+            <div class="twPc-divName">
+                <%= @church_group.name %>
+            </div>
+            <span class="twpc-divElder">
+               <%= @church_group.leader %><br>
+                 <%= "#{@church_group.region} Region"%>
+            </span>
+        </div>
+
+        <div class="twPc-divStats">
+            <ul class="twPc-Arrange">
+                <li class="twPc-ArrangeSizeFit">
+                   
+                        <span class="twPc-StatLabel twPc-block">Average Sunday</span>
+                        <span class="twPc-StatValue"><%= @church_group.sum_ytd_avg(:sunday_att) %></span>
+                    
+                </li>
+                <li class="twPc-ArrangeSizeFit">
+                  
+                        <span class="twPc-StatLabel twPc-block">Max Sunday</span>
+                        <span class="twPc-StatValue"> <%= @max %> </span>
+                  
+                </li>
+                <li class="twPc-ArrangeSizeFit">
+                   
+                        <span class="twPc-StatLabel twPc-block">Latest Sunday</span>
+                        <span class="twPc-StatValue"><%= @church_group.sum_latest(:sunday_att) %></span>
+                  
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!-- Collapsable -->
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Historical Attendance
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+            <div class="row" style="background-color: white; margin-top: 5px">
+      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= area_chart [{name: "Sunday", data: @church_group.make_hash_time_series(:sunday_att)}, {name: "Weekday", data: @church_group.make_hash_time_series(:weekday_att)}], stacked: false, library: {title: {text: "Historic Attendance"}} %>
+  </div>
+</div>
+ 
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Additional Information
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+     Overseer: <%= " #{@church_group.leader}" %><br>  
+     <br>
+      Churches: <%= "#{@church_group.name} currently has #{@church_group.users.count} #{pluralize(@church_group.users.count, "Church")}" %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          View Members
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <!-- Churches -->
+  <table class="table table-striped user-list">
                             <thead>
                                 <tr>
                                 <th><span><%= sortable "name", "Campus Church" %></span></th>
@@ -61,3 +157,51 @@
                                <% end %>
                         
                         </table>
+<!-- Churches END -->
+
+
+      </div>
+    </div>
+  </div>
+</div> <!-- finish -->
+
+
+<div class="row" style="background-color: white; margin-top: 5px">
+      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "Sunday", data: @church_group.make_hash_monthly_avg(:sunday_att)}, {name: "Weekday", data: @church_group.make_hash_monthly_avg(:weekday_att)}], stacked: false, library: {title: {text: "Past Year Monthly Average Attendance"}} %>
+  </div>
+       <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "New Converts", data: @church_group.make_hash_monthly_sum(:new_converts)}, {name: "Started NBS", data: @church_group.make_hash_monthly_sum(:nbs)}], stacked: false, library: {title: {text: "Past Year Monthly Total New Converts vs Started NBS"}} %>
+  </div>
+     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "Started", data: @church_group.make_hash_monthly_sum(:nbs)}, {name: "Finished", data: @church_group.make_hash_monthly_sum(:nbs_finish)}], stacked: false, library: {title: {text: "Past Year Monthly New Believers School"}} %>
+  </div>
+     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "Sunday Attendance", data: @church_group.make_hash_monthly_avg(:sunday_att)}, {name: "First & Best", data: @church_group.make_hash_monthly_sum(:fnb)}], stacked: false, library: {title: {text: "Past Year Monthly Average Sunday vs Monthly First & Best"}} %>
+  </div>
+  
+</div>
+
+  <br>
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+     <div class="btn-group" role="group">
+  <%= link_to "Back to Home Page", demo_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+</div>
+   <div class="btn-group" role="group">
+  <%= link_to "All Church Groups", church_groups_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+  </div>
+   <div class="btn-group" role="group">
+  <%= link_to "All Campus Churches", users_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+  </div>
+     <div class="btn-group" role="group">
+  <%= link_to "FLC Monthly Averages", monthly_average_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+         

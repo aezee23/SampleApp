@@ -2,44 +2,49 @@
 
 <div class="container">  
 
-                    <div class="panel-heading">
-                        <h1 class="panel-title">Last Sunday Data [<%=@date.strftime("%d-%b-%y") %>]</h1>
-                      </div>
-
+                  <!--  <div class="panel-heading">
+                        <h1 class="panel-title">Last Sunday Data [<%=@date.strftime("%d-%b-%y") %>]</h1> 
+                      </div> -->
+<div class="row">
   <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
-    <%= column_chart [{name: "Sunday", data: User.make_hash_latest(:sunday_att)}, {name: "Weekday", data: User.make_hash_latest(:weekday_att)}], stacked: false, library: {title: {text: "Sunday/Weekday Attendance Breakdown"}} %>
+    <%= column_chart [{name: "Sunday", data: User.make_hash_latest(:sunday_att)}, {name: "Weekday", data: User.make_hash_latest(:weekday_att)}], stacked: false, library: {title: {text: "#{@date.strftime("%d-%b-%y")} Sunday/Weekday Attendance Breakdown"}} %>
   </div>
     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-    <%= column_chart [{name: "First Timers", data: User.make_hash_latest(:first_timers)}, {name: "New Converts", data: User.make_hash_latest(:new_converts)}, {name: "Started NBS", data: User.make_hash_latest(:nbs)}], stacked: false, library: {backgroundColor: "#F0F0F0", title: {text: "First Timers vs New Converts vs NBS"}} %>
+    <%= column_chart [{name: "First Timers", data: User.make_hash_latest(:first_timers)}, {name: "New Converts", data: User.make_hash_latest(:new_converts)}, {name: "Started NBS", data: User.make_hash_latest(:nbs)}], stacked: false, library: {backgroundColor: "#F0F0F0", title: {text: "#{@date.strftime("%d-%b-%y")} First Timers vs New Converts vs NBS"}} %>
   </div>
     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-    <%= column_chart [{name: "Finished NBS", data: User.make_hash_latest(:nbs_finish)}, {name: "First & Best", data: User.make_hash_latest(:fnb)}], stacked: false, library: {backgroundColor: "#F0F0F0", title: {text: "First & Best vs Finished NBS"}} %>
+    <%= column_chart [{name: "Finished NBS", data: User.make_hash_latest(:nbs_finish)}, {name: "First & Best", data: User.make_hash_latest(:fnb)}], stacked: false, library: {backgroundColor: "#{@date.strftime("%d-%b-%y")} #F0F0F0", title: {text: "First & Best vs Finished NBS"}} %>
   </div>
     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-    <%= pie_chart ChurchGroup.make_hash_latest(:sunday_att), library: {legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', style: {fontSize: "1vmin"}}, options3d: {enabled: true, alpha: 45}, backgroundColor: "#F0F0F0", title: {text: "Sunday Attendance By Church Group (Total: #{ChurchGroup.total_latest(:sunday_att)})"}} %>
+    <%= pie_chart ChurchGroup.make_hash_latest(:sunday_att), library: {legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', style: {fontSize: "1vmin"}}, options3d: {enabled: true, alpha: 45}, backgroundColor: "#F0F0F0", title: {text: "#{@date.strftime("%d-%b-%y")} Sunday Attendance By Church Group (Total: #{ChurchGroup.total_latest(:sunday_att)})"}} %>
   </div>
      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-    <%= pie_chart @ldn_hash, library: {legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', style: {fontSize: "1vmin"}}, options3d: {enabled: true, alpha: 45}, backgroundColor: "#F0F0F0", title: {text: "London Sunday Attendance By Group (Total: #{ChurchGroup.where(region: "London Main").total_latest(:sunday_att)})"}} %>
+    <%= pie_chart @ldn_hash, library: {legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', style: {fontSize: "1vmin"}}, options3d: {enabled: true, alpha: 45}, backgroundColor: "#F0F0F0", title: {text: "#{@date.strftime("%d-%b-%y")} London Sunday Attendance By Group (Total: #{ChurchGroup.where(region: "London Main").total_latest(:sunday_att)})"}} %>
   </div>
      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey">
-    <%= pie_chart User.where.not('city = ? OR city = ?', "London CC", "London").make_hash_latest(:sunday_att), library: {legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', style: {fontSize: "1vmin"}}, options3d: {enabled: true, alpha: 45}, backgroundColor: "#F0F0F0", title: {text: "Judea Sunday Attendance By City (Total: #{ChurchGroup.judea_latest(:sunday_att)})"}} %>
+    <%= pie_chart User.where.not('city = ? OR city = ?', "London CC", "London").make_hash_latest(:sunday_att), library: {legend: {layout: 'vertical', align: 'right', chart: { options3d: {enabled: true, alpha: 45, beta: 0, depth: 60}}, verticalAlign: 'bottom', style: {fontSize: "1vmin"}}, backgroundColor: "#F0F0F0", title: {text: "#{@date.strftime("%d-%b-%y")} Judea Sunday Attendance By City (Total: #{ChurchGroup.judea_latest(:sunday_att)})"}} %>
   </div>
 </div>
 <br>
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
-	 <div class="btn-group" role="group">
+   <div class="btn-group" role="group">
   <%= link_to "Back to Home Page", demo_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
 </div>
    <div class="btn-group" role="group">
-  <%= link_to "View/Download Raw Data", last_sunday_path, class: "btn btn-primary", style: "font-size: 2vmin"  %>
-</div>
+  <%= link_to "Monthly Trends", monthly_average_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+  </div>
+
    <div class="btn-group" role="group">
   <%= link_to "View Time Series", time_series_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
   </div>
-   <div class="btn-group" role="group">
-  <%= link_to "View Campus Churches", users_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+     <div class="btn-group" role="group">
+  <%= link_to "View/Download Data", last_sunday_path, class: "btn btn-primary", style: "font-size: 2vmin"  %>
   </div>
+</div>
 
 </div>
+
+
+
 
 

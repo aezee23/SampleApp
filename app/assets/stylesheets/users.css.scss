@@ -160,15 +160,16 @@ a > .table-text{
 
 .twPc-div {
     background: #fff none repeat scroll 0 0;
-    border: 1px solid #e1e8ed;
-    border-radius: 6px;
-    height: 250px;
+    border: 0px solid #e1e8ed;
+    border-radius: 0px;
+    height: auto;
+    width: 100%;
     max-width: 100%; // orginal twitter width: 290px;
 }
 .twPc-bg {
     background-image: url("https://pbs.twimg.com/profile_banners/50988711/1384539792/600x200");
     background-position: 0 50%;
-    background-size: 100% auto;
+    background-size: 100% 100%;
     border-bottom: 1px solid #e1e8ed;
     border-radius: 4px 4px 0 0;
     height: 95px;
@@ -239,14 +240,14 @@ ul.twPc-Arrange {
 }
 .twPc-StatValue {
     display: block;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 500;
     color: #66b3ff;
     transition: color 0.15s ease-in-out 0s;
 }
 .twPc-StatLabel {
     color: #8899a6;
-    font-size: 10px;
+    font-size: 3vmin;
     letter-spacing: 0.02em;
     overflow: hidden;
     text-transform: uppercase;

@@ -66,6 +66,18 @@ def time_series_charts
 	end
 end
 
+def monthly_average_charts
+	if current_user && current_user.admin
+@date = date_of_last("Sunday")
+@ldn_hash = ChurchGroup.make_hash_latest_ldn(:sunday_att)
+@ldn_hash["No Church"] = (User.find_by(id: 33).records.order('day DESC').first.sunday_att)-(ChurchGroup.where(region: "London").total_latest_ldn(:sunday_att))
+	end
+end
+
+def visitation
+
+end
+
 private
 
   def sort_column

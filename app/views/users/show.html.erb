@@ -37,7 +37,8 @@
                 <%= @user.name %>
             </div>
             <span class="twpc-divElder">
-               <%= @user.elder %>
+               <%= @user.elder %><br>
+                 <%= "#{@user.church_group.name} Church"%>
             </span>
         </div>
 
@@ -63,6 +64,160 @@
                 </li>
             </ul>
         </div>
+    </div>
+
+</div>
+
+<!-- Collapsable -->
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Historical Attendance
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+            <div class="row" style="background-color: white; margin-top: 5px">
+      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+       <% if @user.id == 33 %>
+    <%= area_chart [{name: "Sunday", data: @user.make_hash_time_series(:sunday_att)}, {name: "Weekday", data: ChurchGroup.where(region: "London").make_hash_time_series(:weekday_att)}], stacked: false, library: {title: {text: "Historic Attendance"}} %>
+    <% else %>
+     <%= area_chart [{name: "Sunday", data: @user.make_hash_time_series(:sunday_att)}, {name: "Weekday", data: @user.make_hash_time_series(:weekday_att)}], stacked: false, library: {title: {text: "Historic Attendance"}} %>
+     <% end %>
+  </div>
+</div>
+ 
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Additional Information
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+     Overseer: <%= " #{@user.church_group.leader}" %><br>  
+      Visitation: <%= @user.records.last.visitation ? "#{@user.elder.split[0]} went on visitation in the past week." : "#{@user.elder.split[0]} DID NOT go on visitation in the past week." %>
+      <br>
+      Members: <%= "#{@user.name} currently has x members" %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          View Raw Data
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+   <!-- Records -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><span><%= sortable "day", "Date" %></span></th>
+            <% if current_user.admin %>
+            <th><span><%= sortable "user_id", "Church" %></span></th>
+            <% end %>
+            <th><span><%= sortable "sunday_att", "Sunday" %></span></th>
+            <th><span><%= sortable "weekday_att", "Weekday" %></span></th>               
+            <th><span><%= sortable "first_timers", "First Timers" %></span></th>
+            <th><span><%= sortable "new_converts", "New Converts" %></span></th>
+            <th><span><%= sortable "fnb", "Tithe" %></span></th>
+            <th ><span><%= sortable "nbs", "Start NBS" %></span></th>
+            <th ><span><%= sortable "nbs_finish", "Finish NBS" %></span></th>
+        </tr>
+    </thead>
+
+      <tbody>
+        <% @records.each do |t| %>
+        <tr>
+            <td><span><%= link_to t.day.strftime('%d-%b-%y'), record_path(t) %></span></td>
+            <% if current_user.admin %>
+            <td><span><%= link_to t.user.name, user_path(t.user) %></span></td>
+            <% end %>
+            <td><span><%= t.sunday_att %></span></td>
+            <td><span><%= t.weekday_att %></span></td>               
+            <td><span><%= t.first_timers %></span></td>
+            <td><span><%= t.new_converts %></span></td>
+            <td><span><%= t.fnb %></span></td>
+            <td ><span><%= t.nbs %></span></td>
+            <td ><span><%= t.nbs_finish %></span></td>
+             <% if current_user.admin %>
+             <td>
+                                  <%= link_to edit_record_path(t), class: "btn btn-default", remote: false do %>
+<i class="fa fa-cog"></i>Edit</a>
+<% end %> 
+                                    </td>
+                                    <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+    <%= will_paginate @records, renderer: BootstrapPagination::Rails%>
+</table>
+
+   <!--Records end -->
+      </div>
+    </div>
+  </div>
+</div> <!-- finish -->
+
+
+<div class="row" style="background-color: white; margin-top: 5px">
+      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+         <% if @user.id == 33 %>
+<%= column_chart [{name: "Sunday", data: @user.make_hash_monthly_avg(:sunday_att)}, {name: "Weekday", data: ChurchGroup.where(region: "London").make_total_hash_monthly_avg_cc(:weekday_att)}], stacked: false, library: {title: {text: "Past Year Monthly Average Attendance"}} %>
+         <% else %>
+    <%= column_chart [{name: "Sunday", data: @user.make_hash_monthly_avg(:sunday_att)}, {name: "Weekday", data: @user.make_hash_monthly_avg(:weekday_att)}], stacked: false, library: {title: {text: "Past Year Monthly Average Attendance"}} %>
+    <% end %>
+  </div>
+  <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+      <% if @user.id == 33 %>
+<%= column_chart [{name: "New Converts", data: @user.make_hash_monthly_sum(:new_converts)}, {name: "Started NBS", data: ChurchGroup.where(region: "London").make_total_hash_monthly_cc(:nbs)}], stacked: false, library: {title: {text: "Past Year Monthly Total New Converts vs Started NBS"}} %>
+         <% else %>
+       
+    <%= column_chart [{name: "New Converts", data: @user.make_hash_monthly_sum(:new_converts)}, {name: "Started NBS", data: @user.make_hash_monthly_sum(:nbs)}], stacked: false, library: {title: {text: "Past Year Monthly Total New Converts vs Started NBS"}} %>
+    <% end %>
+  </div>
+     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+      <% if @user.id == 33 %>
+ <%= column_chart [{name: "Started", data: ChurchGroup.where(region: "London").make_total_hash_monthly_cc(:nbs)}, {name: "Finished", data: ChurchGroup.where(region: "London").make_total_hash_monthly_cc(:nbs_finish)}], stacked: false, library: {title: {text: "Past Year Monthly New Believers School"}} %>
+<% else %>
+    <%= column_chart [{name: "Started", data: @user.make_hash_monthly_sum(:nbs)}, {name: "Finished", data: @user.make_hash_monthly_sum(:nbs_finish)}], stacked: false, library: {title: {text: "Past Year Monthly New Believers School"}} %>
+    <% end %>
+  </div>
+     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "Sunday Attendance", data: @user.make_hash_monthly_avg(:sunday_att)}, {name: "First & Best", data: @user.make_hash_monthly_sum(:fnb)}], stacked: false, library: {title: {text: "Past Year Monthly Average Sunday vs Monthly First & Best"}} %>
+  </div>
+ <% if @user.id == 33 %>
+    <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+    <%= column_chart [{name: "Non CC Attendants", data: ChurchGroup.make_LDN_monthly_avg_split(:sunday_att)}], stacked: false, library: {title: {text: "Average Monthly Percentage of Attendants in no Campus Church"}, yAxis: {title: {text: "Percentage (%)"}} } %>
+  </div>
+   <% end %>
+</div>
+  <br>
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+     <div class="btn-group" role="group">
+  <%= link_to "Back to Home Page", demo_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
+</div>
+   <div class="btn-group" role="group">
+  <%= link_to "#{@user.church_group.name} Church", @user.church_group, class: "btn btn-primary", style: "font-size: 2vmin" %>
+  </div>
+   <div class="btn-group" role="group">
+  <%= link_to "#{@user.elder.split[0]}'s Latest Entry ", @user.records.last, class: "btn btn-primary", style: "font-size: 2vmin" %>
+  </div>
+     <div class="btn-group" role="group">
+  <%= link_to "FLC Monthly Averages", monthly_average_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
     </div>
 </div>
 
