@@ -1,0 +1,83 @@
+<% provide(:title, 'Latest Visitation') %>
+<div class="container">
+  <% if !@users.empty? %>
+<div class="table-responsive">
+   <table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th ><span class="list-group-item list-group-item-danger"> The Following <%= pluralize(@users.count, "Elder") %> Did Not Visit in The Past Week</span></th>
+                             
+                                </tr>
+    </thead>
+ </table>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th><span>Elder</span></th>
+                              
+                                 <th><span>Group</span></th>
+                                <th><span>Region</span></th>
+                              <th><span>Email</span></th>
+                                <th><span>Last Submitted</span></th>
+                                <th class="text-center"><span>Data Status</span></th>
+                                <th> &nbsp; </th>
+                                </tr>
+    </thead>
+
+    <tbody>
+    	 	<% @users.each do |t| %>
+                                <tr>
+                                    <td>
+                                        <%= gravatar_for t %>
+                                        <%= link_to t.elder, t, class: "user-link2" %><br>
+                                       <span class="user-subhead"><%= t.name%></span>    
+                                    </td>
+
+                                    <td><%= link_to t.church_group.name, church_group_path(t.church_group), class: "table-text"%></td>
+                                    <td class="table-text"><%= t.church_group.region %></td>
+                                    <td><%= link_to "#{t.elder}", "mailto:#{t.email}" %></td>
+                                    <td class="table-text text-center"><%= t.records.first.day.strftime("%d%b%y") %></td>
+                                    <td class="text-center">
+                                    	<% @csclass= t.records.count < (Date.today+1).cweek ? "label label-danger" : "label label-success" %>
+                                        <span class="<%="#{@csclass}"%>"><%= t.missing_data%></span>
+                                    </td>
+                                  
+                        <td>
+                                        <%= link_to user_path(t), class: "table-link success" do %>
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                       <% end %>
+                                        <%= link_to edit_user_path(t), class: "table-link" do %>
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <% end %>
+                                   
+                                    </td>
+                                </tr>
+                               <% end %>
+                            </tbody>
+
+ 
+
+</table>
+</div>
+<% else %>
+<div class="table-responsive">
+   <table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th ><span class="list-group-item list-group-item-success">All Users Have Submitted <%= @date %> Data </span></th>
+                             
+                                </tr>
+    </thead>
+ </table>
+</div>
+ <% end %>
+</div>

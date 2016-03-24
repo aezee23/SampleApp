@@ -75,7 +75,12 @@ def monthly_average_charts
 end
 
 def visitation
-
+@users = []
+		User.where(admin: false).each do |t|
+			if !t.records.last.visitation
+				@users << t
+			end
+		end
 end
 
 private

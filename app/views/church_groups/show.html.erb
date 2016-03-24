@@ -102,7 +102,6 @@
                             <thead>
                                 <tr>
                                 <th><span><%= sortable "name", "Campus Church" %></span></th>
-                                <th><span><%= "Region" %></span></th>
                                 <th><span> AVG Size</span></th>
                                 <th><span> Latest Size</span></th>
                                  <th><span> Email</span></th>
@@ -122,7 +121,7 @@
                                         <%= link_to t.name, t, class: "user-link" %>
                                         <span class="user-subhead"><%= t.elder%></span>
                                     </td>
-                                    <td class="table-text"><%= t.church_group.region %></td>
+                                   
                                     <td class="table-text text-center"><strong><%= t.ytd_avg(:sunday_att) %></strong></td>
                                     <td class="table-text text-center"><strong><%= t.records.order('day DESC').first.sunday_att %></strong></td>
                                     <td><%= link_to "#{t.elder}", "mailto:#{t.email}" %></td>

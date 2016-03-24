@@ -1,5 +1,6 @@
 <% provide(:title, 'Data Records') %>
 
+<div class="container">
 <h1 style="padding-left: 0px"><span class="label label-default">All Records</span></h1>
 <% if current_user.admin %>
 <p style="padding: 4vmin">
@@ -60,4 +61,6 @@
 </table>
 </div>
 <%= will_paginate @records, renderer: BootstrapPagination::Rails%>
+
+</div>
                 
