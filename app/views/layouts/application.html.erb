@@ -48,6 +48,7 @@
           <%= link_to show_nots_path do %>
           <%= "Show Outstanding Data" %> <span class="sr-only">(current)</span>
           <% end %></li>
+          <li><a href="#">Visitation Report</a></li>
              <li class="">
           <%= link_to last_sunday_path do %>
           <%= "View/Download Latest Data" %> <span class="sr-only">(current)</span>
@@ -56,10 +57,21 @@
           <%= link_to records_path do %>
           <%= "View/Download All Data" %> <span class="sr-only">(current)</span>
           <% end %></li>
+           <li role="separator" class="divider"></li>
+             <li class="">
+          <%= link_to new_record_path do %>
+          <%= "Create new Data Record" %> <span class="sr-only">(current)</span>
+          <% end %></li>
+             <li class="">
+          <%= link_to new_user_path do %>
+          <%= "Create New Campus Church" %> <span class="sr-only">(current)</span>
+          <% end %></li>
+           <li class="">
+             <%= link_to new_church_group_path do %>
+          <%= "Create New Church Group" %> <span class="sr-only">(current)</span>
+          <% end %></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Visitation Report</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Edit Password</a></li>
+            <li><a href="#">Change Password</a></li>
           </ul>
         </li>
       </ul>

@@ -1,17 +1,23 @@
 <% provide(:title, 'Create New church Group') %>
 
-<h1 style="padding-left: 0px"><span class="label label-default" style="padding-left:20px">Create New Church Group</span></h1>
+ <div class="container">    
+        <div id="loginbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Create New Church Group</div>
+                      </div>
+                      <div style="padding-top:30px" class="panel-body" >
 
-<div>
-  <div>
-    <%= form_for(@church_group) do |f| %>
- <div class="form-group">
-    
-      <%= f.label :name %>
-      <%= f.text_field :name, placeholder: "Name" %>
-</div>
+<%= bootstrap_form_for(@church_group) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+  <%= f.text_field :name, icon: "pencil", label: "Church Group Name:" %>
+  <%= f.text_field :leader, icon: "user", label: "Church Group Overseer:" %>
+  <%= f.select :region, [["London", "London"], ["Judea", "Judea"]], { icon: "check", label: "Select Region Church Group is Based In" }, { class: "selectpicker" }  %>
+  <%= f.submit "Submit", data: { confirm: 'Are You Sure You Want To Create This New Church Group?' }, class: "btn btn-primary" %>
+<% end %>
 
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
-</div>
+
+                      </div>
+                    </div>
+                    </div>
+                    </div>
