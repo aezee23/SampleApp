@@ -19,3 +19,13 @@
 //= require chartkick
 //= require_tree .
 
+$(function() {
+  $("#records th a, #records .pagination a").live("click", function() {
+    $.getScript(this.href);
+    return false;
+  });
+  $("#records_search input").keyup(function() {
+    $.get($("#records_search").attr("action"), $("#records_search").serialize(), null, "script");
+    return false;
+  });
+});

@@ -1,0 +1,9 @@
+LOG:  database system was shut down at 2016-03-26 13:44:57 GMT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  database "SampleApp" does not exist
+ERROR:  database "SampleApp" already exists
+STATEMENT:  CREATE DATABASE "SampleApp" ENCODING = 'utf8'
+FATAL:  role "myuser" does not exist
+FATAL:  database "mydb" does not exist
