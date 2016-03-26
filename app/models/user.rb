@@ -36,11 +36,11 @@ end
 end
 
 def month_avg(month, att)
-   n = self.records.where(day: (Date.parse(month)..Date.parse(month)>>1)).count
+   n = self.records.where(day: (Date.parse(month)..(Date.parse(month)>>1)-1)).count
 if n == 0
     0
   else
-  a = self.records.where(day: (Date.parse(month)..Date.parse(month)>>1)).pluck(att).first(n)
+  a = self.records.where(day: (Date.parse(month)..(Date.parse(month)>>1)-1)).pluck(att).first(n)
   sum_a = a.inject(0){|sum,x| sum + x }
   avg= sum_a/n.to_f
   avg.round(0)
@@ -86,7 +86,7 @@ n = self.records.where(day: (((Date.today) << 3)..(Date.today))).sum(att)
 end
 
 def month_sum(month, att)
- n = self.records.where(day: (Date.parse(month)..Date.parse(month) >> 1)).sum(att)
+ n = self.records.where(day: (Date.parse(month)..(Date.parse(month) >> 1)-1)).sum(att)
 end
 
 def day_attr(x, att)
