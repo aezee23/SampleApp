@@ -7,53 +7,53 @@ validates :email, presence: true, length: { maximum: 255 }, format: { with: VALI
 
 
 def sum_day_attr(d, att)
-a =	self.users.map {|x| x.records.find_by(day: d)[att]}
+a =	self.users.map {|x| x.records.find_by(day: d)[att]||0}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
 def sum_ytd_avg(att)
-a =	self.users.map {|x| x.ytd_avg(att)}
+a =	self.users.map {|x| x.ytd_avg(att)||0}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
 def sum_ytd_avg_pm(att)
-a =	self.users.map {|x| x.ytd_sum(att)}
+a =	self.users.map {|x| x.ytd_sum(att)||0}
  sum_a = a.inject(0){|sum,x| sum + x }
  sum_a/(Date.today.month)
 end
 
 def sum_qtd_avg(att)
-a =	self.users.map {|x| x.qtd_avg(att)}
+a =	self.users.map {|x| x.qtd_avg(att)||0}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
 def sum_month_avg(month, att)
-a =	self.users.map {|x| x.month_avg(month, att)}
+a =	self.users.map {|x| x.month_avg(month, att)||0}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
 def sum_day_attr(y, att)
-a =	self.users.map {|x| x.day_attr(y, att)}
+a =	self.users.map {|x| x.day_attr(y, att)||0}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
 def sum_ytd_sum(att)
-a =	self.users.map {|x| x.ytd_sum(att)}
+a =	self.users.map {|x| x.ytd_sum(att)||0}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
 def sum_qtd_sum(att)
-a =	self.users.map {|x| x.qtd_sum(att)}
+a =	self.users.map {|x| x.qtd_sum(att)||0}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
 def sum_month_sum(month, att)
-a =	self.users.map {|x| x.month_sum(month, att)}
+a =	self.users.map {|x| x.month_sum(month, att)||0}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
 def sum_latest(h)
-a =	self.users.map {|x| x.latest(h)}
+a =	self.users.map {|x| x.latest(h)||0}
 b = a.inject(0){|sum,x| sum + x }
 end
 

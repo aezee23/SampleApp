@@ -8,8 +8,12 @@
                       </div>
                       <div style="padding-top:30px" class="panel-body" >
 
+
 <%= bootstrap_form_for(@record) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+  <% if current_user.is_leader %>
+<%= render 'new_cg_record', object: f.object %>
+  <% else %>
     <% if current_user.admin %>
   <%= f.select :user_id, User.where(admin: false).collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Campus Church" }, { class: "selectpicker" } %>
   <% end %>
@@ -27,6 +31,7 @@
   <%= f.text_field :message_weekday, icon: "grain", label: "Weekday Message Title:" , value: "None" %>
   <%= f.text_field :preacher_weekday, icon: "fire", label: "Who Preached in Weekday Service?", value: current_user.admin ? "None": "#{current_user.elder}" %>
   <%= f.submit "Submit Data", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
+<% end %>
 <% end %>
 
                       </div>

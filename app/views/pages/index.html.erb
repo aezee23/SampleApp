@@ -5,7 +5,11 @@
   <p>Welcome <%= current_user.elder.split[0] %>! </p>
 
   <p>All data should now have been submitted for <b><%= @date %></b></p>
-   <p><%= link_to "View Data", records_path, class: "btn btn-primary btn-xs" %></p>  
+  <% if current_user.is_leader %>
+   <p><%= link_to "View Data", church_group_path(@current_user.church_group), class: "btn btn-primary btn-xs" %></p>  
+   <% else %>
+    <p><%= link_to "View Data", records_path, class: "btn btn-primary btn-xs" %></p> 
+    <% end %>
 </div>
    
 

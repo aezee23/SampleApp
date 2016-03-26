@@ -90,7 +90,11 @@ def month_sum(month, att)
 end
 
 def day_attr(x, att)
- n = self.records.find_by(day: x)[att]
+  if self.records.find_by(day: x).nil?
+    0
+  else
+ n = self.records.find_by(day: x)[att]||0
+end
 end
 
 

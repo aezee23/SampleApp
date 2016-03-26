@@ -1,7 +1,7 @@
 class ChurchGroupsController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
-  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
-
+  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :destroy]
+before_action :correct_user_cg, only: [:show]
 helper_method :sort_column, :sort_direction
 
 
@@ -40,7 +40,7 @@ redirect_to church_groups_path
 
 def show
 @church_group = ChurchGroup.find(params[:id])
-@users = @church_group.users
+@users = @church_group.users.where(is_leader: false)
 @max= @church_group.make_hash_time_series(:sunday_att).max[1]
 end
 
@@ -70,6 +70,11 @@ flash[:danger] = "Please log in."
 redirect_to login_url
 end
 end
+
+ def correct_user_cg
+      @cg = ChurchGroup.find(params[:id])
+      redirect_to(demo_path) unless (current_user.is_leader && current_user.church_group == @cg) || current_user.admin
+    end
 
   def admin_user
       redirect_to demo_path unless current_user.admin?

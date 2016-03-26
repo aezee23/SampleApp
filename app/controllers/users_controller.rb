@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
    before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
-  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :correct_user_cg, only: [:show]
 	helper_method :sort_column, :sort_direction
 def index
   if params[:search]
@@ -80,9 +81,9 @@ end
   end
 
 
-   def correct_user
+   def correct_user_cg
       @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+      redirect_to(demo_path) unless (current_user.is_leader && current_user.church_group == @user.church_group) || current_user.admin
     end
 
 def logged_in_user
