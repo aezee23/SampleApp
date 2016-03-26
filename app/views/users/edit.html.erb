@@ -16,6 +16,7 @@
   <%= f.email_field :email, icon: "folder-open", label: "Campus Church Email Address:" %>
   <%= f.text_field :city, icon: "globe", label: "City the Campus Church is Based In:" %>
   <%= f.select :church_group_id, ChurchGroup.all.collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Church Group" }, { class: "selectpicker" } %>
+   <%= f.select :is_leader, [["No", false], ["Yes", true]], { icon: "check", label: "Is this setup for a church group leader?" }, { class: "selectpicker" }  %>
   <%= f.submit "Submit Amendment", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
 <% end %>
 

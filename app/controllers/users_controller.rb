@@ -4,9 +4,9 @@ class UsersController < ApplicationController
 	helper_method :sort_column, :sort_direction
 def index
   if params[:search]
-    @users = User.search(params[:search]).where(admin: false).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 11) 
+    @users = User.search(params[:search]).where(admin: false).where(is_leader: false).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 11) 
   else
-    @users = User.where(admin: false).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 11) 
+    @users = User.where(admin: false).where(is_leader: false).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 11) 
 
   end
   
@@ -72,7 +72,7 @@ end
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :elder, :church_group_id, :password, :password_confirmation, :city)
+    params.require(:user).permit(:email, :name, :elder, :church_group_id, :password, :password_confirmation, :city, :is_leader)
   end
 
     def pwd_params

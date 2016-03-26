@@ -7,3 +7,9 @@ ERROR:  database "SampleApp" already exists
 STATEMENT:  CREATE DATABASE "SampleApp" ENCODING = 'utf8'
 FATAL:  role "myuser" does not exist
 FATAL:  database "mydb" does not exist
+ERROR:  cached plan must not change result type
+STATEMENT:  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1
+ERROR:  cached plan must not change result type
+STATEMENT:  SELECT  "users".* FROM "users" WHERE "users"."church_group_id" = $1  ORDER BY "users"."id" ASC LIMIT 1
+ERROR:  cached plan must not change result type
+STATEMENT:  SELECT "users".* FROM "users" WHERE "users"."church_group_id" = $1
