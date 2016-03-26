@@ -12,6 +12,7 @@
 <%= render 'shared/error_messages', object: f.object %>
   <%= f.text_field :name, icon: "pencil", label: "Church Group Name:" %>
   <%= f.text_field :leader, icon: "user", label: "Church Group Overseer:" %>
+  <%= f.email_field :email, icon: "folder-open", label: "Church Group Email Address:" %>
   <%= f.select :region, [["London", "London"], ["Judea", "Judea"]], { icon: "check", label: "Select Region Church Group is Based In" }, { class: "selectpicker" }  %>
   <%= f.submit "Submit", data: { confirm: 'Are You Sure You Want To Create This New Church Group?' }, class: "btn btn-primary" %>
 <% end %>

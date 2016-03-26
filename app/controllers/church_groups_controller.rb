@@ -53,7 +53,7 @@ def destroy
   private
 
   def church_params
-    params.require(:church_group).permit(:name, :leader, :region)
+    params.require(:church_group).permit(:name, :leader, :region, :email)
   end
 
     def sort_column
