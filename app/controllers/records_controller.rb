@@ -29,9 +29,9 @@ end
     end
 
 def new
-#@record = current_user.records.new
-#@date = date_of_last("Sunday")
-Record.create(record_params)
+@record = current_user.records.new
+@date = date_of_last("Sunday")
+#Record.create(record_params)
 end
 
 
@@ -42,15 +42,15 @@ end
 
 
  def create
-   #@record = current_user.records.build(record_params)
-    #if @record.save
-     # flash[:success] = "Data Recorded! Thank You #{current_user.elder}"
-     #redirect_to records_path
-    #else
-     #flash.now[:danger] = 'Error - See Below'
-     #render 'new'
-    #end
- Record.create(record_params)
+   @record = current_user.records.build(record_params)
+    if @record.save
+      flash[:success] = "Data Recorded! Thank You #{current_user.elder}"
+     redirect_to records_path
+    else
+     flash.now[:danger] = 'Error - See Below'
+     render 'new'
+    end
+ #Record.create(record_params)
   end
   
   def update
