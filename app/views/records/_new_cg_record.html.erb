@@ -9,7 +9,7 @@
   <%= f.hidden_field :nbs_finish, icon: "education",  value: 0, label: "How many people FINISHED New Believers School this Sunday?" %>
    <%= f.hidden_field :fnb, icon: "briefcase", value: 0, label: "Number of people who gave their First and Best this Sunday:" %>
   <%= f.select :visitation, [["No", false], ["Yes", true]], { icon: "check", label: "Did you go on visitation in the past week?" }, { class: "selectpicker" }  %>
-  <%= f.hidden_field :message_sunday, icon: "grain", label: "Sunday Message Title:", value: "None" %>
+  <%= f.hidden_field :message_sunday, icon: "grain", label: "Sunday Message Title:", value: "ChurchGroup" %>
   <%= f.hidden_field :preacher_sunday, icon: "fire", label: "Who Preached in Sunday Service?", value: current_user.admin ? "None": "#{current_user.elder}"%>
   <%= f.hidden_field :message_weekday, icon: "grain", label: "Weekday Message Title:" , value: "None" %>
   <%= f.hidden_field :preacher_weekday, icon: "fire", label: "Who Preached in Weekday Service?", value: current_user.admin ? "None": "#{current_user.elder}" %>

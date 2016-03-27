@@ -36,6 +36,8 @@
 
       <tbody>
         <% @records.each do |t| %>
+      <% if t.user.is_leader %>
+      <% else %>
         <tr>
             <td><span><%= link_to t.day.strftime('%d-%b-%y'), record_path(t) %></span></td>
             <% if current_user.admin %>
@@ -56,6 +58,7 @@
                                     </td>
                                     <% end %>
         </tr>
+        <% end %>
         <% end %>
     </tbody>
     
