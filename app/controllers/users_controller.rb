@@ -35,7 +35,7 @@ end
   def show
 @user = User.find(params[:id])
 @records = @user.records.paginate(page: params[:page], per_page: 20)
-@max_record = @user.records.order('sunday_att DESC').first
+@max_record = @user.records.find_by(sunday_att: @user.records.pluck(:sunday_att).max)
 @latest_record = @user.records.find_by(day: @user.date_of_last("Sunday") ) || @user.records.order('day DESC').first
     end
 
