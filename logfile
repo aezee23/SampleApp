@@ -23,3 +23,7 @@ ERROR:  missing FROM-clause entry for table "church_group" at character 117
 STATEMENT:  SELECT "users".* FROM "users" INNER JOIN "church_groups" ON "church_groups"."id" = "users"."church_group_id" WHERE (church_group.id = 3)
 ERROR:  missing FROM-clause entry for table "church_group" at character 116
 STATEMENT:  SELECT "users".* FROM "users" INNER JOIN "church_groups" ON "church_groups"."id" = "users"."church_group_id" WHERE "church_group"."id" = $1
+ERROR:  column "b" does not exist at character 77
+STATEMENT:  SELECT "records".* FROM "records" WHERE "records"."user_id" = $1 AND (day > b)  ORDER BY "records"."day" DESC
+ERROR:  syntax error at or near ">" at character 77
+STATEMENT:  SELECT "records".* FROM "records" WHERE "records"."user_id" = $1 AND (day > > '2016-01-01')  ORDER BY "records"."day" DESC

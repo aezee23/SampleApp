@@ -123,7 +123,7 @@ b
 end
 
 def missing_data
-  if self.records.count < (Date.today+1).cweek
+  if self.records.where('day > ?', Date.parse(Date.today.strftime('%Y0101'))).count < (Date.today+1).cweek
     "Missing #{(Date.today+1).cweek-self.records.count} #{"Record".pluralize((Date.today+1).cweek-self.records.count)}"
   else
     "Complete"
