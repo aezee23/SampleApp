@@ -83,7 +83,7 @@
       <div class="panel-body">
      Overseer: <%= " #{@church_group.leader}" %><br>  
      <br>
-      Churches: <%= "#{@church_group.name} currently has #{pluralize(@church_group.users.count, "Church")}" %>
+      Churches: <%= "#{@church_group.name} currently has #{pluralize(@church_group.users.where(is_leader: false).count, "Church")}" %>
       </div>
     </div>
   </div>

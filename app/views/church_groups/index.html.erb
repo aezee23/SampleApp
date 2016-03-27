@@ -26,7 +26,7 @@
                                     </td>
                                    
                                     <td class= "table-text"><%= t.region%></td>
-                                    <td class= "table-text"><%= t.users.count%></td>
+                                    <td class= "table-text"><%= t.users.where(is_leader: false).count%></td>
                                     <td class="table-text text-center"><strong><%= t.sum_ytd_avg(:sunday_att) %></strong></td>
                                      <td class="table-text text-center"><strong><%= t.sum_latest(:sunday_att) %></strong></td>
                                  
