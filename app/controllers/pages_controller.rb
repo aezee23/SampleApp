@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   before_action :logged_in_user, only: [:index, :show, :last_sunday, :last_sunday_charts, :time_series_charts, :monthly_average_charts, :visitation]
   before_action :admin_user, only: [:show, :last_sunday, :last_sunday_charts, :time_series_charts, :monthly_average_charts, :visitation]
-	helper_method :sort_column, :sort_direction
+	helper_method :sort_column, :sort_direction, :mweek
 	def index
 		@date = date_of_last("Sunday").strftime('%d-%b-%y')
 		@users = []
@@ -88,6 +88,26 @@ def visitation
 			end
 		end
 end
+
+def visi_record
+@users = User.where(admin: false)
+sd = Date.parse(Date.today.strftime("%Y0101"))
+ed=Date.today
+@dates = ed.downto(sd)
+@months = @dates.map{|t| t.strftime("%b%y")}.uniq
+months = @dates.map{|t| t.strftime("01%b%y")}.uniq
+@weeks = months.map{|t| (Date.parse(t)..((Date.parse(t)>>1)-1))}
+
+def sun_in_month(month)
+b = (Date.parse("01#{month}")..((Date.parse("01#{month}"))>>1)-1).select{|y| y.wday==0}
+b.length
+end
+
+	end
+
+
+
+
 
 private
 

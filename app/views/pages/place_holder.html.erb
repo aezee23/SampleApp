@@ -1,231 +1,84 @@
-<!-- Charts -->
-
-<div class="row">
-  <div class="col-md-12" style="text-align: center">
-<h3 class="page_heading">	
-	
-	<span class="label label-primary" width= 100%>Latest Attendance By Church Group</span>
-	</h3>
-  </div>
-</div>
-</div>
-<div class="row" style="padding-left: 20px; padding-top: 0px">
-  <div class="col-xs-6">
-    <%= pie_chart @array.except("London Main"), library: {backgroundColor: "#F0F0F0"} %>
-  </div>
-    <div class="col-xs-6">
-    <%= column_chart @array, library: {backgroundColor: "#F0F0F0"} %>
-  </div>
-   
+<!-- visitation -->
+<% provide(:title, 'Latest Visitation') %>
+<div class="container">
+  <% if !@users.empty? %>
+<div class="table-responsive">
+   <table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th ><span class="list-group-item list-group-item-danger"> The Following <%= pluralize(@users.count, "Elder") %> Did Not Visit in The Past Week</span></th>
+                             
+                                </tr>
+    </thead>
+ </table>
 </div>
 
+<div class="table-responsive">
+<table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th><span>Elder</span></th>
+                              
+                                 <th><span>Group</span></th>
+                                <th><span>Region</span></th>
+                              <th><span>Email</span></th>
+                                <th><span>Last Submitted</span></th>
+                                <th class="text-center"><span>Data Status</span></th>
+                                <th> &nbsp; </th>
+                                </tr>
+    </thead>
 
+    <tbody>
+        <% @users.each do |t| %>
+                                <tr>
+                                    <td>
+                                        <%= gravatar_for t %>
+                                        <%= link_to t.elder, t, class: "user-link2" %><br>
+                                       <span class="user-subhead"><%= t.name%></span>    
+                                    </td>
 
-
-
-
-
-<!--new record -->
-
-
-
-<% provide(:title, 'New Data Record') %>
-
-  <h1>Enter New Data Record</h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@record) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.label :day, "Date of Sunday Service (click dropdown arrow to select)" %>
-      <%= f.date_field :day, :value => @date, class: 'form-control' %>
-      
-      <%= f.label :sunday_att, "Sunday Attendance" %>
-     <%= f.number_field :sunday_att, value: 0, class: "form-control"%>
-
-         <%= f.label :weekday_att, "Weekday Attendance (for meeting a few days prior to the Sunday above.)" %>
-      <%= f.number_field :weekday_att, value: 0, class: 'form-control' %>
-      
-        <%= f.label :first_timers, "Number of First Timers In Sunday Service" %>
-      <%= f.number_field :first_timers, value: 0, class: 'form-control' %>
-
-          <%= f.label :new_converts, "Number of New Converts In Sunday Service" %>
-      <%= f.number_field :new_converts, value: 0, class: 'form-control' %>
-
-          <%= f.label :fnb, "Number of People Who Gave Their First and Best" %>
-      <%= f.number_field :fnb, value: 0, class: 'form-control' %>
-
-          <%= f.label :nbs, "Number of People Who STARTED New Believers School" %>
-      <%= f.number_field :nbs, value: 0, class: 'form-control' %>
-
-          <%= f.label :nbs_finish, "Number of People Who FINISHED New Believers School" %>
-      <%= f.number_field :nbs_finish, value: 0, class: 'form-control' %><br>
-
-      <%= f.label :visitation, "Did you go on visitation in the past week?" %>
-       <%= f.select :visitation, [['No', false], ['Yes', true]], class: 'form-control' %><br><br>
-
-         <%= f.label :message_sunday, "Sunday Message Title" %>
-      <%= f.text_field :message_sunday, value: "None", class: 'form-control' %>
-
-       <%= f.label :message_weekday, "Weekday Message Title" %>
-      <%= f.text_field :message_weekday, value: "None", class: 'form-control' %>
-
-       <%= f.label :preacher_sunday, "Who Preached in Sunday Service" %>
-      <%= f.text_field :preacher_sunday, value: "#{current_user.elder}", class: 'form-control' %>
-
-       <%= f.label :preacher_weekday, "Who Preached in Weekday Service" %>
-      <%= f.text_field :preacher_weekday, value: "#{current_user.elder}", class: 'form-control' %> <br>
-      
-      <%= f.submit "Submit Data", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
-
-
-
-
-<!-- Update Record Form -->
-    <div class="container">    
-        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
-            <div class="panel panel-info" >
-                    <div class="panel-heading">
-                        <div class="panel-title">New Data Record</div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"> <%= "Select Date Of The Sunday Service Data Corresponds To" %></div>
-                    </div>     
-
-                    <div style="padding-top:30px" class="panel-body" >
-
-                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                            
-                       
-                                    <%= form_for(@record) do |f| %>
-                                     <%= render 'shared/error_messages', object: f.object %>
-                            <div style="margin-bottom: 25px" class="input-group">
-
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                    
-                                         <%= f.date_field :day, :value => @date, class: 'form-control' %>                               
-                                    </div>
-     
-     <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <%= f.number_field :sunday_att, value: 0, placeholder: "Enter Sunday Attendance", class: "form-control"%>
-                                    </div>
-
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <%= f.number_field :weekday_att, value: 0, placeholder: "Enter Weekday Attendance", class: "form-control"%>
-                                    </div>
-
-                                      <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <%= f.number_field :weekday_att, placeholder: "Enter First Timers in Sunday Service", value: 0, class: "form-control"%>
-                                    </div>
-                                
-                            <div style="margin-bottom: 25px" class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    
-                                        <%= f.password_field :password, placeholder: "Enter Password", class: "form-control" %>
-                                    </div>
-                                    
-
-                                
-                        
-
-
-                                <div style="margin-top:10px" class="form-group">
-                                    <!-- Button -->
-
-                                    <div class="col-sm-12 controls">
-                                      <%= f.submit "Login", class: "btn btn-primary" %>
-                                 
-
-                                    </div>
-                                </div>
-
-
-                          
-                          
-
-
-
-                        </div>                     
-                    </div>  
-        </div>
-        <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <div class="panel-title">Sign Up</div>
-                            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
-                        </div>  
-                        <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form">
-                                
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Error:</p>
-                                    <span></span>
-                                </div>
-                                    
-                                
+                                    <td><%= link_to t.church_group.name, church_group_path(t.church_group), class: "table-text"%></td>
+                                    <td class="table-text"><%= t.church_group.region %></td>
+                                    <td><%= link_to "#{t.elder}", "mailto:#{t.email}" %></td>
+                                    <td class="table-text text-center"><%= t.records.first.day.strftime("%d%b%y") %></td>
+                                    <td class="text-center">
+                                      <% @csclass= t.records.count < (Date.today+1).cweek ? "label label-danger" : "label label-success" %>
+                                        <span class="<%="#{@csclass}"%>"><%= t.missing_data%></span>
+                                    </td>
                                   
-                                <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Email</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
-                                    </div>
-                                </div>
-                                    
-                                <div class="form-group">
-                                    <label for="firstname" class="col-md-3 control-label">First Name</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstname" placeholder="First Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastname" class="col-md-3 control-label">Last Name</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="lastname" placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Password</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passwd" placeholder="Password">
-                                    </div>
-                                </div>
-                                    
-                                <div class="form-group">
-                                    <label for="icode" class="col-md-3 control-label">Invitation Code</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="icode" placeholder="">
-                                    </div>
-                                </div>
+                        <td>
+                                        <%= link_to user_path(t), class: "table-link success" do %>
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                       <% end %>
+                                        <%= link_to edit_user_path(t), class: "table-link" do %>
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        <% end %>
+                                   
+                                    </td>
+                                </tr>
+                               <% end %>
+                            </tbody>
 
-                                <div class="form-group">
-                                    <!-- Button -->                                        
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
-                                        <span style="margin-left:8px;">or</span>  
-                                    </div>
-                                </div>
-                                
-                                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
-                                    
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
-                                    </div>                                           
-                                        
-                                </div>
-                                
-                                
-                                <% end %>
-                           
-                         </div>
-                    </div>
+ 
 
-               
-               
-                
-         </div> 
-    </div>
+</table>
+</div>
+<% else %>
+<div class="table-responsive">
+   <table class="table table-striped user-list">
+ <thead>
+                                <tr>
+                                <th ><span class="list-group-item list-group-item-success">All Users Have Submitted <%= @date %> Data </span></th>
+                             
+                                </tr>
+    </thead>
+ </table>
+</div>
+ <% end %>
+</div>

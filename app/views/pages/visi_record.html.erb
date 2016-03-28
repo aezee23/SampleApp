@@ -1,0 +1,60 @@
+<% provide(:title, 'Visitation Record') %>
+<div class="container">
+<div class="table-responsive">
+   <table class="table table-striped user-list" border="1">
+   	<caption><span class="tableTitle"><%= Date.today.strftime("%Y") %> Visitation Report </span></caption>
+
+ <thead>
+                                
+                                <tr class="border_bottom">
+                                	<th rowspan="2" style="background-color: #bfbfbf; color: black; border-bottom: 1pt solid black; text-align: right"> Week</th>
+                                	<% @months.each do |t| %>
+                                	<% v = (Date.parse("01#{t}")..((Date.parse("01#{t}"))>>1)-1).select{|y| y.wday==0} %>
+                                <th colspan="<%= v.length %>", style= "text-align:center; background-color: #bfbfbf; border-bottom: 1pt solid black" ><%= t %></th>
+                                  <% end %>
+                                </tr>
+
+                                <tr>
+                                
+                                	<% @weeks.each do |x| %>
+                                	
+                                		<% b = x.select{|y| y.wday ==0 }.map{|y| y.strftime("%d%b")} %>
+                                		<% b.each do |c| %>
+                                		<th style="background-color: #bfbfbf; color: black; border-bottom: 1pt solid black"><%= b.index(c)+1 %></th>
+                                		<% end %>
+                                	
+                                	<% end %>
+                                	               
+    </thead>
+
+
+    <tbody>
+<% @users.each do |t| %>
+<tr>
+<td style="background-color: #b3e6ff; color: black; border-bottom: 1pt solid black"> <%= t.elder %> </td>
+ <% @weeks.each do |x| %>
+	<% b = x.select{|y| y.wday ==0 } %>
+	<% b.each do |c| %>
+	<% if t.records.find_by(day: c).nil? %>
+	<td style="border-bottom: 1pt solid black">N/A</td>
+	<% else %>
+	<td style="border-bottom: 1pt solid black"> <% if t.records.find_by(day: c).visitation %>
+		<i class="fa fa-check" style="color: green"></i>
+		<% else %>
+		<i class="fa fa-close" style="color: red"></i>
+		<% end %>
+	 </td>
+	<% end %>
+	<% end %>
+	<% end %>
+
+
+<tr>
+<% end %>
+
+    </tbody>
+ </table>
+
+
+</div>
+</div>

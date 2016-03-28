@@ -1,5 +1,24 @@
 module ApplicationHelper
 
+def median(array)
+  sorted = array.sort
+  len = sorted.length
+  (sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0
+end
+
+def mweek(date_or_time, start_day = :sunday)
+
+  date = date_or_time
+  week_start_format = start_day == :sunday ? '%U' : '%W'
+
+  month_week_start = Date.new(date.year, date.month, 1)
+  month_week_start_num = month_week_start.strftime(week_start_format).to_i
+  month_week_start_num += 1 if month_week_start.wday > 4 # Skip first week if doesn't contain a Thursday
+
+  month_week_index = date.strftime(week_start_format).to_i - month_week_start_num
+  month_week_index + 1 # Add 1 so that first week is 1 and not 0
+
+end
 
 def sortable(column, title = nil)
   title ||= column.titleize
