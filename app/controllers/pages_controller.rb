@@ -79,10 +79,10 @@ end
 
 def visitation
 @users = []
-		User.where(admin: false).each do |t|
-			if t.records.count == 0
-				@users << t
-			end
+		User.where(admin: false).where(is_leader: false).each do |t|
+		#	if t.records.count == 0
+		#		@users << t
+		#	else
 			if !t.records.order('day DESC').first.visitation
 				@users << t
 			end
