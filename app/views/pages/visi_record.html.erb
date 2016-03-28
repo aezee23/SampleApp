@@ -19,7 +19,7 @@
                                 	<% @weeks.each do |x| %>
                                 	
                                 		<% b = x.select{|y| y.wday ==0 }.map{|y| y.strftime("%d%b")} %>
-                                		<% b.each do |c| %>
+                                		<% b.reverse.each do |c| %>
                                 		<th style="background-color: #bfbfbf; color: black; border-bottom: 1pt solid black"><%= b.index(c)+1 %></th>
                                 		<% end %>
                                 	
@@ -34,7 +34,7 @@
 <td style="background-color: #b3e6ff; color: black; border-bottom: 1pt solid black"> <%= t.elder %> </td>
  <% @weeks.each do |x| %>
 	<% b = x.select{|y| y.wday ==0 } %>
-	<% b.each do |c| %>
+	<% b.reverse.each do |c| %>
 	<% if t.records.find_by(day: c).nil? %>
 	<td style="border-bottom: 1pt solid black">N/A</td>
 	<% else %>
