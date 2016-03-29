@@ -11,6 +11,8 @@ validates :password, presence: true, length: { minimum: 6 }, confirmation: true,
 validates_inclusion_of :is_leader, in: [true, false]
 
 
+
+
 def ytd_avg(y)
   n = self.records.where(day: ((Date.parse(Date.today.strftime("%Y0101"))..Date.today))).count
   if n ==0

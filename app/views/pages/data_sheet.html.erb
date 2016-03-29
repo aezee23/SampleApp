@@ -1,0 +1,88 @@
+<% provide(:title, 'Data_Formatted') %>
+
+<table border="1">
+	
+	<thead>
+		<tr>
+			<th style="background-color: #ffcc00"> <%= "    " %></th>
+			<% @months.each do |t| %>
+			<th colspan="9" style="text-align:center; background-color: #ffcc00"><%= t %></th>
+			<th><%= "    " %></th>
+			<% end %>
+		</tr>
+		<% @users.each do |u| %>
+		<tr>
+			<th style="background-color: #ffcc00"><%= u.name %> </th>
+			<% @months.each do |t| %>
+			<th colspan="9" style="text-align:center; background-color: #ffcc00">SUNDAY SERVICE ATTENDANCE</th>
+			<th><%= "    " %></th>
+			<% end %>
+		</tr>
+		<tr>
+			<th style="background-color: #ffcc00"> </th>
+			<% @months.each do |x| %>
+			<% @cats.each do |t| %>
+			<th style="text-align:center; background-color: #cccccc"><%= t %></th>
+			<% end %>
+			<th><%= "    " %></th>
+			<% end %>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @weeks.each do |w| %>
+		<tr> 
+			<th> <%= "WK #{w}" %></th>
+			<% @months.each do |x| %>
+			<% if u.records.find_by(day: sun_in_month(x)[w-1]) %>
+			<td> <%= u.records.find_by(day: sun_in_month(x)[w-1]).sunday_att|| " " %> </td>
+			<td> 0 </td>
+			<td> 0 </td>
+			<% if u.records.find_by(day: sun_in_month(x)[w]) %>
+			<td> <%= u.records.find_by(day: sun_in_month(x)[w]).weekday_att|| " " %> </td>
+				<% else %>
+				<td> <%= " " %> </td>
+				<% end %>
+			<td> 0 </td>
+			<td> <%= u.records.find_by(day: sun_in_month(x)[w-1]).new_converts|| " " %> </td>
+			<td> <%= u.records.find_by(day: sun_in_month(x)[w-1]).first_timers|| " " %> </td>
+			<td> <%= u.records.find_by(day: sun_in_month(x)[w-1]).fnb|| " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			
+			<% else %>
+				<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<% end %>
+			<% end %>
+		</tr>
+		<% end %>
+		<tr> 
+			<th> AVE</th>
+			<% @months.each do |x| %>
+					<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<td> <%= " " %> </td>
+			<% end %>
+		</tr>
+		<tr> </tr>
+		<tr> </tr>
+<% end %>
+	</tbody>
+
+</table>

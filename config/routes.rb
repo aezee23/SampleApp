@@ -8,6 +8,7 @@ get 'time_series_charts' => 'pages#time_series_charts'
 get 'monthly_average_charts' => 'pages#monthly_average_charts'
 get 'visitation' => 'pages#visitation'
 get 'visi_record' => 'pages#visi_record'
+get 'data_sheet' => 'pages#data_sheet'
 get 'show_nots' => 'pages#show'
 get 'change_pwd' => 'users#change_pwd'
 resources :church_groups

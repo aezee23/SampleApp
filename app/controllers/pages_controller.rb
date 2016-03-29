@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   before_action :logged_in_user, only: [:index, :show, :last_sunday, :last_sunday_charts, :time_series_charts, :monthly_average_charts, :visitation]
   before_action :admin_user, only: [:show, :last_sunday, :last_sunday_charts, :time_series_charts, :monthly_average_charts, :visitation]
 	helper_method :sort_column, :sort_direction, :mweek
+	helper_method :sun_in_month
 	def index
 		@date = date_of_last("Sunday").strftime('%d-%b-%y')
 		@users = []
@@ -105,6 +106,14 @@ end
 
 	end
 
+def data_sheet
+@users = User.where(admin: false).where(is_leader: false)
+@date_range= (Date.parse(Date.today.strftime("%Y0101"))..Date.today)
+@dates=@date_range.select{|x| x.wday==0}
+@months= ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+@cats= ["Sunday 1ST SERVICE", "Sunday 2NDSERVICE", "Sunday 3RD SERVICE", "Weekday", "Ministry", "New Con", "F-T", "F & B", "Children below 12 yrs" ]
+@weeks = 1..5
+end
 
 
 

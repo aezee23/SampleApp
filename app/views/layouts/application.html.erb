@@ -72,6 +72,11 @@
           <% end %></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Change Password</a></li>
+            <li role="separator" class="divider"></li>
+             <li class="">
+             <%= link_to data_sheet_path do %>
+          <%= "#{Date.today.strftime("%Y")} Excel Data Format" %> <span class="sr-only">(current)</span>
+          <% end %></li>
           </ul>
         </li>
       </ul>
