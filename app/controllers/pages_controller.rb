@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   before_action :logged_in_user, only: [:index, :show, :last_sunday, :last_sunday_charts, :time_series_charts, :monthly_average_charts, :visitation]
-  before_action :admin_user, only: [:show, :last_sunday, :last_sunday_charts, :time_series_charts, :monthly_average_charts, :visitation]
+  before_action :admin_user, only: [:show, :last_sunday, :last_sunday_charts, :time_series_charts, :monthly_average_charts, :visitation, :data_sheet, :visi_record]
 	helper_method :sort_column, :sort_direction, :mweek
 	helper_method :sun_in_month
 	def index
