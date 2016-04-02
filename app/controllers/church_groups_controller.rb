@@ -46,7 +46,7 @@ end
 
 def destroy
     ChurchGroup.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "Church Group Deleted"
     redirect_to users_url
   end
 
