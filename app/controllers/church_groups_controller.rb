@@ -41,7 +41,7 @@ redirect_to church_groups_path
 def show
 @church_group = ChurchGroup.find(params[:id])
 @users = @church_group.users.where(is_leader: false)
-@max= @church_group.make_hash_time_series(:sunday_att).max[1]
+@max= @church_group.make_hash_time_series(:sunday_att).values.max
 end
 
 def destroy
