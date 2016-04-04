@@ -40,8 +40,8 @@
 			<td> <%= u.records.find_by(day: sun_in_month(x)[w-1]).sunday_att|| " " %> </td>
 			<td> 0 </td>
 			<td> 0 </td>
-			<% if u.records.find_by(day: sun_in_month(x)[w]) %>
-			<td> <%= u.records.find_by(day: sun_in_month(x)[w]).weekday_att|| " " %> </td>
+			<% if u.records.find_by(day: sun_in_month(x)[w-1]) %>
+			<td> <%= u.records.find_by(day: sun_in_month(x)[w-1]).weekday_att|| " " %> </td>
 				<% else %>
 				<td> <%= " " %> </td>
 				<% end %>
