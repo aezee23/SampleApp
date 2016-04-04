@@ -99,8 +99,14 @@
 			<th style="background-color: #ffcc00"> <%= "Branch" %></th>
 			<th colspan="9" style="text-align:center; background-color: #ffcc00"><%= "Month" %></th>
 			<th><%= "Week no." %></th>
-			<th><%= "Sunday MSG" %></th>
-			<th><%= "Weekday MSG" %></th>
+			<th><%= "Sunday Preacher" %></th>
+			<th><%= "Sunday Message" %></th>
+				<th><%= "Sunday 2nd Preacher" %></th>
+			<th><%= "Sunday 2nd Message" %></th>
+				<th><%= "Sunday 3rd Preacher" %></th>
+			<th><%= "Sunday 3rd Message" %></th>
+						<th><%= "Weekday Preacher" %></th>
+			<th><%= "Weekday Message" %></th>
 		</tr>
 	</thead>
 
@@ -113,14 +119,14 @@
 			<th> <%= x %></th>
 			<th> <%= w %></th>
 			<% if t.records.find_by(day: sun_in_month(x)[w-1]) %>
+			<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).preacher_sunday|| " " %> </td>
 			<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).message_sunday|| " " %> </td>
-			<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).message_weekday|| " " %> </td>
 			<td> <%= " " %> </td>
 				<td> <%= " " %> </td>
 				<td> <%= " " %> </td>
 				<td> <%= " " %> </td>
-				<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).preacher_sunday|| " " %> </td>
-			<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).preacher_weekday|| " " %> </td>
+				<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).preacher_weekday|| " " %> </td>
+			<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).message_weekday|| " " %> </td>
 				<% else %>
 				<td> <%= " " %> </td>
 				<td> <%= " " %> </td>
