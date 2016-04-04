@@ -107,7 +107,7 @@ end
 	end
 
 def data_sheet
-@users = User.where(admin: false).where(is_leader: false)
+@users = User.where(admin: false).where(is_leader: false).order('id ASC')
 @date_range= (Date.parse(Date.today.strftime("%Y0101"))..Date.today)
 @dates=@date_range.select{|x| x.wday==0}
 @months= ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]

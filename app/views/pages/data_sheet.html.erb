@@ -89,4 +89,42 @@
 
 </table>
 </div>
+
+<!--- Messages Preached -->
+<div class="table-responsive">
+<table border="1">
+	
+	<thead>
+		<tr>
+			<th style="background-color: #ffcc00"> <%= "Branch" %></th>
+			<th colspan="9" style="text-align:center; background-color: #ffcc00"><%= "Month" %></th>
+			<th><%= "Week no." %></th>
+			<th><%= "Sunday MSG" %></th>
+			<th><%= "Weekday MSG" %></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @users.each do |t| %>
+		<% @months.each do |x| %>
+		<% @weeks.each do |w| %>
+		<tr> 
+			<th> <%= t.name %></th>
+			<th> <%= x %></th>
+			<th> <%= w %></th>
+			<% if t.records.find_by(day: sun_in_month(x)[w-1]) %>
+			<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).message_sunday|| " " %> </td>
+			<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).message_weekday|| " " %> </td>
+				<% else %>
+				<td> <%= " " %> </td>
+				<td> <%= " " %> </td>
+				<% end %>
+			<% end %>
+			<% end %>
+		<% end %>
+
+	</tbody>
+
+</table>
+</div>
 </div>
