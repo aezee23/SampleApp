@@ -125,8 +125,10 @@
 				<td> <%= " " %> </td>
 				<td> <%= " " %> </td>
 				<td> <%= " " %> </td>
-				<td> <%= t.records.find_by(day: (sun_in_month(x)[w-1])+7).preacher_weekday|| " " %> </td>
-			<td> <%= t.records.find_by(day: (sun_in_month(x)[w-1])+7).message_weekday|| " " %> </td>
+				
+				<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).preacher_weekday|| " " %> </td>
+			<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).message_weekday|| " " %> </td>
+	
 				<% else %>
 				<td> <%= " " %> </td>
 				<td> <%= " " %> </td>
