@@ -40,8 +40,12 @@
 			<td> <%= u.records.find_by(day: sun_in_month(x)[w-1]).sunday_att|| " " %> </td>
 			<td> 0 </td>
 			<td> 0 </td>
-			<% if u.records.find_by(day: sun_in_month(x)[w-1]) %>
-			<td> <%= u.records.find_by(day: sun_in_month(x)[w-1]).weekday_att|| " " %> </td>
+			<% if thu_in_month(x)[w-1] %>
+			<% if u.records.find_by(day: (thu_in_month(x)[w-1])+3) %>
+			<td> <%= u.records.find_by(day: (thu_in_month(x)[w-1])+3).weekday_att|| " " %> </td>
+			<% else %>
+			<td> <%= " " %> </td>
+			<% end %>
 				<% else %>
 				<td> <%= " " %> </td>
 				<% end %>
@@ -126,9 +130,18 @@
 				<td> <%= " " %> </td>
 				<td> <%= " " %> </td>
 				
-				<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).preacher_weekday|| " " %> </td>
-			<td> <%= t.records.find_by(day: sun_in_month(x)[w-1]).message_weekday|| " " %> </td>
-	
+				<% if thu_in_month(x)[w-1] %>
+			<% if t.records.find_by(day: (thu_in_month(x)[w-1])+3) %>
+				<td> <%= t.records.find_by(day: (thu_in_month(x)[w-1])+3).preacher_weekday|| " " %> </td>
+			<td> <%= t.records.find_by(day: (thu_in_month(x)[w-1])+3).message_weekday|| " " %> </td>
+			<% else %>
+	<td> <%= " " %> </td>
+				<td> <%= " " %> </td>
+				<% end %>
+				<% else %>
+					<td> <%= " " %> </td>
+				<td> <%= " " %> </td>
+				<% end %>
 				<% else %>
 				<td> <%= " " %> </td>
 				<td> <%= " " %> </td>
