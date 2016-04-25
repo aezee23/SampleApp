@@ -17223,8 +17223,11 @@
             color: null,
             style: {"color": "contrast", "fontSize": "2vmin", "fontWeight": "bold", "textShadow": "0 0 0px contrast, 0 0 3px contrast" },
             //format: '{percentage}%',
-             formatter: function () {
-                   return Highcharts.numberFormat(this.percentage, 0) > 5 ?  Highcharts.numberFormat(this.percentage, 0)+ '%</b>': undefined;
+            // formatter: function () {
+            //       return Highcthis.y > 5 ?  Highcharts.numberFormat(this.value, 0)+ '%</b>': undefined;
+            //   },
+           formatter: function () {
+                   return this.y > 1 ?  this.y : undefined;
                },
             //formatter: function () { // #2945
               //  return this.percentage === null ? undefined : this.point.name;
