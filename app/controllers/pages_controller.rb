@@ -91,7 +91,7 @@ def visitation
 end
 
 def visi_record
-@users = User.where(admin: false)
+@users = User.where(admin: false).order(is_leader: :asc).order(elder: :asc)
 sd = Date.parse(Date.today.strftime("%Y0101"))
 ed=Date.today
 @dates = ed.downto(sd)

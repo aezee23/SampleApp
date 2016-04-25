@@ -30,3 +30,11 @@ STATEMENT:  SELECT "records".* FROM "records" WHERE "records"."user_id" = $1 AND
 FATAL:  database "Aezee" does not exist
 FATAL:  database "Aezee" does not exist
 FATAL:  database "Aezee" does not exist
+LOG:  autovacuum launcher shutting down
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2016-04-23 12:02:49 BST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
