@@ -32,7 +32,13 @@
                                     <td><%= link_to t.church_group.name, church_group_path(t.church_group), class: "table-text"%></td>
                                     <td class="table-text"><%= t.city.nil? ? "Blank": t.city %></td>
                                     <td class="table-text text-center"><strong><%= t.ytd_avg(:sunday_att) %></strong></td>
-                                    <td class="table-text text-center"><strong><%= t.records.order('day DESC').first.sunday_att %></strong></td>
+                                    <td class="table-text text-center"><strong>
+                                        <% if t.records.first %>
+                                        <%= t.records.order('day DESC').first.sunday_att %>
+                                        <% else %>
+                                        <%= 0 %>
+                                        <% end %>
+                                    </strong></td>
                                     <td><%= link_to "#{t.elder}", "mailto:#{t.email}" %></td>
                                     <td class="text-center">
                                          <% csclass= t.records.where('day > ?', Date.parse(Date.today.strftime("%Y0101"))).count < (Date.today+1).cweek ? "label label-danger" : "label label-success" %>

@@ -123,7 +123,13 @@
                                     </td>
                                    
                                     <td class="table-text text-center"><strong><%= t.ytd_avg(:sunday_att) %></strong></td>
-                                    <td class="table-text text-center"><strong><%= t.records.order('day DESC').first.sunday_att %></strong></td>
+                                    <td class="table-text text-center"><strong>
+                                      <% if t.records.first %>
+                                      <%= t.records.order('day DESC').first.sunday_att %>
+                                      <% else %>
+                                      <%= 0 %>
+                                      <% end %>
+                                    </strong></td>
                                     <td><%= link_to "#{t.elder}", "mailto:#{t.email}" %></td>
                                     <td class="text-center">
                                          <% csclass= t.records.where('day > ?', Date.parse(Date.today.strftime('%Y0101'))).count < (Date.today+1).cweek ? "label label-danger" : "label label-success" %>
@@ -167,13 +173,25 @@
 
 <div class="row" style="background-color: white; margin-top: 5px">
       <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+  <% if @church_group.id == 10 %>
+        <%= column_chart [{name: "Sunday", data: @church_group.make_hash_monthly_avg(:sunday_att)}, {name: "Weekday", data: ChurchGroup.where(region: "London").make_total_hash_monthly_avg_cc(:weekday_att)}], stacked: false, library: {title: {text: "Past Year Monthly Average Attendance"}} %>
+  <% else %>
     <%= column_chart [{name: "Sunday", data: @church_group.make_hash_monthly_avg(:sunday_att)}, {name: "Weekday", data: @church_group.make_hash_monthly_avg(:weekday_att)}], stacked: false, library: {title: {text: "Past Year Monthly Average Attendance"}} %>
+  <% end %>
   </div>
        <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+  <% if @church_group.id == 10 %>
+        <%= column_chart [{name: "New Converts", data: @church_group.make_hash_monthly_sum(:new_converts)}, {name: "Started NBS", data: ChurchGroup.where(region: "London").make_total_hash_monthly_cc(:nbs)}], stacked: false, library: {title: {text: "Past Year Monthly Total New Converts vs Started NBS"}} %>
+  <% else %>
     <%= column_chart [{name: "New Converts", data: @church_group.make_hash_monthly_sum(:new_converts)}, {name: "Started NBS", data: @church_group.make_hash_monthly_sum(:nbs)}], stacked: false, library: {title: {text: "Past Year Monthly Total New Converts vs Started NBS"}} %>
+    <% end %>
   </div>
      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+  <% if @church_group.id == 10 %>
+   <%= column_chart [{name: "Started", data: ChurchGroup.where(region: "London").make_total_hash_monthly_cc(:nbs)}, {name: "Finished", data: ChurchGroup.where(region: "London").make_total_hash_monthly_cc(:nbs_finish)}], stacked: false, library: {title: {text: "Past Year Monthly New Believers School"}} %>
+  <% else %>
     <%= column_chart [{name: "Started", data: @church_group.make_hash_monthly_sum(:nbs)}, {name: "Finished", data: @church_group.make_hash_monthly_sum(:nbs_finish)}], stacked: false, library: {title: {text: "Past Year Monthly New Believers School"}} %>
+    <% end %>
   </div>
      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
     <%= column_chart [{name: "Sunday Attendance", data: @church_group.make_hash_monthly_avg(:sunday_att)}, {name: "First & Best", data: @church_group.make_hash_monthly_sum(:fnb)}], stacked: false, library: {title: {text: "Past Year Monthly Average Sunday vs Monthly First & Best"}} %>

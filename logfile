@@ -38,3 +38,30 @@ LOG:  database system was shut down at 2016-04-23 12:02:49 BST
 LOG:  MultiXact member wraparound protections are now enabled
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
+FATAL:  role "postgres" does not exist
+FATAL:  database "Aezee" does not exist
+FATAL:  database "Postgres" does not exist
+ERROR:  database "ManVan" already exists
+STATEMENT:  CREATE DATABASE "ManVan" ENCODING = 'utf8'
+ERROR:  database "ManVan" already exists
+STATEMENT:  CREATE DATABASE "ManVan" ENCODING = 'utf8'
+LOG:  received smart shutdown request
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2016-05-08 10:16:45 BST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  role "myuser" does not exist
+FATAL:  role "aezee" does not exist
+LOG:  autovacuum launcher shutting down
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2016-06-04 09:07:32 BST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  column users.region does not exist at character 37
+STATEMENT:  SELECT "users".* FROM "users" WHERE "users"."region" = 'London' AND "users"."admin" = $1  ORDER BY "users"."is_leader" ASC, "users"."elder" ASC

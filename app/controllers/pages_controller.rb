@@ -91,7 +91,14 @@ def visitation
 end
 
 def visi_record
-@users = User.where(admin: false).order(is_leader: :asc).order(elder: :asc)
+  if params[:church_group] && params[:church_group] != "Church Group Leaders"
+    @users = ChurchGroup.where(region: params[:church_group].split(" ")[0]).each_with_object([]) {|group, array| array << group.users.where(is_leader: false)}.flatten
+  elsif params[:church_group] == "Church Group Leaders"
+    @users = ChurchGroup.order(region: :asc).each_with_object([]) {|group, array| array << group.users.where(is_leader: true)}.flatten
+  else
+    @users = User.where(admin: false).order(is_leader: :asc).order(elder: :asc)
+  end
+
 sd = Date.parse(Date.today.strftime("%Y0101"))
 ed=Date.today
 @dates = ed.downto(sd)

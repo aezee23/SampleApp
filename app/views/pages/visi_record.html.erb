@@ -1,5 +1,9 @@
 <% provide(:title, 'Visitation Record') %>
 <div class="container">
+<%= form_tag(visi_record_path, method: 'get', class: 'filtering') do %>
+      <%= select_tag :church_group, options_for_select(["London Elders", "Judea Elders", "Church Group Leaders"], "#{params[:church_group]}"), class: 'form-control'  %>
+      <%= submit_tag "Filter", class: 'btn btn-default', :name => nil %>
+    <% end %>
 <div class="table-responsive">
    <table class="table table-striped user-list" border="1">
    	<caption><span class="tableTitle"><%= Date.today.strftime("%Y") %> Visitation Report </span></caption>
@@ -31,7 +35,7 @@
     <tbody>
 <% @users.each do |t| %>
 <tr>
-<td style="background-color: #b3e6ff; color: black; border-bottom: 1pt solid black"> <%= t.elder %> </td>
+<td style="background-color: #b3e6ff; color: black; border-bottom: 1pt solid black"> <%= t.is_leader ? "#{t.elder} - #{t.church_group.leader.split(" ")[0]}" : t.elder %> </td>
  <% @weeks.each do |x| %>
 	<% b = x.select{|y| y.wday ==0 } %>
 	<% b.reverse.each do |c| %>
