@@ -27,15 +27,58 @@ footer {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 30px;
-  background-color: #f5f5f5;
-  border-top: double #393E41;
+  height: 120px;
+  background-color: #5d5c61;
+  padding: 5px 10px 0 10px;
+  font-size: 14px;
+  color: #e4e8ee;
 }
 footer a{
-	color: #595959;
-  text-align: left
+color: #EDEAE6;
+font: normal 12px helvetica, arial, sans-serif;
+}
+footer a:hover{
+  color: #40B9ED;
+  text-decoration: none;
+}
+footer li{
+  list-style: none;
+  padding: 0;
+}
+footer ul{
+  padding: 0;
+}
+#footer_left{
+  float: left;
+  width: 33.3%;
+  box-sizing: border-box;
+
+}
+#footer_middle{
+  float: left;
+  width: 33.3%;
+  box-sizing: border-box;
+
+}
+#footer_right{
+  float: left;
+  width: 33.3%;
+  box-sizing: border-box;
+
+}
+#footer_clear{
+  display: block;
+  clear: both;
+  position: absolute;
+  bottom: 0px;
+}
+#copyright{
+  font-size: 10px;
 }
 .list-group-item{
 	padding-left: 0px;
 	padding-right: 0px;
+}
+.container {
+  margin-bottom: 100px
 }

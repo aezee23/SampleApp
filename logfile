@@ -65,3 +65,10 @@ LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
 ERROR:  column users.region does not exist at character 37
 STATEMENT:  SELECT "users".* FROM "users" WHERE "users"."region" = 'London' AND "users"."admin" = $1  ORDER BY "users"."is_leader" ASC, "users"."elder" ASC
+LOG:  database system was interrupted; last known up at 2016-06-09 09:54:57 BST
+LOG:  database system was not properly shut down; automatic recovery in progress
+LOG:  invalid record length at 0/1927098
+LOG:  redo is not required
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started

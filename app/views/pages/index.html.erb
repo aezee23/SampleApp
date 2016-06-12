@@ -16,22 +16,13 @@
    <% elsif current_user && current_user.admin %>
 
   <div class="container">
-
-      <div class="btn-group btn-group-justified" role="group" aria-label="...">
-   <div class="btn-group" role="group">
-  <%= link_to "View Latest Data", last_sunday_charts_path, class: "btn btn-primary", style: "font-size: 1.75vmin" %>
-</div>
-   <div class="btn-group" role="group">
-  <%= link_to "Monthly Trends", monthly_average_charts_path, class: "btn btn-primary", style: "font-size: 1.75vmin"  %>
-</div>
-   <div class="btn-group" role="group">
-  <%= link_to "Time Series Analysis", time_series_charts_path, class: "btn btn-primary", style: "font-size: 1.75vmin"  %>
-</div>
-   <div class="btn-group" role="group">
-  <%= link_to "Visitation Report", visi_record_path, class: "btn btn-primary", style: "font-size: 1.75vmin" %>
-  </div>
-
-</div>
+    <ul class="section_nav_group">
+      <li class="section_nav_item"><%= link_to "Summary", "#", class: "section_nav", style: "" %></li>
+      <li class="section_nav_item"><%= link_to "Latest Data", "#", class: "section_nav", style: "" %></li>
+      <li class="section_nav_item"><%= link_to "Retention", retention_path, class: "section_nav", style: "" %></li>
+      <li class="section_nav_item"><%= link_to "Visitation", visi_record_path, class: "section_nav", style: "" %></li>
+    </ul>
+  
    <div class="row text-center">
             <div class="col-md-12">
        
@@ -40,14 +31,14 @@
             </div>
     </div>        
 
-              <table class="table table-striped user-list">
+          <!--    <table class="table table-striped user-list">
  <thead>
                                 <tr>
                                 <th ><span class="list-group-item list-group-item-info" style="text-align: center"><i class="glyphicon glyphicon-signal"></i>&nbsp;&nbsp;Key Summary</span></th>
                              
                                 </tr>
     </thead>
- </table>
+ </table> -->
 
 
   <div class="row db-padding-btm db-attached">
@@ -311,14 +302,14 @@
             </div>
         </div>
 
-              <table class="table table-striped user-list">
+  <!--            <table class="table table-striped user-list">
  <thead>
                                 <tr>
                                 <th ><span class="list-group-item list-group-item-info" style="text-align: center"><i class="glyphicon glyphicon-signal"></i>&nbsp;&nbsp;LATEST SUNDAY DATA</span></th>
                              
                                 </tr>
     </thead>
- </table>
+ </table> -->
 
         <div class="row db-padding-btm db-attached">
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="width: 33%">
