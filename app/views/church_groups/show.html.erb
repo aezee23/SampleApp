@@ -198,25 +198,6 @@
   </div>
   
 </div>
-
-  <br>
-  <% if current_user.admin %>
-<div class="btn-group btn-group-justified" role="group" aria-label="...">
-     <div class="btn-group" role="group">
-  <%= link_to "Back to Home Page", demo_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
-</div>
-   <div class="btn-group" role="group">
-  <%= link_to "All Church Groups", church_groups_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
-  </div>
-   <div class="btn-group" role="group">
-  <%= link_to "All Campus Churches", users_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
-  </div>
-     <div class="btn-group" role="group">
-  <%= link_to "FLC Monthly Averages", monthly_average_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
-    </div>
-</div>
-<% end %>
-
 </div>
 
 

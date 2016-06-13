@@ -201,20 +201,5 @@
   </div>
    <% end %>
 </div>
-  <br>
-<div class="btn-group btn-group-justified" role="group" aria-label="...">
-     <div class="btn-group" role="group">
-  <%= link_to "Back to Home Page", demo_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
-</div>
-   <div class="btn-group" role="group">
-  <%= link_to "#{@user.church_group.name} Church", @user.church_group, class: "btn btn-primary", style: "font-size: 2vmin" %>
-  </div>
-   <div class="btn-group" role="group">
-  <%= link_to "#{@user.elder.split[0]}'s Latest Entry ", record_path(@latest_record), class: "btn btn-primary", style: "font-size: 2vmin" %>
-  </div>
-     <div class="btn-group" role="group">
-  <%= link_to "FLC Monthly Averages", monthly_average_charts_path, class: "btn btn-primary", style: "font-size: 2vmin" %>
-    </div>
-</div>
 
 </div>

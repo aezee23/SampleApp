@@ -13,7 +13,7 @@
                                 <tr class="border_bottom">
                                 	<th rowspan="2" style="background-color: #bfbfbf; color: black; border-bottom: 1pt solid black; text-align: right"> Week</th>
                                 	<% @months.each do |t| %>
-                                	<% v = (Date.parse("01#{t}")..((Date.parse("01#{t}"))>>1)-1).select{|y| y.wday==0} %>
+                                	<% v = (Date.parse("01#{t}")..((Date.parse("01#{t}"))>>1)-1).select{|y| y.wday==0 && y < Date.today} %>
                                 <th colspan="<%= v.length %>", style= "text-align:center; background-color: #bfbfbf; border-bottom: 1pt solid black" ><%= t %></th>
                                   <% end %>
                                 </tr>
@@ -22,7 +22,7 @@
                                 
                                 	<% @weeks.each do |x| %>
                                 	
-                                		<% b = x.select{|y| y.wday ==0 }.map{|y| y.strftime("%d%b")} %>
+                                		<% b = x.select{|y| y.wday ==0 && y < Date.today }.map{|y| y.strftime("%d%b")} %>
                                 		<% b.reverse.each do |c| %>
                                 		<th style="background-color: #bfbfbf; color: black; border-bottom: 1pt solid black"><%= b.index(c)+1 %></th>
                                 		<% end %>
@@ -35,9 +35,9 @@
     <tbody>
 <% @users.each do |t| %>
 <tr>
-<td style="background-color: #b3e6ff; color: black; border-bottom: 1pt solid black"> <%= t.is_leader ? "#{t.elder} - #{t.church_group.leader.split(" ")[0]}" : t.elder %> </td>
+<td style="background-color: #b3e6ff; color: black; border-bottom: 1pt solid black"> <%= t.is_leader ? "#{t.elder} - #{t.church_group.leader.split(" ")[0]} - #{t.ytd_visitation}%" : "#{t.elder} - #{t.ytd_visitation}%" %> </td>
  <% @weeks.each do |x| %>
-	<% b = x.select{|y| y.wday ==0 } %>
+	<% b = x.select{|y| y.wday ==0 && y < Date.today} %>
 	<% b.reverse.each do |c| %>
 	<% if t.records.find_by(day: c).nil? %>
 	<td style="border-bottom: 1pt solid black">N/A</td>

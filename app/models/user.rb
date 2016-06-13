@@ -11,7 +11,11 @@ validates :password, presence: true, length: { minimum: 6 }, confirmation: true,
 validates_inclusion_of :is_leader, in: [true, false]
 
 
-
+def ytd_visitation
+  n = Date.today.cwyear == 2016 ? Date.today.cweek - Date.parse("26Mar2016").cweek : Date.today.cweek
+  visitation_count = self.records.where("day >= ?", Date.parse("26Mar2016")).where(visitation: true).count
+  (visitation_count.to_f / n * 100).to_i
+end
 
 def ytd_avg(y)
   n = self.records.where(day: ((Date.parse(Date.today.strftime("%Y0101"))..Date.today))).count
