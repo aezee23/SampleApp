@@ -5,17 +5,13 @@ class PagesController < ApplicationController
 	helper_method :sort_column, :sort_direction, :mweek
 	helper_method :sun_in_month
 	def index
-		@date = date_of_last("Sunday").strftime('%d-%b-%y')
-		@users = []
-		User.where(admin: false).each do |t|
-			if t.has_not_submitted
-				@users << t
-			end
-		end
-		@array= ChurchGroup.make_hash_month_sum("Jan", :sunday_att)
-		@ldn_hash = ChurchGroup.make_hash_latest_ldn(:sunday_att)
-		@ldn_hash["No Church"] = (User.find_by(id: 33).records.order('day DESC').first.sunday_att)-(ChurchGroup.where(region: "London").total_latest_ldn(:sunday_att))
-    @records = Record.includes(user: :church_group)
+    @records = Record.includes( user: [:church_group] )
+    @total_hash = {}
+    make_total_hash
+    @latest_hash = {}
+    @latest_hash["Judea"] = latest_totals("Judea")
+    @latest_hash["FLC UK"] = latest_totals
+    @latest_hash["London"] = latest_totals("London Main")
 	end
 
 	def show
@@ -131,6 +127,44 @@ end
 
 
 private
+
+def make_total_hash
+  @total_hash[Date.parse(month(2)).strftime('%b-%y')] = totals(month(2), month(1))
+  @total_hash[Date.parse(month(1)).strftime('%b-%y')] = totals(month(1), month(0))
+  @total_hash[Date.parse(month(0)).strftime('%b-%y')] = totals(month(0), month(-1))
+  @total_hash[Date.today.strftime("%Y")] = totals(Date.today.strftime("Jan%Y"), month(-1))
+end
+
+def totals(records=@records, start_month, end_month)
+  attrs = [:sunday_att, :new_converts, :first_timers, :nbs, :nbs_finish, :fnb]
+  results = {}
+  recs = records.select{ |record| record.user.sunday_meeting }
+          .select{ |record| (Date.parse(start_month)..(Date.parse(end_month))-1).include?(record.day) }
+  attrs.each { |attribute| results[attribute] = recs.map(&attribute).inject(&:+) }
+  results[:n] = recs.map(&:day).uniq.count.to_f
+  results
+end
+
+def latest_totals(region=nil, records=@records)
+  attrs = [:sunday_att, :new_converts, :first_timers, :nbs, :nbs_finish, :fnb]
+  results = {}
+  if region
+    recs = records.select{ |record| record.user.sunday_meeting }
+                  .select{ |record| record.user.church_group.region == region }
+                  .select{ |record| record.day == date_of_last("Sunday") }
+  else
+    recs = records.select{ |record| record.user.sunday_meeting }
+                  .select{ |record| record.day == date_of_last("Sunday") }
+  end
+  attrs.each { |attribute| results[attribute] = recs.map(&attribute).inject(&:+) }
+  results
+end
+
+def averages(records=@records, start_month, end_month)
+  sums = totals(records, start_month, end_month)
+  sums.each { |key, value| sums[key] = (value / sums[:n]).round(0) }
+  sums
+end
 
   def sort_column
     (params[:sort]) ? params[:sort] : "day"

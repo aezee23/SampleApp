@@ -1,5 +1,20 @@
 module ApplicationHelper
 
+  def total_month_sum(records, attribute, month)
+    @cached = @cached || records.select{ |record| record.user.sunday_meeting }
+                                .select{ |record| (Date.parse(month)..(Date.parse(month)>>1)-1).include?(record.day) }
+    
+    @cached.map(&attribute).inject(&:+)
+  end
+
+  def total_month_avg(records, attribute, month)
+    @cached = @cached || records.select{ |record| record.user.sunday_meeting }
+                                .select{ |record| (Date.parse(month)..(Date.parse(month)>>1)-1).include?(record.day) }
+    n = @cached.map(&:day).uniq.count.to_f
+    sum = @cached.map(&attribute).inject(&:+)
+    sum / n.round(0)
+  end
+
 def median(array)
   sorted = array.sort
   len = sorted.length

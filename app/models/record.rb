@@ -43,6 +43,12 @@ def self.search(search)
   end
 end
 
+def self.total_month_avg(r, attribute, month)
+  r.select{ |record| record.user.sunday_meeting }
+      .select{ |record| (Date.parse(month)..(Date.parse(month)>>1)-1).include?(record.day) }
+      .map(&attribute).inject(&:+)
+end
+
 def self.to_csv(options = {})
   CSV.generate(options) do |csv|
     csv << column_names

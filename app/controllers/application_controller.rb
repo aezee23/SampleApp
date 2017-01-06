@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
    include SessionsHelper
    include ApplicationHelper
 
+   helper_method :month
+   
+  def month(offset, format='long')
+    format == 'short' ? (Date.today << offset).strftime('%b-%y') : (Date.today << offset).strftime('%b%Y')
+  end
+
   def date_of_last(day)
   date  = Date.parse(day)
   delta = date > Date.today ? -7 : 0
