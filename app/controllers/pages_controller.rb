@@ -15,6 +15,7 @@ class PagesController < ApplicationController
 		@array= ChurchGroup.make_hash_month_sum("Jan", :sunday_att)
 		@ldn_hash = ChurchGroup.make_hash_latest_ldn(:sunday_att)
 		@ldn_hash["No Church"] = (User.find_by(id: 33).records.order('day DESC').first.sunday_att)-(ChurchGroup.where(region: "London").total_latest_ldn(:sunday_att))
+    @records = Record.includes(user: :church_group)
 	end
 
 	def show

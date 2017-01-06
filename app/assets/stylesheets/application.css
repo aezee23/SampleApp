@@ -43,11 +43,12 @@ li.section_nav_item{
   display: inline-block;
   vertical-align: middle;
   border-radius: 10px;
+  width: 25%;
 }
 ul li a.section_nav{
   color: #31708f;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 16px;
   padding: 10px;
   display: inline-block;
 }

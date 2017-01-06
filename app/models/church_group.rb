@@ -101,11 +101,11 @@ b
 end
 
 def self.make_hash_month_avg(func, fun)
-b = {}
-self.where.not(id: 1).each do |x| 
-b["#{x.name}- #{x.leader.split[0]}"] = x.sum_month_avg(func, fun)
-	end
-b
+  b = {}
+  self.where.not(id: 1).each do |x| 
+    b["#{x.name}- #{x.leader.split[0]}"] = x.sum_month_avg(func, fun)
+  end
+  b
 end
 
 def self.make_hash_ytd_sum(func)

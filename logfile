@@ -82,3 +82,5 @@ LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
 ERROR:  column "%Y0101" does not exist at character 108
 STATEMENT:  SELECT "records".* FROM "records" WHERE "records"."user_id" = $1 AND (day > Date.parse(Date.today.strftime("%Y0101")))  ORDER BY "records"."day" DESC
+FATAL:  lock file "postmaster.pid" already exists
+HINT:  Is another postmaster (PID 335) running in data directory "/usr/local/var/postgres"?

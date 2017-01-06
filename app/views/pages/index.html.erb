@@ -46,18 +46,18 @@
                 <div class="db-wrapper">
                     <div class="db-pricing-eleven db-bk-color-one">
                         <div class="price">
-                                <%= ChurchGroup.total_month_avg((Date.today << 2).strftime('%b'), :sunday_att) %>
+                                <%= ChurchGroup.total_month_avg((Date.today << 2).strftime('%b%Y'), :sunday_att) %>
                                 <small>Total FLC UK Average Sunday Attendance For</small>
                         </div>
                         <div class="type">
                             <%= (Date.today << 2).strftime('%b-%y')%>
                         </div>
                         <ul>
-							<li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :new_converts) %></span><p style="font-size: 2.5vmin"> Total New Converts </p></li>
-                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :first_timers) %></span><p style="font-size: 2.5vmin"> Total First Timers  </p></li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 2).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 2).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
-                             <li><i class="glyphicon glyphicon-briefcase"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B'), :fnb) %></span><p style="font-size: 2.5vmin"> Total First and Best </p></li>
+							<li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B%Y'), :new_converts) %></span><p style="font-size: 2.5vmin"> Total New Converts </p></li>
+                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B%Y'), :first_timers) %></span><p style="font-size: 2.5vmin"> Total First Timers  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 2).strftime('%B%Y'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 2).strftime('%B%Y'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                             <li><i class="glyphicon glyphicon-briefcase"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 2).strftime('%B%Y'), :fnb) %></span><p style="font-size: 2.5vmin"> Total First and Best </p></li>
                         </ul>
                         <div class="pricing-footer">
                               <%= link_to "Details", "#my-modal", :class => "btn db-button-color-square btn-lg", style: "font-size:2vmin", "data-toggle" => "modal" %>
@@ -69,25 +69,25 @@
 <div class="container">
 
   <div class="col-xs-6" style="color:#000000; width: 100%; text-align: center">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_avg((Date.today << 2).strftime('%B'), :sunday_att), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} Sunday"}} %>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_avg((Date.today << 2).strftime('%B%Y'), :sunday_att), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} Sunday"}} %>
   </div>
   
     <div class="col-xs-6" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :new_converts), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} New Converts"}}%>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B%Y'), :new_converts), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} New Converts"}}%>
   </div>
   
     <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :first_timers), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} First Timers"}} %>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B%Y'), :first_timers), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} First Timers"}} %>
   </div>
   
       <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :nbs), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} Started NBS"}}%>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B%Y'), :nbs), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} Started NBS"}}%>
   </div>
       <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :nbs_finish), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} Finished NBS"}} %>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B%Y'), :nbs_finish), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} Finished NBS"}} %>
   </div>
       <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B'), :fnb), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} First & Best"}}%>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 2).strftime('%B%Y'), :fnb), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 2).strftime('%b-%y')} First & Best"}}%>
   </div>
  
 
@@ -107,7 +107,7 @@
                   <div class="db-wrapper">
                 <div class="db-pricing-eleven db-bk-color-two popular">
                     <div class="price">
-                        <%= ChurchGroup.total_month_avg((Date.today << 1).strftime('%b'), :sunday_att) %>
+                        <%= ChurchGroup.total_month_avg((Date.today << 1).strftime('%b%Y'), :sunday_att) %>
                                 <small>Total FLC UK Average Sunday Attendance For</small>
                     </div>
                     <div class="type">
@@ -115,11 +115,11 @@
                     </div>
                     <ul>
 
-                     <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :new_converts) %></span> <p style="font-size: 2.5vmin">Total New Converts </p></li>
-                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :first_timers) %></span><p style="font-size: 2.5vmin"> Total First Timers  </p></li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 1).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 1).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
-                             <li><i class="glyphicon glyphicon-briefcase"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B'), :fnb) %></span><p style="font-size: 2.5vmin"> Total First and Best </p></li>
+                     <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B%Y'), :new_converts) %></span> <p style="font-size: 2.5vmin">Total New Converts </p></li>
+                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B%Y'), :first_timers) %></span><p style="font-size: 2.5vmin"> Total First Timers  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 1).strftime('%B%Y'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today << 1).strftime('%B%Y'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                             <li><i class="glyphicon glyphicon-briefcase"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today << 1).strftime('%B%Y'), :fnb) %></span><p style="font-size: 2.5vmin"> Total First and Best </p></li>
                     </ul>
 
                 
@@ -134,25 +134,25 @@
   <div class="container">
 
   <div class="col-xs-6" style="color:#000000; width: 100%; text-align: center">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_avg((Date.today << 1).strftime('%B'), :sunday_att), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} Sunday"}} %>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_avg((Date.today << 1).strftime('%B%Y'), :sunday_att), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} Sunday"}} %>
   </div>
   
     <div class="col-xs-6" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B'), :new_converts), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} New Converts"}}%>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B%Y'), :new_converts), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} New Converts"}}%>
   </div>
   
     <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B'), :first_timers), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} First Timers"}} %>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B%Y'), :first_timers), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} First Timers"}} %>
   </div>
   
       <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B'), :nbs), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} Started NBS"}}%>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B%Y'), :nbs), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} Started NBS"}}%>
   </div>
       <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B'), :nbs_finish), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} Finished NBS"}} %>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B%Y'), :nbs_finish), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} Finished NBS"}} %>
   </div>
       <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B'), :fnb), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} First & Best"}}%>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today << 1).strftime('%B%Y'), :fnb), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today << 1).strftime('%b-%y')} First & Best"}}%>
   </div>
   
 </div>
@@ -182,11 +182,11 @@
                     </div>
                     <ul>
 
-                          <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :new_converts) %> </span><p style="font-size: 2.5vmin">Total New Converts </p></li>
-                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :first_timers) %></span> <p style="font-size: 2.5vmin">Total First Timers  </p></li>
-                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today).strftime('%B'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
-                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today).strftime('%B'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
-                             <li><i class="glyphicon glyphicon-briefcase"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B'), :fnb) %></span> <p style="font-size: 2.5vmin">Total First and Best </p></li>
+                          <li><i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B%Y'), :new_converts) %> </span><p style="font-size: 2.5vmin">Total New Converts </p></li>
+                            <li><i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B%Y'), :first_timers) %></span> <p style="font-size: 2.5vmin">Total First Timers  </p></li>
+                            <li><i class="glyphicon glyphicon-home"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today).strftime('%B%Y'), :nbs) %></span><p style="font-size: 2.5vmin"> Began New Believers School  </p></li>
+                            <li><i class="glyphicon glyphicon-education"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month_cc((Date.today).strftime('%B%Y'), :nbs_finish) %></span><p style="font-size: 2.5vmin"> Finished New Believers School  </p></li>
+                             <li><i class="glyphicon glyphicon-briefcase"></i>&nbsp;<span style="font-size: 4.5vmin; font-weight: Bold"><%= ChurchGroup.total_month((Date.today).strftime('%B%Y'), :fnb) %></span> <p style="font-size: 2.5vmin">Total First and Best </p></li>
                     </ul>
                     <div class="pricing-footer">
 
@@ -200,25 +200,25 @@
 <div class="container">
 
   <div class="col-xs-6" style="color:#000000; width: 100%; text-align: center">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_avg((Date.today).strftime('%B'), :sunday_att), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} Sunday"}} %>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_avg((Date.today).strftime('%B%Y'), :sunday_att), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} Sunday"}} %>
   </div>
   
     <div class="col-xs-6" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today).strftime('%B'), :new_converts), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} New Converts"}}%>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today).strftime('%B%Y'), :new_converts), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} New Converts"}}%>
   </div>
   
     <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today).strftime('%B'), :first_timers), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} First Timers"}} %>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today).strftime('%B%Y'), :first_timers), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} First Timers"}} %>
   </div>
   
       <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today).strftime('%B'), :nbs), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} Started NBS"}}%>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today).strftime('%B%Y'), :nbs), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} Started NBS"}}%>
   </div>
       <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today).strftime('%B'), :nbs_finish), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} Finished NBS"}} %>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London", "Judea").make_hash_month_sum((Date.today).strftime('%B%Y'), :nbs_finish), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'left', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} Finished NBS"}} %>
   </div>
       <div class="col-xs-12" id="pie_c">
-    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today).strftime('%B'), :fnb), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} First & Best"}}%>
+    <%= pie_chart ChurchGroup.where('region = ? OR region = ?', "London Main", "Judea").make_hash_month_sum((Date.today).strftime('%B%Y'), :fnb), library: {chart: {width: 350}, legend: {layout: 'vertical', align: 'right', verticalAlign: 'bottom', itemStyle: {fontSize: "10px"}}, title: {text: "Average #{(Date.today).strftime('%b-%y')} First & Best"}}%>
   </div>
    
 </div>
