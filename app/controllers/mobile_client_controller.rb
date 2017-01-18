@@ -23,11 +23,11 @@ class MobileClientController < ApplicationController
 
   def prepare_totals(records)
     months = (Date.today.last_year..Date.today).map{|day| day.strftime("%b%Y")}.uniq.reverse
-    results = []
-    results << totals(records, months[12], months[0])
+    results = {}
+    results["Last 12 months"] = totals(records, months[12], months[0])
     months.each do |month|
       next_month = (Date.parse(month) >> 1).strftime("%b%Y")
-      results << totals(records, month, next_month)
+      results[month] = totals(records, month, next_month)
     end
 
     results
@@ -68,13 +68,18 @@ class MobileClientController < ApplicationController
   def totals(records=@records, start_month, end_month)
     attrs = [:sunday_att, :first_timers, :new_converts, :nbs, :nbs_finish, :baptised, :fnb]
     attrs_names = ["sunday", "ft", "newConv", "nbs", "fnbs", "bap", "tithe"]
+    results = {}
     d1 = Date.parse(start_month)
     d2 = Date.parse(end_month)
-    title = d1.next_year == d2 ? d1.strftime("%Y") : start_month
+    divisor = d1.next_year == d2 ? 12.0 : 1.0
+    title = start_month
     results = { month: title }
     recs = records.select{ |record| (d1..d2-1).include?(record.day) }
-    attrs.each_with_index { |attribute, index| results[attrs_names[index]] = ( ( recs.map{ |rec| rec[attribute] || 0 }.inject(&:+) ) || 0 ).to_s }
+    attrs.each_with_index { |attribute, index| results[attrs_names[index]] = ( ( recs.map{ |rec| rec[attribute] || 0 }.inject(&:+) || 0 ) / divisor).round(0).to_s }
     results[:n] = recs.map(&:day).uniq.count.to_f.to_s
+    if results[:n].to_i != 0 
+      results["sunday"] = (results["sunday"].to_f * divisor / results[:n].to_f).round(0).to_s
+    end
     results
   end
 
