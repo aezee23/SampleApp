@@ -16,6 +16,8 @@ resources :church_groups
 get 'login' => 'sessions#new'
 post 'login' => 'sessions#create'
 delete 'logout' => 'sessions#destroy'
+get 'mobile-summary' => 'mobile_client#summary'
+get "unauthorised" => 'mobile_client#unauthorised'
 
 
 resources :users

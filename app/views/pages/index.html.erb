@@ -11,12 +11,6 @@
   </div>
 <% elsif current_user && current_user.admin %>
   <div class="container">
-    <ul class="section_nav_group">
-      <li class="section_nav_item"><%= link_to "Summary", "#", class: "section_nav", style: "" %></li>
-      <li class="section_nav_item"><%= link_to "Latest Data", "#", class: "section_nav", style: "" %></li>
-      <li class="section_nav_item"><%= link_to "Retention", retention_path, class: "section_nav", style: "" %></li>
-      <li class="section_nav_item"><%= link_to "Visitation", visi_record_path, class: "section_nav", style: "" %></li>
-    </ul>
     <div class="row db-padding-btm db-attached">
       <% @total_hash.each_with_index do |(month, totals), index| %>
         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="width: 25%">

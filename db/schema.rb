@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170106112856) do
+ActiveRecord::Schema.define(version: 20170118091030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 20170106112856) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "mobile_tokens", force: :cascade do |t|
+    t.string   "auth_token"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "records", force: :cascade do |t|
     t.date     "day"
     t.integer  "sunday_att"
@@ -43,10 +50,11 @@ ActiveRecord::Schema.define(version: 20170106112856) do
     t.string   "preacher_sunday"
     t.string   "preacher_weekday"
     t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "nbs_finish"
     t.boolean  "visitation"
+    t.integer  "baptised",         default: 0
   end
 
   add_index "records", ["day", "user_id"], name: "index_records_on_day_and_user_id", unique: true, using: :btree
@@ -64,14 +72,15 @@ ActiveRecord::Schema.define(version: 20170106112856) do
     t.integer  "church_group_id"
     t.string   "password_digest"
     t.boolean  "admin",           default: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "remember_digest"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.string   "city"
     t.boolean  "is_leader"
     t.boolean  "sunday_meeting"
+    t.string   "role",            default: "Elder"
   end
 
   add_index "users", ["church_group_id"], name: "index_users_on_church_group_id", using: :btree

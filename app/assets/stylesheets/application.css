@@ -36,29 +36,6 @@
     color: black;
 }
 
-/*Front page nav links */
-li.section_nav_item{
-  list-style: none;
-  background: #d9edf7;
-  display: inline-block;
-  vertical-align: middle;
-  border-radius: 10px;
-  width: 25%;
-}
-ul li a.section_nav{
-  color: #31708f;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 10px;
-  display: inline-block;
-}
-ul li a.section_nav:hover{
-  color: red;
-  text-decoration: none;
-  cursor: pointer;
-}
-ul.section_nav_group{
-  padding: 0;
-  font-size: 0;
-  text-align: center;
+.container{
+  margin-top: 60px;
 }

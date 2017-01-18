@@ -9,6 +9,7 @@ validates :email, presence: true, length: { maximum: 255 }, format: { with: VALI
 has_secure_password
 validates :password, presence: true, length: { minimum: 6 }, confirmation: true, :unless => :already_has_password?
 validates_inclusion_of :is_leader, in: [true, false]
+validates_inclusion_of :role, in: ["Elder", "Pastor", "Admin"]
 
 
 def ytd_visitation

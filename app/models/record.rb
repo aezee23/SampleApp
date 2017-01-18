@@ -17,6 +17,7 @@ validates :message_sunday, presence: true
 validates :message_weekday, presence: true
 validates :preacher_sunday, presence: true
 validates :preacher_weekday, presence: true
+validates :baptised, presence: true
 validates_inclusion_of :visitation, in: [true, false]
 
 def ft_const
