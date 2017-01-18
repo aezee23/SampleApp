@@ -72,7 +72,7 @@ class MobileClientController < ApplicationController
     d1 = Date.parse(start_month)
     d2 = Date.parse(end_month)
     divisor = d1.next_year == d2 ? 12.0 : 1.0
-    title = start_month
+    title = d1.next_year == d2 ? "Last 12 months": start_month
     results = { month: title }
     recs = records.select{ |record| (d1..d2-1).include?(record.day) }
     attrs.each_with_index { |attribute, index| results[attrs_names[index]] = ( ( recs.map{ |rec| rec[attribute] || 0 }.inject(&:+) || 0 ) / divisor).round(0).to_s }
