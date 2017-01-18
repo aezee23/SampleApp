@@ -24,6 +24,7 @@
   <%= f.number_field :first_timers, icon: "user", value: 0, label: "Number of First Timers in Sunday service:" %>
   <%= f.number_field :nbs, icon: "home", value: 0, label: "How many people STARTED New Believers School this Sunday?" %>
   <%= f.number_field :nbs_finish, icon: "education",  value: 0, label: "How many people FINISHED New Believers School this Sunday?" %>
+   <%= f.number_field :baptised, icon: "tree-deciduous", value: 0, label: "Number of people who were baptised this Sunday:" %>
    <%= f.number_field :fnb, icon: "briefcase", value: 0, label: "Number of people who gave their First and Best this Sunday:" %>
   <%= f.select :visitation, [["No", false], ["Yes", true]], { icon: "check", label: "Did you go on visitation in the past week?" }, { class: "selectpicker" }  %>
   <%= f.text_field :message_sunday, icon: "grain", label: "Sunday Message Title:", value: "None" %>
