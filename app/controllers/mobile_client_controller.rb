@@ -29,6 +29,9 @@ class MobileClientController < ApplicationController
       next_month = (Date.parse(month) >> 1).strftime("%b%Y")
       results[month] = totals(records, month, next_month)
     end
+    results["Latest Data"] = totals(records.select{ |record| record.day == date_of_last("Sunday") }, months[1], months[0] )
+    results["Latest Data"]["month"] = "Latest Data"
+    results["Latest Data"]["date"] = date_of_last("Sunday").strftime("%d%b%y")
 
     results
   end
