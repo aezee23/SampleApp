@@ -73,8 +73,8 @@ class MobileClientController < ApplicationController
     title = d1.next_year == d2 ? d1.strftime("%Y") : start_month
     results = { month: title }
     recs = records.select{ |record| (d1..d2-1).include?(record.day) }
-    attrs.each_with_index { |attribute, index| results[attrs_names[index]] = ( recs.map{ |rec| rec[attribute] || 0 }.inject(&:+) ) || 0 }
-    results[:n] = recs.map(&:day).uniq.count.to_f
+    attrs.each_with_index { |attribute, index| results[attrs_names[index]] = ( ( recs.map{ |rec| rec[attribute] || 0 }.inject(&:+) ) || 0 ).to_s }
+    results[:n] = recs.map(&:day).uniq.count.to_f.to_s
     results
   end
 
