@@ -1,0 +1,146 @@
+<% provide(:title, @church.name) %>
+
+
+<!-- START -->
+<div class="container">
+<div class="twPc-div">
+    <a class="twPc-bg twPc-block"></a>
+
+    <div>
+     
+
+        <a title="" href="#" class="twPc-avatarLink">
+           <%= gravatar_for @church.elder, size: 200 %>
+        <!--    <img alt="Mert Salih Kaplan" src="https://pbs.twimg.com/profile_images/378800000352678934/34f9e192635975bf42e534434e2b6273_bigger.jpeg" class="twPc-avatarImg">  -->
+        </a>
+
+        <div class="twPc-divUser">
+            <div class="twPc-divName">
+                <%= @church.name %>
+            </div>
+            <span class="twpc-divElder">
+               <%= @church.elder.name %><br>
+                 <%= "#{@church.church_group.name} Church"%>
+            </span>
+        </div>
+
+        <div class="twPc-divStats">
+            <ul class="twPc-Arrange">
+                <li class="twPc-ArrangeSizeFit">
+                   
+                        <span class="twPc-StatLabel twPc-block">Average Sunday</span>
+                        <span class="twPc-StatValue"><%= @church.ytd_avg(:sunday_att) %></span>
+                    
+                </li>
+                <li class="twPc-ArrangeSizeFit">
+                  
+                        <span class="twPc-StatLabel twPc-block">Max Sunday</span>
+                        <span class="twPc-StatValue"><%= link_to @max_record.sunday_att, record_path(@max_record) %></span>
+                  
+                </li>
+                <li class="twPc-ArrangeSizeFit">
+                   
+                        <span class="twPc-StatLabel twPc-block">Latest Sunday</span>
+                        <span class="twPc-StatValue"><%= link_to @latest_record.sunday_att, record_path(@latest_record) %></span>
+                  
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!-- Collapsable -->
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Historical Attendance
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+            <div class="row" style="background-color: white; margin-top: 5px">
+      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
+
+  </div>
+</div>
+ 
+
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Additional Information
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+     Overseer: <%= " #{!!@church.church_group.user ? @church.church_group.user.name : "None"}" %><br>  
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          View Raw Data
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+   <!-- Records -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th><span><%= sortable "day", "Date" %></span></th>
+            <th><span><%= sortable "sunday_att", "Sunday" %></span></th>
+            <th><span><%= sortable "weekday_att", "Weekday" %></span></th>               
+            <th><span><%= sortable "first_timers", "First Timers" %></span></th>
+            <th><span><%= sortable "new_converts", "New Converts" %></span></th>
+            <th><span><%= sortable "fnb", "Tithe" %></span></th>
+            <th ><span><%= sortable "nbs", "Start NBS" %></span></th>
+            <th ><span><%= sortable "nbs_finish", "Finish NBS" %></span></th>
+            <th ><span>Sunday Message</span></th>
+        </tr>
+    </thead>
+
+      <tbody>
+        <% @records.each do |t| %>
+        <tr>
+            <td><span><%= link_to t.day.strftime('%d-%b-%y'), record_path(t) %></span></td>
+            <td><span><%= t.sunday_att %></span></td>
+            <td><span><%= t.weekday_att %></span></td>               
+            <td><span><%= t.first_timers %></span></td>
+            <td><span><%= t.new_converts %></span></td>
+            <td><span><%= t.fnb %></span></td>
+            <td ><span><%= t.nbs %></span></td>
+            <td ><span><%= t.nbs_finish %></span></td>
+             <td ><span><%= t.message_sunday %></span></td>
+             <% if current_user.admin %>
+             <td>
+                                  <%= link_to edit_record_path(t), class: "btn btn-default", remote: false do %>
+<i class="fa fa-cog"></i>Edit</a>
+<% end %> 
+                                    </td>
+                                    <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+    <%= will_paginate @records, renderer: BootstrapPagination::Rails%>
+</table>
+
+   <!--Records end -->
+      </div>
+    </div>
+  </div>
+</div> <!-- finish -->
+
+</div>

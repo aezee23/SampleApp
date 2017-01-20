@@ -1,9 +1,11 @@
 class ChurchGroup < ActiveRecord::Base
-	has_many :users
-	has_many :records, through: :users
+	belongs_to :user
+  has_many :churches
+	has_many :records, through: :churches
+  validates :user_id, presence: true
 	validates :name, presence: true, uniqueness: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 
 
 def sum_day_attr(d, att)
@@ -12,7 +14,7 @@ a =	self.users.map {|x| x.records.find_by(day: d)[att]||0}
 end
 
 def sum_ytd_avg(att)
-a =	self.users.map {|x| x.ytd_avg(att)||0}
+a =	self.churches.map {|x| x.ytd_avg(att)||0}
  sum_a = a.inject(0){|sum,x| sum + x }
 end
 
@@ -53,7 +55,7 @@ a =	self.users.map {|x| x.month_sum(month, att)||0}
 end
 
 def sum_latest(h)
-a =	self.users.map {|x| x.latest(h)||0}
+a =	self.churches.map {|x| x.latest(h)||0}
 b = a.inject(0){|sum,x| sum + x }
 end
 

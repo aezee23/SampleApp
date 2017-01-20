@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118091030) do
+ActiveRecord::Schema.define(version: 20170120162502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,22 @@ ActiveRecord::Schema.define(version: 20170118091030) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "email"
+    t.integer  "user_id"
+  end
+
+  create_table "churches", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "church_group_id"
+    t.string   "name"
+    t.string   "short_name"
+    t.string   "email"
+    t.string   "city"
+    t.string   "postcode"
+    t.string   "address"
+    t.date     "date_started"
+    t.boolean  "sunday_meeting"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "members", force: :cascade do |t|
@@ -55,9 +71,10 @@ ActiveRecord::Schema.define(version: 20170118091030) do
     t.integer  "nbs_finish"
     t.boolean  "visitation"
     t.integer  "baptised",         default: 0
+    t.integer  "church_id"
   end
 
-  add_index "records", ["day", "user_id"], name: "index_records_on_day_and_user_id", unique: true, using: :btree
+  add_index "records", ["day", "church_id"], name: "index_records_on_day_and_church_id", unique: true, using: :btree
   add_index "records", ["user_id"], name: "index_records_on_user_id", using: :btree
 
   create_table "specials", force: :cascade do |t|
@@ -68,8 +85,6 @@ ActiveRecord::Schema.define(version: 20170118091030) do
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "name"
-    t.string   "elder"
-    t.integer  "church_group_id"
     t.string   "password_digest"
     t.boolean  "admin",           default: false
     t.datetime "created_at",                        null: false
@@ -77,12 +92,15 @@ ActiveRecord::Schema.define(version: 20170118091030) do
     t.string   "remember_digest"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
-    t.string   "city"
-    t.boolean  "is_leader"
-    t.boolean  "sunday_meeting"
     t.string   "role",            default: "Elder"
   end
 
-  add_index "users", ["church_group_id"], name: "index_users_on_church_group_id", using: :btree
+  create_table "visitation_records", force: :cascade do |t|
+    t.date     "day"
+    t.boolean  "visitation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
 end

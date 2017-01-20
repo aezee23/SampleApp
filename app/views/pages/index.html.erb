@@ -1,10 +1,15 @@
 <% provide(:title, 'Home') %>
 <% if current_user && !current_user.admin %>
   <div class="jumbotron" style="text-align: center">
-    <p>Welcome <%= current_user.elder.split[0] %>! </p>
+    <p>Welcome <%= current_user.name.split[0] %>! </p>
     <p>All data should now have been submitted for <b><%= date_of_last("Sunday").strftime('%d-%b-%y') %></b></p>
-    <% if current_user.is_leader %>
-      <p><%= link_to "View Data", church_group_path(@current_user.church_group), class: "btn btn-primary btn-xs" %></p>  
+    <% if current_user.is_leader? %>
+      <% @current_user.church_groups.each do |group| %>
+        <p><%= link_to "View #{group.name}", church_group_path(group), class: "btn btn-primary btn-xs" %></p>  
+      <% end %>
+      <% if current_user.churches.count > 0 %>
+        <p><%= link_to "View Campus Church Data", records_path, class: "btn btn-primary btn-xs" %></p> 
+       <% end %>
     <% else %>
       <p><%= link_to "View Data", records_path, class: "btn btn-primary btn-xs" %></p> 
     <% end %>

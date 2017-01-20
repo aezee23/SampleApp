@@ -8,7 +8,6 @@
                                 <th><span><%= sortable "name", "Name" %></span></th>
                                  <th><span><%= sortable "region", "Region" %></span></th>
                                 <th><span> Number of Churches</span></th>
-                                 <th><span> AVG Total Size</span></th>
                                  <th><span> Latest Total Size</span></th>
                                 <th> &nbsp; </th>
                                 </tr>
@@ -20,15 +19,14 @@
                                   
                                     <td>
 
-                                        <%= gravatar_fore(t) %>
+                                        <%= gravatar_for(t.churches.first.elder) %>
                                          
                                         <%= link_to t.name, t, class: "user-link" %>
                                         <span class="user-subhead"><%="Overseer: #{t.leader}"%></span>
                                     </td>
                                    
                                     <td class= "table-text"><%= t.region%></td>
-                                    <td class= "table-text"><%= t.users.where(is_leader: false).count%></td>
-                                    <td class="table-text text-center"><strong><%= t.sum_ytd_avg(:sunday_att) %></strong></td>
+                                    <td class= "table-text"><%= t.churches.count%></td>
                                      <td class="table-text text-center"><strong><%= t.sum_latest(:sunday_att) %></strong></td>
                                  
                                   

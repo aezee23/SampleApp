@@ -21,6 +21,7 @@ get "unauthorised" => 'mobile_client#unauthorised'
 
 
 resources :users
+resources :churches
 resources :records
 resources :password_resets,     only: [:new, :create, :edit, :update]
 get 'change_password' => 'users#change_password'

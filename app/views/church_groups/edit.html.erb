@@ -11,7 +11,7 @@
 <%= bootstrap_form_for(@church_group) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
   <%= f.text_field :name, icon: "pencil", label: "Church Group Name:" %>
-  <%= f.text_field :leader, icon: "user", label: "Church Group Overseer:" %>
+  <%= f.select :user_id, User.where.not(role: "Admin").collect {|a| [ a.name, a.id ] }, {icon: "user", label: "Current Leader" }, { class: "selectpicker" } %>
   <%= f.email_field :email, icon: "folder-open", label: "Church Group Email Address:" %>
   <%= f.select :region, [["London", "London"], ["London Main", "London Main"], ["Judea", "Judea"]], { icon: "check", label: "Select Region Church Group is Based In" }, { class: "selectpicker" }  %>
   <%= f.submit "Submit", data: { confirm: 'Are You Sure You Want To Amend?' }, class: "btn btn-primary" %>

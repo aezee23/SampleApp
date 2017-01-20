@@ -12,7 +12,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if logged_in? && current_user.admin == true %>
+<% if logged_in? && current_user.admin %>
 
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
@@ -37,7 +37,7 @@
           <%= "Church Groups" %> <span class="sr-only">(current)</span>
           <% end %></li>
         <li class="">
-          <%= link_to users_path do %>
+          <%= link_to churches_path do %>
           <%= "Campus Churches" %> <span class="sr-only">(current)</span>
           <% end %></li>
           
@@ -63,14 +63,24 @@
           <%= "Create new Data Record" %> <span class="sr-only">(current)</span>
           <% end %></li>
              <li class="">
-          <%= link_to new_user_path do %>
-          <%= "Create New Campus Church" %> <span class="sr-only">(current)</span>
+          <%= link_to new_church_path do %>
+          <%= "Create New Campus Church" %> <span class="sr-only"></span>
           <% end %></li>
            <li class="">
              <%= link_to new_church_group_path do %>
-          <%= "Create New Church Group" %> <span class="sr-only">(current)</span>
+          <%= "Create New Church Group" %> <span class="sr-only-current"></span>
           <% end %></li>
             <li role="separator" class="divider"></li>
+            <li class="">
+              <%= link_to new_user_path do %>
+              <%= "Add New User" %> <span class="sr-only-current"></span>
+              <% end %>
+            </li>
+            <li class="">
+              <%= link_to users_path do %>
+              <%= "View current users" %> <span class="sr-only-current"></span>
+              <% end %>
+            </li>
             <li><a href="#">Change Password</a></li>
             <li role="separator" class="divider"></li>
              <li class="">
@@ -102,7 +112,7 @@
 
 
 
-<% elsif logged_in? && current_user.admin == false && current_user.is_leader == false %>
+<% elsif logged_in? && !current_user.admin && !current_user.is_leader? %>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -146,7 +156,7 @@
 
 
 
-<% elsif logged_in? && current_user.admin == false && current_user.is_leader == true %>
+<% elsif logged_in? && !current_user.admin && current_user.is_leader? %>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -165,10 +175,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <% current_user.church_groups.each do |group| %>
           <li>
-          <%= link_to church_group_path(current_user.church_group) do %>
-          <%= "View Data" %> <span class="sr-only">(current)</span>
+          <%= link_to church_group_path(group) do %>
+          <%= "View #{group.name} Data" %> <span class="sr-only">(current)</span>
           <% end %></li>
+          <% end %>
       
             <li>
           <%= link_to new_record_path do %>

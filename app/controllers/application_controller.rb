@@ -6,16 +6,28 @@ class ApplicationController < ActionController::Base
    include ApplicationHelper
 
    helper_method :month
+
+
+  def logged_in_user
+    unless logged_in?
+    flash[:danger] = "Please log in."
+    redirect_to login_url
+    end
+  end
+
+  def admin_user
+    redirect_to demo_path unless current_user.admin?
+  end
    
   def month(offset, format='long')
     format == 'short' ? (Date.today << offset).strftime('%b-%y') : (Date.today << offset).strftime('%b%Y')
   end
 
   def date_of_last(day)
-  date  = Date.parse(day)
-  delta = date > Date.today ? -7 : 0
-  date + delta
-end
+    date  = Date.parse(day)
+    delta = date > Date.today ? -7 : 0
+    date + delta
+  end
 
 def date_of_next(day)
   date  = Date.parse(day)

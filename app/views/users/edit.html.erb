@@ -5,18 +5,16 @@
         <div id="loginbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <div class="panel-title">Update <%= @user.name %> Campus Church Information</div>
+                        <div class="panel-title">Update <%= @user.name %>'s Information</div>
                       </div>
                       <div style="padding-top:30px" class="panel-body" >
 
 <%= bootstrap_form_for(@user) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
-  <%= f.text_field :name, icon: "pencil", label: "Campus Church Name:" %>
-  <%= f.text_field :elder, icon: "user", label: "Campus Church Current Elder:" %>
-  <%= f.email_field :email, icon: "folder-open", label: "Campus Church Email Address:" %>
-  <%= f.text_field :city, icon: "globe", label: "City the Campus Church is Based In:" %>
-  <%= f.select :church_group_id, ChurchGroup.all.collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Church Group" }, { class: "selectpicker" } %>
-   <%= f.select :is_leader, [["No", false], ["Yes", true]], { icon: "check", label: "Is this setup for a church group leader?" }, { class: "selectpicker" }  %>
+<%= f.text_field :name, icon: "pencil", label: "User's full name:" %>
+<%= f.email_field :email, icon: "folder-open", label: "User's Email Address:" %>
+<%= f.select :role, [["Admin", "Admin"], ["Overseer", "Overseer"], ["Elder", "Elder"], ["Pastor", "Pastor"]],{ icon: "pencil", label: "User's main role:" }, { class: "selectpicker" }  %>
+ <%= f.select :admin, [["No", false], ["Yes", true]], { icon: "check", label: "Is this setup for an admin user?" }, { class: "selectpicker" }  %>
   <%= f.submit "Submit Amendment", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
 <% end %>
 

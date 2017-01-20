@@ -6,14 +6,17 @@
         <div id="loginbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <div class="panel-title">Edit <%= @record.day.strftime("%d-%b-%y") %> Record for <%= @record.user.name %></div>
+                        <div class="panel-title">Edit <%= @record.day.strftime("%d-%b-%y") %> Record for <%= @record.church.name %></div>
                       </div>
                       <div style="padding-top:30px" class="panel-body" >
 
 <%= bootstrap_form_for(@record) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <% if current_user.admin %>
-  <%= f.select :user_id, User.where(admin: false).collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Campus Church" }, { class: "selectpicker" } %>
+    <%= f.select :church_id, Church.all.collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Campus Church" }, { class: "selectpicker" } %>
+    <%= f.select :user_id, User.where(admin: false).collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Select Elder" }, { class: "selectpicker" } %>
+  <% else %>
+    <%= f.select :church_id, current_user.churches.collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Campus Church" }, { class: "selectpicker" } %>
   <% end %>
   <%= f.date_field :day, icon: "calendar", value: @date, label: "Date of Sunday Service", help: "Click dropdown arrow to select" %>
   <%= f.number_field :sunday_att, icon: "globe", value: 0, label: "Sunday Attendance:" %>

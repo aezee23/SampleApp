@@ -1,9 +1,9 @@
-<% provide(:title, "#{@record.day} Data - #{@record.user.name}") %>
+<% provide(:title, "#{@record.day} Data - #{@record.church.name}") %>
 
 <div class="container">
 <h3 class="page_heading">	
 	
-	<span class="label label-primary"><%= link_to @record.user.name, user_path(@record.user), class: "label label-primary" %><%= "      "+@record.day.strftime('%d-%b-%y') %></span>
+	<span class="label label-primary"><%= link_to @record.church.name, church_path(@record.church), class: "label label-primary" %><%= "      "+@record.day.strftime('%d-%b-%y') %></span>
 	</h3>
 		
 
@@ -30,6 +30,8 @@
   <dd><%= @record.message_weekday %></dd>
    <dt> Weekday Preacher</dt>
   <dd><%= @record.preacher_weekday %></dd>
+   <dt> Data entered by:</dt>
+  <dd><%= @record.user ? @record.user.name : "User deleted" %></dd>
    <% if current_user.admin %>
    <dt> 
 <br>

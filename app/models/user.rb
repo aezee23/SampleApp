@@ -1,21 +1,37 @@
 class User < ActiveRecord::Base
-	belongs_to :church_group
+	has_many :church_groups
+  has_many :visitation_records
+  has_many :churches
 	has_many :records
   attr_accessor :remember_token, :activation_token, :reset_token
 	before_save { self.email = email.downcase }
-validates :name, presence: true, length: { maximum: 50 }
-VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-has_secure_password
-validates :password, presence: true, length: { minimum: 6 }, confirmation: true, :unless => :already_has_password?
-validates_inclusion_of :is_leader, in: [true, false]
-validates_inclusion_of :role, in: ["Elder", "Pastor", "Admin"]
+  validates :name, presence: true, length: { maximum: 50 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  has_secure_password
+  validates :password, presence: true, length: { minimum: 6 }, confirmation: true, :unless => :already_has_password?
+  validates_inclusion_of :role, in: ["Elder", "Pastor", "Admin", "Overseer"]
 
 
 def ytd_visitation
   n = Date.today.cwyear == 2016 ? Date.today.cweek - Date.parse("26Mar2016").cweek : Date.today.cweek
-  visitation_count = self.records.where("day >= ?", Date.parse("26Mar2016")).where(visitation: true).count
+  visitation_count = self.records.where("day >= ?", Date.parse(Date.today.strftime("Jan%Y"))).where(visitation: true).count
   (visitation_count.to_f / n * 100).to_i
+end
+
+def has_sunday_meetings?
+  self.churches.any?{ |church| church.sunday_meeting }
+end
+
+def is_leader?
+  self.church_groups.count > 0
+end
+
+def responsibilities
+  result = []
+  self.churches.map(&:short_name).each {|name| result << name } if self.churches.count > 0
+  self.church_groups.each { |cg| result << cg.name } if self.church_groups.count > 0
+  result
 end
 
 def ytd_avg(y)

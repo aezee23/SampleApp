@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 	helper_method :sort_column, :sort_direction, :mweek
 	helper_method :sun_in_month
 	def index
-    @records = Record.includes( user: [:church_group] )
+    @records = Record.includes( church: [:church_group] )
     @total_hash = {}
     make_total_hash
     @latest_hash = {}
@@ -89,11 +89,11 @@ end
 
 def visi_record
   if params[:church_group] && params[:church_group] != "Church Group Leaders"
-    @users = ChurchGroup.where(region: params[:church_group].split(" ")[0]).each_with_object([]) {|group, array| array << group.users.where(is_leader: false)}.flatten
+    @users = ChurchGroup.where(region: params[:church_group].split(" ")[0]).each_with_object([]) {|group, array| array << group.churches.map(&:elder)}.flatten
   elsif params[:church_group] == "Church Group Leaders"
-    @users = ChurchGroup.order(region: :asc).each_with_object([]) {|group, array| array << group.users.where(is_leader: true)}.flatten
+    @users = ChurchGroup.order(region: :asc).map(&:user)
   else
-    @users = User.where(admin: false).order(is_leader: :asc).order(elder: :asc)
+    @users = User.where.not(role: "Admin").order(name: :asc)
   end
 
 sd = Date.parse(Date.today.strftime("%Y0101"))
@@ -138,7 +138,7 @@ end
 def totals(records=@records, start_month, end_month)
   attrs = [:sunday_att, :new_converts, :first_timers, :nbs, :nbs_finish, :fnb]
   results = {}
-  recs = records.select{ |record| record.user.sunday_meeting }
+  recs = records.select{ |record| record.church.sunday_meeting }
           .select{ |record| (Date.parse(start_month)..(Date.parse(end_month))-1).include?(record.day) }
   attrs.each { |attribute| results[attribute] = recs.map(&attribute).inject(&:+) }
   results[:n] = recs.map(&:day).uniq.count.to_f
@@ -149,11 +149,11 @@ def latest_totals(region=nil, records=@records)
   attrs = [:sunday_att, :new_converts, :first_timers, :nbs, :nbs_finish, :fnb]
   results = {}
   if region
-    recs = records.select{ |record| record.user.sunday_meeting }
-                  .select{ |record| record.user.church_group.region == region }
+    recs = records.select{ |record| record.church.sunday_meeting }
+                  .select{ |record| record.church.church_group.region == region }
                   .select{ |record| record.day == date_of_last("Sunday") }
   else
-    recs = records.select{ |record| record.user.sunday_meeting }
+    recs = records.select{ |record| record.church.sunday_meeting }
                   .select{ |record| record.day == date_of_last("Sunday") }
   end
   attrs.each { |attribute| results[attribute] = recs.map(&attribute).inject(&:+) }

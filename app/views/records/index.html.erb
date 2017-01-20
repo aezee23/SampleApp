@@ -36,12 +36,10 @@
 
       <tbody>
         <% @records.each do |t| %>
-      <% if t.user.is_leader %>
-      <% else %>
         <tr>
             <td><span><%= link_to t.day.strftime('%d-%b-%y'), record_path(t) %></span></td>
             <% if current_user.admin %>
-            <td><span><%= link_to t.user.name, user_path(t.user) %></span></td>
+            <td><span><%= link_to t.church.name, church_path(t.church) %></span></td>
             <% end %>
             <td><span><%= t.sunday_att %></span></td>
             <td><span><%= t.weekday_att %></span></td>               
@@ -56,7 +54,6 @@
 <i class="fa fa-cog"></i>Edit</a>
 <% end %> 
                                     </td>
-                                    <% end %>
         </tr>
         <% end %>
         <% end %>

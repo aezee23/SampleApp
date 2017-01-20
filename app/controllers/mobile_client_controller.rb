@@ -13,10 +13,10 @@ class MobileClientController < ApplicationController
 
 
   def prepare_summary
-    @records ||= Record.includes( user: [:church_group] ).where(
+    @records ||= Record.includes( church: [:church_group] ).where(
       day: (Date.today.last_year.beginning_of_year..Date.today)
       )
-    @results[:totals] = prepare_totals(@records.select{ |record| record.user.sunday_meeting })
+    @results[:totals] = prepare_totals(@records.select{ |record| record.church.sunday_meeting })
     @results[:totals_by_group] = total_for_church_group
     @results[:totals_by_city] = total_for_city
   end
@@ -37,27 +37,27 @@ class MobileClientController < ApplicationController
   end
 
   def total_for_church_group
-    groups = @records.map(&:user).uniq.map(&:church_group).uniq.map(&:name).uniq
+    groups = @records.map(&:church).uniq.map(&:church_group).uniq.map(&:name).uniq
     results = {}
     groups.each do |group|
-      records = @records.select { |record| record.user.church_group.name == group }
+      records = @records.select { |record| record.church.church_group.name == group }
       results[group] = prepare_totals(records)
     end
     results
   end
 
   def total_for_city
-    cities = @records.map(&:user).uniq.map(&:city).uniq
+    cities = @records.map(&:church).uniq.map(&:city).uniq
     results = {}
     cities.each do |city|
-      records = @records.select { |record| record.user.city == city }
+      records = @records.select { |record| record.church.city == city }
       results[city] = prepare_totals(records)
     end
     results
   end
 
   def get_workers
-    @results[:people] = @records.map(&:user).uniq.map {|user| { name: user.elder, church: user.name, email: user.email } }
+    @results[:people] = @records.map(&:church).uniq.map {|church| { name: church.elder.name, church: church.name, email: church.elder.email } }
   end
 
   private

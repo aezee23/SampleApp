@@ -1,23 +1,21 @@
 class ChurchGroupsController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
   before_action :admin_user, only: [:index, :new, :create, :edit, :update, :destroy]
-before_action :correct_user_cg, only: [:show]
-helper_method :sort_column, :sort_direction
+  before_action :correct_user_cg, only: [:show]
+  helper_method :sort_column, :sort_direction
 
 
-	 def index
-@church_groups = ChurchGroup.where.not(id: 1).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 13)
-@user= ChurchGroup.find_by(id: 10).users.first
-	 end
+	def index
+    @church_groups = ChurchGroup.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 13)
+	end
 
-
- def new
+  def new
     @church_group = ChurchGroup.new
   end
 	 
-	 def create
+  def create
     @church_group= ChurchGroup.new(church_params)
-        if @church_group.save
+    if @church_group.save
       redirect_to church_groups_path , notice: 'Church Group was successfully created.'
     else
       render action: 'new'
@@ -28,7 +26,7 @@ helper_method :sort_column, :sort_direction
   	@church_group = ChurchGroup.find(params[:id])
   end
 
-    def update
+  def update
     	@church_group = ChurchGroup.find(params[:id])
     if @church_group.update(church_params)
      flash[:success] = 'Church Group was successfully updated.'
@@ -38,22 +36,21 @@ redirect_to church_groups_path
     end
   end
 
-def show
-@church_group = ChurchGroup.find(params[:id])
-@users = @church_group.users.where(is_leader: false)
-@max= @church_group.make_hash_time_series(:sunday_att).values.max
-end
+  def show
+    @church_group = ChurchGroup.find(params[:id])
+    @churches = @church_group.churches
+  end
 
-def destroy
+  def destroy
     ChurchGroup.find(params[:id]).destroy
     flash[:success] = "Church Group Deleted"
-    redirect_to users_url
+    redirect_to churches_url
   end
 
   private
 
   def church_params
-    params.require(:church_group).permit(:name, :leader, :region, :email)
+    params.require(:church_group).permit(:name, :user_id, :region, :email)
   end
 
     def sort_column
@@ -71,14 +68,14 @@ redirect_to login_url
 end
 end
 
- def correct_user_cg
-      @cg = ChurchGroup.find(params[:id])
-      redirect_to(demo_path) unless (current_user.is_leader && current_user.church_group == @cg) || current_user.admin
-    end
+  def correct_user_cg
+    @cg = ChurchGroup.find(params[:id])
+    redirect_to(demo_path) unless (current_user.is_leader? && current_user.church_groups.include?(@cg)) || current_user.admin
+  end
 
   def admin_user
       redirect_to demo_path unless current_user.admin?
-    end
+  end
  
 
 end
