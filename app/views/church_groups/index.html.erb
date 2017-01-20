@@ -22,7 +22,7 @@
                                         <%= gravatar_for(t.leader) %>
                                          
                                         <%= link_to t.name, t, class: "user-link" %>
-                                        <span class="user-subhead"><%="Overseer: #{t.leader}"%></span>
+                                        <span class="user-subhead"><%="Overseer: #{t.leader.name}"%></span>
                                     </td>
                                    
                                     <td class= "table-text"><%= t.region%></td>
