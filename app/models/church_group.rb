@@ -7,11 +7,14 @@ class ChurchGroup < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 
+  def leader
+    self.user
+  end
 
-def sum_day_attr(d, att)
-a =	self.users.map {|x| x.records.find_by(day: d)[att]||0}
- sum_a = a.inject(0){|sum,x| sum + x }
-end
+  def sum_day_attr(d, att)
+  a =	self.users.map {|x| x.records.find_by(day: d)[att]||0}
+   sum_a = a.inject(0){|sum,x| sum + x }
+  end
 
 def sum_ytd_avg(att)
 a =	self.churches.map {|x| x.ytd_avg(att)||0}
