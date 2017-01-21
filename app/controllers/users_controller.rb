@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    redirect_to users_path
     @user = User.find(params[:id])
     @church_groups = @user.church_groups
     @churches = @user.churches
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])    
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
-      redirect_to @user
+      redirect_to users_path
     else
     	 flash[:danger] = "Please try again"
       render 'edit'
