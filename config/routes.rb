@@ -18,7 +18,7 @@ post 'login' => 'sessions#create'
 delete 'logout' => 'sessions#destroy'
 get 'mobile-summary' => 'mobile_client#summary'
 get "unauthorised" => 'mobile_client#unauthorised'
-
+get 'users/:id/edit_my_profile' => 'users#edit_my_profile', as: :edit_my_profile
 
 resources :users
 resources :churches

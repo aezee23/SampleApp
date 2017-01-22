@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
-  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :destroy, :show]
+  before_action :admin_user, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :correct_user_account, only: [:show]
 	helper_method :sort_column, :sort_direction
 
   def index
@@ -26,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to users_path
     @user = User.find(params[:id])
     @church_groups = @user.church_groups
     @churches = @user.churches
@@ -41,6 +41,11 @@ class UsersController < ApplicationController
     	 flash[:danger] = "Please try again"
       render 'edit'
     end
+  end
+
+  def edit_my_profile
+    @user = User.find(params[:id])
+    
   end
 
   def change_pwd
@@ -66,6 +71,11 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation, :admin, :role)
+  end
+
+  def correct_user_account
+    user = User.find(params[:id])
+    redirect_to demo_path unless (current_user.admin? || current_user == user)
   end
 
   def pwd_params

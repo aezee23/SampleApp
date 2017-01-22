@@ -5,6 +5,13 @@
 
 $gray-medium-light: #eaeaea;
 
+.container hr.user_profile_line {
+  display: block;
+  font-size: 16px;
+  color: #000000;
+  border-bottom: 1px solid #000000
+}
+
 aside {
   section.user_info {
     margin-top: 20px;

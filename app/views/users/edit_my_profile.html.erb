@@ -1,0 +1,24 @@
+
+<% provide(:title, 'Edit Campus Church Information') %>
+
+ <div class="container">    
+        <div id="loginbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Update My Information</div>
+                      </div>
+                      <div style="padding-top:30px" class="panel-body" >
+
+<%= bootstrap_form_for(@user) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+<%= f.text_field :name, icon: "pencil", label: "User's full name:" %>
+<%= f.email_field :email, icon: "folder-open", label: "User's Email Address:" %>
+<%= f.password_field :password, icon: "user", label: "New Password:" %>
+<%= f.password_field :password_confirmation, icon: "user", label: "Confirm New Password:" %>
+  <%= f.submit "Submit Amendment", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
+<% end %>
+    </div>
+  </div>
+  </div>
+  </div>
+

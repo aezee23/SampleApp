@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+  def pluralize_without_count(count, noun, text = nil)
+    if count != 0
+      count == 1 ? "#{noun}#{text}" : "#{noun.pluralize}#{text}"
+    end
+  end
+
   def total_month_sum(records, attribute, month)
     @cached = @cached || records.select{ |record| record.user.sunday_meeting }
                                 .select{ |record| (Date.parse(month)..(Date.parse(month)>>1)-1).include?(record.day) }

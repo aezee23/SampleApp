@@ -1,205 +1,25 @@
-<% provide(:title, @user.name) %>
-<!--
-<div class="container">
- <div class="row">
-  <aside class="col-md-9">
-    <section class="user_info">
-      <h1 style="font-size: 6vmin">
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1><br>
-      <p style="font-size: 4vmin; font-style: italic;"> <%= @user.elder %>
-    </section>
-  </aside>
-</div>
-
-
-
-
-
-</div> --><!--container -->  
+<% provide(:title, "#{@user.name} - Profile Page") %>
 
 <!-- START -->
 <div class="container">
-<div class="twPc-div">
-    <a class="twPc-bg twPc-block"></a>
-
-    <div>
-     
-
-        <a title="" href="#" class="twPc-avatarLink">
-            <%= gravatar_for @user, size: 200 %>
-        <!--    <img alt="Mert Salih Kaplan" src="https://pbs.twimg.com/profile_images/378800000352678934/34f9e192635975bf42e534434e2b6273_bigger.jpeg" class="twPc-avatarImg">  -->
-        </a>
-
-        <div class="twPc-divUser">
-            <div class="twPc-divName">
-                <%= @user.name %>
-            </div>
-            <span class="twpc-divElder">
-               <%= @user.elder %><br>
-                 <%= "#{@user.church_group.name} Church"%>
-            </span>
-        </div>
-
-        <div class="twPc-divStats">
-            <ul class="twPc-Arrange">
-                <li class="twPc-ArrangeSizeFit">
-                   
-                        <span class="twPc-StatLabel twPc-block">Average Sunday</span>
-                        <span class="twPc-StatValue"><%= @user.ytd_avg(:sunday_att) %></span>
-                    
-                </li>
-                <li class="twPc-ArrangeSizeFit">
-                  
-                        <span class="twPc-StatLabel twPc-block">Max Sunday</span>
-                        <span class="twPc-StatValue"><%= link_to @max_record.sunday_att, record_path(@max_record) %></span>
-                  
-                </li>
-                <li class="twPc-ArrangeSizeFit">
-                   
-                        <span class="twPc-StatLabel twPc-block">Latest Sunday</span>
-                        <span class="twPc-StatValue"><%= link_to @latest_record.sunday_att, record_path(@latest_record) %></span>
-                  
-                </li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-
-<!-- Collapsable -->
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Historical Attendance
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-            <div class="row" style="background-color: white; margin-top: 5px">
-      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
-       <% if @user.id == 33 %>
-    <%= area_chart [{name: "Sunday", data: @user.make_hash_time_series(:sunday_att)}, {name: "Weekday", data: ChurchGroup.where(region: "London").make_hash_time_series(:weekday_att)}], stacked: false, library: {title: {text: "Historic Attendance"}} %>
-    <% else %>
-     <%= area_chart [{name: "Sunday", data: @user.make_hash_time_series(:sunday_att)}, {name: "Weekday", data: @user.make_hash_time_series(:weekday_att)}], stacked: false, library: {title: {text: "Historic Attendance"}} %>
-     <% end %>
-  </div>
-</div>
- 
-
+  <div>
+    <%= gravatar_for @user, size: 200 %>
+    <div class="twPc-divUser">
+      <div class="twPc-divName">
+        <%= @user.name %>
       </div>
+      <p><%= pluralize_without_count(@user.responsibilities.count, "Responsibility") %>:</p>
+      <% @user.churches.each do |church| %>
+        <span class="twpc-divElder">
+          <%= church.name %><br>
+        </span>
+      <% end %>
+      <% @user.church_groups.each do |cg| %>
+        <span class="twpc-divElder">
+          <%= cg.name %><br>
+        </span>
+      <% end %>
     </div>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Additional Information
-        </a>
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body">
-     Overseer: <%= " #{@user.church_group.leader}" %><br>  
-      Visitation: <%= @user.records.last.visitation ? "#{@user.elder.split[0]} went on visitation in the past week." : "#{@user.elder.split[0]} DID NOT go on visitation in the past week." %>
-      <br>
-      Members: <%= "#{@user.name} currently has x members" %>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          View Raw Data
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div class="panel-body">
-   <!-- Records -->
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th><span><%= sortable "day", "Date" %></span></th>
-            <th><span><%= sortable "sunday_att", "Sunday" %></span></th>
-            <th><span><%= sortable "weekday_att", "Weekday" %></span></th>               
-            <th><span><%= sortable "first_timers", "First Timers" %></span></th>
-            <th><span><%= sortable "new_converts", "New Converts" %></span></th>
-            <th><span><%= sortable "fnb", "Tithe" %></span></th>
-            <th ><span><%= sortable "nbs", "Start NBS" %></span></th>
-            <th ><span><%= sortable "nbs_finish", "Finish NBS" %></span></th>
-            <th ><span>Sunday Message</span></th>
-        </tr>
-    </thead>
-
-      <tbody>
-        <% @records.each do |t| %>
-        <tr>
-            <td><span><%= link_to t.day.strftime('%d-%b-%y'), record_path(t) %></span></td>
-            <td><span><%= t.sunday_att %></span></td>
-            <td><span><%= t.weekday_att %></span></td>               
-            <td><span><%= t.first_timers %></span></td>
-            <td><span><%= t.new_converts %></span></td>
-            <td><span><%= t.fnb %></span></td>
-            <td ><span><%= t.nbs %></span></td>
-            <td ><span><%= t.nbs_finish %></span></td>
-             <td ><span><%= t.message_sunday %></span></td>
-             <% if current_user.admin %>
-             <td>
-                                  <%= link_to edit_record_path(t), class: "btn btn-default", remote: false do %>
-<i class="fa fa-cog"></i>Edit</a>
-<% end %> 
-                                    </td>
-                                    <% end %>
-        </tr>
-        <% end %>
-    </tbody>
-    <%= will_paginate @records, renderer: BootstrapPagination::Rails%>
-</table>
-
-   <!--Records end -->
-      </div>
-    </div>
-  </div>
-</div> <!-- finish -->
-
-
-<div class="row" style="background-color: white; margin-top: 5px">
-      <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
-         <% if @user.id == 33 %>
-<%= column_chart [{name: "Sunday", data: @user.make_hash_monthly_avg(:sunday_att)}, {name: "Weekday", data: ChurchGroup.where(region: "London").make_total_hash_monthly_avg_cc(:weekday_att)}], stacked: false, library: {title: {text: "Past Year Monthly Average Attendance"}} %>
-         <% else %>
-    <%= column_chart [{name: "Sunday", data: @user.make_hash_monthly_avg(:sunday_att)}, {name: "Weekday", data: @user.make_hash_monthly_avg(:weekday_att)}], stacked: false, library: {title: {text: "Past Year Monthly Average Attendance"}} %>
-    <% end %>
-  </div>
-  <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
-      <% if @user.id == 33 %>
-<%= column_chart [{name: "New Converts", data: @user.make_hash_monthly_sum(:new_converts)}, {name: "Started NBS", data: ChurchGroup.where(region: "London").make_total_hash_monthly_cc(:nbs)}], stacked: false, library: {title: {text: "Past Year Monthly Total New Converts vs Started NBS"}} %>
-         <% else %>
-       
-    <%= column_chart [{name: "New Converts", data: @user.make_hash_monthly_sum(:new_converts)}, {name: "Started NBS", data: @user.make_hash_monthly_sum(:nbs)}], stacked: false, library: {title: {text: "Past Year Monthly Total New Converts vs Started NBS"}} %>
-    <% end %>
-  </div>
-     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
-      <% if @user.id == 33 %>
- <%= column_chart [{name: "Started", data: ChurchGroup.where(region: "London").make_total_hash_monthly_cc(:nbs)}, {name: "Finished", data: ChurchGroup.where(region: "London").make_total_hash_monthly_cc(:nbs_finish)}], stacked: false, library: {title: {text: "Past Year Monthly New Believers School"}} %>
-<% else %>
-    <%= column_chart [{name: "Started", data: @user.make_hash_monthly_sum(:nbs)}, {name: "Finished", data: @user.make_hash_monthly_sum(:nbs_finish)}], stacked: false, library: {title: {text: "Past Year Monthly New Believers School"}} %>
-    <% end %>
-  </div>
-     <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
-    <%= column_chart [{name: "Sunday Attendance", data: @user.make_hash_monthly_avg(:sunday_att)}, {name: "First & Best", data: @user.make_hash_monthly_sum(:fnb)}], stacked: false, library: {title: {text: "Past Year Monthly Average Sunday vs Monthly First & Best"}} %>
-  </div>
- <% if @user.id == 33 %>
-    <div class="col-xs-12" style= "border-style: solid; border-width: 1px; border-color: grey;">
-    <%= column_chart [{name: "Non CC Attendants", data: ChurchGroup.make_LDN_monthly_avg_split(:sunday_att)}], stacked: false, library: {title: {text: "Average Monthly Percentage of Attendants in no Campus Church"}, yAxis: {title: {text: "Percentage (%)"}} } %>
-  </div>
-   <% end %>
-</div>
-
+  <hr class="user_profil_line"/>
 </div>

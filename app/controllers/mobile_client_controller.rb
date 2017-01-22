@@ -19,6 +19,9 @@ class MobileClientController < ApplicationController
     @results[:totals] = prepare_totals(@records.select{ |record| record.church.sunday_meeting })
     @results[:totals_by_group] = total_for_church_group
     @results[:totals_by_city] = total_for_city
+    @results[:information] = prepare_info
+    @results[:pastors] = User.where.not(role: "Admin").map{ |user| [user.name, user.name.split(" ").reverse.join("").downcase] }
+    @results[:churches] = Church.all.map { |church| [church.name, church.church_group.name, church.elder.name, church.elder.name.split(" ").reverse.join("").downcase] }
   end
 
   def prepare_totals(records)
@@ -84,6 +87,20 @@ class MobileClientController < ApplicationController
       results["sunday"] = (results["sunday"].to_f * divisor / results[:n].to_f).round(0).to_s
     end
     results
+  end
+
+  def prepare_info
+    result = {
+      "Date Started"=> "2013",
+      "Past Year Average Weekly Attendance"=> @result[:totals]["Last 12 months"]["sunday"],
+      "Branches"=> Church.where(sunday_meeting: true).count,
+      "London Campuses"=> Church.where(city: "London CC").count,
+      "Pastors"=> User.where(role: "Pastor").count,
+      "Elders"=> User.where(role: "Elder").count,
+      "Church Planters"=> User.where(role: "Church Planter").count,
+      "Church Groups"=> ChurchGroup.count,
+      "Total Campus Churches"=> Church.count
+    }
   end
 
   def authorised
