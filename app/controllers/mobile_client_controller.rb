@@ -92,7 +92,7 @@ class MobileClientController < ApplicationController
   def prepare_info
     result = {
       "Date Started"=> "2013",
-      "Past Year Average Weekly Attendance"=> @result[:totals]["Last 12 months"]["sunday"],
+      "Past Year Average Weekly Attendance"=> @results[:totals]["Last 12 months"]["sunday"],
       "Branches"=> Church.where(sunday_meeting: true).count,
       "London Campuses"=> Church.where(city: "London CC").count,
       "Pastors"=> User.where(role: "Pastor").count,
