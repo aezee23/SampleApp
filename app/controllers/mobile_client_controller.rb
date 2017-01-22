@@ -93,13 +93,13 @@ class MobileClientController < ApplicationController
     result = {
       "Date Started"=> "2013",
       "Past Year Average Weekly Attendance"=> @results[:totals]["Last 12 months"]["sunday"],
-      "Branches"=> Church.where(sunday_meeting: true).count,
-      "London Campuses"=> Church.where(city: "London CC").count,
-      "Pastors"=> User.where(role: "Pastor").count,
-      "Elders"=> User.where(role: "Elder").count,
-      "Church Planters"=> User.where(role: "Church Planter").count,
-      "Church Groups"=> ChurchGroup.count,
-      "Total Campus Churches"=> Church.count
+      "Branches"=> Church.where(sunday_meeting: true).count.to_s,
+      "London Campuses"=> Church.where(city: "London CC").count.to_s,
+      "Pastors"=> User.where(role: "Pastor").count.to_s,
+      "Elders"=> User.where(role: "Elder").count.to_s,
+      "Church Planters"=> User.where(role: "Church Planter").count.to_s,
+      "Church Groups"=> ChurchGroup.count.to_s,
+      "Total Campus Churches"=> Church.count.to_s
     }
   end
 
