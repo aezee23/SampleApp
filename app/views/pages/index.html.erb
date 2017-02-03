@@ -22,7 +22,7 @@
           <div class="db-wrapper">
             <div class="db-pricing-eleven db-bk-color-<%= index + 1 %>">
               <div class="price">
-                <%= (totals[:sunday_att] / totals[:n]).round(0) %>
+                <%= ( (totals[:sunday_att] || 0) / (totals[:n] == 0.0 ? 1.0 : totals[:n] ) ).round(0) %>
                 <small>Total FLC UK Average Sunday Attendance For</small>
               </div>
               <div class="type">

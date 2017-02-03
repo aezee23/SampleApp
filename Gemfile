@@ -24,6 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass'
 gem 'pg'
 gem 'pry'
+gem 'carrierwave', '~> 1.0'
 
 group :development, :test do
    

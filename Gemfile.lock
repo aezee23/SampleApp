@@ -51,6 +51,10 @@ GEM
     bootstrap_form (2.3.0)
     builder (3.2.2)
     byebug (8.2.1)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     chartkick (1.4.2)
     coderay (1.1.1)
     coffee-rails (4.1.1)
@@ -183,6 +187,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap_form
   byebug
+  carrierwave (~> 1.0)
   chartkick
   coffee-rails (~> 4.1.0)
   dateslices (~> 0.0.3)

@@ -1,6 +1,10 @@
 class MobileClientController < ApplicationController
   before_action :check_access, except: [:unauthorised]
 
+    def avg(rec)
+      rec.reduce(:+) / rec.count
+    end
+
   def summary
     @results = {}
     prepare_summary
