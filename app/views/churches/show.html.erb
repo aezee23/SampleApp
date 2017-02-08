@@ -35,13 +35,13 @@
                 <li class="twPc-ArrangeSizeFit">
                   
                         <span class="twPc-StatLabel twPc-block">Max Sunday</span>
-                        <span class="twPc-StatValue"><%= link_to @max_record.sunday_att, record_path(@max_record) %></span>
+                        <span class="twPc-StatValue"><%= link_to @max_record.sunday_att, record_path(@max_record) if @max_record %></span>
                   
                 </li>
                 <li class="twPc-ArrangeSizeFit">
                    
                         <span class="twPc-StatLabel twPc-block">Latest Sunday</span>
-                        <span class="twPc-StatValue"><%= link_to @latest_record.sunday_att, record_path(@latest_record) %></span>
+                        <span class="twPc-StatValue"><%= link_to @latest_record.sunday_att, record_path(@latest_record) if @latest_record %></span>
                   
                 </li>
             </ul>
