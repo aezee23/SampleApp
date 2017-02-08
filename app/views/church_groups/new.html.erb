@@ -13,7 +13,7 @@
   <%= f.text_field :name, icon: "pencil", label: "Church Group Name:" %>
   <%= f.select :user_id, User.where.not(role: "Admin").collect {|a| [ a.name, a.id ] }, {icon: "user", label: "Current Leader" }, { class: "selectpicker" } %>
   <%= f.email_field :email, icon: "folder-open", label: "Church Group Email Address:" %>
-  <%= f.select :region, [["London", "London"], ["London Main", "London Main"], ["Judea", "Judea"], ["Samaria", "Samaria"]], { icon: "check", label: "Select Region Church Group is Based In" }, { class: "selectpicker" }  %>
+  <%= f.select :region, [["London", "London"], ["London Main", "London Main"], ["Judea", "Judea"], ["Samaria", "Samaria"], ["Planters", "Planters"]], { icon: "check", label: "Select Region Church Group is Based In" }, { class: "selectpicker" }  %>
   <%= f.submit "Submit", data: { confirm: 'Are You Sure You Want To Create This New Church Group?' }, class: "btn btn-primary" %>
 <% end %>
 
