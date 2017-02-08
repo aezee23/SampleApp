@@ -16,13 +16,7 @@ class PagesController < ApplicationController
 
 	def show
 		@date = date_of_last("Sunday").strftime('%d-%b-%y')
-		@users = []
-		User.where(admin: false).where(is_leader: false).each do |t|
-			if t.has_not_submitted
-				@users << t
-			end
-		end
-
+		@churches = Church.all.select{ |church| church.missing_data? }
 	end
 
 def last_sunday

@@ -1,11 +1,11 @@
 <% provide(:title, 'Outstanding Records') %>
 <div class="container">
-  <% if !@users.empty? %>
+  <% if !@churches.empty? %>
 <div class="table-responsive">
    <table class="table table-striped user-list">
  <thead>
                                 <tr>
-                                <th ><span class="list-group-item list-group-item-danger">Missing <%= @date %> Data For The Following <%= pluralize(@users.count, "Church") %></span></th>
+                                <th ><span class="list-group-item list-group-item-danger">Missing Data For The Following <%= pluralize(@churches.count, "Church") %></span></th>
                              
                                 </tr>
     </thead>
@@ -19,39 +19,37 @@
                                 <th><span>Campus Church</span></th>
                               
                                  <th><span>Group</span></th>
-                                <th><span>Region</span></th>
-                              <th><span>Email</span></th>
-                                <th><span>Last Submitted</span></th>
-                                <th class="text-center"><span>Data Status</span></th>
+                                <th><span>Leader</span></th>
+                              <th><span>Dates Missing</span></th>
                                 <th> &nbsp; </th>
                                 </tr>
     </thead>
 
     <tbody>
-    	 	<% @users.each do |t| %>
+    	 	<% @churches.each do |t| %>
                                 <tr>
                                     <td>
-                                        <%= gravatar_for t %>
+                                        <%= gravatar_for t.elder %>
                                         <%= link_to t.name, t, class: "user-link2" %>
                                         
                                     </td>
                                     <td><%= link_to t.church_group.name, church_group_path(t.church_group), class: "table-text"%></td>
-                                    <td class="table-text"><%= t.church_group.region %></td>
-                                    <td><%= link_to "#{t.elder}", "mailto:#{t.email}" %></td>
-                                    <td class="table-text text-center"><%= t.records.first.day.strftime("%d%b%y") %></td>
-                                    <td class="text-center">
-                                    	<% @csclass= t.records.where('day > ?', Date.parse(Date.today.strftime('%Y0101'))).count < (Date.today+1).cweek ? "label label-danger" : "label label-success" %>
-                                        <span class="<%="#{@csclass}"%>"><%= t.missing_data%></span>
+                                    <td class="table-text"><%= t.elder.name %></td>
+                                    <td>
+                                        <%= t.missing_data.count %>
+                                        <% t.missing_data.each do |date| %>
+                                        <span class="responsibility"><%= date.strftime("%d%b") %></span>
+                                        <% end %>
                                     </td>
                                   
                         <td>
-                                        <%= link_to user_path(t), class: "table-link success" do %>
+                                        <%= link_to church_path(t), class: "table-link success" do %>
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                             </span>
                                        <% end %>
-                                        <%= link_to edit_user_path(t), class: "table-link" do %>
+                                        <%= link_to edit_church_path(t), class: "table-link" do %>
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
