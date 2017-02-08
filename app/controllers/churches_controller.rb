@@ -59,6 +59,10 @@ class ChurchesController < ApplicationController
 
   private
 
+  def church_params
+    params.require(:church).permit!
+  end
+
   def sort_column
    params[:sort] ? params[:sort] : "name"
   end

@@ -14,7 +14,7 @@ class ChurchGroupsController < ApplicationController
   end
 	 
   def create
-    @church_group= ChurchGroup.new(church_params)
+    @church_group= ChurchGroup.new(church_group_params)
     if @church_group.save
       redirect_to church_groups_path , notice: 'Church Group was successfully created.'
     else
@@ -28,7 +28,7 @@ class ChurchGroupsController < ApplicationController
 
   def update
     	@church_group = ChurchGroup.find(params[:id])
-    if @church_group.update(church_params)
+    if @church_group.update(church_group_params)
      flash[:success] = 'Church Group was successfully updated.'
 redirect_to church_groups_path
     else
@@ -49,7 +49,7 @@ redirect_to church_groups_path
 
   private
 
-  def church_params
+  def church_group_params
     params.require(:church_group).permit(:name, :user_id, :region, :email)
   end
 
@@ -61,12 +61,12 @@ redirect_to church_groups_path
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
-def logged_in_user
-unless logged_in?
-flash[:danger] = "Please log in."
-redirect_to login_url
-end
-end
+  def logged_in_user
+    unless logged_in?
+    flash[:danger] = "Please log in."
+    redirect_to login_url
+    end
+  end
 
   def correct_user_cg
     @cg = ChurchGroup.find(params[:id])
