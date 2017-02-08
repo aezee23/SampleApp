@@ -45,10 +45,10 @@ class Church < ActiveRecord::Base
   end
 
   def missing_data
-    date = [Date.today.beginning_of_year, self.date_started].max
+    date = [Date.today.beginning_of_year, self.date_started || self.created_at ].max
     start = date
     end_date = Date.today
-    sundays = (start..end_date).select{ |day| day.wday == 0 }
+    sundays = (start.to_date..end_date.to_date).select{ |day| day.wday == 0 }
     records = self.records.where(day: (start..end_date))
     sundays.select do |date|
       records.select { |rec| rec.day == date }.count == 0
