@@ -36,7 +36,7 @@
 <% @users.each do |t| %>
 <% if t %>
 <tr>
-<td style="background-color: #b3e6ff; color: black; border-bottom: 1pt solid black"> <%= "#{t.name} - #{t.ytd_visitation}%" %> </td>
+<td style="background-color: #b3e6ff; color: black; border-bottom: 1pt solid black"> <%= "#{t.name}" %> </td>
  <% @weeks.each do |x| %>
 	<% b = x.select{|y| y.wday ==0 && y < Date.today} %>
 	<% b.reverse.each do |c| %>

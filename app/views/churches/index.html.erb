@@ -35,8 +35,8 @@
                                     </strong></td>
                                     <td><%= link_to "#{t.elder.name}", "mailto:#{t.email}" %></td>
                                     <td class="text-center">
-                                         <% csclass= t.records.where('day > ?', Date.parse(Date.today.strftime("%Y0101"))).count < (Date.today+1).cweek ? "label label-danger" : "label label-success" %>
-                                        <span class="<%="#{csclass}"%>"><%= t.missing_data%></span>
+                                         <% csclass= t.missing_data? ? "label label-danger" : "label label-success" %>
+                                        <span class="<%="#{csclass}"%>"><%= t.data_status%></span>
                                     </td>
                                   
                                     <td>

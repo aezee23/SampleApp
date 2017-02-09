@@ -83,9 +83,9 @@ end
 
 def visi_record
   if params[:church_group] && params[:church_group] != "Church Group Leaders"
-    @users = ChurchGroup.where(region: params[:church_group].split(" ")[0]).each_with_object([]) {|group, array| array << group.churches.map(&:elder)}.flatten
+    @users = ChurchGroup.where(region: params[:church_group].split(" ")[0]).each_with_object([]) {|group, array| array << group.churches.map(&:elder)}.flatten.uniq
   elsif params[:church_group] == "Church Group Leaders"
-    @users = ChurchGroup.order(region: :asc).map(&:user)
+    @users = ChurchGroup.order(region: :asc).map(&:user).uniq
   else
     @users = User.where.not(role: "Admin").order(name: :asc)
   end

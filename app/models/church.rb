@@ -55,6 +55,10 @@ class Church < ActiveRecord::Base
     end
   end
 
+  def data_status
+    n = missing_data.count
+  end
+
 
   private
 
