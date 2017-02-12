@@ -133,7 +133,7 @@
                 <% @regions.each do |region| %>
                   <option value="region:<%= region %>"><%= region %></option>
                 <% end %>
-                <option value=''>Select Region</option>
+                <option value=''>All Regions</option>
               </select>
             </li>
             <li ng-hide="searchFilterHide || choice_by !=='Church Group'">
@@ -141,7 +141,7 @@
                 <% @church_groups.each do |group| %>
                   <option value="church_group:<%= group.name %>"><%= group.leader.name.split(" ")[0] + "- " + group.name %></option>
                 <% end %>
-                <option value=''>Select Church Group</option>
+                <option value=''>All Church Groups</option>
               </select>
             </li>
             <li ng-hide="searchFilterHide || choice_by !=='City'">
@@ -149,7 +149,7 @@
                 <% @cities.each do |city| %>
                   <option value="city:<%= city %>"><%= city %></option>
                 <% end %>
-                <option value=''>Select City</option>
+                <option value=''>All Cities</option>
               </select>
             </li>
             <li ng-hide="searchFilterHide || choice_by !=='Church'">
@@ -157,7 +157,7 @@
                 <% @churches.each do |church| %>
                   <option value="church:<%= church %>"><%= church %></option>
                 <% end %>
-                <option value=''>Select Church</option>
+                <option value=''>All Churchs</option>
               </select>
             </li>
           </ul>
