@@ -93,7 +93,7 @@
             <li ng-hide='filterHide'><button ng-click="search = ''; reloadData()"> Reset Data </button></li>
           </ul>
         </section>
-        <div ui-sortable ng-model='cards'>
+        <div>
           <div ng-repeat="card in cards">
             <%= render "info_box" %>
           </div>
