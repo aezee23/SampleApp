@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery.mobile
 //= require bootstrap
 //= require highcharts.src
 //= require highcharts-3d
@@ -40,7 +39,8 @@ $(function() {
   $(".datepicker").datepicker({
               changeMonth: true,
               changeYear: true,
-              format: "yy-mm-dd",
+              dateFormat: 'yy-mm-dd',
+              altFormat: 'yy-mm-dd',
               maxDate: '0'
           });
 
