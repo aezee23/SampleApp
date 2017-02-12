@@ -18,7 +18,7 @@
   <%= f.text_field :city, icon: "globe", label: "City the Campus Church is Based In:" %>
   <%= f.text_field :address, icon: "pencil", label: "Campus Church Address:" %>
   <%= f.select :church_group_id, ChurchGroup.all.collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Church Group" }, { class: "selectpicker" } %>
-   <%= f.date_field :date_started, icon: "calendar", label: "Date Church Started", help: "Click dropdown arrow to select" %>
+   <%= f.date_field :date_started, icon: "calendar", label: "Date Church Started", help: "Click dropdown arrow to select", class: "datepicker" %>
    <%= f.select :sunday_meeting, [["No", false], ["Yes", true]], { icon: "check", label: "Does this church meet on a Sunday?" }, { class: "selectpicker" }  %>
   <%= f.submit "Create", data: { confirm: 'Are You Sure Create this new Church' }, class: "btn btn-primary" %>
 <% end %>

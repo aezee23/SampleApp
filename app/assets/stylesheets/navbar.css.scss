@@ -1,9 +1,9 @@
 .navbar-default {
-  background-color: #5d5c61;
-  border-color: #5d5c61;
+  background-color: #252830;
+  border-color: #c4d2da;
 }
 .navbar-default .navbar-brand {
-  color: #f9f9f9;
+  color: #9398a7;
   text-transform: uppercase;
 }
 .navbar-default .navbar-brand:hover,
@@ -12,17 +12,18 @@
 
 }
 .navbar-default .navbar-text {
-  color: #f9f9f9;
+  color: #9398a7;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #f9f9f9;
+  color: #9398a7;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
   color: #e4e8ee;
+  background-color: #558bd4;
 }
 .navbar-default .navbar-nav > li > .dropdown-menu {
-  background-color: #5d5c61;
+  background-color: #252830;
 }
 .navbar-default .navbar-nav > li > .dropdown-menu > li > a {
   color: #f9f9f9;
@@ -74,7 +75,7 @@
   color: #e4e8ee;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 800px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #f9f9f9;
   }
@@ -88,4 +89,6 @@
     color: #e4e8ee;
     background-color: #558bd4;
   }
+
+  //change breakpoint
 }

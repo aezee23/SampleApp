@@ -24,6 +24,9 @@ resources :users
 resources :churches
 resources :records
 resources :password_resets,     only: [:new, :create, :edit, :update]
+resources :datacards, only: [:index]
+get 'datacard', to: 'datacards#show'
+get 'datadetail', to: 'datacards#get_detail'
 get 'change_password' => 'users#change_password'
 patch 'change_password' => 'users#change_passwor'
 

@@ -6,6 +6,11 @@ module ApplicationHelper
     end
   end
 
+  def percentage(a, b)
+    return "100%" if a > b
+    "#{(a/b.to_f*100).round(0)}%"
+  end
+  
   def total_month_sum(records, attribute, month)
     @cached = @cached || records.select{ |record| record.user.sunday_meeting }
                                 .select{ |record| (Date.parse(month)..(Date.parse(month)>>1)-1).include?(record.day) }

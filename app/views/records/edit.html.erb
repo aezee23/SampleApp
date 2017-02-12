@@ -18,7 +18,7 @@
   <% else %>
     <%= f.select :church_id, current_user.churches.collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Campus Church" }, { class: "selectpicker" } %>
   <% end %>
-  <%= f.date_field :day, icon: "calendar", value: @date, label: "Date of Sunday Service", help: "Click dropdown arrow to select" %>
+  <%= f.date_field :day, icon: "calendar", value: @date, label: "Date of Sunday Service", help: "Click dropdown arrow to select", class: "datepicker"  %>
   <%= f.number_field :sunday_att, icon: "globe", value: 0, label: "Sunday Attendance:" %>
   <%= f.number_field :weekday_att, icon: "book", value: 0, label: "Weekday Attendance:", help: "For meeting a few days prior to the Sunday above" %>
   <%= f.number_field :new_converts, icon: "tree-deciduous", value: 0, label: "Number of New Converts in Sunday service:" %>

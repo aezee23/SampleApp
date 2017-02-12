@@ -12,9 +12,39 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
-//= require turbolinks
 //= require highcharts.src
 //= require highcharts-3d
 //= require chartkick
+//= require angular
+//= require angular-ui-sortable
 //= require_tree .
+
+
+$(function() {
+  setTimeout(function(){
+    $('div.alert').hide();
+  }, 3000)
+
+  $(".datepick").datepicker({
+              changeMonth: true,
+              changeYear: true,
+              dateFormat: 'yy-mm-dd',
+              altFormat: 'yy-mm-dd',
+              minDate: '-1Y',
+              maxDate: '0'
+          });
+
+  $(".datepicker").datepicker({
+              changeMonth: true,
+              changeYear: true,
+              format: "yy-mm-dd",
+              maxDate: '0'
+          });
+
+  $('div.section_heading').off('click').on('click', function(){
+    $(this).next('div').slideToggle();
+  })
+
+});

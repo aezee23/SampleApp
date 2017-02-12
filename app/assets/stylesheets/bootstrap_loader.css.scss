@@ -9,17 +9,36 @@ padding-left: 0px;
 padding-top: 2px;
 }
 
-
+.table-striped > tbody > tr:nth-child(even) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background: rgb(67, 72, 87);
+   color: #c4d2da;
+}
+ 
+.pagination>li>a,
+.pagination>li>span {
+  border: 1px solid #c4d2da;
+}
+ul.pagination.pagination>li.active > span {
+  background: rgb(67, 72, 87);
+  border: 1px solid  #c4d2da;
+  color: #fff;
+}
+ul.pagination > li >a{
+  color: #000000;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
   position: relative;
   min-height: 100%;
+  background: #252830;
 }
 body {
   /* Margin bottom by footer height */
   width: 100%;
   margin-bottom: 30px;
+  margin-top: 80px;
+  background: #252830;
 
 }
 footer {
@@ -28,10 +47,11 @@ footer {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 110px;
-  background-color: #5d5c61;
+  background: #252830;
   padding: 5px 10px 0 10px;
   font-size: 14px;
   color: #e4e8ee;
+  border-top: 1px solid #c4d2da
 }
 footer a{
 color: #EDEAE6;
@@ -80,5 +100,6 @@ footer ul{
 	padding-right: 0px;
 }
 .container {
-  margin-bottom: 100px
+  margin-bottom: 100px;
+  margin-top: 20px !important;
 }

@@ -15,124 +15,166 @@
     <% end %>
   </div>
 <% elsif current_user && current_user.admin %>
-  <div class="container">
-    <div class="row db-padding-btm db-attached">
-      <% @total_hash.each_with_index do |(month, totals), index| %>
-        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="width: 25%">
-          <div class="db-wrapper">
-            <div class="db-pricing-eleven db-bk-color-<%= index + 1 %>">
-              <div class="price">
-                <%= ( (totals[:sunday_att] || 0) / (totals[:n] == 0.0 ? 1.0 : totals[:n] ) ).round(0) %>
-                <small>Total FLC UK Average Sunday Attendance For</small>
-              </div>
-              <div class="type">
-                <%= month %>
-              </div>
-              <ul>
-  							<li>
-                  <i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold">
-                    <%= totals[:new_converts] %>
-                  </span>
-                  <p style="font-size: 2.5vmin"> Total New Converts </p>
-                </li>
-                <li>
-                  <i class="glyphicon glyphicon-user"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold">
-                     <%= totals[:first_timers] %>
-                  </span>
-                  <p style="font-size: 2.5vmin"> Total First Timers  </p>
-                </li>
-                <li>
-                  <i class="glyphicon glyphicon-home"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold">
-                     <%= totals[:nbs] %>
-                  </span>
-                  <p style="font-size: 2.5vmin"> Began New Believers School</p>
-                </li>
-                <li>
-                  <i class="glyphicon glyphicon-education"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold">
-                     <%= totals[:nbs_finish] %>
-                  </span>
-                  <p style="font-size: 2.5vmin"> Finished New Believers School</p>
-                </li>
-                <li>
-                  <i class="glyphicon glyphicon-briefcase"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold">
-                    <%= totals[:fnb] %>
-                  </span>
-                  <p style="font-size: 2.5vmin"> Total First and Best </p>
-                </li>
-              </ul>
-              <div class="pricing-footer">
-                <%= link_to "Details", "#my-modal", :class => "btn db-button-color-square btn-lg", style: "font-size:2vmin", "data-toggle" => "modal" %>       
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %> 
+  <div ng-app='DashBoard' class="container dashboard">
+    <div class="dashboard_heading">
+      <h2> Summary </h2>
+      <div>
+        <span>
+          <%= fa_icon "calendar-check-o" %>
+          <%= Date.today.strftime("%d %b %Y") %>
+        </span>
+      </div>
     </div>
-    <div class="row db-padding-btm db-attached">
-      <% @latest_hash.each_with_index do |(label, totals), index| %>
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="width: 33%">
-          <div class="db-wrapper">
-            <div class="db-pricing-eleven db-bk-color-<%= index + 1 %>">
-              <div class="price">
-                <%= totals[:sunday_att] %>
-                  <small>
-                    <%= date_of_last("Sunday").strftime('%d%b%y') %> Attendance
-                  </small>
-              </div>
-              <div class="type">
-                <%= label %>
-              </div>
-              <ul>
-                <li>
-                  <i class="glyphicon glyphicon-tree-deciduous"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold"><%= totals[:new_converts] %>
-                  </span> 
-                  <p style="font-size: 2.5vmin">New Converts </p>
-                </li>
-                <li>
-                  <i class="glyphicon glyphicon-user"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold">
-                    <%= totals[:first_timers] %>
-                  </span>
-                  <p style="font-size: 2.5vmin">First Timers
-                  </p>
-                </li>
-                <li>
-                  <i class="glyphicon glyphicon-home"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold">
-                    <%= totals[:nbs] %>
-                  </span>
-                  <p style="font-size: 2.5vmin">Began New Believers School
-                  </p>
-                </li>
-                <li>
-                  <i class="glyphicon glyphicon-education"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold">
-                    <%= totals[:nbs_finish] %>
-                  </span>
-                  <p style="font-size: 2.5vmin"> Finished New Believers School
-                  </p>
-                </li>
-                <li>
-                  <i class="glyphicon glyphicon-briefcase"></i>&nbsp;
-                  <span style="font-size: 4.5vmin; font-weight: Bold"><%= totals[:fnb] %>
-                  </span>
-                  <p style="font-size: 2.5vmin">First and Best
-                  </p>
-                </li>
-              </ul>
-              <div class="pricing-footer">
-                <%= link_to "Details", "#my-modal5", :class => "btn db-button-color-square btn-lg", "data-toggle" => "modal" %>
-              </div>
-            </div>
+    <div ng-controller='CardListCtrl'>
+      <div class='modal_layer' ng-click='closeModal()' ng-show='modalShow'></div>
+      <div class='modal_box' ng-show='modalShow'>
+        <%= fa_icon "close pull-right", class: "fa-2x", "ng-click" => "closeModal()" %>
+        <h3>{{modalHeader}}</h3>
+        <span>{{chosenCard.name}}</span>
+        <hr />
+        <div ng-show="detailLoading" class='loading' id="detailloader">
+          <i class="fa fa-spinner fa-spin fa-3x" aria-hidden="true"></i>
+          ... Loading Chart Data
+        </div>
+        <div id="chartContainer" ng-hide="detailLoading" style="position: absolute; top: 100px; left: 0; right: 0; height: 400px"></div>
+      </div>
+      <div ng-show="loading" class='loading'>
+        <i class="fa fa-spinner fa-spin fa-3x" aria-hidden="true" ng-show='loading'></i>
+        ... Loading
+      </div>
+      <div ng-hide='loading' class="section_heading" >
+        <h3> Quick Stats </h3>
+      </div>
+      <div ng-hide='loading' class="quick_stats">
+        <section class='card_actions' ng-hide="loading">
+          <button ng-click="filterToggle()" class="filterToggle">Show / Hide Filters</button>
+          <ul>
+            <li ng-hide='filterHide'>
+              <select ng-model="main_choice_by">
+                  <option value="">Select Grouping</option>
+                  <option value="Region">Region</option>
+                  <option value="Church Group">Church Group</option>
+                  <option value="City">City</option>
+                  <option value="Church">Church</option>
+              </select>
+            </li>
+            <li ng-hide="filterHide  || main_choice_by !== 'Region'">
+              <select ng-change="reloadData()" ng-model="search">
+                <% @regions.each do |region| %>
+                  <option value="region:<%= region %>"><%= region %></option>
+                <% end %>
+                <option value=''>Select Region</option>
+              </select>
+            </li>
+            <li ng-hide="filterHide  || main_choice_by !== 'Church Group'">
+              <select ng-change="reloadData()" ng-model="search">
+                <% @church_groups.each do |group| %>
+                  <option value="church_group:<%= group.name %>"><%= group.leader.name.split(" ")[0] + "- " + group.name %></option>
+                <% end %>
+                <option value=''>Select Church Group</option>
+              </select>
+            </li>
+            <li ng-hide="filterHide  || main_choice_by !== 'City'">
+              <select ng-change="reloadData()" ng-model="search">
+                <% @cities.each do |city| %>
+                  <option value="city:<%= city %>"><%= city %></option>
+                <% end %>
+                <option value=''>Select City</option>
+              </select>
+            </li>
+            <li ng-hide="filterHide  || main_choice_by !== 'Church'">
+              <select ng-change="reloadData()" ng-model="search">
+                <% @churches.each do |church| %>
+                  <option value="church:<%= church %>"><%= church %></option>
+                <% end %>
+                <option value=''>Select Church</option>
+              </select>
+            </li>
+            <li ng-hide='filterHide'><button ng-click="search = ''; reloadData()"> Reset Data </button></li>
+          </ul>
+        </section>
+        <div ui-sortable ng-model='cards'>
+          <div ng-repeat="card in cards">
+            <%= render "info_box" %>
           </div>
         </div>
-      <% end %>
+      </div>
+      <div ng-hide='loading' class="section_heading">
+        <h3> Search Data </h3>
+      </div>
+      <div id="search_data">
+        <section class='card_actions' ng-hide="loading">
+          <button ng-click="searchFilterToggle()" class="filterToggle">Show / Hide Search Params</button>
+          <ul>
+            <li ng-hide='searchFilterHide'>
+              <div class='form-group'>
+                <label for="start_date">Date From:</label>
+                <input type='date' class='datepick' name="start_date" ng-model='start_date' ng-change="updateDate()" value="<%= (Date.today - 7).strftime('%Y-%m-%d') %>" />
+              </div>
+            </li>
+            <li ng-hide='searchFilterHide' >
+              <div class='form-group'>
+                <label for="end_date">Date To:</label>
+                <input type='date' class='datepick' ng-model='end_date' ng-change="updateDate()" name="end_date" value="<%= Date.today.strftime('%Y-%m-%d') %>" />
+              </div>
+            </li>
+            <li ng-hide='searchFilterHide'>
+              <select ng-model="choice_by" ng-change="getAllCard()">
+                  <option value="">Select Grouping</option>
+                  <option value="all">All UK</option>
+                  <option value="Region">Region</option>
+                  <option value="Church Group">Church Group</option>
+                  <option value="City">City</option>
+                  <option value="Church">Church</option>
+              </select>
+            </li>
+            <li ng-hide="searchFilterHide || choice_by !=='Region'">
+              <select ng-change="searchData()" ng-model="searchTerm">
+                <% @regions.each do |region| %>
+                  <option value="region:<%= region %>"><%= region %></option>
+                <% end %>
+                <option value=''>Select Region</option>
+              </select>
+            </li>
+            <li ng-hide="searchFilterHide || choice_by !=='Church Group'">
+              <select ng-change="searchData()" ng-model="searchTerm">
+                <% @church_groups.each do |group| %>
+                  <option value="church_group:<%= group.name %>"><%= group.leader.name.split(" ")[0] + "- " + group.name %></option>
+                <% end %>
+                <option value=''>Select Church Group</option>
+              </select>
+            </li>
+            <li ng-hide="searchFilterHide || choice_by !=='City'">
+              <select ng-change="searchData()" ng-model="searchTerm">
+                <% @cities.each do |city| %>
+                  <option value="city:<%= city %>"><%= city %></option>
+                <% end %>
+                <option value=''>Select City</option>
+              </select>
+            </li>
+            <li ng-hide="searchFilterHide || choice_by !=='Church'">
+              <select ng-change="searchData()" ng-model="searchTerm">
+                <% @churches.each do |church| %>
+                  <option value="church:<%= church %>"><%= church %></option>
+                <% end %>
+                <option value=''>Select Church</option>
+              </select>
+            </li>
+          </ul>
+        </section>
+        <div class="quick_stats">
+            <div ng-show="hasSearched">
+              <%= render "info_box" %>
+            </div>
+        </div>
+      </div>
+
+      <div ng-hide='loading' class="section_heading">
+        <h3> FLC UK Overview </h3>
+      </div>
+      <div ng-hide='loading' id='overview'>
+        <%= render 'overview' %>
+      </div>
     </div>
   </div>
 <% end %>

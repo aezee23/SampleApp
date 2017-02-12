@@ -5,13 +5,11 @@ class PagesController < ApplicationController
 	helper_method :sort_column, :sort_direction, :mweek
 	helper_method :sun_in_month
 	def index
-    @records = Record.includes( church: [:church_group] )
-    @total_hash = {}
-    make_total_hash
-    @latest_hash = {}
-    @latest_hash["Judea"] = latest_totals("Judea")
-    @latest_hash["FLC UK"] = latest_totals
-    @latest_hash["London"] = latest_totals("London Main")
+    churches = Church.includes(:church_group)
+    @churches = churches.map(&:name).sort
+    @regions = churches.map(&:church_group).map(&:region).uniq.sort
+    @cities = churches.map(&:city).uniq.sort
+    @church_groups = churches.map(&:church_group).uniq
 	end
 
 	def show
