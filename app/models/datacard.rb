@@ -113,7 +113,17 @@ class Datacard
   end
 
   def diff_months(date1, date2)
-    (date2.year * 12 + date2.month) - (date1.year * 12 + date1.month)
+    if date1.day == date2.day
+      (date2.year * 12 + date2.month) - (date1.year * 12 + date1.month)
+    else
+      (date2.year * 12 + date2.month + (date2.day.to_f / days_in_month(date2.month, date2.year))) - (date1.year * 12 + date1.month + (date1.day.to_f / days_in_month(date1.month, date1.year)))
+    end
+  end
+
+  def days_in_month(month, year = Time.now.year)
+    days = [nil, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    return 29 if month == 2 && Date.gregorian_leap?(year)
+    days[month]
   end
 
 end

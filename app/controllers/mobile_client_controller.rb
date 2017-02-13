@@ -21,6 +21,7 @@ class MobileClientController < ApplicationController
       day: (Date.today.last_year.beginning_of_year..Date.today)
       )
     @results[:totals] = prepare_totals(@records.select{ |record| record.church.sunday_meeting })
+    @results[:totals_by_region] = total_for_region
     @results[:totals_by_group] = total_for_church_group
     @results[:totals_by_city] = total_for_city
     @results[:information] = prepare_info
@@ -44,10 +45,20 @@ class MobileClientController < ApplicationController
   end
 
   def total_for_church_group
-    groups = @records.map(&:church).uniq.map(&:church_group).uniq.map(&:name).uniq
+    groups = @records.map(&:church).uniq.map(&:church_group).uniq.sort{|x, y| x.leader.name<=>y.leader.name}
     results = {}
     groups.each do |group|
-      records = @records.select { |record| record.church.church_group.name == group }
+      records = @records.select { |record| record.church.church_group == group }
+      results[group.leader.name.split(" ")[0] + " - " + group.name] = prepare_totals(records)
+    end
+    results
+  end
+
+  def total_for_region
+    groups = @records.map(&:church).uniq.map(&:church_group).uniq.map(&:region).uniq.sort
+    results = {}
+    groups.each do |group|
+      records = @records.select { |record| record.church.church_group.region == group }
       results[group] = prepare_totals(records)
     end
     results
@@ -108,6 +119,10 @@ class MobileClientController < ApplicationController
   end
 
   def authorised
+    valid_token || (current_user && current_user.admin)
+  end
+
+  def valid_token
     !!params[:mobile] && !!MobileToken.find_by_auth_token(params[:mobile])
   end
 

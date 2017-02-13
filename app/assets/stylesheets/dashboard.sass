@@ -17,6 +17,18 @@ $light_blue: rgb(225, 240, 246)
 div.container.dashboard
   background: #252830
   color: #c4d2da
+  div
+    ul.nav.nav-tabs
+      margin-bottom: 50px
+      li
+        a
+          &:hover
+      li.active
+        background: none
+        a
+          background-color: transparent
+          color: inherit
+          border-bottom-color: $bg
   div.dashboard_heading
     margin-bottom: 20px
     h2
@@ -210,6 +222,7 @@ section.card_actions
       select, button, input[type='date']
         width: 100%
         height: 40px
+        padding-left: 15px
         box-sizing: border-box
         background: rgb(67, 72, 87)
         border: none

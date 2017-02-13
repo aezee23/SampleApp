@@ -15,6 +15,9 @@ dashboardApp.factory('summaryData', ['$http', function($http){
     },
     detail: function(d1, d2, attr, callback){
       $http.get("datadetail?start=" + d1 + "&end="+ d2 + "&attribute=" + attr).then(callback);
+    },
+    getAll: function(callback){
+      $http.get("mobile-summary").then(callback);
     }
   };
 }]);
@@ -28,6 +31,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   $scope.end_date = new Date;
   $scope.choice_by = "";
   $scope.modalShow = false;
+  $scope.currentActive = 'cards';
   $scope.filterToggle = function(){
     $scope.filterHide = !$scope.filterHide;
   }
@@ -68,26 +72,29 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     if($scope.hasSearched) $scope.searchData();
   }
   $scope.reloadData();
+  $scope.detailLoading = true;
+  summaryData.getAll(function(data){
+    $scope.allData = data.data;
+    console.log(data.data);
+    $scope.setBaseChartData();
+    $scope.detailLoading = false;
+    $scope.chart = $scope.drawChart();
+  });
   $scope.toggleCard = function(card){
-    console.log('called');
     card.show = !card.show;
-    console.log(card);
-  }
-  $scope.closeModal = function(){
-    $scope.modalShow = false;
   }
   $scope.showModal = function(card, attr, attr_name){
-    $scope.detailLoading = true;
     $scope.modalHeader = attr_name;
     $scope.chosenCard = card
-    $scope.modalShow = true;
-    summaryData.detail(card.start_date, card.end_date, attr, function(card){
-      console.log(card);
-      $scope.detailLoading = false;
-      $scope.chart = $scope.drawChart();
-    })
-    $scope.chart.reflow();
+    $scope.currentActive = 'charts'
+    $scope.chart = $scope.drawChart();
   }
+  $scope.setBaseChartData = function(){
+    $scope.chartData = [];
+    for (var region in $scope.allData.totals_by_region){
+      $scope.chartData.push([region, +$scope.allData.totals_by_region[region]["Last 12 months"].sunday])
+    }
+  };
   $scope.drawChart = function(options){
     return new Highcharts.chart({
         chart: {
@@ -96,16 +103,55 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
             plotBorderWidth: 0,
             plotShadow: false
         },
+        xAxis: {
+             categories: $scope.chartData.map(function(ele){return ele[0] + " - " + ele[1];}),
+             title: {
+                 text: null
+             },
+         },
+        yAxis: {
+          title: {
+            text: null
+          },
+          lineWidth: 0,
+          gridLineWidth: 0,
+          minorGridLineWidth: 0,
+          lineColor: 'transparent',
+             labels: {
+               enabled: false
+             },
+          minorTickLength: 0,
+          tickLength: 0
+        },
+        legend: {
+            enabled: false,
+            layout: 'vertical',
+            verticalAlign: 'middle',
+            align: 'right',
+            itemStyle: {
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: '14px',
+            }
+        },
         title: {
             text: $scope.modalHeader,
-            align: 'center',
-            verticalAlign: 'middle',
-            y: 40
+            margin: 20,
+            style: {color: '#f9f9f9'}
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            pointFormat: '{series.name}: <b>{point.y:.0f}</b>'
         },
         plotOptions: {
+            bar: {
+              dataLabels: {
+                enabled: true,
+                align: 'left',
+                style: {
+                  color: '#f9f9f9'
+                }
+              }
+            },
             pie: {
                 dataLabels: {
                     enabled: true,
@@ -121,28 +167,11 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
             }
         },
         series: [{
-            type: 'pie',
-            name: 'Browser share',
-            innerSize: '30%',
-            data: [
-                ['Firefox',   10.38],
-                ['IE',       56.33],
-                ['Chrome', 24.03],
-                ['Safari',    4.77],
-                ['Opera',     0.91],
-                {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2,
-                    dataLabels: {
-                        enabled: false
-                    }
-                }
-            ]
+          type: 'bar',
+          name: $scope.modalHeader,
+          data: $scope.chartData
         }]
     });
   }
 
-  $scope.sortableOptions = {
-    cursor: 'move'
-  }
 }])
