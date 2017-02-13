@@ -87,7 +87,9 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     $scope.modalHeader = attr_name;
     $scope.chosenCard = card
     $scope.currentActive = 'charts'
-    $scope.chart = $scope.drawChart();
+    if ($scope.chartData){
+      $scope.chart = $scope.drawChart();
+    }
   }
   $scope.setBaseChartData = function(){
     $scope.chartData = [];
@@ -97,6 +99,9 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   };
   $scope.drawChart = function(options){
     return new Highcharts.chart({
+        credits: {
+          enabled: false
+        },
         chart: {
             renderTo: 'chartContainer',
             plotBackgroundColor: null,
@@ -108,6 +113,9 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
              title: {
                  text: null
              },
+             labels: {
+              style: {size: '#a9a9a9', fontSize: '14px'}
+             }
          },
         yAxis: {
           title: {
@@ -148,7 +156,9 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
                 enabled: true,
                 align: 'left',
                 style: {
-                  color: '#f9f9f9'
+                  color: '#f9f9f9',
+                  fontWeight: 'normal',
+                  fontSize: '14px'
                 }
               }
             },

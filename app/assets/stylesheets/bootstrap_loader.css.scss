@@ -3,6 +3,7 @@
 @import 'bootstrap' ;
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 
 .jumbotron{padding-bottom: 2px;
 padding-left: 0px;
@@ -29,6 +30,18 @@ ul.pagination > li >a{
 
 .form-control{
   font-size: 16px !important;
+}
+a.navbar-brand > i{
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 30px;
+}
+#brand-title{
+  font-family: 'Pacifico', cursive;
+  text-transform: none;
+  display: inline-block;
+  font-size: 30px;
+  vertical-align: top;
 }
 /* Sticky footer styles
 -------------------------------------------------- */
