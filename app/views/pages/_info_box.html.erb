@@ -4,64 +4,64 @@
     <i ng-hide="card.show" ng-click="toggleCard(card)" class="fa fa-plus pull-right hide_card fa-2x"></i>
     {{card.name + ' ' + card.group_name }}
   </h4>
-  <span ng-click="showModal(card, 'sunday_att', 'Sunday Attendance')">
+  <span ng-click="showModal(card.name, card.mobile_name, 'sunday', 'Sunday Attendance')">
     {{card.sunday_att}}
-    <small ng-click="showModal(card, 'sunday_att', 'Sunday Attendance')">
+    <small ng-click="showModal(card.name, card.mobile_name, 'sunday', 'Sunday Attendance')">
       <%= fa_icon "users 2x" %>
       AVG Sunday Attendance
     </small>
   </span>
   <hr ng-show="card.show" />
   <%= content_tag :div, class: "stat_first", style: "width: 100%;", "ng-show" => "card.show"  do %>
-    <span ng-click="showModal(card, 'first_timers', 'First Timers')">
+    <span ng-click="showModal(card.name, card.mobile_name, 'ft', 'First Timers')">
       {{card.first_timers}}
     </span>
-    <small ng-click="showModal(card, 'first_timers', 'First Timers')">
+    <small ng-click="showModal(card.name, card.mobile_name, 'ft', 'First Timers')">
       <%= fa_icon "user" %>
       Total First Timers
     </small>
   <% end %>
   <%= content_tag :div, class: "stat_convert", style: "width: 100%;", "ng-show" => "card.show" do %>
-    <span ng-click="showModal(card, 'new_converts', 'New Converts')">
+    <span ng-click="showModal(card.name, card.mobile_name, 'newConv', 'New Converts')">
       {{card.new_converts}}
     </span>
-    <small ng-click="showModal(card, 'new_converts', 'New Converts')">
+    <small ng-click="showModal(card.name, card.mobile_name, 'newConv', 'New Converts')">
       <%= fa_icon "tree" %>
       Total Converts
     </small>
   <% end %>
   <div class="stat_nbstart" ng-show="card.show" style="width: {{Math.min( card.nbs / (card.new_converts || 1) *100, 100)}}%;">
-    <span ng-click="showModal(card, 'nbs', 'Started NBS')">
+    <span ng-click="showModal(card.name, card.mobile_name, 'nbs', 'Started NBS')">
       {{card.nbs}}
     </span>
-    <small ng-click="showModal(card, 'nbs', 'Started NBS')">
+    <small ng-click="showModal(card.name, card.mobile_name, 'nbs', 'Started NBS')">
       <%= fa_icon "book" %>
       Began NB School
     </small>
   </div>
   <div class="stat_nbfinish" ng-show="card.show" style="width: {{Math.min( card.nbs_finish / (card.nbs || 1) *100, 100)}}%;">
-    <span ng-click="showModal(card, 'nbs_finish', 'Finished NBS')">
+    <span ng-click="showModal(card.name, card.mobile_name, 'fnbs', 'Finished NBS')">
       {{card.nbs_finish}}
     </span>
-    <small ng-click="showModal(card, 'nbs_finish', 'Finished NBS')">
+    <small ng-click="showModal(card.name, card.mobile_name, 'fnbs', 'Finished NBS')">
       <%= fa_icon "graduation-cap" %>
       Finished NB School
     </small>
   </div>
   <div class="stat_baptised" ng-show="card.show" style="width: {{Math.min( card.baptised / (card.nbs || 1) *100, 100)}}%;">
-    <span ng-click="showModal(card, 'baptised', 'Baptised')">
+    <span ng-click="showModal(card.name, card.mobile_name, 'bap', 'Baptised')">
       {{card.baptised}}
     </span>
-    <small ng-click="showModal(card, 'baptised', 'Baptised')">
+    <small ng-click="showModal(card.name, card.mobile_name, 'bap', 'Baptised')">
       <%= fa_icon "tint" %>
       Total Baptised
     </small>
   </div>
   <div class="stat_fnb" ng-show="card.show" style="width: {{Math.min( card.fnb / (card.sunday_att || 1) *100, 100)}}%">
-    <span ng-click="showModal(card, 'fnb', 'First &amp; Best')">
+    <span ng-click="showModal(card.name, card.mobile_name, 'tithe', 'First &amp; Best')">
       {{card.fnb}}
     </span>
-    <small ng-click="showModal(card, 'fnb', 'First &amp; Best')">
+    <small ng-click="showModal(card.name, card.mobile_name, 'tithe', 'First &amp; Best')">
       <%= fa_icon "credit-card" %>
       Tithe Payers
     </small>

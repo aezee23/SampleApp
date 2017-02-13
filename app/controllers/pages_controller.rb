@@ -10,6 +10,7 @@ class PagesController < ApplicationController
     @regions = churches.map(&:church_group).map(&:region).uniq.sort
     @cities = churches.map(&:city).uniq.sort
     @church_groups = churches.map(&:church_group).uniq
+    @times = last_twelve_months
 	end
 
 	def show
@@ -119,6 +120,15 @@ end
 
 
 private
+
+def last_twelve_months
+  months = (Date.today.last_year..Date.today).map{|day| day.strftime("%b%Y")}.uniq.reverse
+  array = [["Last 12 months", "Past Year"], ["Latest Data", "Latest Data"]]
+  for i in 0..10
+    array << [months[i + 1], "#{months[i + 1]} - #{months[i]}"] 
+  end
+  array
+end
 
 def make_total_hash
   @total_hash[Date.parse(month(2)).strftime('%b-%y')] = totals(month(2), month(1))

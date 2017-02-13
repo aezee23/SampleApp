@@ -77,6 +77,13 @@ class Datacard
     data[:group_name] = @group ? @group.split(":")[1] : "All UK"
     data[:color] = @@colors[(@idx -1) % @@colors.count]
     data[:show] = false
+    data[:mobile_name] = if (@month_end - @month_start < 14)
+                          "Latest Data"
+                        elsif (@month_end - @month_start > 300)
+                          "Last 12 months"
+                        else
+                          @month_start.strftime("%b%Y")
+                        end
     data  
   end
 

@@ -65,7 +65,7 @@ class MobileClientController < ApplicationController
   end
 
   def total_for_city
-    cities = @records.map(&:church).uniq.map(&:city).uniq
+    cities = @records.map(&:church).uniq.map(&:city).uniq.sort
     results = {}
     cities.each do |city|
       records = @records.select { |record| record.church.city == city }

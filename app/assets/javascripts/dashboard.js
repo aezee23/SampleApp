@@ -32,6 +32,15 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   $scope.choice_by = "";
   $scope.modalShow = false;
   $scope.currentActive = 'cards';
+  $scope.attrMap = {
+    sunday: "Sunday Attendance",
+    ft: "First Timers",
+    newConv: "New Converts",
+    nbs: "Started NBS",
+    fnbs: "Finished NBS",
+    bap: "Baptised",
+    tithe: "First &amp; Best"
+  }
   $scope.filterToggle = function(){
     $scope.filterHide = !$scope.filterHide;
   }
@@ -78,19 +87,49 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     console.log(data.data);
     $scope.setBaseChartData();
     $scope.detailLoading = false;
+    // $scope.showModal();
     $scope.chart = $scope.drawChart();
   });
   $scope.toggleCard = function(card){
     card.show = !card.show;
   }
-  $scope.showModal = function(card, attr, attr_name){
-    $scope.modalHeader = attr_name;
-    $scope.chosenCard = card
-    $scope.currentActive = 'charts'
+  $scope.showModal = function(name, mob_name, attr, attr_name){
+    $scope.modalHeader = attr_name || $scope.modalHeader;
+    $scope.subHeader = name || $scope.subHeader;
+    $scope.cardName = mob_name || $scope.cardName
+    $scope.chartAttr = attr || $scope.chartAttr;
+    $scope.currentActive = 'charts';
+    $scope.reDrawChart();
+  }
+  $scope.reDrawChart = function(){
+    $scope.modalHeader = $scope.attrMap[$scope.chartAttr];
+    $scope.subHeader = $scope.cardName;
     if ($scope.chartData){
-      $scope.chart = $scope.drawChart();
+      $scope.chartData = [];
+      if($scope.compareGrouping == "region"){
+        for (var region in $scope.allData.totals_by_region){
+          $scope.chartData.push([region, +$scope.allData.totals_by_region[region][$scope.cardName][$scope.chartAttr]])
+        }
+      }else if($scope.compareGrouping == "city"){
+        for (var region in $scope.allData.totals_by_city){
+          $scope.chartData.push([region, +$scope.allData.totals_by_city[region][$scope.cardName][$scope.chartAttr]])
+        }
+      }else if($scope.compareGrouping == "church_group"){
+        for (var region in $scope.allData.totals_by_group){
+          $scope.chartData.push([region, +$scope.allData.totals_by_group[region][$scope.cardName][$scope.chartAttr]])
+        }
+      }
+
+      setTimeout(function(){
+        $scope.chart = $scope.drawChart();
+      }, 100)
     }
   }
+  $scope.modalHeader = "Sunday Attendance";
+  $scope.subHeader = "Last 12 Months";
+  $scope.compareGrouping = "region";
+  $scope.chartAttr = 'sunday';
+  $scope.cardName = "Last 12 months"
   $scope.setBaseChartData = function(){
     $scope.chartData = [];
     for (var region in $scope.allData.totals_by_region){
@@ -109,7 +148,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
             plotShadow: false
         },
         xAxis: {
-             categories: $scope.chartData.map(function(ele){return ele[0] + " - " + ele[1];}),
+             categories: $scope.chartData.filter(function(ele){ return ele[1] > 0}).map(function(ele){return ele[0] + " - " + ele[1];}),
              title: {
                  text: null
              },
@@ -147,6 +186,10 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
             margin: 20,
             style: {color: '#f9f9f9'}
         },
+        subtitle: {
+            text: $scope.subHeader,
+            style: {color: '#c9c9c9'}
+        },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.y:.0f}</b>'
         },
@@ -179,7 +222,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
         series: [{
           type: 'bar',
           name: $scope.modalHeader,
-          data: $scope.chartData
+          data: $scope.chartData.filter(function(ele){return ele[1] > 0 })
         }]
     });
   }

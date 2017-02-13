@@ -1,5 +1,27 @@
+<select class='chart_filter' ng-model="chartAttr" ng-change="reDrawChart()">
+    <option value="sunday">Select Attribute to Compare</option>
+    <option value="sunday">Sunday Attendance</option>
+    <option value="ft">First Timers</option>
+    <option value="newConv">New Converts</option>
+    <option value="nbs">Started NB School</option>
+    <option value="fnbs">Finished NB School</option>
+    <option value="bap">Baptised</option>
+    <option value="tithe">First &amp; Best</option>
+</select>
+<select class='chart_filter' ng-model="cardName" ng-change="reDrawChart()">
+    <option value="Last 12 months">Select Time Period</option>
+    <% @times.each do |time| %>
+      <option value="<%= time[0] %>"><%= time[1] %></option>
+    <% end %>
+</select>
+<select class='chart_filter' ng-model="compareGrouping" ng-change="reDrawChart()">
+    <option value="region">Select Grouping</option>
+    <option value="region">Region</option>
+    <option value="church_group">Church Group</option>
+    <option value="city">City</option>
+</select>
 <div ng-show="detailLoading" class='loading'>
   <i class="fa fa-spinner fa-spin fa-3x" aria-hidden="true" ng-show='loading'></i>
   ... Loading
 </div>
-<div id="chartContainer" style="height: 400px; margin: 10px 0 40px 0"></div>
+<div id="chartContainer" style="height: 500px; margin: 50px 0 100px 0"></div>

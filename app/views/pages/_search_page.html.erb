@@ -1,0 +1,69 @@
+<div ng-hide='loading' class="section_heading">
+  <h3> Search Data </h3>
+</div>
+<div id="search_data">
+  <section class='card_actions' ng-hide="loading">
+    <button ng-click="searchFilterToggle()" class="filterToggle">Show / Hide Search Params</button>
+    <ul>
+      <li ng-hide='searchFilterHide'>
+        <div class='form-group'>
+          <label for="start_date">Date From:</label>
+          <input type='date' class='datepick' name="start_date" ng-model='start_date' ng-change="updateDate()" value="<%= (Date.today - 7).strftime('%Y-%m-%d') %>" />
+        </div>
+      </li>
+      <li ng-hide='searchFilterHide' >
+        <div class='form-group'>
+          <label for="end_date">Date To:</label>
+          <input type='date' class='datepick' ng-model='end_date' ng-change="updateDate()" name="end_date" value="<%= Date.today.strftime('%Y-%m-%d') %>" />
+        </div>
+      </li>
+      <li ng-hide='searchFilterHide'>
+        <select ng-model="choice_by" ng-change="getAllCard()">
+            <option value="">Select Grouping</option>
+            <option value="all">All UK</option>
+            <option value="Region">Region</option>
+            <option value="Church Group">Church Group</option>
+            <option value="City">City</option>
+            <option value="Church">Church</option>
+        </select>
+      </li>
+      <li ng-hide="searchFilterHide || choice_by !=='Region'">
+        <select ng-change="searchData()" ng-model="searchTerm">
+          <% @regions.each do |region| %>
+            <option value="region:<%= region %>"><%= region %></option>
+          <% end %>
+          <option value=''>All Regions</option>
+        </select>
+      </li>
+      <li ng-hide="searchFilterHide || choice_by !=='Church Group'">
+        <select ng-change="searchData()" ng-model="searchTerm">
+          <% @church_groups.each do |group| %>
+            <option value="church_group:<%= group.name %>"><%= group.leader.name.split(" ")[0] + "- " + group.name %></option>
+          <% end %>
+          <option value=''>All Church Groups</option>
+        </select>
+      </li>
+      <li ng-hide="searchFilterHide || choice_by !=='City'">
+        <select ng-change="searchData()" ng-model="searchTerm">
+          <% @cities.each do |city| %>
+            <option value="city:<%= city %>"><%= city %></option>
+          <% end %>
+          <option value=''>All Cities</option>
+        </select>
+      </li>
+      <li ng-hide="searchFilterHide || choice_by !=='Church'">
+        <select ng-change="searchData()" ng-model="searchTerm">
+          <% @churches.each do |church| %>
+            <option value="church:<%= church %>"><%= church %></option>
+          <% end %>
+          <option value=''>All Churchs</option>
+        </select>
+      </li>
+    </ul>
+  </section>
+  <div class="quick_stats">
+      <div ng-show="hasSearched">
+        <%= render "info_box" %>
+      </div>
+  </div>
+</div>
