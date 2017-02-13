@@ -29,7 +29,6 @@ gem 'carrierwave', '~> 1.0'
 gem 'angularjs-rails'
 gem 'rails-angular-ui-sortable'
 gem 'jquery_mobile_rails'
-gem 'momentjs-rails'
 
 group :development, :test do
    
