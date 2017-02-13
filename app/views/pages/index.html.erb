@@ -30,7 +30,7 @@
         <li role="presentation" ng-class="{active: currentActive == 'cards'}" ng-click="currentActive = 'cards'"><a href="#">Summary</a></li>
         <li role="presentation" ng-class="{active: currentActive == 'search'}" ng-click="currentActive = 'search'"><a href="#">Search</a></li>
         <li role="presentation" ng-class="{active: currentActive == 'charts'}" ng-click="currentActive = 'charts'; showModal()"><a href="#">Compare</a></li>
-        <li role="presentation" ng-class="{active: currentActive == 'trends'}" ng-click="currentActive = 'trends'"><a href="#">Trends</a></li>
+        <li role="presentation" ng-class="{active: currentActive == 'trends'}" ng-click="currentActive = 'trends'; showTrendChart()"><a href="#">Trends</a></li>
       </ul>
       <div ng-show="currentActive == 'cards'" id='summary_page'>
         <%= render 'summary_page' %>
@@ -40,6 +40,9 @@
       </div>
       <div ng-show="currentActive == 'charts'" id='charts_page'>
         <%= render 'charts_page' %>
+      </div>
+      <div ng-show="currentActive == 'trends'" id='trends_page'>
+        <%= render 'trends_page' %>
       </div>
     </div>
   </div>

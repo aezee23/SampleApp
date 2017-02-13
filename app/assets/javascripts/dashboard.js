@@ -101,6 +101,20 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     $scope.currentActive = 'charts';
     $scope.reDrawChart();
   }
+  $scope.trendChartAttr = 'sunday'
+  $scope.showTrendChart = function(){
+    $scope.trendChartHeader = $scope.attrMap[$scope.trendChartAttr] ? "Monthly " + $scope.attrMap[$scope.trendChartAttr] : ""
+    $scope.reDrawTrendChart();
+  }
+  $scope.reDrawTrendChart = function(){
+    $scope.trendData = []
+    for (var i = 0; i < $scope.lastTwelve.length; i++){
+      $scope.trendData.push([$scope.lastTwelve[i], +$scope.allData["totals"][$scope.lastTwelve[i][0]][$scope.trendChartAttr]])
+    }
+    setTimeout(function(){
+      $scope.chart = $scope.drawTrendChart();
+    }, 100)
+  }
   $scope.reDrawChart = function(){
     $scope.modalHeader = $scope.attrMap[$scope.chartAttr];
     $scope.subHeader = $scope.cardName;
@@ -231,6 +245,85 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
           type: 'bar',
           name: $scope.modalHeader,
           data: $scope.chartData.filter(function(ele){return ele[1] > 0 })
+        }]
+    });
+  }
+
+
+  $scope.drawTrendChart = function(options){
+    return new Highcharts.chart({
+        credits: {
+          enabled: false
+        },
+        chart: {
+            renderTo: 'trendChartContainer',
+            plotBackgroundColor: null,
+            plotBorderWidth: 0,
+            plotShadow: false
+        },
+        xAxis: {
+             categories: $scope.lastTwelve.map(function(ele){return ele[0]}),
+             title: {
+                 text: null
+             },
+             labels: {
+              style: {size: '#a9a9a9', fontSize: '12px'}
+             }
+         },
+        yAxis: {
+          title: {
+            text: null
+          },
+          lineWidth: 0,
+          gridLineWidth: 0,
+          minorGridLineWidth: 0,
+          lineColor: 'transparent',
+             labels: {
+               enabled: false
+             },
+          minorTickLength: 0,
+          tickLength: 0
+        },
+        legend: {
+            enabled: false,
+            layout: 'vertical',
+            verticalAlign: 'middle',
+            align: 'right',
+            itemStyle: {
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: '14px',
+            }
+        },
+        title: {
+            text: "Sunday Attendance",
+            margin: 20,
+            style: {color: '#f9f9f9'}
+        },
+        subtitle: {
+            text: "All UK",
+            style: {color: '#c9c9c9'}
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.0f}</b>'
+        },
+        plotOptions: {
+            column: {
+              dataLabels: {
+                enabled: true,
+                align: 'center',
+                style: {
+                  color: '#f9f9f9',
+                  fontWeight: 'normal',
+                  fontSize: '14px'
+                }
+              }
+            }
+        },
+        series: [{
+          type: 'column',
+          name: "Monthly Sunday Attendance",
+          data: $scope.trendData.filter(function(ele){return ele[1] > 0 })
         }]
     });
   }

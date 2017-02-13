@@ -10,6 +10,8 @@ class PagesController < ApplicationController
     @regions = churches.map(&:church_group).map(&:region).uniq.sort
     @cities = churches.map(&:city).uniq.sort
     @church_groups = churches.map(&:church_group).uniq
+    @sunday_churches = churches.select(&:sunday_meeting).map{ |church| church.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').strip }.sort
+    @campuses = churches.select{ |church| !church.sunday_meeting }.map{ |church| church.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').strip }.sort
     @times = last_twelve_months
 	end
 

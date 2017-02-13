@@ -1,0 +1,53 @@
+<select class='chart_filter' ng-model="trendChartAttr" ng-change="reDrawTrendChart()">
+    <option value="sunday">Select Attribute to View</option>
+    <option value="sunday">Sunday Attendance</option>
+    <option value="ft">First Timers</option>
+    <option value="newConv">New Converts</option>
+    <option value="nbs">Started NB School</option>
+    <option value="fnbs">Finished NB School</option>
+    <option value="bap">Baptised</option>
+    <option value="tithe">First &amp; Best</option>
+</select>
+<select class='chart_filter' ng-model="trendGrouping" ng-change="reDrawTrendChart()">
+    <option value="">Select Grouping</option>
+    <option value="region">Region</option>
+    <option value="church_group">Church Group</option>
+    <option value="city">City</option>
+    <option value="church">Churches (Sunday Meeting)</option>
+    <option value="campus">Campuses (Non-Sunday Meeting)</option>
+</select>
+<select class='chart_filter' ng-change="reDrawTrendChart()" ng-model="trendTarget" ng-hide="trendGrouping !== 'church'">
+  <% @sunday_churches.each do |church| %>
+    <option value="<%= church %>"><%= church %></option>
+  <% end %>
+  <option value=''>Select Church</option>
+</select>
+<select class='chart_filter' ng-change="reDrawTrendChart()" ng-model="trendTarget" ng-hide="trendGrouping !== 'campus'">
+  <% @campuses.each do |church| %>
+    <option value="<%= church %>"><%= church %></option>
+  <% end %>
+  <option value=''>Select Campus</option>
+</select>
+<select class='chart_filter' ng-change="reDrawTrendChart()" ng-model="trendTarget" ng-hide="trendGrouping !== 'region'">
+  <% @regions.each do |church| %>
+    <option value="<%= church %>"><%= church %></option>
+  <% end %>
+  <option value=''>Select Region</option>
+</select>
+<select class='chart_filter' ng-change="reDrawTrendChart()" ng-model="trendTarget" ng-hide="trendGrouping !== 'city'">
+  <% @cities.each do |city| %>
+    <option value="<%= city %>"><%= city %></option>
+  <% end %>
+  <option value=''>Select City</option>
+</select>
+<select class='chart_filter' ng-change="reDrawTrendChart()" ng-model="trendTarget" ng-hide="trendGrouping !== 'church_group'">
+  <% @church_groups.each do |group| %>
+    <option value="<%= group.name %>"><%= "#{group.leader.name.split(" ")[0]} - #{group.name}" %></option>
+  <% end %>
+  <option value=''>Select Church Group</option>
+</select>
+<div ng-show="detailLoading" class='loading'>
+  <i class="fa fa-spinner fa-spin fa-2x" aria-hidden="true" ng-show='detailLoading'></i>
+  ... Fetching Chart Data
+</div>
+<div id="trendChartContainer" style="height: 400px; margin: 50px 0 100px 0"></div>
