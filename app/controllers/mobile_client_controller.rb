@@ -24,6 +24,8 @@ class MobileClientController < ApplicationController
     @results[:totals_by_region] = total_for_region
     @results[:totals_by_group] = total_for_church_group
     @results[:totals_by_city] = total_for_city
+    @results[:totals_by_church] = total_for_church
+    @results[:totals_by_campus] = total_for_campuses
     @results[:information] = prepare_info
     @results[:pastors] = User.where.not(role: "Admin").map{ |user| [user.name, user.name.split(" ").reverse.join("").downcase] }
     @results[:churches] = Church.all.map { |church| [church.name, church.church_group.name, church.elder.name, church.elder.name.split(" ").reverse.join("").downcase] }
@@ -50,6 +52,26 @@ class MobileClientController < ApplicationController
     groups.each do |group|
       records = @records.select { |record| record.church.church_group == group }
       results[group.leader.name.split(" ")[0] + " - " + group.name] = prepare_totals(records)
+    end
+    results
+  end
+
+  def total_for_church
+    groups = @records.map(&:church).uniq.select{ |church| church.sunday_meeting }.sort{|x, y| x.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').strip<=>y.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').strip}
+    results = {}
+    groups.each do |group|
+      records = @records.select { |record| record.church == group }
+      results[group.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').strip] = prepare_totals(records)
+    end
+    results
+  end
+
+  def total_for_campuses
+    groups = @records.map(&:church).uniq.select{ |church| !church.sunday_meeting }.sort{|x, y| x.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').strip<=>y.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').strip}
+    results = {}
+    groups.each do |group|
+      records = @records.select { |record| record.church == group }
+      results[group.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').strip] = prepare_totals(records)
     end
     results
   end

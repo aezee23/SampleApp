@@ -118,6 +118,14 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
         for (var region in $scope.allData.totals_by_group){
           $scope.chartData.push([region, +$scope.allData.totals_by_group[region][$scope.cardName][$scope.chartAttr]])
         }
+      }else if($scope.compareGrouping == "church"){
+        for (var region in $scope.allData.totals_by_church){
+          $scope.chartData.push([region, +$scope.allData.totals_by_church[region][$scope.cardName][$scope.chartAttr]])
+        }
+      }else if($scope.compareGrouping == "campus"){
+        for (var region in $scope.allData.totals_by_campus){
+          $scope.chartData.push([region, +$scope.allData.totals_by_campus[region][$scope.cardName][$scope.chartAttr]])
+        }
       }
 
       setTimeout(function(){
