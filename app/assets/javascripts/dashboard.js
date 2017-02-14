@@ -18,6 +18,7 @@ dashboardApp.factory('summaryData', ['$http', function($http){
     },
     getAll: function(callback){
       $http.get("mobile-summary").then(callback);
+      window.localStorage.setItem('downloadTime', +(new Date));
     }
   };
 }]);
@@ -53,13 +54,27 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   };
   $scope.reloadData = function(){
     $scope.loading = true;
-    summaryData.index($scope.search, function(cards){
-      $scope.cards = cards.data;
+    var last_download = window.localStorage.getItem("downloadTime"),
+        cachedCards = window.localStorage.getItem("seedCards");
+
+    if (!$scope.search && cachedCards && (+(new Date) - last_download < (1000 * 60 * 60))){
+      $scope.cards = JSON.parse(cachedCards);
       $scope.loading = false;
       $scope.search = ""
       $scope.filterHide = true;
       $scope.searchFilterHide = true;
-    })
+    }else{
+      summaryData.index($scope.search, function(cards){
+        $scope.cards = cards.data;
+        if (!$scope.search){
+          window.localStorage.setItem("seedCards", JSON.stringify(cards.data));
+        }      
+        $scope.loading = false;
+        $scope.search = ""
+        $scope.filterHide = true;
+        $scope.searchFilterHide = true;
+      })
+    }
   }
 
   $scope.searchData = function(){
@@ -73,7 +88,6 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   $scope.getAllCard = function(){
     summaryData.show($scope.start_date.toISOString().split("T")[0], $scope.end_date.toISOString().split("T")[0], "", function(card){
       $scope.card = card.data;
-      // $scope.searchFilterHide = false;
       $scope.hasSearched = true;
     })
   };
@@ -82,13 +96,26 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   }
   $scope.reloadData();
   $scope.detailLoading = true;
-  summaryData.getAll(function(data){
-    $scope.allData = data.data;
-    $scope.setBaseChartData();
-    $scope.detailLoading = false;
-    $scope.chart = $scope.drawChart();
-    $scope.showTrendChart();
-  });
+  $scope.getMasterJSON = function(){
+    var last_download = window.localStorage.getItem("downloadTime");
+    if(last_download && (+(new Date) - last_download < (1000 * 60 * 60))){
+      $scope.allData = JSON.parse(window.localStorage.getItem('masterJSON'));
+      $scope.setBaseChartData();
+      $scope.detailLoading = false;
+      $scope.chart = $scope.drawChart();
+      $scope.showTrendChart();
+    }else{
+      summaryData.getAll(function(data){
+        window.localStorage.setItem('masterJSON', JSON.stringify(data.data));
+        $scope.allData = data.data;
+        $scope.setBaseChartData();
+        $scope.detailLoading = false;
+        $scope.chart = $scope.drawChart();
+        $scope.showTrendChart();
+      });
+    }
+  }
+  
   $scope.toggleCard = function(card){
     card.show = !card.show;
   }
@@ -362,5 +389,9 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
         }]
     });
   }
-
+  setTimeout($scope.getMasterJSON, 100);
+  $scope.clearCache = function(){
+    window.localStorage.clear();
+    window.location.reload();
+  }
 }])
