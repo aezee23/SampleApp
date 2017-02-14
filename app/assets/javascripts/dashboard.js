@@ -84,11 +84,10 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   $scope.detailLoading = true;
   summaryData.getAll(function(data){
     $scope.allData = data.data;
-    console.log(data.data);
     $scope.setBaseChartData();
     $scope.detailLoading = false;
-    // $scope.showModal();
     $scope.chart = $scope.drawChart();
+    $scope.showTrendChart();
   });
   $scope.toggleCard = function(card){
     card.show = !card.show;
@@ -103,18 +102,53 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   }
   $scope.trendChartAttr = 'sunday'
   $scope.showTrendChart = function(){
-    $scope.trendChartHeader = $scope.attrMap[$scope.trendChartAttr] ? "Monthly " + $scope.attrMap[$scope.trendChartAttr] : ""
+    $scope.trendChartHeader = $scope.attrMap[$scope.trendChartAttr] ? "Monthly " + $scope.attrMap[$scope.trendChartAttr] : "Sunday Attendance"
+    $scope.trendChartSubheader = $scope.trendTarget || "All UK"
     $scope.reDrawTrendChart();
+    $scope.trendCount = 1;
+  };
+  $scope.resetTrendChart = function(){
+    $scope.trendChartAttr = 'sunday';
+    $scope.trendGrouping = '';
+    $scope.trendTarget = '';
+    $scope.showTrendChart();
   }
   $scope.reDrawTrendChart = function(){
-    $scope.trendData = []
-    for (var i = 0; i < $scope.lastTwelve.length; i++){
-      $scope.trendData.push([$scope.lastTwelve[i], +$scope.allData["totals"][$scope.lastTwelve[i][0]][$scope.trendChartAttr]])
+    if($scope.allData){
+      $scope.trendData = []
+      for (var i = 0; i < $scope.lastTwelve.length; i++){
+        if($scope.trendGrouping && $scope.trendTarget){
+          $scope.trendData.push([$scope.lastTwelve[i], +$scope.allData[$scope.trendGrouping][$scope.trendTarget][$scope.lastTwelve[i][0]][$scope.trendChartAttr]])
+        }else{
+          $scope.trendData.push([$scope.lastTwelve[i], +$scope.allData["totals"][$scope.lastTwelve[i][0]][$scope.trendChartAttr]])
+        }
+      }
+      setTimeout(function(){
+        $scope.trendChart = $scope.drawTrendChart();
+      }, 100)
     }
-    setTimeout(function(){
-      $scope.chart = $scope.drawTrendChart();
-    }, 100)
-  }
+  };
+  $scope.addTrendAttribute = function(){
+    if( $scope.addedAttr && $scope.addedAttr !== $scope.trendChartAttr && $scope.trendCount < 3){
+      var trendData = []
+      $scope.trendCount++
+      for (var i = 0; i < $scope.lastTwelve.length; i++){
+        if($scope.trendGrouping && $scope.trendTarget){
+          trendData.push([$scope.lastTwelve[i], +$scope.allData[$scope.trendGrouping][$scope.trendTarget][$scope.lastTwelve[i][0]][$scope.addedAttr]])
+        }else{
+          trendData.push([$scope.lastTwelve[i], +$scope.allData["totals"][$scope.lastTwelve[i][0]][$scope.addedAttr]])
+        }
+      }
+      $scope.trendChart.addSeries({
+        type: "spline",
+        name: "Monthly " + $scope.attrMap[$scope.addedAttr],
+        data: trendData.filter(function(ele){return ele[1] > 0 })
+      })
+      // $scope.trendChart.legend.options.enabled = true;
+      $scope.addedAttr = "";
+      // console.log($scope.trendChart);
+    }
+  };
   $scope.reDrawChart = function(){
     $scope.modalHeader = $scope.attrMap[$scope.chartAttr];
     $scope.subHeader = $scope.cardName;
@@ -146,7 +180,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
         $scope.chart = $scope.drawChart();
       }, 100)
     }
-  }
+  };
   $scope.modalHeader = "Sunday Attendance";
   $scope.subHeader = "Last 12 Months";
   $scope.compareGrouping = "region";
@@ -285,9 +319,10 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
           tickLength: 0
         },
         legend: {
-            enabled: false,
-            layout: 'vertical',
-            verticalAlign: 'middle',
+            enabled: true,
+            layout: 'horizontal',
+            verticalAlign: 'bottom',
+           
             align: 'right',
             itemStyle: {
                 color: 'white',
@@ -296,12 +331,12 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
             }
         },
         title: {
-            text: "Sunday Attendance",
+            text: $scope.trendChartHeader,
             margin: 20,
             style: {color: '#f9f9f9'}
         },
         subtitle: {
-            text: "All UK",
+            text: $scope.trendChartSubheader,
             style: {color: '#c9c9c9'}
         },
         tooltip: {
@@ -322,7 +357,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
         },
         series: [{
           type: 'column',
-          name: "Monthly Sunday Attendance",
+          name: $scope.trendChartHeader,
           data: $scope.trendData.filter(function(ele){return ele[1] > 0 })
         }]
     });

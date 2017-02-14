@@ -35,6 +35,15 @@ div.container.dashboard
       margin-top: 0
       color: $white
       font-size: 2em
+    div.page_heading
+      h5
+        position: relative
+        z-index: 2
+        background: $bg
+        display: none
+        padding: 0 10px
+        font-size: 1em
+        font-weight: bold
     span
       display: block
       background: rgb(67, 72, 87)
@@ -275,5 +284,16 @@ select.chart_filter
   border: none
   border-radius: 5px
   -webkit-appearance: none
+  &:focus
+    outline: none
+#resetTrendChart
+  margin: 0 0 20px 0
+  display: inline-block
+  width: 30%
+  background: rgba(196, 85, 85, 1)
+  padding: 2px 10px
+  border-radius: 5px
+  vertical-align: middle
+  border: none
   &:focus
     outline: none
