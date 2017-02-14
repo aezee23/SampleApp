@@ -1,78 +1,73 @@
 <div class='section_heading'>
   <h3> FLC UK Overview </h3>
 </div>
-<div id="flc_overview">
-  <ul id="summary_list">
-    <li>
+  <div>
+  <div id='infoDate'>
+    <span>
       <%= fa_icon "calendar" %>
-      <span>
-        <small>
-          Date Started - 2013
-        </small>
-      </span>
-    </li>
-    <li>
-      <%= fa_icon "building" %>
-      <span>
-        <%= number_with_precision(23, :precision => 0, :delimiter => ',') %>
+      <small>
+        Date Started - {{infoStarted || "2013"}}
+      </small>
+    </span>
+  </div>
+  <div id="flc_overview">
+    <ul id="summary_list">
+      <li>
+        <%= fa_icon "building" %>
+        <span class='infoStat' ng-bind='infoBranches'>
+        </span>
         <small>
           Branches
         </small>
-      </span>
-    </li>
-    <li>
-      <%= fa_icon "users" %>
-      <span>
-        <%= number_with_precision(822, :precision => 0, :delimiter => ',') %>
+      </li>
+      <li>
+        <%= fa_icon "users" %>
+        <span class='infoStat' ng-bind='infoAVG'>
+        </span>
         <small>
           Average Weekly Attendance
         </small>
-      </span>
-    </li>
-    <li>
-      <%= fa_icon "user" %>
-      <span>
-        <%= number_with_precision(13, :precision => 0, :delimiter => ',') %>
-        <small>
-          Pastors
-        </small>
-      </span>
-    </li>
-    <li>
-      <%= fa_icon "user" %>
-      <span>
-        <%= number_with_precision(34, :precision => 0, :delimiter => ',') %>
+      </li>
+      <li>
+        <%= fa_icon "user" %>
+          <span class='infoStat' ng-bind='infoPastors'>
+          </span>
+          <small>
+            Pastors
+          </small>
+      </li>
+      <li>
+        <%= fa_icon "user" %>
+        <span class='infoStat' ng-bind='infoElders'>
+        </span>
         <small>
           Elders
         </small>
-      </span>
-    </li>
-    <li>
-      <%= fa_icon "leaf" %>
-      <span>
-        <%= number_with_precision(3, :precision => 0, :delimiter => ',') %>
+      </li>
+      <li>
+        <%= fa_icon "leaf" %>
+        <span class='infoStat' ng-bind='infoChurchPlanters'>
+        </span>
         <small>
           Church Planters
         </small>
-      </span>
-    </li>
-    <li>
-      <%= fa_icon "object-group" %>
-      <span>
-        <%= number_with_precision(13, :precision => 0, :delimiter => ',') %>
+      </li>
+      <li>
+        <%= fa_icon "object-group" %>
+        <span class='infoStat' ng-bind='infoChurchGroups'>
+        </span>
         <small>
           Church Groups
         </small>
-      </span>
-    </li>
-    <li>
-      <%= fa_icon "university" %>
-      <span>
-        <%= number_with_precision(42, :precision => 0, :delimiter => ',') %>
+      </li>
+      <li>
+        <%= fa_icon "university" %>
+        <span class='infoStat' ng-bind='infoChurches'>
+        </span>
         <small>
           Campus Churches
         </small>
-      </span>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </div>

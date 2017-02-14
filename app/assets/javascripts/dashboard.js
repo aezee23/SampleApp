@@ -121,6 +121,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     }
     if(isLocalStorageNameSupported() && last_download && (+(new Date) - last_download < (1000 * 60 * 60))){
       $scope.allData = JSON.parse(window.localStorage.getItem('masterJSON'));
+      $scope.$apply($scope.setInfoBox)
       $scope.setBaseChartData();
       $scope.detailLoading = false;
       $scope.chart = $scope.drawChart();
@@ -131,6 +132,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
           window.localStorage.setItem('masterJSON', JSON.stringify(data.data));
         }
         $scope.allData = data.data;
+        $scope.setInfoBox()
         $scope.setBaseChartData();
         $scope.detailLoading = false;
         $scope.chart = $scope.drawChart();
@@ -138,7 +140,18 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
       });
     }
   }
-  
+  $scope.setInfoBox = function(){
+    $scope.infoStarted = $scope.allData.information["Date Started"];
+    $scope.infoBranches = $scope.allData.information["Branches"];
+    $scope.infoChurchGroups = $scope.allData.information["Church Groups"];
+    $scope.infoChurchPlanters = $scope.allData.information["Church Planters"];
+    $scope.infoElders = $scope.allData.information["Elders"];
+    $scope.infoLondonCampuses = $scope.allData.information["London Campuses"];
+    $scope.infoAVG = $scope.allData.information["Past Year Average Weekly Attendance"];
+    $scope.infoPastors = $scope.allData.information["Pastors"];
+    $scope.infoChurches = $scope.allData.information["Total Campus Churches"];
+    $scope.infoLoaded = !$scope.infoLoaded;
+  }
   $scope.toggleCard = function(card){
     card.show = !card.show;
   }
