@@ -44,7 +44,11 @@ a.navbar-brand > i{
   vertical-align: top;
 }
 input[type='date'].form-control{
-  -webkit-appearance: none
+  -webkit-appearance: none;
+  vertical-align: middle;
+}
+select.form-control{
+  -webkit-appearance: none;
 }
 /* Sticky footer styles
 -------------------------------------------------- */

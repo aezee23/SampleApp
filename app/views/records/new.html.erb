@@ -17,7 +17,7 @@
   <% else %>
     <%= f.select :church_id, current_user.churches.collect {|a| [ a.name, a.id ] }, {label: "Campus Church" }, { class: "selectpicker" } %>
   <% end %>
-  <%= f.date_field :day, value: @date, label: "Date of Sunday Service", help: "(DD/MM/YYYY)", class: "datepicker" %>
+  <%= f.date_field :day, value: @date, label: "Date of Sunday Service", class: "datepicker" %>
   <%= f.number_field :sunday_att, value: 0, label: "Sunday Attendance:" %>
   <%= f.number_field :weekday_att, value: 0, label: "Weekday Attendance:", help: "For meeting a few days prior to the Sunday above" %>
   <%= f.number_field :new_converts, value: 0, label: "Number of New Converts in Sunday service:" %>
