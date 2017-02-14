@@ -1,10 +1,13 @@
 <% provide(:title, 'Latest Sunday Raw Data') %>
 
 <div class="container">
+  <div class="section_heading" >
+    <h3 > 
+      <%= date_of_last("Sunday").strftime('%d-%b-%y') %> Records
+      </h3>
+  </div>
 
-<h1 style="padding-left: 0px"><span class="label label-default" style="padding-left:20px"><%= User.first.date_of_last("Sunday").strftime('%d-%b-%y') %></span></h1>
-
-<p style="padding: 20px">
+<p style="color: #f9f9f9">
  Data Download:
   <%= link_to "To Excel", last_sunday_path(format: "csv") %> |
 </p>

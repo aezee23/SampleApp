@@ -1,10 +1,12 @@
 <% provide(:title, "#{@record.day} Data - #{@record.church.name}") %>
 
 <div class="container">
-<h3 class="page_heading">	
-	
-	<span class="label label-primary"><%= link_to @record.church.name, church_path(@record.church), class: "label label-primary" %><%= "      "+@record.day.strftime('%d-%b-%y') %></span>
-	</h3>
+  <div class="section_heading" >
+    <h3 > 
+      <span class="label label-primary"><%= link_to @record.church.name, church_path(@record.church), class: "label label-primary" %><%= "      "+@record.day.strftime('%d-%b-%y') %></span>
+      </h3>
+  </div>
+
 		
 
 <dl class="dl-horizontal">

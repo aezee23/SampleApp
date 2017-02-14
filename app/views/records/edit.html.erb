@@ -13,25 +13,25 @@
 <%= bootstrap_form_for(@record) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <% if current_user.admin %>
-    <%= f.select :church_id, Church.all.collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Campus Church" }, { class: "selectpicker" } %>
-    <%= f.select :user_id, User.where(admin: false).collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Select Elder" }, { class: "selectpicker" } %>
+    <%= f.select :church_id, Church.all.collect {|a| [ a.name, a.id ] }, { label: "Campus Church" }, { class: "selectpicker" } %>
+    <%= f.select :user_id, User.where(admin: false).collect {|a| [ a.name, a.id ] }, {label: "Select Elder" }, { class: "selectpicker" } %>
   <% else %>
-    <%= f.select :church_id, current_user.churches.collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Campus Church" }, { class: "selectpicker" } %>
+    <%= f.select :church_id, current_user.churches.collect {|a| [ a.name, a.id ] }, {label: "Campus Church" }, { class: "selectpicker" } %>
   <% end %>
-  <%= f.date_field :day, icon: "calendar", value: @date, label: "Date of Sunday Service", help: "Click dropdown arrow to select"  %>
-  <%= f.number_field :sunday_att, icon: "globe", value: 0, label: "Sunday Attendance:" %>
-  <%= f.number_field :weekday_att, icon: "book", value: 0, label: "Weekday Attendance:", help: "For meeting a few days prior to the Sunday above" %>
-  <%= f.number_field :new_converts, icon: "tree-deciduous", value: 0, label: "Number of New Converts in Sunday service:" %>
-  <%= f.number_field :first_timers, icon: "user", value: 0, label: "Number of First Timers in Sunday service:" %>
-  <%= f.number_field :nbs, icon: "home", value: 0, label: "How many people STARTED New Believers School this Sunday?" %>
-  <%= f.number_field :nbs_finish, icon: "education",  value: 0, label: "How many people FINISHED New Believers School this Sunday?" %>
-   <%= f.number_field :baptised, icon: "tree-deciduous", value: 0, label: "Number of people who were baptised this Sunday:" %>
-   <%= f.number_field :fnb, icon: "briefcase", value: 0, label: "Number of people who gave their First and Best this Sunday:" %>
-  <%= f.select :visitation, [["No", false], ["Yes", true]], {icon: "check", label: "Did you go on visitation in the past week?" }, { class: "selectpicker" }  %>
-  <%= f.text_field :message_sunday, icon: "grain", label: "Sunday Message Title:", value: "None" %>
-  <%= f.text_field :preacher_sunday, icon: "fire", label: "Who Preached in Sunday Service?", value: "#{current_user.elder}"%>
-  <%= f.text_field :message_weekday, icon: "grain", label: "Weekday Message Title:" , value: "None" %>
-  <%= f.text_field :preacher_weekday, icon: "fire", label: "Who Preached in Weekday Service?", value: "#{current_user.elder}" %>
+  <%= f.date_field :day, label: "Date of Sunday Service", help: "Click dropdown arrow to select", class: 'datepicker' %>
+  <%= f.number_field :sunday_att, label: "Sunday Attendance:" %>
+  <%= f.number_field :weekday_att, label: "Weekday Attendance:", help: "For meeting a few days prior to the Sunday above" %>
+  <%= f.number_field :new_converts, label: "Number of New Converts in Sunday service:" %>
+  <%= f.number_field :first_timers, label: "Number of First Timers in Sunday service:" %>
+  <%= f.number_field :nbs, label: "How many people STARTED New Believers School this Sunday?" %>
+  <%= f.number_field :nbs_finish, label: "How many people FINISHED New Believers School this Sunday?" %>
+   <%= f.number_field :baptised, label: "Number of people who were baptised this Sunday:" %>
+   <%= f.number_field :fnb, label: "Number of people who gave their First and Best this Sunday:" %>
+  <%= f.select :visitation, [["No", false], ["Yes", true]], { label: "Did you go on visitation in the past week?" }, { class: "selectpicker" }  %>
+  <%= f.text_field :message_sunday,  label: "Sunday Message Title:" %>
+  <%= f.text_field :preacher_sunday, label: "Who Preached in Sunday Service?" %>
+  <%= f.text_field :message_weekday, label: "Weekday Message Title:" %>
+  <%= f.text_field :preacher_weekday, label: "Who Preached in Weekday Service?" %>
   <%= f.submit "Amend Data", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
 <% end %>
 

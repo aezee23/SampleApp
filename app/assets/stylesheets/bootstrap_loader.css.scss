@@ -43,6 +43,9 @@ a.navbar-brand > i{
   font-size: 30px;
   vertical-align: top;
 }
+input[type='date'].form-control{
+  -webkit-appearance: none
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
