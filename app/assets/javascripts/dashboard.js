@@ -1,3 +1,18 @@
+function isLocalStorageNameSupported() 
+{
+    var testKey = 'test', storage = window.localStorage;
+    try 
+    {
+        storage.setItem(testKey, '1');
+        storage.removeItem(testKey);
+        return true;
+    } 
+    catch (error) 
+    {
+        return false;
+    }
+}
+
 var dashboardApp = angular.module('DashBoard', ["ui.sortable"]);
 
 dashboardApp.factory('summaryData', ['$http', function($http){
@@ -18,7 +33,9 @@ dashboardApp.factory('summaryData', ['$http', function($http){
     },
     getAll: function(callback){
       $http.get("mobile-summary").then(callback);
-      window.localStorage.setItem('downloadTime', +(new Date));
+      if(isLocalStorageNameSupported()){
+        window.localStorage.setItem('downloadTime', +(new Date));
+      }
     }
   };
 }]);
@@ -54,10 +71,12 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   };
   $scope.reloadData = function(){
     $scope.loading = true;
+    if (isLocalStorageNameSupported()){
     var last_download = window.localStorage.getItem("downloadTime"),
         cachedCards = window.localStorage.getItem("seedCards");
+    }
 
-    if (!$scope.search && cachedCards && (+(new Date) - last_download < (1000 * 60 * 60))){
+    if (isLocalStorageNameSupported() && !$scope.search && cachedCards && (+(new Date) - last_download < (1000 * 60 * 60))){
       $scope.cards = JSON.parse(cachedCards);
       $scope.loading = false;
       $scope.search = ""
@@ -66,7 +85,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     }else{
       summaryData.index($scope.search, function(cards){
         $scope.cards = cards.data;
-        if (!$scope.search){
+        if (!$scope.search && isLocalStorageNameSupported()){
           window.localStorage.setItem("seedCards", JSON.stringify(cards.data));
         }      
         $scope.loading = false;
@@ -97,8 +116,10 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   $scope.reloadData();
   $scope.detailLoading = true;
   $scope.getMasterJSON = function(){
-    var last_download = window.localStorage.getItem("downloadTime");
-    if(last_download && (+(new Date) - last_download < (1000 * 60 * 60))){
+    if (isLocalStorageNameSupported()){
+      var last_download = window.localStorage.getItem("downloadTime");
+    }
+    if(isLocalStorageNameSupported() && last_download && (+(new Date) - last_download < (1000 * 60 * 60))){
       $scope.allData = JSON.parse(window.localStorage.getItem('masterJSON'));
       $scope.setBaseChartData();
       $scope.detailLoading = false;
@@ -106,7 +127,9 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
       $scope.showTrendChart();
     }else{
       summaryData.getAll(function(data){
-        window.localStorage.setItem('masterJSON', JSON.stringify(data.data));
+        if (isLocalStorageNameSupported()){
+          window.localStorage.setItem('masterJSON', JSON.stringify(data.data));
+        }
         $scope.allData = data.data;
         $scope.setBaseChartData();
         $scope.detailLoading = false;
@@ -391,7 +414,9 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   }
   setTimeout($scope.getMasterJSON, 100);
   $scope.clearCache = function(){
-    window.localStorage.clear();
-    window.location.reload();
+    if (isLocalStorageNameSupported()){
+      window.localStorage.clear();
+      window.location.reload();
+    }
   }
 }])
