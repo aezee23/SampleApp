@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  mount_uploader :avatar, AvatarUploader
 	has_many :church_groups
   has_many :visitation_records
   has_many :churches

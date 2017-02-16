@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120184237) do
+ActiveRecord::Schema.define(version: 20170216013354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20170120184237) do
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.string   "role",            default: "Elder"
+    t.string   "avatar"
   end
 
   create_table "visitation_records", force: :cascade do |t|

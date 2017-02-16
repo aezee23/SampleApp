@@ -12,6 +12,7 @@
 <%= bootstrap_form_for(@user) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
   <%= f.text_field :name, icon: "pencil", label: "User's full name:" %>
+  <%= f.file_field :avatar, label: "Pick an image" %>
   <%= f.email_field :email, icon: "folder-open", label: "User's Email Address:" %>
   <%= f.select :role, [["Admin", "Admin"], ["Overseer", "Overseer"], ["Elder", "Elder"], ["Pastor", "Pastor"]], { icon: "pencil", label: "User's main role:" }, { class: "selectpicker" }  %>
    <%= f.select :admin, [["No", false], ["Yes", true]], { icon: "check", label: "Is this setup for an admin user?" }, { class: "selectpicker" }  %>
