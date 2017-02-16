@@ -1,34 +1,37 @@
 Rails.application.routes.draw do
-get '/elders' => 'elders#index'
-root "sessions#new"
-get 'demo' => 'pages#index'
-get 'last_sunday' => 'pages#last_sunday'
-get 'last_sunday_charts' => 'pages#last_sunday_charts'
-get 'time_series_charts' => 'pages#time_series_charts'
-get 'monthly_average_charts' => 'pages#monthly_average_charts'
-get 'visitation' => 'pages#visitation'
-get 'visi_record' => 'pages#visi_record'
-get 'data_sheet' => 'pages#data_sheet'
-get 'retention' => 'pages#retention'
-get 'show_nots' => 'pages#show'
-get 'change_pwd' => 'users#change_pwd'
-resources :church_groups
-get 'login' => 'sessions#new'
-post 'login' => 'sessions#create'
-delete 'logout' => 'sessions#destroy'
-get 'mobile-summary' => 'mobile_client#summary'
-get "unauthorised" => 'mobile_client#unauthorised'
-get 'users/:id/edit_my_profile' => 'users#edit_my_profile', as: :edit_my_profile
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
-resources :users
-resources :churches
-resources :records
-resources :password_resets,     only: [:new, :create, :edit, :update]
-resources :datacards, only: [:index]
-get 'datacard', to: 'datacards#show'
-get 'datadetail', to: 'datacards#get_detail'
-get 'change_password' => 'users#change_password'
-patch 'change_password' => 'users#change_passwor'
+  get '/elders' => 'elders#index'
+  root "sessions#new"
+  get 'demo' => 'pages#index'
+  get 'last_sunday' => 'pages#last_sunday'
+  get 'last_sunday_charts' => 'pages#last_sunday_charts'
+  get 'time_series_charts' => 'pages#time_series_charts'
+  get 'monthly_average_charts' => 'pages#monthly_average_charts'
+  get 'visitation' => 'pages#visitation'
+  get 'visi_record' => 'pages#visi_record'
+  get 'data_sheet' => 'pages#data_sheet'
+  get 'retention' => 'pages#retention'
+  get 'show_nots' => 'pages#show'
+  get 'change_pwd' => 'users#change_pwd'
+  resources :church_groups
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+  get 'mobile-summary' => 'mobile_client#summary'
+  get "unauthorised" => 'mobile_client#unauthorised'
+  get 'users/:id/edit_my_profile' => 'users#edit_my_profile', as: :edit_my_profile
+
+  resources :users
+  resources :churches
+  resources :records
+  resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :datacards, only: [:index]
+  get 'datacard', to: 'datacards#show'
+  get 'datadetail', to: 'datacards#get_detail'
+  get 'change_password' => 'users#change_password'
+  patch 'change_password' => 'users#change_passwor'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

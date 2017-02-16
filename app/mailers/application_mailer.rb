@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "nonereply@flcukdata.com"
+  default from: ENV['default_from']
   layout 'mailer'
 end

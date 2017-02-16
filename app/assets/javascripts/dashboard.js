@@ -50,6 +50,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   $scope.choice_by = "";
   $scope.modalShow = false;
   $scope.currentActive = 'cards';
+  $scope.cacheLength = 24; // hours
   $scope.attrMap = {
     sunday: "Sunday Attendance",
     ft: "First Timers",
@@ -76,7 +77,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
         cachedCards = window.localStorage.getItem("seedCards");
     }
 
-    if (isLocalStorageNameSupported() && !$scope.search && cachedCards && (+(new Date) - last_download < (1000 * 60 * 60))){
+    if (isLocalStorageNameSupported() && !$scope.search && cachedCards && (+(new Date) - last_download < (1000 * 60 * 60 * $scope.cacheLength))){
       $scope.cards = JSON.parse(cachedCards);
       $scope.loading = false;
       $scope.search = ""
@@ -119,7 +120,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     if (isLocalStorageNameSupported()){
       var last_download = window.localStorage.getItem("downloadTime");
     }
-    if(isLocalStorageNameSupported() && last_download && (+(new Date) - last_download < (1000 * 60 * 60))){
+    if(isLocalStorageNameSupported() && last_download && (+(new Date) - last_download < (1000 * 60 * 60 * $scope.cacheLength))){
       $scope.allData = JSON.parse(window.localStorage.getItem('masterJSON'));
       $scope.$apply($scope.setInfoBox)
       $scope.setBaseChartData();

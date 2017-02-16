@@ -32,14 +32,15 @@ gem "figaro"
 gem 'angularjs-rails'
 gem 'rails-angular-ui-sortable'
 gem 'jquery_mobile_rails'
+gem 'mailgun-ruby', '~>1.1.2'
 
 group :development, :test do
-   
+  gem "letter_opener"
 end
 
 group :production do
-    gem 'puma',           '2.11.1'
-     gem 'rails_12factor'
+  gem 'puma',           '2.11.1'
+  gem 'rails_12factor'
 end
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
@@ -54,6 +55,8 @@ gem "chartkick"
 gem 'font-awesome-sass', '~> 4.5.0'
 gem "font-awesome-rails"
 gem 'bootstrap_form'
+gem 'sidekiq'
+gem 'sinatra'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
