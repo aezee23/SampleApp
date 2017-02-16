@@ -214,15 +214,26 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     }
   };
   $scope.reDrawChart = function(){
+    console.log($scope.allData);
     $scope.modalHeader = $scope.attrMap[$scope.chartAttr];
     $scope.subHeader = $scope.cardName;
     if ($scope.chartData){
       $scope.chartData = [];
       $scope.drilldownData = [];
+      var j = 0;
       if($scope.compareGrouping == "region"){
         for (var region in $scope.allData.totals_by_region){
+          var reg = $scope.allData.totals_by_region[region]
           $scope.chartData.push({name: region, y: +$scope.allData.totals_by_region[region][$scope.cardName][$scope.chartAttr], drilldown: region})
-          $scope.drilldownData.push();
+          $scope.drilldownData.push({id: region, data: []})
+          for (var i=0; i < reg.groups.length; i++){
+            var church_group = reg.groups[i]
+            $scope.drilldownData[j].data.push({
+              name: reg.groups[i],
+              y: +$scope.allData.totals_by_group[church_group][$scope.cardName][$scope.chartAttr], drilldown: church_group
+            })
+          }
+          j += 1;
         }
       }else if($scope.compareGrouping == "city"){
         for (var region in $scope.allData.totals_by_city){
@@ -255,9 +266,18 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   $scope.setBaseChartData = function(){
     $scope.chartData = [];
     $scope.drilldownData = [];
+    var j = 0;
     for (var region in $scope.allData.totals_by_region){
+      var reg = $scope.allData.totals_by_region[region];
       $scope.chartData.push({name: region, y: +$scope.allData.totals_by_region[region]["Last 12 months"].sunday, drilldown: region})
-      $scope.drilldownData.push()
+      $scope.drilldownData.push({id: region, data: []})
+      for (var i=0; i < reg.groups.length; i++){
+        $scope.drilldownData[j].data.push({
+          name: reg.groups[i],
+          y: +$scope.allData.totals_by_group[reg.groups[i]]["Last 12 months"].sunday, drilldown: reg.groups[i]
+        })
+      }
+      j += 1;
     }
   };
   $scope.drawChart = function(options){
@@ -278,9 +298,9 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
              // title: {
              //     text: null
              // },
-             labels: {
-              style: {color: '#a9a9a9', fontSize: '14px'}
-             }
+             // labels: {
+             //  style: {color: '#a9a9a9', fontSize: '14px'}
+             // }
          },
         yAxis: {
           title: {
@@ -333,18 +353,16 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
           }
         },
         series: [{
-          name: 'Main',
+          // name: 'Main',
           colorByPoint: true,
           // type: 'column',
-          // name: $scope.modalHeader,
-          data: $scope.chartData.filter(function(ele){return ele['y'] > 0 })
+          name: $scope.modalHeader.replace(/&amp;/, '&'),
+          data: $scope.chartData
+          // data: $scope.chartData.filter(function(ele){return ele['y'] > 0 })
         }],
         drilldown: {
           activeAxisLabelStyle: { "cursor": "pointer", "color": "#a9a9a9", "fontWeight": "bold", "textDecoration": "none" },
-          series: [{
-            id: 'none',
-            data: [['Kent', 5], ['Johnson', 6]]
-          }]
+          series: $scope.drilldownData
         }
     });
   }

@@ -82,6 +82,7 @@ class MobileClientController < ApplicationController
     groups.each do |group|
       records = @records.select { |record| record.church.church_group.region == group }
       results[group] = prepare_totals(records)
+      results[group][:groups] = records.map { |record| record.church.church_group }.uniq.map{ |group| group.leader.name.split(" ")[0] + " - " + group.name }
     end
     results
   end
