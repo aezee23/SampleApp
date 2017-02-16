@@ -16,7 +16,7 @@
 //= require bootstrap
 //= require highcharts.src
 //= require highcharts-3d
-//= require chartkick
+//= require highcharts/drilldown
 //= require angular
 //= require angular-ui-sortable
 //= require_tree .

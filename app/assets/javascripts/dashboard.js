@@ -218,25 +218,27 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     $scope.subHeader = $scope.cardName;
     if ($scope.chartData){
       $scope.chartData = [];
+      $scope.drilldownData = [];
       if($scope.compareGrouping == "region"){
         for (var region in $scope.allData.totals_by_region){
-          $scope.chartData.push([region, +$scope.allData.totals_by_region[region][$scope.cardName][$scope.chartAttr]])
+          $scope.chartData.push({name: region, y: +$scope.allData.totals_by_region[region][$scope.cardName][$scope.chartAttr], drilldown: region})
+          $scope.drilldownData.push();
         }
       }else if($scope.compareGrouping == "city"){
         for (var region in $scope.allData.totals_by_city){
-          $scope.chartData.push([region, +$scope.allData.totals_by_city[region][$scope.cardName][$scope.chartAttr]])
+          $scope.chartData.push({name: region, y: +$scope.allData.totals_by_city[region][$scope.cardName][$scope.chartAttr], drilldown: region})
         }
       }else if($scope.compareGrouping == "church_group"){
         for (var region in $scope.allData.totals_by_group){
-          $scope.chartData.push([region, +$scope.allData.totals_by_group[region][$scope.cardName][$scope.chartAttr]])
+          $scope.chartData.push({name: region, y: +$scope.allData.totals_by_group[region][$scope.cardName][$scope.chartAttr], drilldown: region})
         }
       }else if($scope.compareGrouping == "church"){
         for (var region in $scope.allData.totals_by_church){
-          $scope.chartData.push([region, +$scope.allData.totals_by_church[region][$scope.cardName][$scope.chartAttr]])
+          $scope.chartData.push({name: region, y: +$scope.allData.totals_by_church[region][$scope.cardName][$scope.chartAttr]})
         }
       }else if($scope.compareGrouping == "campus"){
         for (var region in $scope.allData.totals_by_campus){
-          $scope.chartData.push([region, +$scope.allData.totals_by_campus[region][$scope.cardName][$scope.chartAttr]])
+          $scope.chartData.push({name: region, y: +$scope.allData.totals_by_campus[region][$scope.cardName][$scope.chartAttr]})
         }
       }
 
@@ -252,8 +254,10 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
   $scope.cardName = "Last 12 months"
   $scope.setBaseChartData = function(){
     $scope.chartData = [];
+    $scope.drilldownData = [];
     for (var region in $scope.allData.totals_by_region){
-      $scope.chartData.push([region, +$scope.allData.totals_by_region[region]["Last 12 months"].sunday])
+      $scope.chartData.push({name: region, y: +$scope.allData.totals_by_region[region]["Last 12 months"].sunday, drilldown: region})
+      $scope.drilldownData.push()
     }
   };
   $scope.drawChart = function(options){
@@ -262,18 +266,20 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
           enabled: false
         },
         chart: {
+            type: 'bar',
             renderTo: 'chartContainer',
             plotBackgroundColor: null,
             plotBorderWidth: 0,
             plotShadow: false
         },
         xAxis: {
-             categories: $scope.chartData.filter(function(ele){ return ele[1] > 0}).map(function(ele){return ele[0] + " - " + ele[1];}),
-             title: {
-                 text: null
-             },
+            type: 'category',
+             // categories: $scope.chartData.filter(function(ele){ return ele.y > 0}).map(function(ele){return ele.name + " - " + ele.y;}),
+             // title: {
+             //     text: null
+             // },
              labels: {
-              style: {size: '#a9a9a9', fontSize: '14px'}
+              style: {color: '#a9a9a9', fontSize: '14px'}
              }
          },
         yAxis: {
@@ -314,36 +320,32 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
             pointFormat: '{series.name}: <b>{point.y:.0f}</b>'
         },
         plotOptions: {
-            bar: {
-              dataLabels: {
-                enabled: true,
-                align: 'left',
-                style: {
-                  color: '#f9f9f9',
-                  fontWeight: 'normal',
-                  fontSize: '14px'
-                }
+          bar: {
+            dataLabels: {
+              enabled: true,
+              align: 'left',
+              style: {
+                color: '#f9f9f9',
+                fontWeight: 'normal',
+                fontSize: '14px'
               }
-            },
-            pie: {
-                dataLabels: {
-                    enabled: true,
-                    distance: -50,
-                    style: {
-                        fontWeight: 'bold',
-                        color: 'white'
-                    }
-                },
-                startAngle: -90,
-                endAngle: 90,
-                center: ['50%', '75%']
             }
+          }
         },
         series: [{
-          type: 'bar',
-          name: $scope.modalHeader,
-          data: $scope.chartData.filter(function(ele){return ele[1] > 0 })
-        }]
+          name: 'Main',
+          colorByPoint: true,
+          // type: 'column',
+          // name: $scope.modalHeader,
+          data: $scope.chartData.filter(function(ele){return ele['y'] > 0 })
+        }],
+        drilldown: {
+          activeAxisLabelStyle: { "cursor": "pointer", "color": "#a9a9a9", "fontWeight": "bold", "textDecoration": "none" },
+          series: [{
+            id: 'none',
+            data: [['Kent', 5], ['Johnson', 6]]
+          }]
+        }
     });
   }
 
@@ -420,6 +422,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
             }
         },
         series: [{
+          colorByPoint: true,
           type: 'column',
           name: $scope.trendChartHeader,
           data: $scope.trendData.filter(function(ele){return ele[1] > 0 })
