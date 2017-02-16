@@ -308,7 +308,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
             }
         },
         title: {
-            text: $scope.modalHeader,
+            text: $scope.modalHeader.replace(/&amp;/g, '&'),
             margin: 20,
             style: {color: '#f9f9f9'}
         },
@@ -397,7 +397,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
             }
         },
         title: {
-            text: $scope.trendChartHeader,
+            text: $scope.trendChartHeader.replace(/&amp;/g, '&'),
             margin: 20,
             style: {color: '#f9f9f9'}
         },
