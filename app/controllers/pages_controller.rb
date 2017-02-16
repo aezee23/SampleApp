@@ -5,6 +5,7 @@ class PagesController < ApplicationController
 	helper_method :sort_column, :sort_direction, :mweek
 	helper_method :sun_in_month
 	def index
+    UserMailer.password_reset(User.last).deliver
     churches = Church.includes(:church_group)
     @churches = churches.map(&:name).sort
     @regions = churches.map(&:church_group).map(&:region).uniq.sort
