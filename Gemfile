@@ -47,7 +47,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap'
-#gem 'groupdate', '~> 2.5', '>= 2.5.2'
 gem 'dateslices', '~> 0.0.3'
 gem 'hightop'
 gem 'active_median'
