@@ -3,6 +3,8 @@
   <div class="church_info">
     <h3><%= link_to group.name, group %></h3>
     <h5><%= link_to group.leader.name, group.leader %></h5>
+    <p class="church_info_stats"><small>Latest Size:</small> <span class='church_size'><%= group.latest(:sunday_att) %></span></p>
+    <p class="church_info_stats"><small>Members:</small> <span class='members'><%= group.members.count %></span></p>
     <p>
       <%= link_to(churches_path(group: group.name)) do %>
         <span><%= pluralize(group.churches.count, "Church") %></span>

@@ -3,6 +3,7 @@ class Church < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   belongs_to :church_group
   belongs_to :elder, class_name: User, foreign_key: :user_id
+  has_many :members
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 60 }
