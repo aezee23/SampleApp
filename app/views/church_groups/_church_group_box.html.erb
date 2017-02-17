@@ -1,8 +1,8 @@
 <div class='church'>
   <div class="user-blur" style="background-image: url(<%= group.leader.thumbnail %>);"></div>
   <div class="church_info">
-    <h3><%= group.name %></h3>
-    <h5><%= group.leader.name %></h5>
+    <h3><%= link_to group.name, group %></h3>
+    <h5><%= link_to group.leader.name, group.leader %></h5>
     <p>
       <%= link_to(churches_path(group: group.name)) do %>
         <span><%= pluralize(group.churches.count, "Church") %></span>

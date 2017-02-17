@@ -1,8 +1,10 @@
 <div class='church'>
   <div class="user-blur" style="background-image: url(<%= church.thumbnail %>);"></div>
-  <div class="church_info">
-    <h3><%= church.readable_name %></h3>
-    <h5><%= church.elder.name %></h5>
+  <div class="church_info churches">
+    <h3><%= link_to church.readable_name, church %></h3>
+    <h5><%= link_to church.elder.name, church.elder %></h5>
+    <p class="church_info_stats"><small>Latest Size:</small> <span class='church_size'><%= church.latest(:sunday_att) %></span></p>
+    <p class="church_info_stats"><small>Members:</small> <span class='members'><%= 10 %></span></p>
     <p>
       <%= link_to(church) do %>
         <span><%= church.city %></span>
