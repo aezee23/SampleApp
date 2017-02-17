@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }, confirmation: true, :unless => :already_has_password?
   validates_inclusion_of :role, in: ["Elder", "Pastor", "Admin", "Overseer"]
 
+  def thumbnail(size = 160)
+    gravatar_id = Digest::MD5::hexdigest(self.email.downcase)
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+    self.avatar? ? self.avatar.thumb.url : gravatar_url
+  end
 
 def ytd_visitation
   n = Date.today.cweek

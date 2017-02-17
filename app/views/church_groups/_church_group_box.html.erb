@@ -1,0 +1,23 @@
+<div class='church'>
+  <div class="user-blur" style="background-image: url(<%= group.leader.thumbnail %>);"></div>
+  <div class="church_info">
+    <h3><%= group.name %></h3>
+    <h5><%= group.leader.name %></h5>
+    <p>
+      <%= link_to(group) do %>
+        <span><%= pluralize(group.churches.count, "Church") %></span>
+      <% end %>
+    </p>
+    <div class="church_group_actions">
+      <%= link_to(edit_church_group_path(group), class: "info")  do %>
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to(group, method: :delete, data: { confirm: "Are you sure you want to delete #{group.name} Group?" }, class: 'danger') do %>
+        <i class="fa fa-trash-o fa-inverse" aria-hidden="true"></i>
+      <% end %>
+    </div>
+  </div>
+  <%= link_to(group) do %>
+    <%= image_tag(group.leader.thumbnail, :alt => group.name, class: "user-thumbnail") %>
+  <% end %>
+</div>

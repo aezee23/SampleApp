@@ -1,0 +1,103 @@
+// Place all the styles related to the Church_Groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#church_group_index
+  padding: 0
+  font-size: 0
+  list-style: none
+  text-align: center
+  li
+    vertical-align: top
+    font-size: 16px
+    display: inline-block
+    width: 45%
+    height: 260px
+    background: transparent
+    margin: 10px 2.5% 50px 2.5%
+    box-sizing: border-box
+    // border: 2px solid #c4d2da
+    max-width: 200px
+    position: relative
+    color: #c4d2da
+    .user-blur
+      width: 100%
+      height: 90px
+      -webkit-filter: grayscale(50%) /* Safari 6.0 - 9.0 */
+      filter: grayscale(50%) blur(10px)
+      opacity: 0.6
+      // filter: blur(5px)
+      // margin: 10px 10px
+      box-sizing: border-box
+      background-repeat: no-repeat
+      background-position: center
+      background-size: 100%
+      border-bottom: 2px solid red
+      &:hover
+        opacity: 0.9
+    .church_info
+      width: 100%
+      height: 170px
+      border-top: 2px solid #fff
+      padding: 70px 0 0 0
+      box-sizing: border-box
+      background: #284c79
+      h3
+        margin: 5px 0 5px 0
+        font-size: 18px
+        font-family: 'Special Elite', cursive
+      h5
+        font-family: 'Caveat Brush','Special Elite', cursive
+        margin: 5px 0
+        font-size: 18px
+      p
+        margin: 15px 0
+        a
+          display: inline-block
+          span
+            padding: 5px 10px
+            background: #5587C5
+            border-radius: 5px
+            font-size: 14px
+            &:hover
+              background: #2E71C5
+      div.church_group_actions
+        text-align: right
+        a
+          opacity: 0.7
+          display: inline-block
+          margin: 5px 0
+          padding: 2px 8px
+          border-radius: 5px
+          font-size: 12px
+          z-index: 2
+          bottom: 5px
+          &:hover
+            opacity: 1
+        a.danger
+          position: absolute
+          right: 5px
+          &:hover
+            background: #e64759
+        a.info
+          left: 5px
+          position: absolute
+          &:hover
+            background: #fff
+            color: #222222
+
+.user-thumbnail
+  border-radius: 50%
+  height: 140px
+  width: 140px
+  position: absolute
+  left: 50%
+  top: 20px
+  margin-left: -70px
+  padding: 0
+  z-index: 2
+  border: 3px solid #252830
+  opacity: 1
+div.section_heading.global
+  font-size: 25px
+  font-family: 'Caveat Brush', cursive
+  margin-bottom: 40px

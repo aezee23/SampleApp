@@ -1,0 +1,8 @@
+<div class="section_heading global" >
+  <h3> Church Groups </h3>
+</div>
+<ul id='church_group_index'>
+<% @church_groups.each do |church_group| %>
+  <li><%= render "church_group_box", group: church_group %></li>
+<% end %>
+</ul>
