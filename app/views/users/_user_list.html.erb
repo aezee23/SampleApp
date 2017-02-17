@@ -1,0 +1,45 @@
+<div class="section_heading church_section_heading" >
+  <h3>Church Group Leaders</h3>
+</div>
+<div>
+  <ul class='user_index'>
+    <% @users.select(&:is_leader?).sort{ |x, y| x.name <=> y.name }.each do |user| %>
+      <li><%= render "user_box", user: user %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="section_heading church_section_heading" >
+  <h3>Campus Church Leaders</h3>
+</div>
+<div>
+  <ul class='user_index'>
+    <% @users.select{ |user| !user.is_leader? && user.is_cc_leader? }.sort{ |x, y| x.name <=> y.name }.each do |user| %>
+      <li><%= render "user_box", user: user %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="section_heading church_section_heading" >
+  <h3>Purely Admin Access</h3>
+</div>
+<div>
+  <ul class='user_index'>
+    <% @users.select{ |user| user.just_admin? }.sort{ |x, y| x.name <=> y.name }.each do |user| %>
+      <li><%= render "user_box", user: user %></li>
+    <% end %>
+  </ul>
+</div>
+
+<% if @users.select{ |user| user.unused? }.count > 0 %>
+  <div class="section_heading church_section_heading" >
+    <h3>Unassigned Users</h3>
+  </div>
+  <div>
+    <ul class='user_index'>
+      <% @users.select{ |user| user.unused? }.sort{ |x, y| x.name <=> y.name }.each do |user| %>
+        <li><%= render "user_box", user: user %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

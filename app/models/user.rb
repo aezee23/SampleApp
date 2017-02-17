@@ -33,6 +33,18 @@ def is_leader?
   self.church_groups.count > 0
 end
 
+def is_cc_leader?
+  self.churches.count > 0
+end
+
+def just_admin?
+  self.admin && self.responsibilities.count == 0
+end
+
+def unused?
+  !self.admin && self.responsibilities.count == 0 
+end
+
 def responsibilities
   result = []
   self.churches.map(&:short_name).each {|name| result << name } if self.churches.count > 0

@@ -1,0 +1,26 @@
+<div class='church'>
+  <div class="user-blur" style="background-image: url(<%= user.thumbnail %>);"></div>
+  <div class="church_info">
+    <h3><%= link_to user.name, user %></h3>
+    <p>
+      <a><span><small><%= pluralize(user.responsibilities.count, "Role") %></small></span></a>
+      <% user.responsibilities.each do |responsibility| %>
+        <small><span class='responsibility'><%= responsibility %></span></small>
+      <% end %>
+      <% if user.admin %>
+        <span class='responsibility'>ADMIN</span>
+      <% end %>
+    </p>
+    <div class="church_group_actions">
+      <%= link_to(edit_user_path(user), class: "info")  do %>
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to(user, method: :delete, data: { confirm: "Are you sure you want to delete #{user.name}?" }, class: 'danger') do %>
+        <i class="fa fa-trash-o fa-inverse" aria-hidden="true"></i>
+      <% end %>
+    </div>
+  </div>
+  <%= link_to(user) do %>
+    <%= image_tag(user.thumbnail, :alt => user.name, class: "user-thumbnail") %>
+  <% end %>
+</div>

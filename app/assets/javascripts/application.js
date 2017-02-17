@@ -47,5 +47,6 @@ $(function() {
   $('div.section_heading').off('click').on('click', function(){
     $(this).next('div').slideToggle();
   })
+  $('div.section_heading.global').off('click');
 
 });

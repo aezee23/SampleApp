@@ -1,64 +1,11 @@
 <% provide(:title, "Current System Users") %>
 
 <div class="container">
-                 <div class="table-responsive">     
-                        <table class="table table-striped user-list">
-                            <thead>
-                                <tr>
-                                <th><span><%= sortable "name", "Name" %></span></th>
-                                 <th><span> Email</span></th>
-                                <th class="text-center"><span> Responsibilities</span></th>
-                                <th> &nbsp; </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% @users.each do |t| %>
-                               
-                                <tr>
-                                  
-                                    <td>
-
-                                        <%= gravatar_for(t) %>
-                                         
-                                        <%= link_to t.name, t, class: "user-link" %>
-                                        <span class="user-subhead"><%= t.role%></span>
-                                    </td>
-                                    <td><%= link_to "#{t.name}", "mailto:#{t.email}" %></td>
-                                    <td >
-                                        <%= t.responsibilities.count %>
-                                        <% t.responsibilities.each do |responsibility| %>
-                                        <span class="responsibility"><%= responsibility %></span>
-                                        <% end %>
-                                    </td>
-                                  
-                                    <td>
-                                        <%= link_to user_path(t), class: "table-link success" do %>
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                       <% end %>
-                                        <%= link_to edit_user_path(t), class: "table-link" do %>
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                        <% end %>
-                                      
-                                            <span class="fa-stack">
-                                                
-                                                <%= link_to url_for(t), method: :delete, data: { confirm: 'Are you sure you want to delete this Church and all thier records?' }, class: "table-link danger", remote: false do %>
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                        <% end %>
-                                    </td>
-                                </tr>
-                               <% end %>
-                        
-                        </table>
-                    </div>
-                     </div>
+  <div class="section_heading global" >
+    <h3> All System Users </h3>
+  </div>
+  <%= render 'user_list' %>
+</div>
                   
 
   
