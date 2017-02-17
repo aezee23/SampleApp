@@ -1,5 +1,14 @@
-<ul id='church_group_index'>
-  <% @church_groups.each do |church_group| %>
-    <li><%= render "church_group_box", group: church_group %></li>
+<% @regions.each do |region| %>
+  <% if @church_groups.select{ |group| group.region }.count > 0 %>
+    <div class="section_heading church_section_heading" >
+      <h3> <%= region %></h3>
+    </div>
+    <div>
+      <ul id='church_group_index'>
+        <% @church_groups.select{ |group| group.region == region }.each do |church_group| %>
+          <li><%= render "church_group_box", group: church_group %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-</ul>
+<% end %>

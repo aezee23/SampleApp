@@ -8,6 +8,7 @@ class ChurchGroupsController < ApplicationController
 	def index
     # @church_groups = ChurchGroup.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 13)
     @church_groups = ChurchGroup.all.sort{|x, y| x.name<=>y.name}
+    @regions = @church_groups.map(&:region).uniq.sort
 	end
 
   def new
