@@ -12,6 +12,7 @@
 <%= bootstrap_form_for(@church) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
   <%= f.text_field :name, icon: "pencil", label: "Campus Church Name:" %>
+  <%= f.file_field :avatar, label: "Pick an image" %>
   <%= f.text_field :short_name, icon: "pencil", label: "Abbreviated Church Name:" %>
   <%= f.select :user_id, User.where.not(role: "Admin").collect {|a| [ a.name, a.id ] }, {icon: "home", label: "Current Elder/Pastor" }, { class: "selectpicker" } %>
   <%= f.email_field :email, icon: "folder-open", label: "Campus Church Email Address:" %>

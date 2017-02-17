@@ -1,5 +1,6 @@
 class Church < ActiveRecord::Base
   has_many :records
+  mount_uploader :avatar, AvatarUploader
   belongs_to :church_group
   belongs_to :elder, class_name: User, foreign_key: :user_id
 
@@ -12,6 +13,10 @@ class Church < ActiveRecord::Base
 
   def readable_name
     self.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').gsub(',', '').gsub('University', '').strip
+  end
+
+  def thumbnail(size = 160)
+    self.avatar? ? self.avatar.thumb.url : self.elder.thumbnail
   end
   
   def missing_data
