@@ -1,0 +1,23 @@
+<div class='church'>
+  <div class="user-blur" style="background-image: url(<%= church.elder.thumbnail %>);"></div>
+  <div class="church_info">
+    <h3><%= church.readable_name %></h3>
+    <h5><%= church.elder.name %></h5>
+    <p>
+      <%= link_to(church) do %>
+        <span><%= church.city %></span>
+      <% end %>
+    </p>
+    <div class="church_group_actions">
+      <%= link_to(edit_church_path(church), class: "info")  do %>
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      <% end %>
+      <%= link_to(church, method: :delete, data: { confirm: "Are you sure you want to delete #{church.name} and all it's records?" }, class: 'danger') do %>
+        <i class="fa fa-trash-o fa-inverse" aria-hidden="true"></i>
+      <% end %>
+    </div>
+  </div>
+  <%= link_to(church) do %>
+    <%= image_tag(church.elder.thumbnail, :alt => church.name, class: "user-thumbnail") %>
+  <% end %>
+</div>

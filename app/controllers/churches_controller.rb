@@ -4,10 +4,10 @@ class ChurchesController < ApplicationController
     before_action :correct_user_cg, only: [:show]
     helper_method :sort_column, :sort_direction
   def index
-    if params[:search]
-      @churches = Church.search(params[:search]).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 11) 
+    if params[:group]
+      @church_groups = ChurchGroup.where(name: (params[:group]))
     else
-      @churches = Church.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 11) 
+      @church_groups ||= ChurchGroup.includes(:churches).order(:region)
     end  
   end
 

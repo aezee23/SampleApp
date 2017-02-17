@@ -163,6 +163,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     $scope.chartAttr = attr || $scope.chartAttr;
     $scope.currentActive = 'charts';
     $scope.reDrawChart();
+    document.getElementById('chartContainer').focus();
   }
   $scope.trendChartAttr = 'sunday'
   $scope.showTrendChart = function(){
@@ -214,7 +215,6 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
     }
   };
   $scope.reDrawChart = function(){
-    console.log($scope.allData);
     $scope.modalHeader = $scope.attrMap[$scope.chartAttr];
     $scope.subHeader = $scope.cardName;
     if ($scope.chartData){
@@ -357,7 +357,7 @@ dashboardApp.controller("CardListCtrl", ["$scope", "summaryData", function($scop
           colorByPoint: true,
           // type: 'column',
           name: $scope.modalHeader.replace(/&amp;/, '&'),
-          data: $scope.chartData
+          data: $scope.chartData.filter(function(ele){return ele.y > 0 })
           // data: $scope.chartData.filter(function(ele){return ele['y'] > 0 })
         }],
         drilldown: {

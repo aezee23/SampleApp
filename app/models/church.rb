@@ -10,7 +10,10 @@ class Church < ActiveRecord::Base
   validates_inclusion_of :sunday_meeting, in: [true, false]
   validates :city, presence: true
 
-
+  def readable_name
+    self.name.gsub('The University of', '').gsub('University of', '').gsub('()', '').gsub(',', '').gsub('University', '').strip
+  end
+  
   def missing_data
     if self.records.where('day > ?', Date.parse(Date.today.strftime('%Y0101'))).count < (Date.today+1).cweek
       "Missing #{(Date.today+1).cweek-self.records.where('day > ?', Date.parse(Date.today.strftime('%Y0101'))).count} #{"Record".pluralize((Date.today+1).cweek-self.records.count)}"

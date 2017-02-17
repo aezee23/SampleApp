@@ -1,75 +1,11 @@
 <% provide(:title, "Campus Churches") %>
 
 <div class="container">
-                 <div class="table-responsive">     
-                        <table class="table table-striped user-list">
-                            <thead>
-                                <tr>
-                                <th><span><%= sortable "name", "Campus Church" %></span></th>
-                              
-                                 <th><span><%= sortable "church_group_id", "Group" %></span></th>
-                                <th><span><%= sortable "city", "City" %></span></th>
-                                <th><span> Latest Size</span></th>
-                                 <th><span> Email</span></th>
-                                <th class="text-center"><span> Data Status</span></th>
-                                <th> &nbsp; </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% @churches.each do |t| %>
-                               
-                                <tr>
-                                  
-                                    <td>
-
-                                        <%= gravatar_for(t.elder) %>
-                                         
-                                        <%= link_to t.name, t, class: "user-link" %>
-                                        <span class="user-subhead"><%= t.elder.name%></span>
-                                    </td>
-                                   
-                                    <td><%= link_to t.church_group.name, church_group_path(t.church_group), class: "table-text"%></td>
-                                    <td class="table-text"><%= t.city.nil? ? "Blank": t.city %></td>
-                                    <td class="table-text text-center"><strong>
-                                        <%= t.latest(:sunday_att) %>
-                                    </strong></td>
-                                    <td><%= link_to "#{t.elder.name}", "mailto:#{t.email}" %></td>
-                                    <td class="text-center">
-                                         <% csclass= t.missing_data? ? "label label-danger" : "label label-success" %>
-                                        <span class="<%="#{csclass}"%>"><%= t.data_status%></span>
-                                    </td>
-                                  
-                                    <td>
-                                        <%= link_to church_path(t), class: "table-link success" do %>
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                       <% end %>
-                                        <%= link_to edit_church_path(t), class: "table-link" do %>
-                                            <span class="fa-stack">
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                        <% end %>
-                                      
-                                            <span class="fa-stack">
-                                                
-                                                <%= link_to url_for(t), method: :delete, data: { confirm: 'Are you sure you want to delete this Church and all thier records?' }, class: "table-link danger", remote: false do %>
-                                                <i class="fa fa-square fa-stack-2x"></i>
-                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                            </span>
-                                        <% end %>
-                                    </td>
-                                </tr>
-                               <% end %>
-                        
-                        </table>
-                    </div>
-                    <div>
-                         <%= will_paginate @church, renderer: BootstrapPagination::Rails%>
-                     </div>
-                     </div>
+  <div class="section_heading global" >
+    <h3> <%= params[:group] if params[:group] %> Churches </h3>
+  </div>
+  <%= render 'church_list' %>
+</div>
                   
 
   

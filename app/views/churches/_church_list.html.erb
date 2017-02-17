@@ -1,0 +1,14 @@
+<% @church_groups.each do |church_group| %>
+  <% if !params[:group] %>
+    <div class="section_heading church_section_heading" >
+      <h3> <%= church_group.name %></h3>
+    </div>
+  <% end %>
+  <div>
+    <ul id='church_index'>
+      <% church_group.churches.each do |church| %>
+        <li><%= render "church_box", church: church %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
