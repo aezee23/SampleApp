@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_user
-    redirect_to demo_path unless current_user.admin?
+    redirect_to home_path unless current_user.admin?
   end
    
   def month(offset, format='long')

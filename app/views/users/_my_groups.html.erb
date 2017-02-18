@@ -1,0 +1,36 @@
+<% if @groups.any? %>
+  <div class='my_groups'>
+    <h4><%= personal ? "My" : "" %> <%= pluralize(@groups.count, "Group").gsub(/\d+/, '' ) %></h4>
+    <div>
+      <ul>
+        <% @groups.each do |group| %>
+          <li>
+            <h5><%= link_to group.name, church_group_path(group) %></h5>
+            <ul>
+              <% group.churches.each do |church| %>
+                <li>
+                  <div>
+                    <h5>
+                      <%= link_to church.readable_name, church %>
+                      <button class='btn btn-default'><%= link_to "View", church %></button>
+                      <button class='btn btn-success'><%= link_to "+ Member", new_member_path(church: church.name) %></button>
+                    </h5>
+                    <p>Latest Size: <span><%= church.latest(:sunday_att) %></span></p>
+                    <p>Members: <span><%= church.members.count %></span></p>
+                    <% if church.missing_data.any? %>
+                      <p>Missing Data: 
+                        <% church.missing_data.each do |date| %>
+                          <span class='missing_data'><%= date.strftime('%d%b%y') %></span>
+                        <% end %>
+                      </p>
+                    <% end %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

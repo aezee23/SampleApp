@@ -1,0 +1,13 @@
+
+  <div class='my_groups my_members' id='my_members_list'>
+    <h4><%= personal ? "My" : "" %> <%= pluralize(@members.count, "Member").gsub(/\d+/, '' ) %></h4>
+    <div id='members_list' class='short_list'>
+      <input class="search" placeholder="Search" />
+      <button class="sort" data-sort="name">
+        Sort by name
+      </button>
+      <ul class='list bordered'>
+        <%= render @members %>
+      </ul>
+    </div>
+  </div>

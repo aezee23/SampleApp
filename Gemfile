@@ -33,6 +33,7 @@ gem 'angularjs-rails'
 gem 'rails-angular-ui-sortable'
 gem 'jquery_mobile_rails'
 gem 'mailgun-ruby', '~>1.1.2'
+gem 'listjs-rails'
 
 group :development, :test do
   gem "letter_opener"

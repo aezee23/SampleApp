@@ -5,15 +5,22 @@
   <div id='profile_bg'>
     <div class='profile_banner'>
       <%= image_tag(@user.thumbnail, :alt => @user.name, class: "user-profile") %>
+      <button id='edit_profile_button' class='btn btn-default'><%= link_to "Edit My Profile", edit_my_profile_path(@user) %></button>
       <div class='user-profile-info'>
         <h2><%= @user.name %></h2>
       </div>
     </div>
     <div class='profile-nav'>
+      <% if @user.is_cc_leader? %>
+        <button class='btn btn-success'><%= link_to "Submit New Record", new_record_path %></button>
+      <% end %>
     </div>
-    <%= render 'my_groups', personal: false %>
-    <%= render 'my_churches', personal: false %>
-    <%= render 'my_latest_data', personal: false %>
+    <%= render 'my_groups', personal: true %>
+    <%= render 'my_churches', personal: true %>
+    <%= render 'my_latest_data', personal: true %>
+    <% if current_user.is_leader? %>
+      <%= render 'my_members', personal: true %>
+    <% end %>
   </div>
   <!-- <div> -->
 <!--     <div class="twPc-divUser">

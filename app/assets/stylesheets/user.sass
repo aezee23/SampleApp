@@ -1,6 +1,7 @@
 #profile_bg
   background: #c3c8d7
-  padding-bottom: 200px
+  margin-bottom: 50px
+  padding-left: 0px
 div.profile_banner
   width: 100%
   height: 200px
@@ -13,7 +14,10 @@ div.profile_banner
     position: absolute
     left: 5%
     width: 140px
-    top: 230px
+    top: 232px
+    font-size: 10px
+    padding-top: 5px
+    padding-bottom: 5px
   img.user-profile
     position: absolute
     width: 140px
@@ -32,6 +36,8 @@ div.profile_banner
     h2
       width: 100%
       font-family: 'Special Elite', cursive
+      font-size: 26px
+      padding-right: 5px
 div.profile-nav
   margin-top: 0
   margin-bottom: 30px
@@ -41,12 +47,171 @@ div.profile-nav
   height: 40px
   background: #fff
   text-align: right
-div.responsibilities
+  button
+    font-size: 10px
+    padding: 5px 5px
+    margin-top: 3px
+div.my_groups
   background: #fff
-  padding: 5px 5px
+  padding: 5px 5%
+  margin-bottom: 30px
   font-family: 'Lato', sans-serif
   h4
-    
+    margin-bottom: 30px
+  div
+    ul
+      list-style: none
+      padding: 0
+      li
+        h5
+          border-bottom: 1px solid #999999
+          font-family: 'Special Elite', cursive
+        ul
+          li
+            margin-bottom: 10px
+            div
+              background: rgba(0, 115, 175, 1)
+              color: #fff
+              border-radius: 10px
+              padding: 5px 10px
+              h5
+                border-color: #fff
+                a
+                  width: 40%
+                  display: inline-block
+                button
+                  font-size: 10px
+                  padding: 5px 10px
+                  font-family: 'Lato', sans-serif
+                  &:first-of-type
+                    margin-left: 10%
+                  a
+                    width: auto
+              p
+                margin: 0
+                font-family: 'Lato', sans-serif
+                font-size: 12px
+                span
+                  &:first-of-type
+                    margin-left: 5px
+                span.missing_data
+                  background: #e64759
+                  font-size: 10px
+                  padding: 2px 3px
+                  border-radius: 4px
+                  cursor: pointer
+  div.my_cc_info
+    ul
+      li
+        background: rgba(0, 115, 175, 1)
+        margin-bottom: 10px
+        color: #fff
+        border-radius: 10px
+        padding: 5px 10px
+        p
+          small
+            width: 60px
+            display: inline-block
+    h5
+      border-color: #fff
+    p
+      font-size: 12px
+      margin: 0
+      span
+        &:first-of-type
+          margin-left: 5px
+      span.missing_data
+        background: #e64759
+        font-size: 10px
+        padding: 2px 3px
+        border-radius: 4px
+        cursor: pointer
+  div.my_latest_data
+    ul
+      li
+        background: rgba(0, 115, 175, 1)
+        margin: 5px 2.5% 5px 2.5%
+        color: #fff
+        border-radius: 10px
+        padding: 5px 10px
+        display: inline-block
+        width: 42%
+        position: relative
+        button
+          font-size: 8px
+          padding: 2px 4px
+          position: absolute
+          top: 0px
+          right: 5px
+        h6
+          border-bottom: 1px solid #fff
+          margin-bottom: 5px
+          margin-top: 15px
+        p
+          font-size: 10px
+          margin: 0
+          small
+            width: 60px
+            display: inline-block
+div#my_profile_upload
+  text-align: center
+  border-radius: 50%
+  width: 140px
+  height: 140px
+  padding: 35px 10px 35px 10px
+  margin: 0 auto
+  cursor: pointer
+  border: 2px solid #bbbbbb
+  p
+    margin-top: 10px
+    font-size: 14px
+    font-family: 'Lato', sans-serif
+$photoGray: #B4B4B4
+$brand-primary: #00c38b
+$brand-danger: #d9625a
+
+.profilePhoto
+  width: 140px
+  margin: 0 auto
+  display: block
+  margin-bottom: 10px
+  height: 140px
+  border-radius: 70px
+  cursor: pointer
+div.photoPreview
+  border: 1px solid $photoGray
+  width: 140px
+  margin: 0 auto
+  margin-bottom: 10px
+  height: 140px
+  border-radius: 70px
+  cursor: pointer
+  background-repeat: no repeat
+  background-position: center
+  background-size: 100% 100% !important
+  text-align: center
+  .photoUpload
+    font-size: 32px
+    margin-top: 35px
+    color: $photoGray
+  .fa
+    display: inline-block
+    text-rendering: auto
+  p
+    color: $photoGray
+    font-size: 16px
+input#uploadAvatar
+  display: none
+p.deletePhoto
+  color: #DA7364
+  cursor: pointer
+  text-align: center
+  margin-bottom: 10px
+div#my_members_list
+  max-height: 600px
+  overflow: scroll
+
+
 
 
 

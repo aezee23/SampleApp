@@ -3,12 +3,12 @@
   <div class="church_info">
     <h3><%= link_to user.name, user %></h3>
     <p>
-      <a><span><small><%= pluralize(user.responsibilities.count, "Role") %></small></span></a>
+      <a><span><small><%= pluralize(user.responsibilities.count, "Role") %></small></span></a><br>
       <% user.responsibilities.each do |responsibility| %>
-        <small><span class='responsibility'><%= responsibility %></span></small>
+        <small><span class='user_resp'><%= responsibility %></span></small>
       <% end %>
       <% if user.admin %>
-        <span class='responsibility'>ADMIN</span>
+        <span class='user_resp'>ADMIN</span>
       <% end %>
     </p>
     <div class="church_group_actions">

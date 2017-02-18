@@ -4,7 +4,11 @@
     <h3><%= link_to church.readable_name, church %></h3>
     <h5><%= link_to church.elder.name, church.elder %></h5>
     <p class="church_info_stats"> <span class='church_size'><%= church.latest(:sunday_att) %> <small>Latest Size</small></span></p>
-    <p class="church_info_stats"><span class='members'><%= church.members.count %> <small>Members</small> </span></p>
+    <p class="church_info_stats">
+      <%= link_to members_path(church: church.id), class: 'link_members' do %>
+      <span class='members'><%= count = church.members.count %> <small><%= pluralize(count, "Member").gsub(/\d+/, "") %></small> </span>
+      <% end %>
+    </p>
     <p>
       <%= link_to(church) do %>
         <span><%= church.city %></span>

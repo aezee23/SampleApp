@@ -37,6 +37,10 @@ def +(record)
     )
 end
 
+  def is_editable?
+    (Date.today - self.created_at.to_date).to_i < 15
+  end
+
   def ft_const
     if self.sunday_att && (self.first_timers > self.sunday_att)
       self.errors.add :base, "First Timers cannot be greater than Total attendance"

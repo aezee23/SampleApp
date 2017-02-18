@@ -5,6 +5,7 @@ class PagesController < ApplicationController
 	helper_method :sort_column, :sort_direction, :mweek
 	helper_method :sun_in_month
 	def index
+    redirect_to home_path unless current_user.admin
     churches = Church.includes(:church_group)
     @churches = churches.map(&:name).sort
     @regions = churches.map(&:church_group).map(&:region).uniq.sort

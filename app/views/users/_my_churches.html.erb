@@ -1,0 +1,24 @@
+<% if @churches.any? %>
+  <div class='my_groups'>
+    <h4><%= personal ? "My" : "" %> <%= pluralize(@churches.count, "Campus Church").gsub(/\d+/, '' ) %></h4>
+    <div class='my_cc_info'>
+      <ul>
+        <% @churches.each do |church| %>
+          <li>
+            <h5><%= church.name %></h5>
+            <p><small>Group: </small><span><%= church.church_group.name %></span></p>
+            <p><small>Latest Size: </small><span><%= church.latest(:sunday_att) %></span></p>
+            <p><small>Members: </small><span><%= church.members.count %></span></p>
+            <% if church.missing_data.any? %>
+              <p>Missing Data: 
+                <% church.missing_data.each do |date| %>
+                  <span class='missing_data'><%= link_to date.strftime('%d%b%y'), new_record_path %></span>
+                <% end %>
+              </p>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

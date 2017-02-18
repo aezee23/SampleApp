@@ -1,0 +1,27 @@
+<% if @records.any? %>
+  <div class='my_groups'>
+    <h4><%= personal ? "My" : "" %> Latest Data</h4>
+    <div class='my_latest_data'>
+      <ul>
+        <% @records.each do |record| %>
+          <li>
+            <% if record.is_editable? && personal %>
+              <button class='btn btn-default'><%= link_to "Edit", edit_record_path(record) %></button>
+            <% end %>
+            <h6><span><%= record.church.readable_name %></span></h6>
+            <p><span><%= record.day.strftime('%d%b%y') %></span></p>
+            <p><small>Sunday: </small><span><%= record.sunday_att %></span></p>
+            <p><small>Weekday: </small><span><%= record.weekday_att %></span></p>
+            <p><small>First Timers: </small><span><%= record.first_timers %></span></p>
+            <% if record.church.sunday_meeting %>
+              <p><small>New Converts: </small><span><%= record.new_converts %></span></p>
+              <p><small>Started NBS: </small><span><%= record.nbs %></span></p>
+              <p><small>Finished NBS: </small><span><%= record.nbs_finish %></span></p>
+              <p><small>Baptised: </small><span><%= record.baptised %></span></p>
+              <p><small>First &amp; Best: </small><span><%= record.fnb %></span></p>
+            <% end %>
+          </li>
+        <% end %>
+    </div>
+  </div>
+<% end %>

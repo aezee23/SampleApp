@@ -1,10 +1,10 @@
-<% @regions.each do |region| %>
+<% @regions.each_with_index do |region, index| %>
   <% if @church_groups.select{ |group| group.region }.count > 0 %>
     <div class="section_heading church_section_heading" >
       <h3> <%= region %></h3>
     </div>
-    <div>
-      <ul id='church_group_index'>
+    <div class='church_groups'>
+      <ul id='church_group_index' class='list'>
         <% @church_groups.select{ |group| group.region == region }.each do |church_group| %>
           <li><%= render "church_group_box", group: church_group %></li>
         <% end %>

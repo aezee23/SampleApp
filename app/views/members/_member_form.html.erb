@@ -1,0 +1,24 @@
+ <div id="loginbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+  <div class="panel panel-warning" >
+    <div class="panel-heading">
+      <div class="panel-title"><%= edit ? "Edit" : "New" %> Member</div>
+    </div>
+    <div style="padding-top:30px" class="panel-body" >
+      <%= bootstrap_form_for(@member) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <% if current_user.admin %>
+          <%= f.select :church_id, Church.all.collect {|a| [ a.name, a.id ] }, {label: "Campus Church" }, { class: "selectpicker" } %>
+        <% else %>
+          <%= f.select :church_id, current_user.all_churches.collect {|a| [ a.name, a.id ] }, {label: "Campus Church" }, { class: "selectpicker" } %>
+        <% end %>
+        <%= f.text_field :name, label: "Full Name:" %>
+        <%= f.text_field :email, label: "Email Address:" %>
+        <%= f.text_field :phone_number, label: "Phone Number:" %>
+        <%= f.select :visited, [["No", false], ["Yes", true]], { label: "Have You Personally Visited This Member?" }, { class: "selectpicker" }  %>
+        <%= f.file_field :avatar, label: "Member image (Optional)" %>
+        <%= f.submit "Submit Data", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

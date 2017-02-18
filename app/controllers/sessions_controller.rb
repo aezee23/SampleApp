@@ -11,7 +11,11 @@ class SessionsController < ApplicationController
       log_in(user)
       flash[:success] = "Thank you for logging in #{user.name}"
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to demo_url
+      if (user.is_leader? || !user.admin)
+        redirect_to home_path
+      else
+        redirect_to demo_path
+      end
     else
      flash.now[:danger] = 'Invalid email/password combination'
       render 'new'

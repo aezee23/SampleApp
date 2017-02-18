@@ -19,6 +19,7 @@
 //= require highcharts/drilldown
 //= require angular
 //= require angular-ui-sortable
+//= require list
 //= require_tree .
 
 
@@ -48,5 +49,11 @@ $(function() {
     $(this).next('div').slideToggle();
   })
   $('div.section_heading.global').off('click');
+  
+  var options = {
+    valueNames: [ 'name', 'pastor_name' ]
+  };
+
+  var userList = new List("members_list", options);
 
 });

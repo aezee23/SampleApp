@@ -1,0 +1,17 @@
+<% provide(:title, 'Members') %>
+
+<div class="container">
+  <div class="section_heading global" >
+    <h3> <%= @name %> Members </h3>
+  </div>
+  <div id='members_list'>
+    <input class="search" placeholder="Search" />
+    <button class="sort" data-sort="name">
+      Sort by name
+    </button>
+    <ul class='list'>
+      <%= render @members %>
+    </ul>
+  </div>
+  <%= will_paginate @members, renderer: BootstrapPagination::Rails%>
+</div>

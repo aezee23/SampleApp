@@ -19,6 +19,23 @@ class User < ActiveRecord::Base
     self.avatar? ? self.avatar.thumb.url : gravatar_url
   end
 
+  def all_churches
+    return self.churches unless self.is_leader?
+    self.church_groups.map(&:churches).reduce(&:+)
+  end
+
+  def members
+    self.all_churches.map(&:members).reduce(&:+)
+  end
+
+  def can_edit_record(record)
+    if self.is_leader?
+      return self.all_churches.map(&:id).include? record.church_id
+    else
+      return (self.id == record.user_id) || self.admin
+    end
+  end
+
 def ytd_visitation
   n = Date.today.cweek
   visitation_count = self.records.where("day >= ?", Date.parse(Date.today.strftime("Jan%Y"))).where(visitation: true).count
@@ -52,117 +69,6 @@ def responsibilities
   result
 end
 
-def ytd_avg(y)
-  n = self.records.where(day: ((Date.parse(Date.today.strftime("%Y0101"))..Date.today))).count
-  if n ==0
-    0
-  else
-  a = self.records.where(day: ((Date.parse(Date.today.strftime("%Y0101"))..Date.today))).pluck(y).first(n)
-  sum_a = a.inject(0){|sum,x| sum + x }
-  avg= sum_a/n.to_f
-  avg.round(0)
-end
-end
-
-def qtd_avg(y)
-  n = self.records.where(day: ((Date.today << 3)..Date.today)).count
-  if n ==0
-    0
-  else
-  a = self.records.where(day: ((Date.today << 3)..Date.today)).pluck(y).first(n)
-  sum_a = a.inject(0){|sum,x| sum + x }
-  avg= sum_a/n.to_f
-  avg.round(0)
-end
-end
-
-def month_avg(month, att)
-   n = self.records.where(day: (Date.parse(month)..(Date.parse(month)>>1)-1)).count
-if n == 0
-    0
-  else
-  a = self.records.where(day: (Date.parse(month)..(Date.parse(month)>>1)-1)).pluck(att).first(n)
-  sum_a = a.inject(0){|sum,x| sum + x }
-  avg= sum_a/n.to_f
-  avg.round(0)
-end
-end
-
-def make_hash_monthly_avg(att)
-  a = {}
-  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
-  c= b.map{|x| x.strftime("%b%Y")}.uniq
-  c.each do |t|
-    a[t]= self.month_avg(t, att) || 0
-  end 
-  a
-end
-
-
-def make_hash_monthly_sum(att)
-  a = {}
-  b= (Date.parse((Date.today<<12).strftime("%b%Y%"))..Date.parse(Date.today.strftime("%b%Y")))
-  c= b.map{|x| x.strftime("%b%Y")}.uniq
-  c.each do |t|
-    a[t]= self.month_sum(t, att) || 0
-  end 
-  a
-end
-
-def make_hash_time_series(func)
-  a = self.records.order('day ASC').pluck(:day)
-  b = {}
-  a.each do |x|
-    b["#{x}"]= self.records.find_by(day: x)[func]
-  end
-  b
-end
-
-def ytd_sum(att)
- n = self.records.where(day: ((Date.parse(Date.today.strftime("%Y0101"))..Date.today))).sum(att)
-end
-
-def qtd_sum(att)
-n = self.records.where(day: (((Date.today) << 3)..(Date.today))).sum(att)
-end
-
-def month_sum(month, att)
- n = self.records.where(day: (Date.parse(month)..(Date.parse(month) >> 1)-1)).sum(att)
-end
-
-def day_attr(x, att)
-  if self.records.find_by(day: x).nil?
-    0
-  else
- n = self.records.find_by(day: x)[att]||0
-end
-end
-
-
-
-
-def latest(x)
-  a = self.records.find_by(day: date_of_last("Sunday"))
-  if a.nil?
-    0
-  else
-    a[x]
-  end
-end
-
-
-
-def self.make_hash_latest(func)
-b = {}
-c= User.order('city ASC').where.not(admin: true).uniq.pluck(:city)
-c.each do |f|
-d= self.where(city: f).map {|y| y.latest(func)}
-e= d.inject(0) {|sum, y| sum + y}
-b["#{f}"] = e
-  end
-b
-end
-
 def missing_data
   if self.records.where('day > ?', Date.parse(Date.today.strftime('%Y0101'))).count < (Date.today+1).cweek
     "Missing #{(Date.today+1).cweek-self.records.where('day > ?', Date.parse(Date.today.strftime('%Y0101'))).count} #{"Record".pluralize((Date.today+1).cweek-self.records.count)}"
@@ -173,10 +79,10 @@ end
 
 
 def has_not_submitted
-self.records.find_by(day: date_of_last("Sunday")).nil?
+  self.records.find_by(day: date_of_last("Sunday")).nil?
 end
 
-  def date_of_last(day)
+def date_of_last(day)
   date  = Date.parse(day)
   delta = date > Date.today ? -7 : 0
   date + delta

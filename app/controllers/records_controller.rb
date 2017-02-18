@@ -1,6 +1,6 @@
 class RecordsController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
-  before_action :admin_user, only: [:edit, :update, :destroy]
+  before_action :allowed_user, only: [:edit, :update, :destroy]
   before_action :correct_user_cg, only: [:show]
   helper_method :sort_column, :sort_direction
   def index
@@ -115,6 +115,11 @@ if @record.update_attributes(record_params)
 
   def admin_user
     redirect_to demo_path unless current_user.admin?
+  end
+
+  def allowed_user
+    @record = Record.find(params[:id])
+    redirect_to home_path unless ( @record.is_editable? && current_user.can_edit_record(@record) || current_user.admin?
   end
 
 

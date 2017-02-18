@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :new, :create, :edit, :update, :show, :destroy]
   before_action :admin_user, only: [:index, :new, :create, :edit, :update, :destroy]
-  before_action :correct_user_account, only: [:show]
+  before_action :correct_user_account, only: [:show, :edit_my_profile]
 	helper_method :sort_column, :sort_direction
 
   def index
@@ -27,9 +27,18 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @church_groups = @user.church_groups
+    @user = params[:id] ? User.includes(:churches, :church_groups).find(params[:id]) : User.includes(:churches, :church_groups).find(current_user.id)
+    @groups = @user.church_groups
     @churches = @user.churches
+    @records = @user.records.limit(8)
+  end
+
+  def home
+    @user = current_user
+    @groups = @user.church_groups
+    @churches = @user.churches
+    @records = @user.records.limit(8)
+    @members = current_user.members
   end
 
   def update
@@ -48,7 +57,19 @@ class UsersController < ApplicationController
   end
 
   def update_my_profile
+    @user = current_user
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to home_path
+    else
+      flash[:danger] = "Please try again"
+      render 'edit_my_profile'
+    end
+  end
 
+  def remove_avatar
+    # @user.remove_avatar!
+    # @user.save ? render json: 'Done'.to_json : render json: 'Failed'.to_json
   end
 
   def change_pwd
@@ -77,7 +98,7 @@ class UsersController < ApplicationController
   end
 
   def correct_user_account
-    user = User.find(params[:id])
+    user = params[:id] ? User.find(params[:id]) : current_user
     redirect_to demo_path unless (current_user.admin? || current_user == user)
   end
 

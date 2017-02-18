@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/elders' => 'elders#index'
   root "sessions#new"
   get 'demo' => 'pages#index'
+  get 'home' => 'users#home'
   get 'last_sunday' => 'pages#last_sunday'
   get 'last_sunday_charts' => 'pages#last_sunday_charts'
   get 'time_series_charts' => 'pages#time_series_charts'
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   get 'users/:id/edit_my_profile' => 'users#edit_my_profile', as: :edit_my_profile
 
   resources :users
+  resources :members
   patch 'users/:id/my_profile', to: 'users#update_my_profile'
   resources :churches
   resources :records

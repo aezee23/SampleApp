@@ -1,10 +1,14 @@
 <div class='church'>
   <div class="user-blur" style="background-image: url(<%= group.leader.thumbnail %>);"></div>
   <div class="church_info">
-    <h3><%= link_to group.name, group %></h3>
-    <h5><%= link_to group.leader.name, group.leader %></h5>
+    <h3 class='group_name'><%= link_to group.name, group %></h3>
+    <h5 class='name'><%= link_to group.leader.name, group.leader %></h5>
     <p class="church_info_stats"><span class='church_size'><%= group.latest(:sunday_att) %> <small>Sunday</small> </span></p>
-    <p class="church_info_stats"><span class='members'><%= group.members.count %> <small>Members</small> </span></p>
+    <p class="church_info_stats">
+      <%= link_to members_path(group: group.id), class: "link_members" do %>
+        <span class='members'><%= count = group.members.count %> <small><%= pluralize(count, "Member").gsub(/\d+/, "") %></small> </span>
+      <% end %>
+    </p>
     <p>
       <%= link_to(churches_path(group: group.name)) do %>
         <span><%= pluralize(group.churches.count, "Church") %></span>
