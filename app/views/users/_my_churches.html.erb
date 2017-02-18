@@ -5,7 +5,7 @@
       <ul>
         <% @churches.each do |church| %>
           <li>
-            <h5><%= church.name %></h5>
+            <h5><%= church.name %><small><button class="btn btn-success"><%= link_to "+ Record", new_record_path(church: church.id) %></button></small></h5>
             <p><small>Group: </small><span><%= church.church_group.name %></span></p>
             <p><small>Latest Size: </small><span><%= church.latest(:sunday_att) %></span></p>
             <p><small>Members: </small><span><%= church.members.count %></span></p>

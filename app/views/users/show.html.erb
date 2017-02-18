@@ -14,6 +14,9 @@
     <%= render 'my_groups', personal: false %>
     <%= render 'my_churches', personal: false %>
     <%= render 'my_latest_data', personal: false %>
+    <% if current_user.is_leader? %>
+      <%= render 'my_members', personal: false %>
+    <% end %>
   </div>
   <!-- <div> -->
 <!--     <div class="twPc-divUser">

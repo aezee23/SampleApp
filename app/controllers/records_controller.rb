@@ -119,7 +119,7 @@ if @record.update_attributes(record_params)
 
   def allowed_user
     @record = Record.find(params[:id])
-    redirect_to home_path unless ( @record.is_editable? && current_user.can_edit_record(@record) || current_user.admin?
+    redirect_to home_path unless ( @record.is_editable? && current_user.can_edit_record(@record) ) || current_user.admin?
   end
 
 

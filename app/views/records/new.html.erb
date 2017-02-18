@@ -15,7 +15,7 @@
     <%= f.select :church_id, Church.all.collect {|a| [ a.name, a.id ] }, {label: "Campus Church" }, { class: "selectpicker" } %>
     <%= f.select :user_id, User.where(admin: false).collect {|a| [ a.name, a.id ] }, {label: "Select Elder" }, { class: "selectpicker" } %>
   <% else %>
-    <%= f.select :church_id, current_user.churches.collect {|a| [ a.name, a.id ] }, {label: "Campus Church" }, { class: "selectpicker" } %>
+    <%= f.select :church_id, current_user.churches.collect {|a| [ a.name, a.id ] }, {selected: params[:church], label: "Campus Church" }, { class: "selectpicker" } %>
   <% end %>
   <%= f.date_field :day, value: @date, label: "Date of Sunday Service", class: "datepicker" %>
   <%= f.number_field :sunday_att, value: 0, label: "Sunday Attendance:" %>

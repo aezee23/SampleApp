@@ -13,7 +13,7 @@
                     <h5>
                       <%= link_to church.readable_name, church %>
                       <button class='btn btn-default'><%= link_to "View", church %></button>
-                      <button class='btn btn-success'><%= link_to "+ Member", new_member_path(church: church.name) %></button>
+                      <button class='btn btn-success'><%= link_to "+ Member", new_member_path(church: church.id) %></button>
                     </h5>
                     <p>Latest Size: <span><%= church.latest(:sunday_att) %></span></p>
                     <p>Members: <span><%= church.members.count %></span></p>
