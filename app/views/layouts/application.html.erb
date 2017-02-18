@@ -247,21 +247,21 @@
     <% if logged_in? && current_user.admin == true %>
     <div id="footer_left">
       <ul class="section_nav_group_footer">
-        <li class="section_nav_item_footer"><%= link_to "Home", demo_path, class: "section_nav_footer" %></li>
-        <li class="section_nav_item_footer"><%= link_to "Retention Analysis", retention_path, class: "section_nav_footer" %></li>
-        <li class="section_nav_item_footer"><%= link_to "Visitation Report", visi_record_path, class: "section_nav_footer" %></li>
+        <li class="section_nav_item_footer"></li>
+        <li class="section_nav_item_footer"></li>
+        <li class="section_nav_item_footer"></li>
       </ul>
     </div>
     <div id="footer_middle">
       <ul class="section_nav_group_footer">
-        <li class="section_nav_item_footer"><%= link_to "Latest Data", last_sunday_charts_path, class: "section_nav_footer" %></li>
-        <li class="section_nav_item_footer"><%= link_to "Monthly Trends", monthly_average_charts_path, class: "section_nav_footer" %></li>
-        <li class="section_nav_item_footer"><%= link_to "Historical Charts", time_series_charts_path, class: "section_nav_footer" %></li>
+        <li class="section_nav_item_footer"><%= link_to "Home", demo_path, class: "section_nav_footer" %></li>
+        <li class="section_nav_item_footer"><%= link_to "Visitation Report", visi_record_path, class: "section_nav_footer" %></li>
+        <li class="section_nav_item_footer"></li>
       </ul>
     </div>
     <div id="footer_right">
       <ul class="section_nav_group_footer">
-        <li class="section_nav_item_footer"><%= link_to "Campus Churches", users_path, class: "section_nav_footer" %></li>
+        <li class="section_nav_item_footer"><%= link_to "Campus Churches", churches_path, class: "section_nav_footer" %></li>
         <li class="section_nav_item_footer"><%= link_to "Church Groups", church_groups_path, class: "section_nav_footer" %></li>
       </ul>
     </div>

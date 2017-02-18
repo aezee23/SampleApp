@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'users/:id/edit_my_profile' => 'users#edit_my_profile', as: :edit_my_profile
 
   resources :users
+  patch 'users/:id/my_profile', to: 'users#update_my_profile'
   resources :churches
   resources :records
   resources :password_resets,     only: [:new, :create, :edit, :update]

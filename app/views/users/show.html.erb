@@ -2,9 +2,21 @@
 
 <!-- START -->
 <div class="container">
-  <div>
-    <%= gravatar_for @user, size: 200 %>
-    <div class="twPc-divUser">
+  <div id='profile_bg'>
+    <div class='profile_banner'>
+      <%= image_tag(@user.thumbnail, :alt => @user.name, class: "user-profile") %>
+      <button id='edit_profile_button' class='btn btn-default'><%= link_to "Edit My Profile", edit_my_profile_path(@user) %></button>
+      <div class='user-profile-info'>
+        <h2><%= @user.name %></h2>
+      </div>
+    </div>
+    <div class='profile-nav'>
+      <button class='btn btn-success'><%= link_to "Submit New Record", new_record_path %></button>
+    </div>
+    <%= render 'my_responsibilities' %>
+  </div>
+  <!-- <div> -->
+<!--     <div class="twPc-divUser">
       <div class="twPc-divName">
         <%= @user.name %>
       </div>
@@ -20,6 +32,6 @@
         </span>
       <% end %>
     </div>
-  </div>
-  <hr class="user_profil_line"/>
+  </div> -->
+  <!-- <hr class="user_profil_line"/> -->
 </div>

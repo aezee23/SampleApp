@@ -28,7 +28,7 @@
                 <li class="twPc-ArrangeSizeFit">
                    
                         <span class="twPc-StatLabel twPc-block">Average Sunday</span>
-                        <span class="twPc-StatValue"><%= @church_group.sum_ytd_avg(:sunday_att) %></span>
+                        <span class="twPc-StatValue"><%= @church_group.latest(:sunday_att) %></span>
                     
                 </li>
                 <li class="twPc-ArrangeSizeFit">
@@ -40,7 +40,7 @@
                 <li class="twPc-ArrangeSizeFit">
                    
                         <span class="twPc-StatLabel twPc-block">Latest Sunday</span>
-                        <span class="twPc-StatValue"><%= @church_group.sum_latest(:sunday_att) %></span>
+                        <span class="twPc-StatValue"><%= @church_group.latest(:sunday_att) %></span>
                   
                 </li>
             </ul>

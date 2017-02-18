@@ -45,7 +45,10 @@ class UsersController < ApplicationController
 
   def edit_my_profile
     @user = User.find(params[:id])
-    
+  end
+
+  def update_my_profile
+
   end
 
   def change_pwd
