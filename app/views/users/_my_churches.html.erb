@@ -12,7 +12,7 @@
             <% if church.missing_data.any? %>
               <p>Missing Data: 
                 <% church.missing_data.each do |date| %>
-                  <span class='missing_data'><%= link_to date.strftime('%d%b%y'), new_record_path %></span>
+                  <span class='missing_data'><%= link_to date.strftime('%d%b%y'), new_record_path(church: church.id, day: date ) %></span>
                 <% end %>
               </p>
             <% end %>
