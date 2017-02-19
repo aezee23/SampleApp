@@ -6,7 +6,12 @@ class UserMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
-    mail to: ENV["TEST_MAIL"], subject: "Welcome To Revelations!"
+    mail to: user.email, subject: "Welcome To Revelations!"
+  end
+
+  def project_email(user)
+    @user = user
+    mail to: user.email, subject: "Members Visitation Project"
   end
 
 end

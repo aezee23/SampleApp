@@ -23,7 +23,9 @@ class PagesController < ApplicationController
   #   end
 
     # UserMailer.welcome_email(User.find(13)).deliver
-    UserMailer.welcome_email(User.find(12)).deliver_later
+    # User.all.select(&:is_leader?).each do |user|
+    #   UserMailer.project_email(user).deliver_later
+    # end
     render json: "All Done".to_json
   end
 

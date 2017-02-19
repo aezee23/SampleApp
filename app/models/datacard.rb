@@ -31,7 +31,7 @@ class Datacard
     "rgba(29, 196, 48, 1)"
   ]
 
-  def initialize(month_start=Date.today.last_year.strftime("%b%Y"), month_end=Date.today.strftime("%b%Y"), options="")
+  def initialize(month_start=Date.today.last_year.strftime("%d%b%Y"), month_end=Date.today.strftime("%d%b%Y"), options="")
     @month_start = Date.parse(month_start)
     @month_end = Date.parse(month_end)
     @group = options if !options.blank?
