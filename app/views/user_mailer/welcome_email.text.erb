@@ -1,0 +1,19 @@
+Welcome!
+
+Dear <%= @user.name.split(" ")[0] %>,
+
+You are now completely setup on Revelations and can access the web app via the url: www.flcrevelations.co.uk
+
+Your Account Information:
+
+Your sign-in email: <%= @user.email %>
+Default Password: <%= @user.email.split('')[0..3].join + '4321' %>
+ 
+Upon signing in for the first time please make sure to upload a profile picture and amend your password to something you can remember.
+
+You can respond directly to this email with any questions or technical queries.
+
+ Thanks!
+
+
+ - FLC Revelations UK 

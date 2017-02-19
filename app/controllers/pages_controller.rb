@@ -16,6 +16,17 @@ class PagesController < ApplicationController
     @times = last_twelve_months
 	end
 
+  def send_email
+  #   users = User.all.select{ |user| !user.just_admin? }
+  #   users.each do |user|
+  #     UserMailer.welcome_email(user).deliver
+  #   end
+
+    # UserMailer.welcome_email(User.find(13)).deliver
+    UserMailer.welcome_email(User.find(12)).deliver_later
+    render json: "All Done".to_json
+  end
+
 	def show
 		@date = date_of_last("Sunday").strftime('%d-%b-%y')
 		@churches = Church.all.select{ |church| church.missing_data? }

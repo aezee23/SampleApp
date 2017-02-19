@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'retention' => 'pages#retention'
   get 'show_nots' => 'pages#show'
   get 'change_pwd' => 'users#change_pwd'
+  get 'send_email' => 'pages#send_email'
   resources :church_groups
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

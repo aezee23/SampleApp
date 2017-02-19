@@ -1,0 +1,65 @@
+<style>
+  h1{
+    font-size: 22px;
+    background: #252830;
+    color: #fff;
+    text-align: center;
+    padding: 20px 20px;
+    font-family: sans-serif;
+  }
+  h3{
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: sans-serif;
+  }
+  h6{
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  p{
+    font-size: 14px;
+    font-family: sans-serif;
+    margin: 0;
+  }
+  div{
+    background: #c9c9c9;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+</style>
+
+<h1>FLC REVELATIONS</h1>
+<h3>Welcome!</h3>
+
+<p>Dear <%= @user.name.split(" ")[0] %>,</p><br>
+
+<p> You are now completely setup on Revelations and can access the web app via the url: <a href='http://www.flcrevelations.co.uk'>www.flcrevelations.co.uk</a> </p>
+
+<h6>Your Account Information:</h6>
+<div>
+<p><small>Your sign-in email: <%= @user.email %></small></p>
+<p><small>Default Password: <%= @user.email.split('')[0..3].join + '4321' %></small></p>
+</div>
+<p> Upon signing in for the first time please make sure to upload a profile picture and amend your password to something you can remember.</p><br>
+
+<% if @user.is_cc_leader? %>
+<p>You are responsible for the timely submission of data for 
+    <% if @user.churches.count > 1 %>
+    <%= @user.churches[0..@user.churches.count-2].map(&:name).join(", ") %> and <%= @user.churches.last.name %>.
+    <% else %>
+    <%= @user.churches[0].name %>.
+    <% end %>
+   Please ensure all data is submitted each Sunday evening by 9pm.</p><br>
+<% end %>
+
+<% if @user.is_leader? %>
+<p>You are responsible for the <%= @user.church_groups.where.not(id: 10).first.name %> Group, so please ensure all members are up to date on their data submissions and meet the 9pm weekly Sunday deadline.</p><br>
+<% end %>
+
+<p>You can respond directly to this email (<a href="mailto:info@flcrevelations.co.uk">info@flcrevelations.co.uk</a>) with any questions or technical queries.</p><br>
+
+<p>Thanks!</p><br><br>
+
+<p> - FLC Revelations UK </p>
