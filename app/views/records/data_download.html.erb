@@ -1,0 +1,43 @@
+<div class='container'>
+  <div class="section_heading global" >
+    <h3> Sunday Attendance </h3>
+  </div>
+  <form name='date_range' method='get' action='/data_download'>
+    <div class='form-group inline'>
+      <label for="start_date">Date From:</label>
+      <input type='date' class='datepick' name="start" value="<%= (Date.today.beginning_of_month).strftime('%Y-%m-%d') %>" />
+    </div>
+    <div class='form-group inline'>
+      <label for="end_date">Date To:</label>
+      <input type='date' class='datepick' name="end_date" value="<%= Date.today.strftime('%Y-%m-%d') %>" />
+    </div>
+    <input type='submit' class='btn btn-default' value='Search' />
+  </form>
+  <table class='table data_download'>
+    <thead>
+      <tr>
+        <th>Church</th>
+        <% @sundays.each do |date| %>
+          <th><%= date.strftime("%d%b%y") %></th>
+        <% end %>
+        <th>Average</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @churches.each do |church| %>
+        <tr>
+          <td><%= church.name %></td>
+          <% @sundays.each do |date| %>
+            <td>
+              <% a = church.records.select{ |record| record.day == date }[0] %>
+              <%= a ? a.sunday_att : "N/A" %>
+            </td>
+          <% end %>
+          <td><%= (church.records.map(&:sunday_att).reduce(&:+) / @n).round(0) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+  </table>
+</div>

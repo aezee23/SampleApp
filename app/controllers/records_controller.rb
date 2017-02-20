@@ -9,6 +9,7 @@ class RecordsController < ApplicationController
         @records= Record.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 30)
       else
     		@records= Record.order(sort_column + " " + sort_direction)
+        # @records = Record.pluck(:day, :church_id, :sunday_att).map{ |arr| [arr[0], Church.find(arr[1]).name, arr[2]]}
       	respond_to do |format|
           format.html
           format.csv { send_data @records.to_csv }
@@ -18,6 +19,14 @@ class RecordsController < ApplicationController
   	elsif current_user && !current_user.admin
   		@records = current_user.records.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 13)	
     end
+  end
+
+  def data_download
+    start_date = params[:start] ? Date.parse(params[:start]) : Date.today.beginning_of_month
+    end_date = params[:end_date] ? Date.parse(params[:end_date]) : Date.today
+    @sundays = (start_date..end_date).select { |date| date.wday == 0 }
+    @n = @sundays.count == 0 ? 1 : @sundays.count
+    @churches = Church.includes(:records).where('records.day' => start_date..end_date).sort{|x, y| x.name <=> y.name}
   end
 
     def show

@@ -23,8 +23,8 @@ class PagesController < ApplicationController
   #   end
 
     # UserMailer.welcome_email(User.find(13)).deliver
-    # User.all.select(&:is_leader?).each do |user|
-    #   UserMailer.project_email(user).deliver_later
+    # Church.missing_latest_data.each do |church|
+    #   UserMailer.missed_email(church).deliver_later
     # end
     render json: "All Done".to_json
   end

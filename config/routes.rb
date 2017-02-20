@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   patch 'users/:id/my_profile', to: 'users#update_my_profile'
   resources :churches
   resources :records
+  get 'data_download', to: 'records#data_download'
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :datacards, only: [:index]
   get 'datacard', to: 'datacards#show'

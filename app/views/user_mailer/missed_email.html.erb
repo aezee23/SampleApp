@@ -1,0 +1,51 @@
+<style>
+  h1{
+    font-size: 22px;
+    background: #252830;
+    color: #fff;
+    text-align: center;
+    padding: 20px 20px;
+    font-family: sans-serif;
+  }
+  h3{
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: sans-serif;
+  }
+  h3.warning{
+    color: #b00b00;
+    text-decoration: underline;
+  }
+  h6{
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  p{
+    font-size: 14px;
+    font-family: sans-serif;
+    margin: 0;
+  }
+  div{
+    background: #c9c9c9;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+</style>
+
+<h1>FLC REVELATIONS</h1>
+<h3 class='warning'>Missed Deadline</h3>
+
+<p><%= @user.name.split(" ")[0] %> <% if @user != @leader %> &amp; <%= @leader.name.split(" ")[0] %> <% end %> ,</p><br> 
+
+
+<p>You have missed the Sunday 9pm deadline for the weekly data submission of <%= @church.name %>. Remember it is your responsibility to ensure this deadline is consistently met. This missing record is currently causing issues on our batch data processing run.</p><br>
+
+<p>This is a serious issue so please rectify it immediately by taking a minute to fill out a new data record. Let us know if there are any issues preventing you from completing this task.</p><br>
+
+<p>You can respond to (<a href="mailto:info@flcrevelations.co.uk">info@flcrevelations.co.uk</a>) with any questions.</p><br>
+
+<p>Thanks!</p><br><br>
+
+<p> - FLC Revelations UK</p>

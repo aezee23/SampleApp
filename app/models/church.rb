@@ -28,6 +28,10 @@ class Church < ActiveRecord::Base
     end
   end
 
+  def self.missing_latest_data
+    Church.all.select{ |church| !church.records.where(day: date_of_last("Sunday"))[0] };
+  end
+
   def latest(x)
     a = self.records.find_by(day: date_of_last("Sunday"))
     if a.nil?
@@ -81,4 +85,9 @@ class Church < ActiveRecord::Base
     date + delta
   end
 
+  def self.date_of_last(day)
+    date  = Date.parse(day)
+    delta = date > Date.today ? -7 : 0
+    date + delta
+  end
 end

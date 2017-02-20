@@ -17,6 +17,19 @@
  *= require rails_bootstrap_forms
  */
 
+.data_download, .data_download > thead > tr> th, .data_download > tbody > tr> td{
+  background: #fff;
+  color: #808080 !important;
+  border: 1px solid #000000;
+}
+div.inline{
+  display: inline-block;
+}
+
+div.inline label{
+  color: #fff;
+}
+
 .pagination{
   padding-left: 0px;
 }
