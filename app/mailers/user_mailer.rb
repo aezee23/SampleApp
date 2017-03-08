@@ -13,7 +13,7 @@ class UserMailer < ApplicationMailer
     @church = church
     @user = church.elder
     @leader = church.church_group.leader
-    mail to: "#{@leader.email}; #{@user.email if @user != @leader}", bcc: "aezee23@aol.com", from: "data-office@flcrevelations.co.uk", subject: "Missed Deadline"
+    mail to: "#{@leader.email}; #{@user.email if @user != @leader}", from: "data-office@flcrevelations.co.uk", subject: "Missed Deadline"
   end
 
   def project_email(user)

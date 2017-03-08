@@ -22,7 +22,7 @@ class PagesController < ApplicationController
   #     UserMailer.welcome_email(user).deliver
   #   end
 
-    # UserMailer.welcome_email(User.find(13)).deliver
+    # UserMailer.welcome_email(User.find(72)).deliver_later
     # Church.missing_latest_data.each do |church|
     #   UserMailer.missed_email(church).deliver_later
     # end

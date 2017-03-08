@@ -4,10 +4,14 @@
       <div class="panel-title"><%= edit ? "Edit" : "New" %> Member</div>
     </div>
     <div style="padding-top:30px" class="panel-body" >
-      <%= bootstrap_form_for(@member) do |f| %>
+      <%= bootstrap_form_for(member) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <% if current_user.admin %>
+          <% if !edit %>
           <%= f.select :church_id, (Church.all.collect {|a| [ a.name, a.id ] }), {selected: params[:church], label: "Campus Church" }, { class: "selectpicker" } %>
+          <% else %>
+            <%= f.select :church_id, (Church.all.collect {|a| [ a.name, a.id ] }), {label: "Campus Church" }, { class: "selectpicker" } %>
+          <% end %>
         <% else %>
           <%= f.select :church_id, current_user.all_churches.collect {|a| [ a.name, a.id ] }, {selected: params[:church], label: "Campus Church" }, { class: "selectpicker" } %>
         <% end %>
@@ -16,7 +20,7 @@
         <%= f.text_field :phone_number, label: "Phone Number:" %>
         <%= f.select :visited, [["No", false], ["Yes", true]], { label: "Have You Personally Visited This Member?" }, { class: "selectpicker" }  %>
         <%= f.file_field :avatar, label: "Member image (Optional)" %>
-        <%= f.submit "Submit Data", data: { confirm: 'Are You Sure You Want To Submit?' }, class: "btn btn-primary" %>
+        <%= f.submit "Submit", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
