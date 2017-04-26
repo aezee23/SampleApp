@@ -17,5 +17,5 @@ def late_mail
     UserMailer.missed_email(church).deliver_later
     puts "Sent mail for #{church.name} to #{church.elder.name}"
   end
-  puts 'Complete. Sent #{Church.missing_latest_data.count} emails to churches.'
+  puts "Complete. Sent #{Church.missing_latest_data.count} emails to churches."
 end
