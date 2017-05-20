@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user = current_user
     @groups = @user.church_groups
     @churches = @user.churches
-    @records = @user.records.limit(8)
+    @records = @user.is_leader? ? @user.all_churches.map{ |church| church.records.limit(3) }.flatten : @user.records.limit(8)
     @members = current_user.members
   end
 
